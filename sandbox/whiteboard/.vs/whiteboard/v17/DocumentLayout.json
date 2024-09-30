@@ -1,0 +1,67 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Download\\whiteboard\\whiteboard\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Download\\whiteboard\\whiteboard\\WhiteboardDemo.igsplatform||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:WhiteboardDemo.igsplatform||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Download\\whiteboard\\whiteboard\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|Pages de vue d\u0027ensemble de CMake||{B1CAA5B0-FEB1-4350-8AB9-F895876842F2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WhiteboardDemo.igsplatform",
+              "DocumentMoniker": "D:\\Download\\whiteboard\\whiteboard\\WhiteboardDemo.igsplatform",
+              "RelativeDocumentMoniker": "WhiteboardDemo.igsplatform",
+              "ToolTip": "D:\\Download\\whiteboard\\whiteboard\\WhiteboardDemo.igsplatform",
+              "RelativeToolTip": "WhiteboardDemo.igsplatform",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQMSURBVDhPdVVdTBxVFP7mzu4suwUBsYAtoNCqRVoJTUybSHw1IZJiTfTBxJioMaJJY2JifKgmEg2vfTRGE57QxAe0BWw0aNtIWKgFgTaYJqwrZdkuXWBdZmfn597xnGFB/Nkv2ezMued\u002B9/x9d/Bv9PT0IBaLafF4/EgqlXorl8t9ZZrmFP/4mW28xj7s\u002Bw/4vh/8h8NhdHV1YWxszFhYWDiezWYHbdtektIrSjuvvFxSefk7SrqWklIWCUsbGxuD7Mt7eC9z7KG3txczMzOxTCbzPEVyjTa5iiDNu8qevaDM8RdV4buXlPPbl0o6Ji8xscu\u002BvIf3MkeA5uZmzM/PG7xgWdbcHpnnKuf218oceUbZi5\u002Bp4swnyvymR7npXwJCBvvyHt7LHMylDw8Po6am5lhDQ8PHkUikS9M0Hb6Cn52HO3eB6lEF4\u002BS7ENWPQCYuQcQaoB04DC0cBfkKXdcfEEI0b21tTXZ3d6/rQ0NDGhG9U1lZ\u002BQKT\u002BUQm71yBc\u002BVt\u002BMUsUMjAlzbZfoSfT1JOEt6tL6DVPgYt1kikQoRCoUOGYWy3t7dP6H19fUebmpoG6KSD1CWou9fhXD2HUOuzMJ4aBCgif\u002BUHwLMQfqIfobazUH8uw138HHrjaYq4PoiUUE9NGkc6ne73PK8Y1MTaUoXLLwcNkIV7O3XybOWZaeUVsvwS2LztNWVefE5ZE/1K2ts7NuJYW1t7U0Sj0aeJ3eAGya3bUNkFhI\u002B/Dq3ifjZBE2GIaD1ERS2/BDauY7jjNcj0FEWb2LERR8BF\u002BT8UWBj5BDSjElpdZ8lQHqL\u002BJKCHSnXdAXPtHEkIhjx2iByfhL95ixqyQTZVWv0bbPOLm\u002BSzRCm58F1zTyAMQbkHR/hWBnJlHDJDTfn5PdhTH9DpK4HTfvi5BOzJ9\u002BHEP6TuE\u002BH6Dfj2ZrDGXIIG8ypV21H3foVKX4fReQ7G6QH4VE\u002BZugYoGTgHoGcv9RMd9Af5fATj1Hmo9Tma2UVQXxzmEqurq5dJswnIIucDrbqNZuxRqg9p0yuUmHZBqbkWrVVA1LZDVLVC\u002BXQgjRRFl2Au0dnZuWya1oioOyE14wDs719B8VIfVGaWh5Y43BIZQbkQdcfgF1KwRs/AnniVpqGOmvi4LBQKI8SV0EZHR9HS0tLR1tr6acRJn/J\u002B/1YHF5pUItcmKYoWioZIiMzfWCR1HIbedoYOvAFEqkkAvdIOH4wvLyfeSCaTNzUWNJEajY2NvVVVVedJQh2BBCldtT4bkHLNQBLX7nsY\u002BoPdFOUJaKEId1c6jnMzn88PkEAu0v3oBJmUu74Y0nNIDXlqGymCbqBdlL2\u002BGOUvWBlIcj/Yxhcs\u002B5S9YPdj9xMwPT19hLT5n08A22jt6P9\u002BAgD8BfkF44HpkGX8AAAAAElFTkSuQmCC",
+              "WhenOpened": "2024-09-28T11:33:31.08Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CMakeLists.txt",
+              "DocumentMoniker": "D:\\Download\\whiteboard\\whiteboard\\CMakeLists.txt",
+              "RelativeDocumentMoniker": "CMakeLists.txt",
+              "ToolTip": "D:\\Download\\whiteboard\\whiteboard\\CMakeLists.txt",
+              "RelativeToolTip": "CMakeLists.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-09-28T11:33:00.791Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Pages de vue d\u0027ensemble de CMake",
+              "DocumentMoniker": "Pages de vue d\u0027ensemble de CMake",
+              "ToolTip": "Pages de vue d\u0027ensemble de CMake",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-09-28T11:32:43.596Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
