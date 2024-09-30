@@ -13,6 +13,7 @@ import math
 import time
 import keyboard
 import time
+import re
 
 string_map_og = [["X","X","X","X","X","X","X","X","X","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
@@ -58,13 +59,14 @@ wall_width = WINDOW_WIDTH//number_rays
 
 debug_perspective = False
 player_doesnt_move = True
-player_click = False
 
-ennemies = [(440.0,440.0)]
+ennemies = []
 
 wall_draw_list = []
 ennemy_draw_list = []
 ennemy_dict = {}
+
+monstre_link = "./image/test.png"
 
 #inputs
 def send_service_rectangle_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
@@ -74,6 +76,10 @@ def send_service_rectangle_whiteboard(x,y,longeur,largeur,color,couleur_contour,
 def send_service_ellipse_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
     arguments_list = ("ellipse",x,y,longeur,largeur,color,couleur_contour,contour)
     igs.service_call("Whiteboard", "addShape", arguments_list, "")
+
+def send_service_image_whiteboard(url,x,y,height,width):
+    arguments_list = ("http://localhost:8000/?url="+url+"&width="+str(width)+"&height="+str(height),x,y)
+    igs.service_call("Whiteboard","addImageFromUrl",arguments_list,"")
 
 def clear():
     igs.service_call("Whiteboard","clear",(),"")
@@ -116,7 +122,6 @@ def cast_rays_3D():
     global wall_draw_list
     global ennemy_draw_list
     global string_map
-    global player_click
     global ennemies
     global player_doesnt_move
     start_angle = angle - fov / 2
@@ -144,12 +149,8 @@ def cast_rays_3D():
 
                     if ennemy_position[0] - 2 < target_x < ennemy_position[0] + 2 and ennemy_position[1] - 2 < target_y < ennemy_position[1] + 2:
                         touch_enn = True
-                        ennemy_draw_list.append((ray,wall_height))
-                        if player_click == True and ray == (number_rays+1)/2:
-                            for i in ennemies:
-                                if i == ennemy_position:
-                                    ennemies.remove(i)
-                                    string_map[grid_x][grid_y] = "."
+                        ennemy_draw_list.append((ray,wall_height,string_map[grid_x][grid_y]))
+ 
 
 
                 if string_map[grid_x][grid_y] == "X":
@@ -164,8 +165,15 @@ def draw_3D_world():
     for wall in wall_draw_list:
         send_service_rectangle_whiteboard(wall[0] * wall_width, (WINDOW_HEIGHT-wall[1])//2,wall_width,wall[1],dic_color[int(wall[1])],"black",1.0)
 
+    ennemy_draw_dict = {}
+    ennemy_draw_origin_dict = {}
     for enn in ennemy_draw_list:
-        send_service_rectangle_whiteboard(enn[0] * wall_width, (WINDOW_HEIGHT-enn[1])//2,wall_width,enn[1],"purple","black",0.0)
+        if enn[2] not in ennemy_draw_origin_dict.keys():
+            ennemy_draw_origin_dict[enn[2]] = enn[0] 
+        ennemy_draw_dict[enn[2]] = (ennemy_draw_origin_dict[enn[2]],enn[1],enn[0])
+
+    for enn in ennemy_draw_dict.values():
+        send_service_image_whiteboard(monstre_link,enn[0] * wall_width,(WINDOW_HEIGHT-enn[1])//2,int((enn[2]-enn[0])*wall_width),int(enn[1]))
 
     send_service_rectangle_whiteboard(WINDOW_WIDTH_DEMI-2,WINDOW_HEIGHT_DEMI-2,5.0,5.0,"black","black",1.0)
 
@@ -178,6 +186,7 @@ def place_ennemies_on_grid():
 
         ennemy_dict["E"+str(i)] = o
         string_map[x][y] = "E"+str(i)
+    print(string_map)
 
 def update():
     global debug_perspective
@@ -205,6 +214,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
     global player_doesnt_move
     global angle
     global player_click
+    global ennemies
     if keyboard.is_pressed('z'):
         player_doesnt_move = True
         player_x += 1 * math.cos(angle)
@@ -235,14 +245,18 @@ def input_callback(iop_type, name, value_type, value, my_data):
         angle -= 0.1
         if angle == 0:
             angle = 359
-    if keyboard.is_pressed('k'):
-        player_doesnt_move = True
-        player_click = True
     if name=="Timer":
         update()
+    elif name=="Ennemies":
+        ennemies = []
+        for i in value.split("("):
+            if i != "[" and i != "":
+                t = i.strip()[:-2].split(",")
+                ennemies.append((int(t[0]),int(t[1])))
+
     # add code here if needed
 
-if __name__ == "__main__":
+if __name__=="__main__":
     if len(sys.argv) < 4:
         print("usage: python3 main.py agent_name network_device port")
         devices = igs.net_devices_list()
@@ -258,8 +272,10 @@ if __name__ == "__main__":
     igs.set_command_line(sys.executable + " " + " ".join(sys.argv))
 
     igs.input_create("Timer", igs.IMPULSION_T, None)
-
     igs.observe_input("Timer", input_callback, None)
+
+    igs.input_create("Ennemies",igs.STRING_T, None)
+    igs.observe_input("Ennemies",input_callback,None)
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
 

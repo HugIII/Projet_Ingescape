@@ -433,7 +433,7 @@
                     {
                         "commandLine": "D:\\Download\\whiteboard\\whiteboard\\Whiteboard.exe",
                         "hostname": "PcHugo",
-                        "ipAddress": "172.17.156.212",
+                        "ipAddress": "10.188.183.219",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
@@ -442,7 +442,7 @@
                     "isCollapsed": false,
                     "positionX": 1083,
                     "positionY": 218,
-                    "positionZ": 1,
+                    "positionZ": 7.079999999999893,
                     "width": 252
                 }
             },
@@ -474,7 +474,7 @@
                     {
                         "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe main.py Engine Wi-Fi 5670",
                         "hostname": "PcHugo",
-                        "ipAddress": "172.17.156.212",
+                        "ipAddress": "10.188.183.219",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
@@ -483,7 +483,7 @@
                     "isCollapsed": false,
                     "positionX": 665,
                     "positionY": 419,
-                    "positionZ": 1.01,
+                    "positionZ": 7.18999999999989,
                     "width": 252
                 }
             },
@@ -494,6 +494,11 @@
                     "description": "Timer",
                     "family": "",
                     "inputs": [
+                        {
+                            "description": "",
+                            "name": "in",
+                            "type": "IMPULSION"
+                        }
                     ],
                     "isDynamic": false,
                     "name": "Timer",
@@ -515,16 +520,87 @@
                     {
                         "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe main.py Timer Wi-Fi 5670",
                         "hostname": "PcHugo",
-                        "ipAddress": "172.17.156.212",
+                        "ipAddress": "10.188.183.219",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
                 "view": {
                     "height": 40,
                     "isCollapsed": false,
-                    "positionX": 277,
-                    "positionY": 279,
-                    "positionZ": 1.02,
+                    "positionX": 273,
+                    "positionY": 216,
+                    "positionZ": 7.119999999999892,
+                    "width": 252
+                }
+            },
+            {
+                "data": {
+                },
+                "definition": {
+                    "description": "",
+                    "family": "",
+                    "inputs": [
+                    ],
+                    "isDynamic": false,
+                    "name": "Image_Server",
+                    "outputs": [
+                    ],
+                    "parameters": [
+                    ],
+                    "services": [
+                    ],
+                    "version": "1.0"
+                },
+                "identity": "Image_Server",
+                "instances": [
+                    {
+                        "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe main.py Image_Server Wi-Fi 5670",
+                        "hostname": "PcHugo",
+                        "ipAddress": "10.188.183.219",
+                        "mac": "F8:9E:94:19:AD:75"
+                    }
+                ],
+                "view": {
+                    "height": 40,
+                    "isCollapsed": false,
+                    "positionX": 699,
+                    "positionY": 103,
+                    "positionZ": 7.169999999999891,
+                    "width": 252
+                }
+            },
+            {
+                "data": {
+                },
+                "definition": {
+                    "description": "",
+                    "family": "",
+                    "inputs": [
+                    ],
+                    "isDynamic": false,
+                    "name": "Starter",
+                    "outputs": [
+                        {
+                            "description": "",
+                            "name": "out",
+                            "type": "IMPULSION"
+                        }
+                    ],
+                    "parameters": [
+                    ],
+                    "services": [
+                    ],
+                    "version": "1.0"
+                },
+                "identity": "Starter",
+                "instances": [
+                ],
+                "view": {
+                    "height": 40,
+                    "isCollapsed": false,
+                    "positionX": -36,
+                    "positionY": 119,
+                    "positionZ": 7.1799999999998905,
                     "width": 252
                 }
             }
@@ -534,6 +610,12 @@
                 "fromAgent": "Engine",
                 "fromInput": "Timer",
                 "toAgent": "Timer",
+                "toOutput": "out"
+            },
+            {
+                "fromAgent": "Timer",
+                "fromInput": "in",
+                "toAgent": "Starter",
                 "toOutput": "out"
             }
         ],
