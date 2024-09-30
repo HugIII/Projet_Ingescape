@@ -1,0 +1,9 @@
+objet => event
+objet => player
+objet => map
+objet => ennemies
+engine => changer les entrees sorties et adapter le code
+engine => afficher les images des ennemies (Hugo)
+timer => faire en sorte qu'on est pas une boucle infinie
+image_server => voir si on peut pas le faire directement avec ingescape
+
