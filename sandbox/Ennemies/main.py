@@ -9,11 +9,31 @@
 
 import sys
 import ingescape as igs
+import random
+
+string_map = [["X","X","X","X","X","X","X","X","X","X"],
+              ["X",".",".",".",".",".",".",".",".","X"],
+              ["X",".",".",".",".",".",".",".",".","X"],
+              ["X",".",".",".",".",".",".",".",".","X"],
+              ["X",".",".",".",".",".",".",".",".","X"],
+              ["X",".",".",".",".",".",".",".",".","X"],
+              ["X",".",".",".",".",".",".",".",".","X"],
+              ["X",".",".",".",".",".",".",".",".","X"],
+              ["X",".",".",".",".",".",".",".",".","X"],
+              ["X","X","X","X","X","X","X","X","X","X"]]
 
 ennemies_list = [(440,440),(340,440)]
 
 #inputs
 def input_callback(iop_type, name, value_type, value, my_data):
+    while(len(ennemies_list) < 8):
+        coord_not_wall = False
+        while(coord_not_wall):
+            random_x = random.randint(1,500)
+            random_y = random.randint(1,500)
+            if string_map[int(random_x/10)][int(random_y/10)] != "X":
+                coord_not_wall = True
+                ennemies_list.append((random_x,random_y))
     igs.output_set_string("list_ennemies",str(ennemies_list))
     pass
     # add code here if needed
