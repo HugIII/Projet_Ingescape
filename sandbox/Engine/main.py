@@ -41,6 +41,8 @@ dic_color = {}
 
 WINDOW_HEIGHT = 600.0
 WINDOW_WIDTH = 800.0
+WINDOW_HEIGHT_INT = int(WINDOW_HEIGHT)
+WINDOW_WIDTH_INT = int(WINDOW_WIDTH)
 WINDOW_HEIGHT_DEMI = WINDOW_HEIGHT/2
 WINDOW_WIDTH_DEMI = WINDOW_WIDTH/2
 MAX_DEPTH = 800
@@ -52,7 +54,9 @@ angle = 45
 
 fov = math.pi / 3
 tile_size = 50
+number_rays_total = 310
 number_rays = 31
+rays_factor = number_rays_total/number_rays
 angle_step = fov / number_rays
 
 wall_width = WINDOW_WIDTH//number_rays
@@ -66,7 +70,12 @@ wall_draw_list = []
 ennemy_draw_list = []
 ennemy_dict = {}
 
+player_blood = 0
+ennemie_blood = 0
+
 monstre_link = "./image/test.png"
+weapon_link = "./image/weapon.png"
+blood_link = "./image/blood.png"
 
 #inputs
 def send_service_rectangle_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
@@ -111,7 +120,7 @@ def draw_player_render_2D():
 
 def draw_ennemie_render_2D():
     for i in ennemies:
-        send_service_ellipse_whiteboard(i[0]-10,i[1]-1,20.0,20.0,"purple","black",1.0)
+        send_service_ellipse_whiteboard(i[0]-10.0,i[1]-10.0,20.0,20.0,"purple","black",1.0)
 
 def draw_sky_floor_3D():
     send_service_rectangle_whiteboard(0.0,0.0,WINDOW_WIDTH,WINDOW_HEIGHT_DEMI,"blue","grey",0.0)
@@ -128,9 +137,9 @@ def cast_rays_3D():
     wall_height_memory = []
     wall_draw_list = []
     ennemy_draw_list = []
-    for ray in range(number_rays+1):
+    for ray in range(number_rays_total+1):
         touch_enn = False
-        ray_angle = start_angle + ray * angle_step
+        ray_angle = start_angle + ray/rays_factor * angle_step
         ray_angle_cos = math.cos(ray_angle)
         ray_angle_sin = math.sin(ray_angle)
         for depth in range(0,MAX_DEPTH):
@@ -149,19 +158,21 @@ def cast_rays_3D():
 
                     if ennemy_position[0] - 2 < target_x < ennemy_position[0] + 2 and ennemy_position[1] - 2 < target_y < ennemy_position[1] + 2:
                         touch_enn = True
-                        ennemy_draw_list.append((ray,wall_height,string_map[grid_x][grid_y]))
+                        ennemy_draw_list.append((ray/rays_factor,wall_height,string_map[grid_x][grid_y]))
  
 
 
-                if string_map[grid_x][grid_y] == "X":
+                if ray % rays_factor == 0 and string_map[grid_x][grid_y] == "X":
                     corrected_depth = depth/10 * math.cos(ray_angle-angle)
                     wall_height = WINDOW_HEIGHT / (corrected_depth + 0.0001)  
                     wall_height = 600 if wall_height > 600 else wall_height            
-                    wall_draw_list.append((ray,wall_height))
+                    wall_draw_list.append((ray/rays_factor,wall_height))
                     break
     player_click = False
 
 def draw_3D_world():
+    global player_blood
+    global ennemie_blood
     for wall in wall_draw_list:
         send_service_rectangle_whiteboard(wall[0] * wall_width, (WINDOW_HEIGHT-wall[1])//2,wall_width,wall[1],dic_color[int(wall[1])],"black",1.0)
 
@@ -175,7 +186,13 @@ def draw_3D_world():
     for enn in ennemy_draw_dict.values():
         send_service_image_whiteboard(monstre_link,enn[0] * wall_width,(WINDOW_HEIGHT-enn[1])//2,int((enn[2]-enn[0])*wall_width),int(enn[1]))
 
-    send_service_rectangle_whiteboard(WINDOW_WIDTH_DEMI-2,WINDOW_HEIGHT_DEMI-2,5.0,5.0,"black","black",1.0)
+    send_service_ellipse_whiteboard(WINDOW_WIDTH_DEMI-2,WINDOW_HEIGHT_DEMI-2,5.0,5.0,"black","black",1.0)
+
+    send_service_image_whiteboard(weapon_link,700.0,500.0,100,100)
+
+    if player_blood > 0:
+        player_blood -= 1
+        send_service_image_whiteboard(blood_link,0,0,WINDOW_HEIGHT_INT,WINDOW_WIDTH_INT)
 
 def place_ennemies_on_grid():
     global string_map
@@ -186,7 +203,6 @@ def place_ennemies_on_grid():
 
         ennemy_dict["E"+str(i)] = o
         string_map[x][y] = "E"+str(i)
-    print(string_map)
 
 def update():
     global debug_perspective
@@ -215,6 +231,8 @@ def input_callback(iop_type, name, value_type, value, my_data):
     global angle
     global player_click
     global ennemies
+    global player_blood
+    global ennemie_blood
     if keyboard.is_pressed('z'):
         player_doesnt_move = True
         player_x += 1 * math.cos(angle)
@@ -248,11 +266,18 @@ def input_callback(iop_type, name, value_type, value, my_data):
     if name=="Timer":
         update()
     elif name=="Ennemies":
+        player_doesnt_move = True
         ennemies = []
         for i in value.split("("):
             if i != "[" and i != "":
                 t = i.strip()[:-2].split(",")
                 ennemies.append((int(t[0]),int(t[1])))
+    elif name=="player_blood":
+        player_doesnt_move = True
+        player_blood = 40
+    elif name=="ennemie_blood":
+        player_doesnt_move = True
+        ennemie_blood = 20
 
     # add code here if needed
 
@@ -277,11 +302,20 @@ if __name__=="__main__":
     igs.input_create("Ennemies",igs.STRING_T, None)
     igs.observe_input("Ennemies",input_callback,None)
 
+    igs.input_create("player_blood",igs.IMPULSION_T, None)
+    igs.observe_input("player_blood",input_callback,None)
+
+
+    igs.input_create("ennemies_blood",igs.IMPULSION_T, None)
+    igs.observe_input("ennemies_blood",input_callback,None)
+
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
 
     for i in range(int(WINDOW_HEIGHT)+1):
-        print("#"+str(hex(int(i*255/600))[2:])*3)
-        dic_color[i] = "#"+str(hex(int(i*255/600))[2:])*3
+        if len(str(hex(int(i*255/600))[2:])) != 2: 
+            dic_color[i] = "#"+("0"+str(hex(int(i*255/600))[2:]))*3
+        else: 
+            dic_color[i] = "#"+str(hex(int(i*255/600))[2:])*3
 
     input()
 

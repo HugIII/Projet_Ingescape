@@ -22,16 +22,28 @@ string_map = [["X","X","X","X","X","X","X","X","X","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
               ["X","X","X","X","X","X","X","X","X","X"]]
 
-ennemies_list = [(440,440),(340,440)]
+ennemies_list = []
+
+multi = False
 
 #inputs
 def input_callback(iop_type, name, value_type, value, my_data):
+    global ennemies_list
+    global string_map
+
+    if multi == True:
+        return
+
+    if name == "kill":
+        igs.output_set_impulsion("score") 
+        ennemies_list.pop(value)
+
     while(len(ennemies_list) < 8):
         coord_not_wall = False
-        while(coord_not_wall):
-            random_x = random.randint(1,500)
-            random_y = random.randint(1,500)
-            if string_map[int(random_x/10)][int(random_y/10)] != "X":
+        while(coord_not_wall == False):
+            random_x = random.randint(0,500)
+            random_y = random.randint(0,500)
+            if string_map[int(random_x/50)][int(random_y/50)] != "X":
                 coord_not_wall = True
                 ennemies_list.append((random_x,random_y))
     igs.output_set_string("list_ennemies",str(ennemies_list))
@@ -57,6 +69,7 @@ if __name__ == "__main__":
     igs.input_create("kill", igs.INTEGER_T, None)
 
     igs.output_create("list_ennemies", igs.STRING_T, None)
+    igs.output_create("score", igs.IMPULSION_T, None)
 
     igs.observe_input("in", input_callback, None)
     igs.observe_input("kill", input_callback, None)

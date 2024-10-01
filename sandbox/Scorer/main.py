@@ -3,15 +3,24 @@
 
 #
 #  main.py
-#  Starter version 1.0
-#  Created by Ingenuity i/o on 2024/09/30
+#  Scorer version 1.0
+#  Created by Ingenuity i/o on 2024/10/01
 #
 
 import sys
 import ingescape as igs
-import time
 
-if __name__=="__main__":
+score = 0
+
+#inputs
+def input_callback(iop_type, name, value_type, value, my_data):
+    global score
+    if name == "score":
+        score += 50
+    igs.output_set_string("out","Score: "+str(score)) 
+    # add code here if needed
+
+if __name__ == "__main__":
     if len(sys.argv) < 4:
         print("usage: python3 main.py agent_name network_device port")
         devices = igs.net_devices_list()
@@ -26,14 +35,15 @@ if __name__=="__main__":
     igs.log_set_file(True, None)
     igs.set_command_line(sys.executable + " " + " ".join(sys.argv))
 
-    igs.output_create("out", igs.IMPULSION_T, None)
-    igs.output_create("color_background", igs.STRING_T, None)
+    igs.input_create("start", igs.IMPULSION_T, None)
+    igs.input_create("score", igs.IMPULSION_T, None)
+
+    igs.output_create("out", igs.STRING_T, None)
+
+    igs.observe_input("start", input_callback, None)
+    igs.observe_input("score", input_callback, None)
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
-
-    time.sleep(3)
-    igs.output_set_impulsion("out") 
-    igs.output_set_string("color_background","grey") 
 
     input()
 
