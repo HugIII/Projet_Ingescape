@@ -37,6 +37,18 @@ def input_callback(iop_type, name, value_type, value, my_data):
     if name == "kill":
         igs.output_set_impulsion("score") 
         ennemies_list.pop(value)
+    elif name=="map":
+        temp_list = []
+        temp_sub_list = []
+        for i in range(len(value)):
+            if value[i] == "R":
+                temp_list.append(temp_sub_list)
+                temp_sub_list = []
+            else:
+                temp_sub_list.append(value[i])
+        temp_list.append(temp_sub_list)
+        string_map = temp_list
+        player_doesnt_move = True
 
     while(len(ennemies_list) < 8):
         coord_not_wall = False
@@ -70,6 +82,9 @@ if __name__ == "__main__":
 
     igs.output_create("list_ennemies", igs.STRING_T, None)
     igs.output_create("score", igs.IMPULSION_T, None)
+
+    igs.input_create("map",igs.STRING_T, None)
+    igs.observe_input("map",input_callback,None)
 
     igs.observe_input("in", input_callback, None)
     igs.observe_input("kill", input_callback, None)

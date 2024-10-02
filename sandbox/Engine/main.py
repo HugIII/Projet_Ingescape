@@ -26,16 +26,7 @@ string_map_og = [["X","X","X","X","X","X","X","X","X","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
               ["X","X","X","X","X","X","X","X","X","X"]]
 
-string_map = [["X","X","X","X","X","X","X","X","X","X"],
-              ["X",".",".",".",".",".",".",".",".","X"],
-              ["X",".",".",".",".",".",".",".",".","X"],
-              ["X",".",".",".",".",".",".",".",".","X"],
-              ["X",".",".",".",".",".",".",".",".","X"],
-              ["X",".",".",".",".",".",".",".",".","X"],
-              ["X",".",".",".",".",".",".",".",".","X"],
-              ["X",".",".",".",".",".",".",".",".","X"],
-              ["X",".",".",".",".",".",".",".",".","X"],
-              ["X","X","X","X","X","X","X","X","X","X"]]
+string_map = []
 
 dic_color = {}
 
@@ -54,10 +45,17 @@ angle = 45
 
 fov = math.pi / 3
 tile_size = 50
-number_rays_total = 310
+number_rays_total = 124
 number_rays = 31
 rays_factor = number_rays_total/number_rays
 angle_step = fov / number_rays
+
+modulo_rays_factor = []
+divide_rays_factor = []
+for i in range(number_rays_total+1):
+    modulo_rays_factor.append(i%rays_factor)
+    divide_rays_factor.append(i/rays_factor)
+
 
 wall_width = WINDOW_WIDTH//number_rays
 
@@ -71,7 +69,6 @@ ennemy_draw_list = []
 ennemy_dict = {}
 
 player_blood = 0
-ennemie_blood = 0
 
 monstre_link = "./image/test.png"
 weapon_link = "./image/weapon.png"
@@ -133,6 +130,8 @@ def cast_rays_3D():
     global string_map
     global ennemies
     global player_doesnt_move
+    global divide_rays_factor
+    global modulo_rays_factor
     start_angle = angle - fov / 2
     wall_height_memory = []
     wall_draw_list = []
@@ -158,21 +157,19 @@ def cast_rays_3D():
 
                     if ennemy_position[0] - 2 < target_x < ennemy_position[0] + 2 and ennemy_position[1] - 2 < target_y < ennemy_position[1] + 2:
                         touch_enn = True
-                        ennemy_draw_list.append((ray/rays_factor,wall_height,string_map[grid_x][grid_y]))
+                        ennemy_draw_list.append((divide_rays_factor[ray],wall_height,string_map[grid_x][grid_y]))
  
 
 
-                if ray % rays_factor == 0 and string_map[grid_x][grid_y] == "X":
+                if modulo_rays_factor[ray] == 0 and string_map[grid_x][grid_y] == "X":
                     corrected_depth = depth/10 * math.cos(ray_angle-angle)
                     wall_height = WINDOW_HEIGHT / (corrected_depth + 0.0001)  
                     wall_height = 600 if wall_height > 600 else wall_height            
-                    wall_draw_list.append((ray/rays_factor,wall_height))
+                    wall_draw_list.append((divide_rays_factor[ray],wall_height))
                     break
-    player_click = False
 
 def draw_3D_world():
     global player_blood
-    global ennemie_blood
     for wall in wall_draw_list:
         send_service_rectangle_whiteboard(wall[0] * wall_width, (WINDOW_HEIGHT-wall[1])//2,wall_width,wall[1],dic_color[int(wall[1])],"black",1.0)
 
@@ -232,7 +229,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
     global player_click
     global ennemies
     global player_blood
-    global ennemie_blood
+    global string_map_og
     if keyboard.is_pressed('z'):
         player_doesnt_move = True
         player_x += 1 * math.cos(angle)
@@ -274,10 +271,21 @@ def input_callback(iop_type, name, value_type, value, my_data):
                 ennemies.append((int(t[0]),int(t[1])))
     elif name=="player_blood":
         player_doesnt_move = True
-        player_blood = 40
-    elif name=="ennemie_blood":
+        player_blood = 5
+    elif name=="map":
+        temp_list = []
+        temp_sub_list = []
+        for i in range(len(value)):
+            if value[i] == "R":
+                temp_list.append(temp_sub_list)
+                temp_sub_list = []
+            else:
+                temp_sub_list.append(value[i])
+        temp_list.append(temp_sub_list)
+        string_map_og = temp_list
+        print(string_map_og)
         player_doesnt_move = True
-        ennemie_blood = 20
+
 
     # add code here if needed
 
@@ -305,9 +313,8 @@ if __name__=="__main__":
     igs.input_create("player_blood",igs.IMPULSION_T, None)
     igs.observe_input("player_blood",input_callback,None)
 
-
-    igs.input_create("ennemies_blood",igs.IMPULSION_T, None)
-    igs.observe_input("ennemies_blood",input_callback,None)
+    igs.input_create("map",igs.STRING_T, None)
+    igs.observe_input("map",input_callback,None)
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
 

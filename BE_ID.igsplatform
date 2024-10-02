@@ -433,22 +433,22 @@
                     {
                         "commandLine": "D:\\Download\\whiteboard\\whiteboard\\Whiteboard.exe",
                         "hostname": "PcHugo",
-                        "ipAddress": "10.188.183.219",
+                        "ipAddress": "172.17.135.212",
                         "mac": "F8:9E:94:19:AD:75"
                     },
                     {
                         "commandLine": "C:\\Users\\hugo\\Documents\\Projet_Ingescape\\sandbox\\whiteboard\\Whiteboard.exe",
                         "hostname": "PcHugo",
-                        "ipAddress": "10.188.183.219",
+                        "ipAddress": "172.17.135.212",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
                 "view": {
                     "height": 40,
                     "isCollapsed": false,
-                    "positionX": 1277,
-                    "positionY": 345,
-                    "positionZ": 7.949999999999874,
+                    "positionX": 2211,
+                    "positionY": 276,
+                    "positionZ": 8.15999999999987,
                     "width": 252
                 }
             },
@@ -473,6 +473,11 @@
                             "description": "",
                             "name": "player_blood",
                             "type": "IMPULSION"
+                        },
+                        {
+                            "description": "",
+                            "name": "map",
+                            "type": "STRING"
                         }
                     ],
                     "isDynamic": false,
@@ -490,16 +495,16 @@
                     {
                         "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe main.py Engine Wi-Fi 5670",
                         "hostname": "PcHugo",
-                        "ipAddress": "10.188.183.219",
+                        "ipAddress": "172.17.135.212",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
                 "view": {
                     "height": 40,
                     "isCollapsed": false,
-                    "positionX": 833,
-                    "positionY": 444,
-                    "positionZ": 8.029999999999873,
+                    "positionX": 1793,
+                    "positionY": 468,
+                    "positionZ": 8.17999999999987,
                     "width": 252
                 }
             },
@@ -536,16 +541,16 @@
                     {
                         "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe main.py Timer Wi-Fi 5670",
                         "hostname": "PcHugo",
-                        "ipAddress": "10.188.183.219",
+                        "ipAddress": "172.17.135.212",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
                 "view": {
                     "height": 40,
                     "isCollapsed": false,
-                    "positionX": 340,
-                    "positionY": 208,
-                    "positionZ": 7.5999999999998815,
+                    "positionX": 1386,
+                    "positionY": 376,
+                    "positionZ": 8.18999999999987,
                     "width": 252
                 }
             },
@@ -572,7 +577,7 @@
                     {
                         "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe main.py Image_Server Wi-Fi 5670",
                         "hostname": "PcHugo",
-                        "ipAddress": "10.188.183.219",
+                        "ipAddress": "172.17.135.212",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
@@ -618,16 +623,16 @@
                     {
                         "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Starter/main.py Starter Wi-Fi 5670",
                         "hostname": "PcHugo",
-                        "ipAddress": "10.188.183.219",
+                        "ipAddress": "172.17.135.212",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
                 "view": {
                     "height": 40,
                     "isCollapsed": false,
-                    "positionX": -83,
-                    "positionY": -338,
-                    "positionZ": 7.9299999999998745,
+                    "positionX": 19,
+                    "positionY": -169,
+                    "positionZ": 8.19999999999987,
                     "width": 252
                 }
             },
@@ -647,6 +652,11 @@
                             "description": "",
                             "name": "kill",
                             "type": "INTEGER"
+                        },
+                        {
+                            "description": "",
+                            "name": "map",
+                            "type": "STRING"
                         }
                     ],
                     "isDynamic": false,
@@ -674,16 +684,16 @@
                     {
                         "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Ennemies/main.py Ennemies Wi-Fi 5670",
                         "hostname": "PcHugo",
-                        "ipAddress": "10.188.183.219",
+                        "ipAddress": "172.17.135.212",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
                 "view": {
                     "height": 40,
                     "isCollapsed": false,
-                    "positionX": 413,
-                    "positionY": 708,
-                    "positionZ": 7.899999999999875,
+                    "positionX": 618,
+                    "positionY": 498,
+                    "positionZ": 8.349999999999866,
                     "width": 252
                 }
             },
@@ -725,16 +735,82 @@
                     {
                         "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Scorer/main.py Scorer Wi-Fi 5670",
                         "hostname": "PcHugo",
-                        "ipAddress": "10.188.183.219",
+                        "ipAddress": "172.17.135.212",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
                 "view": {
                     "height": 40,
                     "isCollapsed": false,
-                    "positionX": 901,
-                    "positionY": 718,
-                    "positionZ": 7.959999999999874,
+                    "positionX": 2044,
+                    "positionY": 633,
+                    "positionZ": 8.289999999999868,
+                    "width": 252
+                }
+            },
+            {
+                "data": {
+                },
+                "definition": {
+                    "description": "",
+                    "family": "",
+                    "inputs": [
+                        {
+                            "description": "",
+                            "name": "music",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "description": "",
+                            "name": "death",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "description": "",
+                            "name": "monster_death",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "description": "",
+                            "name": "shoot",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "description": "",
+                            "name": "degat_recu",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "description": "",
+                            "name": "sound_on",
+                            "type": "IMPULSION"
+                        }
+                    ],
+                    "isDynamic": false,
+                    "name": "Sound_manager",
+                    "outputs": [
+                    ],
+                    "parameters": [
+                    ],
+                    "services": [
+                    ],
+                    "version": "1.0"
+                },
+                "identity": "Sound_manager",
+                "instances": [
+                    {
+                        "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Sound_manager/main.py Sound_manager Wi-Fi 5670",
+                        "hostname": "PcHugo",
+                        "ipAddress": "172.17.135.212",
+                        "mac": "F8:9E:94:19:AD:75"
+                    }
+                ],
+                "view": {
+                    "height": 40,
+                    "isCollapsed": false,
+                    "positionX": 2077,
+                    "positionY": 849,
+                    "positionZ": 8.339999999999867,
                     "width": 252
                 }
             }
@@ -753,12 +829,6 @@
                 "toOutput": "out"
             },
             {
-                "fromAgent": "Timer",
-                "fromInput": "in",
-                "toAgent": "c038c8d6-1c75-4ede-bde6-2079faf1d224",
-                "toOutput": "value"
-            },
-            {
                 "fromAgent": "Engine",
                 "fromInput": "Ennemies",
                 "toAgent": "Ennemies",
@@ -775,12 +845,6 @@
                 "fromInput": "in",
                 "toAgent": "Starter",
                 "toOutput": "out"
-            },
-            {
-                "fromAgent": "Ennemies",
-                "fromInput": "in",
-                "toAgent": "c038c8d6-1c75-4ede-bde6-2079faf1d224",
-                "toOutput": "value"
             },
             {
                 "fromAgent": "Scorer",
@@ -811,6 +875,18 @@
                 "fromInput": "player_blood",
                 "toAgent": "1318786b-bd6b-4db8-aace-d8feba0a6600",
                 "toOutput": "value"
+            },
+            {
+                "fromAgent": "Engine",
+                "fromInput": "map",
+                "toAgent": "c53b1372-c02e-4c66-ab19-b3d910f215b3",
+                "toOutput": "value"
+            },
+            {
+                "fromAgent": "Sound_manager",
+                "fromInput": "music",
+                "toAgent": "8ae244b3-dac8-4bc6-ae60-5ff5a38361d8",
+                "toOutput": "value"
             }
         ],
         "splits": [
@@ -818,47 +894,6 @@
         "splitters": [
         ],
         "tools": [
-            {
-                "data": {
-                    "entry 0": ""
-                },
-                "definition": {
-                    "description": "",
-                    "family": "fbba66d6-8d60-4694-b5fa-63b6f3f51e63",
-                    "inputs": [
-                        {
-                            "description": "",
-                            "name": "trigger",
-                            "type": "IMPULSION"
-                        }
-                    ],
-                    "isDynamic": false,
-                    "name": "",
-                    "outputs": [
-                        {
-                            "description": "",
-                            "name": "value",
-                            "type": "IMPULSION"
-                        }
-                    ],
-                    "parameters": [
-                    ],
-                    "services": [
-                    ],
-                    "version": ""
-                },
-                "identity": "c038c8d6-1c75-4ede-bde6-2079faf1d224",
-                "instances": [
-                ],
-                "view": {
-                    "height": 52,
-                    "isCollapsed": false,
-                    "positionX": -70,
-                    "positionY": 245,
-                    "positionZ": 7.729999999999879,
-                    "width": 256
-                }
-            },
             {
                 "data": {
                     "entry 0": "1"
@@ -894,9 +929,9 @@
                 "view": {
                     "height": 52,
                     "isCollapsed": false,
-                    "positionX": 41,
-                    "positionY": 748,
-                    "positionZ": 7.919999999999875,
+                    "positionX": 37,
+                    "positionY": 553,
+                    "positionZ": 8.259999999999868,
                     "width": 256
                 }
             },
@@ -925,9 +960,9 @@
                 "view": {
                     "height": 48,
                     "isCollapsed": false,
-                    "positionX": 1291,
-                    "positionY": 682,
-                    "positionZ": 7.8799999999998755,
+                    "positionX": 2232,
+                    "positionY": -9,
+                    "positionZ": 8.20999999999987,
                     "width": 200
                 }
             },
@@ -966,9 +1001,50 @@
                 "view": {
                     "height": 52,
                     "isCollapsed": false,
-                    "positionX": 372,
-                    "positionY": 476,
-                    "positionZ": 8.019999999999873,
+                    "positionX": 1180,
+                    "positionY": 593,
+                    "positionZ": 8.239999999999869,
+                    "width": 256
+                }
+            },
+            {
+                "data": {
+                    "entry 0": "XXXXXXXXXRX........XRXXXXXXX"
+                },
+                "definition": {
+                    "description": "",
+                    "family": "fbba66d6-8d60-4694-b5fa-63b6f3f51e63",
+                    "inputs": [
+                        {
+                            "description": "",
+                            "name": "trigger",
+                            "type": "IMPULSION"
+                        }
+                    ],
+                    "isDynamic": false,
+                    "name": "",
+                    "outputs": [
+                        {
+                            "description": "",
+                            "name": "value",
+                            "type": "STRING"
+                        }
+                    ],
+                    "parameters": [
+                    ],
+                    "services": [
+                    ],
+                    "version": ""
+                },
+                "identity": "c53b1372-c02e-4c66-ab19-b3d910f215b3",
+                "instances": [
+                ],
+                "view": {
+                    "height": 52,
+                    "isCollapsed": false,
+                    "positionX": 1182,
+                    "positionY": 669,
+                    "positionZ": 8.359999999999866,
                     "width": 256
                 }
             },
@@ -1001,15 +1077,15 @@
                     ],
                     "version": ""
                 },
-                "identity": "e279de72-56cc-4344-a9af-87041a5b2cdb",
+                "identity": "8ae244b3-dac8-4bc6-ae60-5ff5a38361d8",
                 "instances": [
                 ],
                 "view": {
                     "height": 52,
                     "isCollapsed": false,
-                    "positionX": 375,
-                    "positionY": 541,
-                    "positionZ": 8.009999999999874,
+                    "positionX": 1502,
+                    "positionY": 974,
+                    "positionZ": 8.329999999999867,
                     "width": 256
                 }
             }
