@@ -11,10 +11,12 @@ import sys
 import ingescape as igs
 import time
 
+f = 1/20
+
 #inputs
 def input_callback(iop_type, name, value_type, value, my_data):
-    f = 1/20
-
+    global f
+    print(f)
     while(1):
        igs.output_set_impulsion("out")
        time.sleep(f) 

@@ -24,14 +24,27 @@ string_map = [["X","X","X","X","X","X","X","X","X","X"],
 
 ennemies_list = []
 
+multi_ennemies = []
 multi = False
 
 #inputs
 def input_callback(iop_type, name, value_type, value, my_data):
     global ennemies_list
     global string_map
+    global multi
+    global multi_ennemies
+
+    if name == "multi":
+        multi = value
+    elif name == "multi_ennemy":
+        multi_ennemies = []
+        for i in value.split("("):
+            if i != "[" and i != "":
+                t = i.strip()[:-2].split(",")
+                multi_ennemies.append((int(t[0]),int(t[1])))
 
     if multi == True:
+        igs.output_set_string("list_ennemies",str(multi_ennemies))
         return
 
     if name == "kill":
@@ -53,8 +66,8 @@ def input_callback(iop_type, name, value_type, value, my_data):
     while(len(ennemies_list) < 8):
         coord_not_wall = False
         while(coord_not_wall == False):
-            random_x = random.randint(0,500)
-            random_y = random.randint(0,500)
+            random_x = random.randint(0,499)
+            random_y = random.randint(0,499)
             if string_map[int(random_x/50)][int(random_y/50)] != "X":
                 coord_not_wall = True
                 ennemies_list.append((random_x,random_y))
@@ -79,6 +92,8 @@ if __name__ == "__main__":
 
     igs.input_create("in", igs.IMPULSION_T, None)
     igs.input_create("kill", igs.INTEGER_T, None)
+    igs.observe_input("in", input_callback, None)
+    igs.observe_input("kill", input_callback, None)
 
     igs.output_create("list_ennemies", igs.STRING_T, None)
     igs.output_create("score", igs.IMPULSION_T, None)
@@ -86,8 +101,11 @@ if __name__ == "__main__":
     igs.input_create("map",igs.STRING_T, None)
     igs.observe_input("map",input_callback,None)
 
-    igs.observe_input("in", input_callback, None)
-    igs.observe_input("kill", input_callback, None)
+    igs.input_create("multi", igs.BOOL_T, None)
+    igs.observe_input("multi", input_callback, None)
+
+    igs.input_create("multi_ennemy",igs.STRING_T, None)
+    igs.observe_input("multi_ennemy", input_callback, None)
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
 

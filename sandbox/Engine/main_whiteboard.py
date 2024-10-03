@@ -7,7 +7,6 @@
 #  Created by Ingenuity i/o on 2024/09/28
 #
 
-import pygame
 import sys
 import ingescape as igs
 import math
@@ -16,8 +15,6 @@ import keyboard
 import time
 import re
 import copy
-
-import threading
 
 string_map_og = [["X","X","X","X","X","X","X","X","X","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
@@ -50,8 +47,8 @@ angle = 45
 
 fov = math.pi / 3
 tile_size = 50
+number_rays_total = 124
 number_rays = 31
-number_rays_total = number_rays * 4
 middle_rays = number_rays_total // 2
 rays_factor = number_rays_total/number_rays
 angle_step = fov / number_rays
@@ -77,25 +74,25 @@ ennemy_dict = {}
 
 player_blood = 0
 
-monstre_link = "./image/monstre.png"
+monstre_link = "./image/test.png"
 weapon_link = "./image/weapon.png"
 blood_link = "./image/blood.png"
-image_monstre = pygame.image.load(monstre_link)
-image_weapon = pygame.image.load(weapon_link)
-image_blood = pygame.image.load(blood_link)
-
-screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
 #inputs
 def send_service_rectangle_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
-    pygame.draw.rect(screen,color,(x,y,longeur,largeur))
+    arguments_list = ("rectangle",x,y,longeur,largeur,color,couleur_contour,contour)
+    igs.service_call("Whiteboard", "addShape", arguments_list, "")
 
 def send_service_ellipse_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
-    pygame.draw.ellipse(screen,color,(x,y,longeur,largeur))
+    arguments_list = ("ellipse",x,y,longeur,largeur,color,couleur_contour,contour)
+    igs.service_call("Whiteboard", "addShape", arguments_list, "")
 
-def send_service_image_whiteboard(image,x,y,height,width):
-    image = pygame.transform.scale(image, (width, height))
-    screen.blit(image, (x,y))
+def send_service_image_whiteboard(url,x,y,height,width):
+    arguments_list = ("http://localhost:8000/?url="+url+"&width="+str(width)+"&height="+str(height),x,y)
+    igs.service_call("Whiteboard","addImageFromUrl",arguments_list,"")
+
+def clear():
+    igs.service_call("Whiteboard","clear",(),"")
 
 def draw_map_render_2D():
     for i in range(len(string_map)):
@@ -194,15 +191,15 @@ def draw_3D_world():
         ennemy_draw_dict[enn[2]] = (ennemy_draw_origin_dict[enn[2]],enn[1],enn[0])
 
     for enn in ennemy_draw_dict.values():
-        send_service_image_whiteboard(image_monstre,enn[0] * wall_width,(WINDOW_HEIGHT-enn[1])//2,int((enn[2]-enn[0])*wall_width),int(enn[1]))
+        send_service_image_whiteboard(monstre_link,enn[0] * wall_width,(WINDOW_HEIGHT-enn[1])//2,int((enn[2]-enn[0])*wall_width),int(enn[1]))
 
-    send_service_ellipse_whiteboard(WINDOW_WIDTH_DEMI-2,WINDOW_HEIGHT_DEMI-2,5.0,5.0,"red","black",1.0)
+    send_service_ellipse_whiteboard(WINDOW_WIDTH_DEMI-2,WINDOW_HEIGHT_DEMI-2,5.0,5.0,"black","black",1.0)
 
-    send_service_image_whiteboard(image_weapon,700.0,500.0,100,100)
+    send_service_image_whiteboard(weapon_link,700.0,500.0,100,100)
 
     if player_blood > 0:
         player_blood -= 1
-        send_service_image_whiteboard(image_blood,0,0,WINDOW_HEIGHT_INT,WINDOW_WIDTH_INT)
+        send_service_image_whiteboard(blood_link,0,0,WINDOW_HEIGHT_INT,WINDOW_WIDTH_INT)
 
 def place_ennemies_on_grid():
     global string_map
@@ -223,6 +220,7 @@ def update():
     global debug_perspective
     global player_doesnt_move
     if player_doesnt_move == True:
+        clear()
         if debug_perspective == True:
             draw_map_render_2D()
             draw_player_render_2D()
@@ -234,7 +232,6 @@ def update():
             cast_rays_3D()
             draw_3D_world()
         player_doesnt_move = False
-        pygame.display.update()
 
 
 
@@ -249,8 +246,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
     global player_blood
     global string_map_og
     global string_map
-    global player_x
-    global player_y
+    print(ennemies)
     if keyboard.is_pressed('z'):
         player_doesnt_move = True
         player_x += 1 * math.cos(angle)
@@ -284,13 +280,14 @@ def input_callback(iop_type, name, value_type, value, my_data):
     if keyboard.is_pressed('k'):
         player_click = True
         player_doesnt_move = True
-    #if name=="Timer":
-    #    update()
+    if name=="Timer":
+        update()
     elif name=="Ennemies":
         player_doesnt_move = True
         if value == "[]":
             ennemies = []
             return
+        print(value)
         ennemies = []
         for i in value.split("("):
             if i != "[" and i != "":
@@ -311,12 +308,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
         temp_list.append(temp_sub_list)
         string_map_og = temp_list
         player_doesnt_move = True
-    elif name=="player_x":
-        player_x = value
-        player_doesnt_move = True
-    elif name=="player_y":
-        player_y = value
-        player_doesnt_move = True
+
 
     # add code here if needed
 
@@ -347,21 +339,9 @@ if __name__=="__main__":
     igs.input_create("map",igs.STRING_T, None)
     igs.observe_input("map",input_callback,None)
 
-    igs.input_create("player_x",igs.INTEGER_T, None)
-    igs.observe_input("player_x",input_callback,None)
-
-    igs.input_create("player_y",igs.INTEGER_T, None)
-    igs.observe_input("player_y",input_callback,None)
-
     igs.output_create("kill", igs.INTEGER_T, None)
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
-
-    pygame.init()
-    pygame.display.set_caption("DPPM")
-
-    thread = threading.Thread(target=input)
-    thread.start()
 
     for i in range(int(WINDOW_HEIGHT)+1):
         if len(str(hex(int(i*255/600))[2:])) != 2: 
@@ -369,15 +349,7 @@ if __name__=="__main__":
         else: 
             dic_color[i] = "#"+str(hex(int(i*255/600))[2:])*3
 
-    running = True
-    clock = pygame.time.Clock()
-    while running:
-        pygame.event.pump()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-        update()
-        clock.tick(144)
+    input()
 
     igs.stop()
 
