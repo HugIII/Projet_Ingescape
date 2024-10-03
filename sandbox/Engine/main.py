@@ -12,7 +12,6 @@ import sys
 import ingescape as igs
 import math
 import time
-import keyboard
 import time
 import re
 import copy
@@ -251,42 +250,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
     global string_map
     global player_x
     global player_y
-    if keyboard.is_pressed('z'):
-        player_doesnt_move = True
-        player_x += 1 * math.cos(angle)
-        player_y += 1 * math.sin(angle)
-    if keyboard.is_pressed('s'):
-        player_doesnt_move = True
-        player_x -= 1 * math.cos(angle)
-        player_y -= 1 * math.sin(angle)
-    if keyboard.is_pressed('q'):
-        player_doesnt_move = True
-        player_x += 1 * math.cos(angle - math.pi / 2)
-        player_y += 1 * math.sin(angle - math.pi / 2)
-    if keyboard.is_pressed('d'):
-        player_doesnt_move = True
-        player_x += 1 * math.cos(angle + math.pi / 2)
-        player_y += 1 * math.sin(angle + math.pi / 2)
-    if keyboard.is_pressed('p'):
-        player_doesnt_move = True
-        if debug_perspective:
-            debug_perspective = False
-        else:
-            debug_perspective = True
-    if keyboard.is_pressed('e'):
-        player_doesnt_move = True
-        angle = (angle + 0.1) % 360
-    if keyboard.is_pressed('a'):
-        player_doesnt_move = True
-        angle -= 0.1
-        if angle == 0:
-            angle = 359
-    if keyboard.is_pressed('k'):
-        player_click = True
-        player_doesnt_move = True
-    #if name=="Timer":
-    #    update()
-    elif name=="Ennemies":
+    if name=="Ennemies":
         player_doesnt_move = True
         if value == "[]":
             ennemies = []
@@ -320,6 +284,59 @@ def input_callback(iop_type, name, value_type, value, my_data):
 
     # add code here if needed
 
+def key_pressed_test():
+    global player_x
+    global player_y
+    global debug_perspective
+    global player_doesnt_move
+    global angle
+    global player_click
+    global ennemies
+    global player_blood
+    global string_map_og
+    global string_map
+    global player_x
+    global player_y
+    keys = pygame.key.get_pressed()  # Récupère l'état des touches
+
+    # Mouvements
+    if keys[pygame.K_z]:  # Avancer
+        player_doesnt_move = True
+        player_x += 1 * math.cos(angle)
+        player_y += 1 * math.sin(angle)
+    if keys[pygame.K_s]:  # Reculer
+        player_doesnt_move = True
+        player_x -= 1 * math.cos(angle)
+        player_y -= 1 * math.sin(angle)
+    if keys[pygame.K_q]:  # Gauche
+        player_doesnt_move = True
+        player_x += 1 * math.cos(angle - math.pi / 2)
+        player_y += 1 * math.sin(angle - math.pi / 2)
+    if keys[pygame.K_d]:  # Droite
+        player_doesnt_move = True
+        player_x += 1 * math.cos(angle + math.pi / 2)
+        player_y += 1 * math.sin(angle + math.pi / 2)
+
+    # Changer de perspective de débogage
+    if keys[pygame.K_p]:
+        player_doesnt_move = True
+        debug_perspective = not debug_perspective
+
+    # Rotation
+    if keys[pygame.K_e]:  # Tourner à droite
+        player_doesnt_move = True
+        angle = (angle + 0.1) % (2 * math.pi)  # en radians
+    if keys[pygame.K_a]:  # Tourner à gauche
+        player_doesnt_move = True
+        angle -= 0.1
+        if angle < 0:
+            angle += 2 * math.pi
+
+    # Logique du clic du joueur
+    if keys[pygame.K_k]:
+        player_click = True
+        player_doesnt_move = True
+
 if __name__=="__main__":
     if len(sys.argv) < 4:
         print("usage: python3 main.py agent_name network_device port")
@@ -334,9 +351,6 @@ if __name__=="__main__":
     igs.log_set_console(True)
     igs.log_set_file(True, None)
     igs.set_command_line(sys.executable + " " + " ".join(sys.argv))
-
-    igs.input_create("Timer", igs.IMPULSION_T, None)
-    igs.observe_input("Timer", input_callback, None)
 
     igs.input_create("Ennemies",igs.STRING_T, None)
     igs.observe_input("Ennemies",input_callback,None)
@@ -373,6 +387,7 @@ if __name__=="__main__":
     clock = pygame.time.Clock()
     while running:
         pygame.event.pump()
+        key_pressed_test()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False

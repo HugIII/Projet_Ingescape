@@ -461,12 +461,12 @@
                     "inputs": [
                         {
                             "description": "",
-                            "name": "Timer",
-                            "type": "IMPULSION"
+                            "name": "Ennemies",
+                            "type": "STRING"
                         },
                         {
                             "description": "",
-                            "name": "Ennemies",
+                            "name": "other_player",
                             "type": "STRING"
                         },
                         {
@@ -519,53 +519,7 @@
                     "isCollapsed": false,
                     "positionX": 1759,
                     "positionY": 496,
-                    "positionZ": 9.499999999999842,
-                    "width": 252
-                }
-            },
-            {
-                "data": {
-                },
-                "definition": {
-                    "description": "Timer",
-                    "family": "",
-                    "inputs": [
-                        {
-                            "description": "",
-                            "name": "in",
-                            "type": "IMPULSION"
-                        }
-                    ],
-                    "isDynamic": false,
-                    "name": "Timer",
-                    "outputs": [
-                        {
-                            "description": "",
-                            "name": "out",
-                            "type": "IMPULSION"
-                        }
-                    ],
-                    "parameters": [
-                    ],
-                    "services": [
-                    ],
-                    "version": "1.0"
-                },
-                "identity": "Timer",
-                "instances": [
-                    {
-                        "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe main.py Timer Wi-Fi 5670",
-                        "hostname": "PcHugo",
-                        "ipAddress": "10.188.183.219",
-                        "mac": "F8:9E:94:19:AD:75"
-                    }
-                ],
-                "view": {
-                    "height": 40,
-                    "isCollapsed": false,
-                    "positionX": 1386,
-                    "positionY": -92,
-                    "positionZ": 9.59999999999984,
+                    "positionZ": 9.709999999999837,
                     "width": 252
                 }
             },
@@ -611,7 +565,7 @@
                     "isCollapsed": false,
                     "positionX": 886,
                     "positionY": -97,
-                    "positionZ": 9.529999999999841,
+                    "positionZ": 9.689999999999838,
                     "width": 252
                 }
             },
@@ -680,9 +634,9 @@
                 "view": {
                     "height": 40,
                     "isCollapsed": false,
-                    "positionX": 1776,
-                    "positionY": 851,
-                    "positionZ": 9.61999999999984,
+                    "positionX": 1748,
+                    "positionY": 870,
+                    "positionZ": 9.679999999999838,
                     "width": 252
                 }
             },
@@ -866,6 +820,21 @@
                     "description": "",
                     "family": "",
                     "inputs": [
+                        {
+                            "description": "",
+                            "name": "in",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "description": "",
+                            "name": "kill",
+                            "type": "STRING"
+                        },
+                        {
+                            "description": "",
+                            "name": "list_player_server",
+                            "type": "STRING"
+                        }
                     ],
                     "isDynamic": false,
                     "name": "Player_enn",
@@ -893,20 +862,14 @@
                 "view": {
                     "height": 40,
                     "isCollapsed": false,
-                    "positionX": 1758,
-                    "positionY": 1144,
-                    "positionZ": 9.62999999999984,
+                    "positionX": 1740,
+                    "positionY": 1124,
+                    "positionZ": 9.699999999999838,
                     "width": 252
                 }
             }
         ],
         "mappings": [
-            {
-                "fromAgent": "Timer",
-                "fromInput": "in",
-                "toAgent": "Starter",
-                "toOutput": "out"
-            },
             {
                 "fromAgent": "Engine",
                 "fromInput": "Ennemies",
@@ -1004,9 +967,27 @@
                 "toOutput": "value"
             },
             {
+                "fromAgent": "Scorer",
+                "fromInput": "score",
+                "toAgent": "Player_enn",
+                "toOutput": "score"
+            },
+            {
+                "fromAgent": "Sound_manager",
+                "fromInput": "monster_death",
+                "toAgent": "Player_enn",
+                "toOutput": "score"
+            },
+            {
                 "fromAgent": "Engine",
-                "fromInput": "Timer",
-                "toAgent": "Timer",
+                "fromInput": "other_player",
+                "toAgent": "Player_enn",
+                "toOutput": "list_players"
+            },
+            {
+                "fromAgent": "Player_enn",
+                "fromInput": "in",
+                "toAgent": "Starter",
                 "toOutput": "out"
             }
         ],

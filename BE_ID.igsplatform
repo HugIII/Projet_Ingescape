@@ -461,11 +461,6 @@
                     "inputs": [
                         {
                             "description": "",
-                            "name": "Timer",
-                            "type": "IMPULSION"
-                        },
-                        {
-                            "description": "",
                             "name": "Ennemies",
                             "type": "STRING"
                         },
@@ -519,53 +514,7 @@
                     "isCollapsed": false,
                     "positionX": 1759,
                     "positionY": 496,
-                    "positionZ": 9.499999999999842,
-                    "width": 252
-                }
-            },
-            {
-                "data": {
-                },
-                "definition": {
-                    "description": "Timer",
-                    "family": "",
-                    "inputs": [
-                        {
-                            "description": "",
-                            "name": "in",
-                            "type": "IMPULSION"
-                        }
-                    ],
-                    "isDynamic": false,
-                    "name": "Timer",
-                    "outputs": [
-                        {
-                            "description": "",
-                            "name": "out",
-                            "type": "IMPULSION"
-                        }
-                    ],
-                    "parameters": [
-                    ],
-                    "services": [
-                    ],
-                    "version": "1.0"
-                },
-                "identity": "Timer",
-                "instances": [
-                    {
-                        "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe main.py Timer Wi-Fi 5670",
-                        "hostname": "PcHugo",
-                        "ipAddress": "10.188.183.219",
-                        "mac": "F8:9E:94:19:AD:75"
-                    }
-                ],
-                "view": {
-                    "height": 40,
-                    "isCollapsed": false,
-                    "positionX": 1386,
-                    "positionY": -92,
-                    "positionZ": 9.59999999999984,
+                    "positionZ": 9.62999999999984,
                     "width": 252
                 }
             },
@@ -862,12 +811,6 @@
         ],
         "mappings": [
             {
-                "fromAgent": "Timer",
-                "fromInput": "in",
-                "toAgent": "Starter",
-                "toOutput": "out"
-            },
-            {
                 "fromAgent": "Engine",
                 "fromInput": "Ennemies",
                 "toAgent": "Ennemies",
@@ -962,12 +905,6 @@
                 "fromInput": "player_y",
                 "toAgent": "fd9a7410-57d8-4c3e-8633-5c1c05f7c728",
                 "toOutput": "value"
-            },
-            {
-                "fromAgent": "Engine",
-                "fromInput": "Timer",
-                "toAgent": "Timer",
-                "toOutput": "out"
             }
         ],
         "splits": [
