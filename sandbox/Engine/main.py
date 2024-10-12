@@ -15,10 +15,9 @@ import time
 import time
 import re
 import copy
-
 import threading
 
-string_map_og = [["X","X","X","X","X","X","X","X","X","X"],
+string_map = [["X","X","X","X","X","X","X","X","X","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
@@ -30,12 +29,10 @@ string_map_og = [["X","X","X","X","X","X","X","X","X","X"],
               ["X","X","X","X","X","X","X","X","X","X"]]
 
 
-string_map = []
-
 dic_color = {}
 
-WINDOW_HEIGHT = 600.0
-WINDOW_WIDTH = 800.0
+WINDOW_HEIGHT = 780.0
+WINDOW_WIDTH = 1200.0
 WINDOW_HEIGHT_INT = int(WINDOW_HEIGHT)
 WINDOW_WIDTH_INT = int(WINDOW_WIDTH)
 WINDOW_HEIGHT_DEMI = WINDOW_HEIGHT/2
@@ -49,39 +46,41 @@ angle = 45
 
 fov = math.pi / 3
 tile_size = 50
-number_rays = 31
-number_rays_total = number_rays * 4
-middle_rays = number_rays_total // 2
-rays_factor = number_rays_total/number_rays
+number_rays = 85
+middle_rays = number_rays / 2
 angle_step = fov / number_rays
-
-modulo_rays_factor = []
-divide_rays_factor = []
-for i in range(number_rays_total+1):
-    modulo_rays_factor.append(i%rays_factor)
-    divide_rays_factor.append(i/rays_factor)
-
 
 wall_width = WINDOW_WIDTH//number_rays
 
 debug_perspective = False
-player_doesnt_move = True
 player_click = False
+lock_ennemi_kill = True
 
 ennemies = []
+player_enn = []
 
 wall_draw_list = []
 ennemy_draw_list = []
+player_enn_draw_list = []
 ennemy_dict = {}
+player_enn_dict = {}
 
 player_blood = 0
 
-monstre_link = "./image/monstre.png"
+monstre_link = ["./image/monstre1.png","./image/monstre2.png","./image/monstre3.png"]
+player_link = "./image/other_player.png"
 weapon_link = "./image/weapon.png"
 blood_link = "./image/blood.png"
-image_monstre = pygame.image.load(monstre_link)
+sky_link = "./image/sky.png"
+
+image_monstre = []
+for i in monstre_link:
+    image_monstre.append(pygame.image.load(i))
+
 image_weapon = pygame.image.load(weapon_link)
 image_blood = pygame.image.load(blood_link)
+image_player = pygame.image.load(player_link)
+image_sky = pygame.image.load(sky_link)
 
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
@@ -93,6 +92,8 @@ def send_service_ellipse_whiteboard(x,y,longeur,largeur,color,couleur_contour,co
     pygame.draw.ellipse(screen,color,(x,y,longeur,largeur))
 
 def send_service_image_whiteboard(image,x,y,height,width):
+    if width <= 0 or height <= 0:
+        return
     image = pygame.transform.scale(image, (width, height))
     screen.blit(image, (x,y))
 
@@ -124,28 +125,36 @@ def draw_player_render_2D():
 def draw_ennemie_render_2D():
     for i in ennemies:
         send_service_ellipse_whiteboard(i[0]-10.0,i[1]-10.0,20.0,20.0,"purple","black",1.0)
+    for i in player_enn:
+        send_service_ellipse_whiteboard(i[0]-10.0,i[1]-10.0,20.0,20.0,"yellow","black",1.0)
+
 
 def draw_sky_floor_3D():
-    send_service_rectangle_whiteboard(0.0,0.0,WINDOW_WIDTH,WINDOW_HEIGHT_DEMI,"blue","grey",0.0)
-    send_service_rectangle_whiteboard(0.0,WINDOW_HEIGHT_DEMI,WINDOW_WIDTH,WINDOW_HEIGHT_DEMI,"green","grey",0.0)
+    send_service_image_whiteboard(image_sky,0,0,WINDOW_HEIGHT_INT-200,WINDOW_WIDTH_INT)
+    #send_service_rectangle_whiteboard(0.0,0.0,WINDOW_WIDTH,WINDOW_HEIGHT_DEMI,"blue","grey",0.0)
+    send_service_rectangle_whiteboard(0.0,WINDOW_HEIGHT_DEMI,WINDOW_WIDTH,WINDOW_HEIGHT_DEMI,"#655e5c","grey",0.0)
 
 
 def cast_rays_3D():
     global wall_draw_list
     global ennemy_draw_list
+    global player_enn_draw_list
     global string_map
     global ennemies
-    global player_doesnt_move
-    global divide_rays_factor
-    global modulo_rays_factor
+    global player_enn
     global player_click
+    global lock_ennemi_kill
     start_angle = angle - fov / 2
     wall_height_memory = []
     wall_draw_list = []
     ennemy_draw_list = []
-    for ray in range(number_rays_total+1):
+    player_enn_draw_list = []
+    degat = 0
+
+    for ray in range(number_rays+1):
         touch_enn = False
-        ray_angle = start_angle + ray/rays_factor * angle_step
+        touch_player = False
+        ray_angle = start_angle + ray * angle_step
         ray_angle_cos = math.cos(ray_angle)
         ray_angle_sin = math.sin(ray_angle)
         for depth in range(0,MAX_DEPTH):
@@ -156,28 +165,45 @@ def cast_rays_3D():
             grid_y = int(target_y / tile_size)
 
             if 0 <= grid_x < len(string_map[0]) and 0 <= grid_y < len(string_map):
-                if touch_enn == False and string_map[grid_x][grid_y][0] == "E":
-                    ennemy_position = ennemy_dict[string_map[grid_x][grid_y]]
-                    corrected_depth = depth/5 * math.cos(ray_angle-angle)
-                    wall_height = WINDOW_HEIGHT / (corrected_depth + 0.0001)
-                    wall_height = 600 if wall_height > 600 else wall_height
-
-                    if ennemy_position[0] - 2 < target_x < ennemy_position[0] + 2 and ennemy_position[1] - 2 < target_y < ennemy_position[1] + 2:
-                        touch_enn = True
-                        ennemy_draw_list.append((divide_rays_factor[ray],wall_height,string_map[grid_x][grid_y]))
-                        if ray == middle_rays and player_click == True:
-                            for index,i in enumerate(ennemies):
-                                if i[0] - 2 < target_x < i[0] + 2 and i[1] - 2 < target_y < i[1] + 2:
-                                    igs.output_set_int("kill",index)
-                                    player_click = False
-
-
-                if modulo_rays_factor[ray] == 0 and string_map[grid_x][grid_y] == "X":
+                if string_map[grid_x][grid_y] == "X":
                     corrected_depth = depth/10 * math.cos(ray_angle-angle)
                     wall_height = WINDOW_HEIGHT / (corrected_depth + 0.0001)  
                     wall_height = 600 if wall_height > 600 else wall_height            
-                    wall_draw_list.append((divide_rays_factor[ray],wall_height))
+                    wall_draw_list.append((ray,wall_height))
                     break
+
+                if depth > 300:
+                    continue
+
+                for index,i in enumerate(ennemies):
+                    ennemies_position = i
+                    if touch_enn == False and ennemies_position[0] - 2 < target_x < ennemies_position[0] + 2 and ennemies_position[1] - 2 < target_y < ennemies_position[1] + 2:
+                        corrected_depth = depth/5 * math.cos(ray_angle-angle)
+                        wall_height = WINDOW_HEIGHT / (corrected_depth + 0.0001)
+                        wall_height = 600 if wall_height > 600 else wall_height
+                        ennemy_draw_list.append((ray,wall_height,index,ennemies_position[0],ennemies_position[1]))
+                        touch_enn = True
+                        degat += 0.1
+
+                        if middle_rays - 1 <= ray <= middle_rays +1 and player_click == True and lock_ennemi_kill == True:
+                            if i[0] - 2 < target_x < i[0] + 2 and i[1] - 2 < target_y < i[1] + 2:
+                                lock_ennemi_kill = False
+                                igs.output_set_int("kill",index)
+
+                for index,i in enumerate(player_enn):
+                    player_enn_position = i
+                    if touch_player == False and player_enn_position[0] - 2 < target_x < player_enn_position[0] + 2 and player_enn_position[1] - 2 < target_y < player_enn_position[1] + 2:
+                        corrected_depth = depth/5 * math.cos(ray_angle-angle)
+                        wall_height = WINDOW_HEIGHT / (corrected_depth + 0.0001)
+                        wall_height = 600 if wall_height > 600 else wall_height
+                        player_enn_draw_list.append((ray,wall_height,index))
+                        touch_player = True
+
+                        if middle_rays - 1 <= ray <= middle_rays +1 and player_click == True:
+                            if i[0] - 2 < target_x < i[0] + 2 and i[1] - 2 < target_y < i[1] + 2:
+                                igs.output_set_int("kill_player",index)
+
+    igs.output_set_double("degat",degat)
     player_click = False
 
 def draw_3D_world():
@@ -190,50 +216,42 @@ def draw_3D_world():
     for enn in ennemy_draw_list:
         if enn[2] not in ennemy_draw_origin_dict.keys():
             ennemy_draw_origin_dict[enn[2]] = enn[0] 
-        ennemy_draw_dict[enn[2]] = (ennemy_draw_origin_dict[enn[2]],enn[1],enn[0])
+        ennemy_draw_dict[enn[2]] = (ennemy_draw_origin_dict[enn[2]],enn[1],enn[0],enn[3],enn[4])
+
+    player_enn_draw_dict = {}
+    player_enn_draw_origin_dict = {}
+    for pla in player_enn_draw_list:
+        if pla[2] not in player_enn_draw_origin_dict.keys():
+            player_enn_draw_origin_dict[pla[2]] = pla[0] 
+        player_enn_draw_dict[pla[2]] = (player_enn_draw_origin_dict[pla[2]],pla[1],pla[0])
 
     for enn in ennemy_draw_dict.values():
-        send_service_image_whiteboard(image_monstre,enn[0] * wall_width,(WINDOW_HEIGHT-enn[1])//2,int((enn[2]-enn[0])*wall_width),int(enn[1]))
+        send_service_image_whiteboard(image_monstre[(enn[3]+enn[4])%len(image_monstre)],enn[0] * wall_width,(WINDOW_HEIGHT-enn[1])//2,int((enn[2]-enn[0])*wall_width),int(enn[1]))
+
+    for pla in player_enn_draw_dict.values():
+        send_service_image_whiteboard(image_player,pla[0] * wall_width,(WINDOW_HEIGHT-pla[1])//2,int((pla[2]-pla[0])*wall_width),int(pla[1]))
 
     send_service_ellipse_whiteboard(WINDOW_WIDTH_DEMI-2,WINDOW_HEIGHT_DEMI-2,5.0,5.0,"red","black",1.0)
 
-    send_service_image_whiteboard(image_weapon,700.0,500.0,100,100)
+    send_service_image_whiteboard(image_weapon,WINDOW_WIDTH_INT-100,WINDOW_HEIGHT_INT-100,100,100)
 
     if player_blood > 0:
         player_blood -= 1
         send_service_image_whiteboard(image_blood,0,0,WINDOW_HEIGHT_INT,WINDOW_WIDTH_INT)
-
-def place_ennemies_on_grid():
-    global string_map
-    global ennemy_dict
-    string_map = copy.deepcopy(string_map_og)
-    ennemy_dict = {}
-    for i,o in enumerate(ennemies):
-        x = int(o[0]/50)
-        y = int(o[1]/50)
-
-        ennemy_dict["E"+str(i)] = o
-        if string_map[x][y] == "X":
-            igs.output_set_int("kill",i)
-        else:
-            string_map[x][y] = "E"+str(i)
+    
 
 def update():
     global debug_perspective
-    global player_doesnt_move
-    if player_doesnt_move == True:
-        if debug_perspective == True:
-            draw_map_render_2D()
-            draw_player_render_2D()
-            cast_rays_2D()
-            draw_ennemie_render_2D()
-        else:
-            place_ennemies_on_grid()
-            draw_sky_floor_3D()
-            cast_rays_3D()
-            draw_3D_world()
-        player_doesnt_move = False
-        pygame.display.update()
+    if debug_perspective == True:
+        draw_map_render_2D()
+        draw_player_render_2D()
+        cast_rays_2D()
+        draw_ennemie_render_2D()
+    else:
+        draw_sky_floor_3D()
+        cast_rays_3D()
+        draw_3D_world()
+    pygame.display.update()
 
 
 
@@ -241,17 +259,16 @@ def input_callback(iop_type, name, value_type, value, my_data):
     global player_x
     global player_y
     global debug_perspective
-    global player_doesnt_move
     global angle
     global player_click
     global ennemies
+    global player_enn
     global player_blood
-    global string_map_og
     global string_map
     global player_x
     global player_y
+    global lock_ennemi_kill
     if name=="Ennemies":
-        player_doesnt_move = True
         if value == "[]":
             ennemies = []
             return
@@ -260,8 +277,17 @@ def input_callback(iop_type, name, value_type, value, my_data):
             if i != "[" and i != "":
                 t = i.strip()[:-2].split(",")
                 ennemies.append((int(t[0]),int(t[1])))
+        lock_ennemi_kill = True
+    if name=="other_player":
+        if value == "[]":
+            player_enn = []
+            return
+        player_enn = []
+        for i in value.split("("):
+            if i != "[" and i != "":
+                t = i.strip()[:-2].split(",")
+                player_enn.append((int(t[0]),int(t[1])))
     elif name=="player_blood":
-        player_doesnt_move = True
         player_blood = 5
     elif name=="map":
         temp_list = []
@@ -273,14 +299,11 @@ def input_callback(iop_type, name, value_type, value, my_data):
             else:
                 temp_sub_list.append(value[i])
         temp_list.append(temp_sub_list)
-        string_map_og = temp_list
-        player_doesnt_move = True
+        string_map = temp_list
     elif name=="player_x":
         player_x = value
-        player_doesnt_move = True
     elif name=="player_y":
         player_y = value
-        player_doesnt_move = True
 
     # add code here if needed
 
@@ -288,46 +311,34 @@ def key_pressed_test():
     global player_x
     global player_y
     global debug_perspective
-    global player_doesnt_move
     global angle
     global player_click
-    global ennemies
     global player_blood
-    global string_map_og
     global string_map
-    global player_x
-    global player_y
     keys = pygame.key.get_pressed()  # Récupère l'état des touches
 
     # Mouvements
     if keys[pygame.K_z]:  # Avancer
-        player_doesnt_move = True
         player_x += 1 * math.cos(angle)
         player_y += 1 * math.sin(angle)
     if keys[pygame.K_s]:  # Reculer
-        player_doesnt_move = True
         player_x -= 1 * math.cos(angle)
         player_y -= 1 * math.sin(angle)
     if keys[pygame.K_q]:  # Gauche
-        player_doesnt_move = True
         player_x += 1 * math.cos(angle - math.pi / 2)
         player_y += 1 * math.sin(angle - math.pi / 2)
     if keys[pygame.K_d]:  # Droite
-        player_doesnt_move = True
         player_x += 1 * math.cos(angle + math.pi / 2)
         player_y += 1 * math.sin(angle + math.pi / 2)
 
     # Changer de perspective de débogage
     if keys[pygame.K_p]:
-        player_doesnt_move = True
         debug_perspective = not debug_perspective
 
     # Rotation
     if keys[pygame.K_e]:  # Tourner à droite
-        player_doesnt_move = True
         angle = (angle + 0.1) % (2 * math.pi)  # en radians
     if keys[pygame.K_a]:  # Tourner à gauche
-        player_doesnt_move = True
         angle -= 0.1
         if angle < 0:
             angle += 2 * math.pi
@@ -335,7 +346,6 @@ def key_pressed_test():
     # Logique du clic du joueur
     if keys[pygame.K_k]:
         player_click = True
-        player_doesnt_move = True
 
 if __name__=="__main__":
     if len(sys.argv) < 4:
@@ -355,6 +365,9 @@ if __name__=="__main__":
     igs.input_create("Ennemies",igs.STRING_T, None)
     igs.observe_input("Ennemies",input_callback,None)
 
+    igs.input_create("other_player",igs.STRING_T, None)
+    igs.observe_input("other_player",input_callback,None)
+
     igs.input_create("player_blood",igs.IMPULSION_T, None)
     igs.observe_input("player_blood",input_callback,None)
 
@@ -368,9 +381,11 @@ if __name__=="__main__":
     igs.observe_input("player_y",input_callback,None)
 
     igs.output_create("kill", igs.INTEGER_T, None)
+    igs.output_create("kill_player", igs.INTEGER_T, None)
+    igs.output_create("degat", igs.DOUBLE_T, None)
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
-
+    
     pygame.init()
     pygame.display.set_caption("DPPM")
 

@@ -36,20 +36,19 @@ def input_callback(iop_type, name, value_type, value, my_data):
 
     if name == "multi":
         multi = value
+        if value == True:
+            igs.output_set_string("list_ennemies",str(multi_ennemies))
     elif name == "multi_ennemy":
+        print("test")
         multi_ennemies = []
         for i in value.split("("):
             if i != "[" and i != "":
                 t = i.strip()[:-2].split(",")
                 multi_ennemies.append((int(t[0]),int(t[1])))
-
-    if multi == True:
-        igs.output_set_string("list_ennemies",str(multi_ennemies))
-        return
+                igs.output_set_string("list_ennemies",str(multi_ennemies))
 
     if name == "kill":
-        igs.output_set_impulsion("score") 
-        ennemies_list.pop(value)
+        igs.output_set_impulsion("score")
     elif name=="map":
         temp_list = []
         temp_sub_list = []
@@ -62,6 +61,13 @@ def input_callback(iop_type, name, value_type, value, my_data):
         temp_list.append(temp_sub_list)
         string_map = temp_list
         player_doesnt_move = True
+
+    if multi == True:
+        return
+
+    if name == "kill":
+        igs.output_set_impulsion("score")
+        ennemies_list.pop(value)
 
     while(len(ennemies_list) < 8):
         coord_not_wall = False

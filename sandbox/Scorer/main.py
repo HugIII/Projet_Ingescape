@@ -17,7 +17,16 @@ def input_callback(iop_type, name, value_type, value, my_data):
     global score
     if name == "score":
         score += 50
-    igs.output_set_string("out","Score: "+str(score)) 
+        igs.output_set_string("out","Score: "+str(score)) 
+        igs.output_set_int("score",score)
+    elif name == "score_multi":
+        s = "Tableau des score:\n" 
+        for i in value.split("("):
+            if i != "[" and i != "":
+                t = i.strip()[:-2].split(",")
+                s += "player_"+t[0]+" : "+t[1] + "\n"
+        igs.service_call("Whiteboard", "chat",(s[:-1]), "")
+
     # add code here if needed
 
 if __name__ == "__main__":
@@ -37,12 +46,16 @@ if __name__ == "__main__":
 
     igs.input_create("start", igs.IMPULSION_T, None)
     igs.input_create("score", igs.IMPULSION_T, None)
+    igs.input_create("score_multi", igs.STRING_T, None)
 
     igs.output_create("out", igs.STRING_T, None)
+    igs.output_create("score", igs.INTEGER_T, None)
+    igs.output_create("score_chat", igs.STRING_T, None)
 
     igs.observe_input("start", input_callback, None)
     igs.observe_input("score", input_callback, None)
-
+    igs.observe_input("score_multi", input_callback, None)
+    
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
 
     input()

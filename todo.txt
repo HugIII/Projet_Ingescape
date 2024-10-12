@@ -1,25 +1,8 @@
-fait:
-engine => afficher les images des ennemies (fait)
-timer => faire en sorte qu'on est pas une boucle infinie (fait)
-
 à faire:
 objet => event
 objet => player
 objet => map
-objet => ennemies (en cours Hugo)
 engine => changer les entrees sorties et adapter le code
-engine => bug realloc 
 engine => artefact visuel ennemie
-ennemies => bug realloc
-image_server => voir si on peut pas le faire directement avec ingescape
-
-XXXXXXXXXXR
-X........XR
-X........XR
-X...XXX..XR
-X...XXX..XR
-X...XXX..XR
-X........XR
-X........XR
-X........XR
-XXXXXXXXXXR
+link le son au event adéquat 
+enlever le in de ennemies et de player_ennemie
