@@ -146,13 +146,13 @@ if __name__ == "__main__":
     time.sleep(4)
     
 
-    os.system("start /B py ./sandbox/Ennemies/main.py Ennemies_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
-    os.system("start /B py ./sandbox/Starter/main.py Starter_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
-    os.system("start /B py ./sandbox/Scorer/main.py Scorer_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
-    os.system("start /B py ./sandbox/Engine/main.py Engine_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
-    os.system("start /B py ./sandbox/Engine_Map/main.py Engine_Map_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
-    os.system("start /B py ./sandbox/Player_enn/main.py Player_enn_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
-    os.system("start /B py ./sandbox/Client_Server/main.py Client_Server_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
+    os.system("start /B python ./sandbox/Ennemies/main.py Ennemies_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
+    os.system("start /B python ./sandbox/Starter/main.py Starter_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
+    os.system("start /B python ./sandbox/Scorer/main.py Scorer_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
+    os.system("start /B python ./sandbox/Engine/main.py Engine_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
+    os.system("start /B python ./sandbox/Engine_Map/main.py Engine_Map_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
+    os.system("start /B python ./sandbox/Player_enn/main.py Player_enn_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
+    os.system("start /B python ./sandbox/Client_Server/main.py Client_Server_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
     os.system("start /B ./sandbox/whiteboard/Whiteboard.exe --device Wi-Fi --port 5670")
 
     igs.stop()
