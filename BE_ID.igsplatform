@@ -433,13 +433,13 @@
                     {
                         "commandLine": "D:\\Download\\whiteboard\\whiteboard\\Whiteboard.exe",
                         "hostname": "PcHugo",
-                        "ipAddress": "192.168.1.88",
+                        "ipAddress": "192.168.1.59",
                         "mac": "F8:9E:94:19:AD:75"
                     },
                     {
                         "commandLine": "C:\\Users\\hugo\\Documents\\Projet_Ingescape\\sandbox\\whiteboard\\Whiteboard.exe",
                         "hostname": "PcHugo",
-                        "ipAddress": "192.168.1.88",
+                        "ipAddress": "192.168.1.59",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
@@ -520,7 +520,7 @@
                     {
                         "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe main.py Engine Wi-Fi 5670",
                         "hostname": "PcHugo",
-                        "ipAddress": "192.168.1.88",
+                        "ipAddress": "192.168.1.59",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
@@ -566,7 +566,7 @@
                     {
                         "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Starter/main.py Starter Wi-Fi 5670",
                         "hostname": "PcHugo",
-                        "ipAddress": "192.168.1.88",
+                        "ipAddress": "192.168.1.59",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
@@ -637,7 +637,7 @@
                     {
                         "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Ennemies/main.py Ennemies Wi-Fi 5670",
                         "hostname": "PcHugo",
-                        "ipAddress": "192.168.1.88",
+                        "ipAddress": "192.168.1.59",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
@@ -703,7 +703,7 @@
                     {
                         "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Scorer/main.py Scorer Wi-Fi 5670",
                         "hostname": "PcHugo",
-                        "ipAddress": "192.168.1.88",
+                        "ipAddress": "192.168.1.59",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
@@ -769,7 +769,7 @@
                     {
                         "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Sound_manager/main.py Sound_manager Wi-Fi 5670",
                         "hostname": "PcHugo",
-                        "ipAddress": "192.168.1.88",
+                        "ipAddress": "192.168.1.59",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
@@ -830,7 +830,7 @@
                     {
                         "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Engine_Map/main.py Engine_Map Wi-Fi 5670",
                         "hostname": "PcHugo",
-                        "ipAddress": "192.168.1.88",
+                        "ipAddress": "192.168.1.59",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
@@ -901,7 +901,7 @@
                     {
                         "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Player_enn/main.py Player_enn Wi-Fi 5670",
                         "hostname": "PcHugo",
-                        "ipAddress": "192.168.1.88",
+                        "ipAddress": "192.168.1.59",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
@@ -1032,7 +1032,7 @@
                     {
                         "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Client_Server/main.py Client_Server Wi-Fi 5670",
                         "hostname": "PcHugo",
-                        "ipAddress": "192.168.1.88",
+                        "ipAddress": "192.168.1.59",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
@@ -1133,7 +1133,7 @@
                     {
                         "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Server/main.py Server Wi-Fi 5670",
                         "hostname": "PcHugo",
-                        "ipAddress": "192.168.1.88",
+                        "ipAddress": "192.168.1.59",
                         "mac": "F8:9E:94:19:AD:75"
                     }
                 ],
