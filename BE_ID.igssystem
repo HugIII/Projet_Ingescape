@@ -1,0 +1,1659 @@
+{
+    "extensions": {
+        "eventsTimeline": {
+            "events": [
+            ],
+            "patterns": [
+            ],
+            "timelines": [
+                {
+                    "eventInstances": [
+                    ],
+                    "name": "Timeline_1",
+                    "order": 0,
+                    "patternInstances": [
+                    ]
+                }
+            ]
+        },
+        "recordAndReplay": {
+            "filters": {
+            }
+        }
+    },
+    "library": {
+        "classes": [
+            {
+                "className": "Whiteboard",
+                "color": 0,
+                "definition": {
+                    "inputs": [
+                        {
+                            "name": "title",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "backgroundColor",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "labelsVisible",
+                            "type": "BOOL"
+                        },
+                        {
+                            "name": "chatMessage",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "clear",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "ui_command",
+                            "type": "STRING"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "lastChatMessage",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "lastAction",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "ui_error",
+                            "type": "STRING"
+                        }
+                    ],
+                    "services": [
+                        {
+                            "arguments": [
+                                {
+                                    "name": "message",
+                                    "type": "STRING"
+                                }
+                            ],
+                            "name": "chat"
+                        },
+                        {
+                            "name": "snapshot",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "base64Png",
+                                            "type": "DATA"
+                                        }
+                                    ],
+                                    "name": "snapshotResult"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "clear"
+                        },
+                        {
+                            "name": "showLabels"
+                        },
+                        {
+                            "name": "hideLabels"
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "type",
+                                    "type": "STRING"
+                                },
+                                {
+                                    "name": "x",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "y",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "width",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "height",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "fill",
+                                    "type": "STRING"
+                                },
+                                {
+                                    "name": "stroke",
+                                    "type": "STRING"
+                                },
+                                {
+                                    "name": "strokeWidth",
+                                    "type": "DOUBLE"
+                                }
+                            ],
+                            "name": "addShape",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "elementId",
+                                            "type": "INTEGER"
+                                        }
+                                    ],
+                                    "name": "elementCreated"
+                                }
+                            ]
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "text",
+                                    "type": "STRING"
+                                },
+                                {
+                                    "name": "x",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "y",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "color",
+                                    "type": "STRING"
+                                }
+                            ],
+                            "name": "addText",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "elementId",
+                                            "type": "INTEGER"
+                                        }
+                                    ],
+                                    "name": "elementCreated"
+                                }
+                            ]
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "base64",
+                                    "type": "DATA"
+                                },
+                                {
+                                    "name": "x",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "y",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "width",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "height",
+                                    "type": "DOUBLE"
+                                }
+                            ],
+                            "name": "addImage",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "elementId",
+                                            "type": "INTEGER"
+                                        }
+                                    ],
+                                    "name": "elementCreated"
+                                }
+                            ]
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "url",
+                                    "type": "STRING"
+                                },
+                                {
+                                    "name": "x",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "y",
+                                    "type": "DOUBLE"
+                                }
+                            ],
+                            "name": "addImageFromUrl",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "elementId",
+                                            "type": "INTEGER"
+                                        }
+                                    ],
+                                    "name": "elementCreated"
+                                }
+                            ]
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "elementId",
+                                    "type": "INTEGER"
+                                }
+                            ],
+                            "name": "remove",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "succeeded",
+                                            "type": "BOOL"
+                                        }
+                                    ],
+                                    "name": "actionResult"
+                                }
+                            ]
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "elementId",
+                                    "type": "INTEGER"
+                                },
+                                {
+                                    "name": "dx",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "dy",
+                                    "type": "DOUBLE"
+                                }
+                            ],
+                            "name": "translate",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "succeeded",
+                                            "type": "BOOL"
+                                        }
+                                    ],
+                                    "name": "actionResult"
+                                }
+                            ]
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "elementId",
+                                    "type": "INTEGER"
+                                },
+                                {
+                                    "name": "x",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "y",
+                                    "type": "DOUBLE"
+                                }
+                            ],
+                            "name": "moveTo",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "succeeded",
+                                            "type": "BOOL"
+                                        }
+                                    ],
+                                    "name": "actionResult"
+                                }
+                            ]
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "elementId",
+                                    "type": "INTEGER"
+                                },
+                                {
+                                    "name": "property",
+                                    "type": "STRING"
+                                },
+                                {
+                                    "name": "value",
+                                    "type": "STRING"
+                                }
+                            ],
+                            "name": "setStringProperty",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "succeeded",
+                                            "type": "BOOL"
+                                        }
+                                    ],
+                                    "name": "actionResult"
+                                }
+                            ]
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "elementId",
+                                    "type": "INTEGER"
+                                },
+                                {
+                                    "name": "property",
+                                    "type": "STRING"
+                                },
+                                {
+                                    "name": "value",
+                                    "type": "DOUBLE"
+                                }
+                            ],
+                            "name": "setDoubleProperty",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "succeeded",
+                                            "type": "BOOL"
+                                        }
+                                    ],
+                                    "name": "actionResult"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "getElementIds",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "jsonArray",
+                                            "type": "STRING"
+                                        }
+                                    ],
+                                    "name": "elementIds"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "getElements",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "jsonArray",
+                                            "type": "STRING"
+                                        }
+                                    ],
+                                    "name": "elements"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "118ec52d-5aba-5ee0-baa7-ae34d567f092",
+                "version": ""
+            },
+            {
+                "className": "Engine",
+                "color": 0,
+                "definition": {
+                    "inputs": [
+                        {
+                            "name": "Ennemies",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "other_player",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "player_blood",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "map",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "player_x",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "player_y",
+                            "type": "INTEGER"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "kill",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "kill_player",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "degat",
+                            "type": "DOUBLE"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "2924bb1c-4778-5b08-ac4c-194a0f51a3d5",
+                "version": ""
+            },
+            {
+                "className": "Starter",
+                "color": 0,
+                "definition": {
+                    "outputs": [
+                        {
+                            "name": "out",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "color_background",
+                            "type": "STRING"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "89153077-bd7e-528c-a4c1-f512db4a456a",
+                "version": ""
+            },
+            {
+                "className": "Ennemies",
+                "color": 0,
+                "definition": {
+                    "inputs": [
+                        {
+                            "name": "in",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "kill",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "map",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "multi",
+                            "type": "BOOL"
+                        },
+                        {
+                            "name": "multi_ennemy",
+                            "type": "STRING"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "list_ennemies",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "score",
+                            "type": "IMPULSION"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "c8ddb841-4528-5479-aa72-9645cb2fd726",
+                "version": ""
+            },
+            {
+                "className": "Scorer",
+                "color": 0,
+                "definition": {
+                    "inputs": [
+                        {
+                            "name": "start",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "score",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "score_multi",
+                            "type": "STRING"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "out",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "score",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "score_chat",
+                            "type": "STRING"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "e401d93d-c758-50e7-a189-0f8911f145f7",
+                "version": ""
+            },
+            {
+                "className": "Sound_manager",
+                "color": 0,
+                "definition": {
+                    "inputs": [
+                        {
+                            "name": "music",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "death",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "monster_death",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "shoot",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "degat_recu",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "sound_on",
+                            "type": "IMPULSION"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "11c411f1-3d38-5bb1-bb31-429119f95233",
+                "version": ""
+            },
+            {
+                "className": "Engine_Map",
+                "color": 0,
+                "definition": {
+                    "inputs": [
+                        {
+                            "name": "player_x",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "player_y",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "map",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "list_ennemies",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "list_other_player",
+                            "type": "STRING"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "7982e962-9357-55f9-aa46-f02597d0ca61",
+                "version": ""
+            },
+            {
+                "className": "Player_enn",
+                "color": 0,
+                "definition": {
+                    "inputs": [
+                        {
+                            "name": "in",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "kill",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "list_player_server",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "multi",
+                            "type": "BOOL"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "list_players",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "score",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "kill",
+                            "type": "STRING"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "dec4f474-02d6-57a0-b02c-bd8988a06798",
+                "version": ""
+            },
+            {
+                "className": "Client_Server",
+                "color": 0,
+                "definition": {
+                    "inputs": [
+                        {
+                            "name": "player_x",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "player_y",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "score",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "kill_ennemies",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "kill_player",
+                            "type": "STRING"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "multi",
+                            "type": "BOOL"
+                        },
+                        {
+                            "name": "multi_ennemy",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "multi_player",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "score_multi",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "kill",
+                            "type": "IMPULSION"
+                        }
+                    ],
+                    "services": [
+                        {
+                            "arguments": [
+                                {
+                                    "name": "liste_player",
+                                    "type": "STRING"
+                                }
+                            ],
+                            "name": "change_liste_player"
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "liste_ennemies",
+                                    "type": "STRING"
+                                }
+                            ],
+                            "name": "change_liste_ennemies"
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "liste_score",
+                                    "type": "STRING"
+                                }
+                            ],
+                            "name": "change_score"
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "uuid",
+                                    "type": "STRING"
+                                },
+                                {
+                                    "name": "message",
+                                    "type": "STRING"
+                                }
+                            ],
+                            "name": "chat"
+                        },
+                        {
+                            "name": "kill"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "3a81b7ed-7a09-54fa-87c9-0e2d8b3eef21",
+                "version": ""
+            },
+            {
+                "className": "Server",
+                "color": 0,
+                "definition": {
+                    "services": [
+                        {
+                            "arguments": [
+                                {
+                                    "name": "uuid",
+                                    "type": "INTEGER"
+                                },
+                                {
+                                    "name": "position_x",
+                                    "type": "INTEGER"
+                                },
+                                {
+                                    "name": "position_y",
+                                    "type": "INTEGER"
+                                }
+                            ],
+                            "name": "player_position"
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "uuid",
+                                    "type": "INTEGER"
+                                },
+                                {
+                                    "name": "index",
+                                    "type": "INTEGER"
+                                }
+                            ],
+                            "name": "ennemies_kill"
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "uuid",
+                                    "type": "INTEGER"
+                                },
+                                {
+                                    "name": "uuid_kill",
+                                    "type": "INTEGER"
+                                }
+                            ],
+                            "name": "player_kill"
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "uuid",
+                                    "type": "INTEGER"
+                                }
+                            ],
+                            "name": "score"
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "uuid",
+                                    "type": "INTEGER"
+                                },
+                                {
+                                    "name": "message",
+                                    "type": "STRING"
+                                }
+                            ],
+                            "name": "chat"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "d9b9fe7e-315b-556a-8498-37d662659390",
+                "version": ""
+            },
+            {
+                "className": "Map",
+                "color": 0,
+                "definition": {
+                    "inputs": [
+                        {
+                            "name": "start",
+                            "type": "IMPULSION"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "map",
+                            "type": "STRING"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "ee26188c-da42-46b8-bf1a-e2ce30745783",
+                "version": ""
+            }
+        ]
+    },
+    "systemViews": [
+        {
+            "children": [
+                {
+                    "data": {
+                        "selectedAgentUuid": "1f911be2-15f4-408f-9fac-535393007e2e"
+                    },
+                    "height": 174,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.serviceobserver",
+                    "uuid": "75f916d9-8a78-4d53-af80-1d504520e80a",
+                    "width": 200,
+                    "x": 2232,
+                    "y": -9
+                },
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Starter/main.py Starter Wi-Fi 5670",
+                                "hostname": "LAPTOP-1U3EERO1",
+                                "ip": "192.168.27.135",
+                                "isAttachedToCircle": false,
+                                "uuid": "c2913a76-d2a1-418c-b2b7-46fb2a165e02"
+                            },
+                            {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Starter/main.py Starter Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "6bf1e6af-da01-4638-99c9-9f542c96ea8c"
+                            }
+                        ]
+                    },
+                    "class": "89153077-bd7e-528c-a4c1-f512db4a456a",
+                    "comment": "",
+                    "height": 114,
+                    "name": "Starter",
+                    "simulationTime": 5000,
+                    "uuid": "2fee7585-2026-445f-af7c-8aeb80bba30c",
+                    "width": 252,
+                    "x": 886,
+                    "y": -97
+                },
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Sound_manager/main.py Sound_manager Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "5298e8b2-7ca2-442a-83d3-0bcfee4ae514"
+                            }
+                        ]
+                    },
+                    "class": "11c411f1-3d38-5bb1-bb31-429119f95233",
+                    "comment": "",
+                    "height": 202,
+                    "name": "Sound_manager",
+                    "simulationTime": 5000,
+                    "uuid": "e8fa4ff7-4ceb-4a6e-9d10-011078108033",
+                    "width": 252,
+                    "x": 2212,
+                    "y": 796
+                },
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Engine_Map/main.py Engine_Map Wi-Fi 5670",
+                                "hostname": "LAPTOP-1U3EERO1",
+                                "ip": "192.168.27.135",
+                                "isAttachedToCircle": false,
+                                "uuid": "99e78a43-f1f8-43ac-a42f-4f0e5f3287ed"
+                            },
+                            {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Engine_Map/main.py Engine_Map Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "73aa1705-54f2-4438-bfb5-7d478e6ff280"
+                            }
+                        ]
+                    },
+                    "class": "7982e962-9357-55f9-aa46-f02597d0ca61",
+                    "comment": "",
+                    "height": 180,
+                    "name": "Engine_Map",
+                    "simulationTime": 5000,
+                    "uuid": "790bac6c-d322-4a0c-8682-779d472b1aa2",
+                    "width": 252,
+                    "x": 2347,
+                    "y": 1109
+                },
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "D:\\Download\\whiteboard\\whiteboard\\Whiteboard.exe",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "3a2bb5ed-7132-4e79-af1e-a5320e54071f"
+                            },
+                            {
+                                "commandLine": "C:\\Users\\hugo\\Documents\\Projet_Ingescape\\sandbox\\whiteboard\\Whiteboard.exe",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "22eac011-6aa0-4850-a4e8-1bccbbfcfd51"
+                            }
+                        ]
+                    },
+                    "class": "118ec52d-5aba-5ee0-baa7-ae34d567f092",
+                    "comment": "",
+                    "height": 202,
+                    "name": "Whiteboard",
+                    "simulationTime": 5000,
+                    "uuid": "1f911be2-15f4-408f-9fac-535393007e2e",
+                    "width": 252,
+                    "x": 2821,
+                    "y": 1053
+                },
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Engine/main.py Engine Wi-Fi 5670",
+                                "hostname": "LAPTOP-1U3EERO1",
+                                "ip": "192.168.27.135",
+                                "isAttachedToCircle": false,
+                                "uuid": "71edad31-10d0-4d9f-b99c-a5c2afe2d779"
+                            },
+                            {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe main.py Engine Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "04455ed2-1df0-4d42-94a6-9b9e8cf139f8"
+                            }
+                        ]
+                    },
+                    "class": "2924bb1c-4778-5b08-ac4c-194a0f51a3d5",
+                    "comment": "",
+                    "height": 202,
+                    "name": "Engine",
+                    "simulationTime": 5000,
+                    "uuid": "d0978519-7a32-4d73-b90f-425c872f2e86",
+                    "width": 252,
+                    "x": 1757,
+                    "y": 1010
+                },
+                {
+                    "data": {
+                        "entries": [
+                            "220"
+                        ],
+                        "value_type": "INTEGER"
+                    },
+                    "height": 79,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.writer",
+                    "uuid": "d0cd9b4f-dba6-41da-9096-dab16d59d04e",
+                    "width": 256,
+                    "x": 575,
+                    "y": 926
+                },
+                {
+                    "data": {
+                        "entries": [
+                            ""
+                        ],
+                        "value_type": "INTEGER"
+                    },
+                    "height": 79,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.writer",
+                    "uuid": "05212126-7148-48d7-89a0-d3bd109b5d49",
+                    "width": 256,
+                    "x": 555,
+                    "y": 1051
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "713ae859-3fb0-4be9-9ab7-f138f03bd21e",
+                    "width": 180,
+                    "x": 592,
+                    "y": 1171
+                },
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Player_enn/main.py Player_enn Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "ca52f641-27f9-40eb-84c0-40759384e299"
+                            }
+                        ]
+                    },
+                    "class": "dec4f474-02d6-57a0-b02c-bd8988a06798",
+                    "comment": "",
+                    "height": 158,
+                    "name": "Player_enn",
+                    "simulationTime": 5000,
+                    "uuid": "06d03db1-86eb-4973-86bc-d677b736cacf",
+                    "width": 252,
+                    "x": 1816,
+                    "y": 1424
+                },
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Scorer/main.py Scorer Wi-Fi 5670",
+                                "hostname": "LAPTOP-1U3EERO1",
+                                "ip": "192.168.27.135",
+                                "isAttachedToCircle": false,
+                                "uuid": "d6424333-5cf2-42e3-80ba-53c4bcba5962"
+                            },
+                            {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Scorer/main.py Scorer Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "f712c874-0247-4a8c-8ba1-f71270b47c9d"
+                            }
+                        ]
+                    },
+                    "class": "e401d93d-c758-50e7-a189-0f8911f145f7",
+                    "comment": "",
+                    "height": 136,
+                    "name": "Scorer",
+                    "simulationTime": 5000,
+                    "uuid": "61409319-c658-4053-8553-7e4d67b3503b",
+                    "width": 252,
+                    "x": 2341,
+                    "y": 1317
+                },
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Server/main.py Server Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "13e9a61b-0cb3-40e4-90a5-7f297536ca90"
+                            }
+                        ]
+                    },
+                    "class": "d9b9fe7e-315b-556a-8498-37d662659390",
+                    "comment": "",
+                    "height": 100,
+                    "name": "Server",
+                    "simulationTime": 5000,
+                    "uuid": "34585ee1-becc-4cbf-a7ec-9cfb9b5cc16a",
+                    "width": 252,
+                    "x": 1801,
+                    "y": 1983
+                },
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Ennemies/main.py Ennemies Wi-Fi 5670",
+                                "hostname": "LAPTOP-1U3EERO1",
+                                "ip": "192.168.27.135",
+                                "isAttachedToCircle": false,
+                                "uuid": "04f1ce53-0d15-4c27-bb67-5e6f0344ba21"
+                            },
+                            {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Ennemies/main.py Ennemies Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "dcb6a990-c285-437a-b9f2-311707abbbd0"
+                            }
+                        ]
+                    },
+                    "class": "c8ddb841-4528-5479-aa72-9645cb2fd726",
+                    "comment": "",
+                    "height": 180,
+                    "name": "Ennemies",
+                    "simulationTime": 5000,
+                    "uuid": "0cf94243-a8b9-4132-8ed6-677e07604de0",
+                    "width": 252,
+                    "x": 1830,
+                    "y": 1218
+                },
+                {
+                    "data": {
+                        "arguments": [
+                            {
+                                "uuid": "1234"
+                            },
+                            {
+                                "index": "1"
+                            }
+                        ],
+                        "selectedAgentUuid": "34585ee1-becc-4cbf-a7ec-9cfb9b5cc16a",
+                        "selectedService": "ennemies_kill"
+                    },
+                    "height": 188,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.servicecaller",
+                    "uuid": "0604bdf9-6b71-45e1-a965-a5a0e3cdb561",
+                    "width": 246,
+                    "x": 2186,
+                    "y": 1925
+                },
+                {
+                    "data": {
+                        "arguments": [
+                            {
+                                "uuid": "4568"
+                            },
+                            {
+                                "message": "prout"
+                            }
+                        ],
+                        "selectedAgentUuid": "34585ee1-becc-4cbf-a7ec-9cfb9b5cc16a",
+                        "selectedService": "chat"
+                    },
+                    "height": 188,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.servicecaller",
+                    "uuid": "e679492a-e5cc-459d-9735-6868afa6e87d",
+                    "width": 246,
+                    "x": 2494,
+                    "y": 1913
+                },
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Client_Server/main.py Client_Server Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "b7d4a002-c5ce-45a9-8561-5a6f242c98b4"
+                            }
+                        ]
+                    },
+                    "class": "3a81b7ed-7a09-54fa-87c9-0e2d8b3eef21",
+                    "comment": "",
+                    "height": 180,
+                    "name": "Client_Server",
+                    "simulationTime": 5000,
+                    "uuid": "69ef9c91-f128-4ff8-abc8-71b0cc9e98cc",
+                    "width": 252,
+                    "x": 1800,
+                    "y": 1726
+                },
+                {
+                    "data": {
+                        "arguments": [
+                            {
+                                "uuid": "4568"
+                            }
+                        ],
+                        "selectedAgentUuid": "34585ee1-becc-4cbf-a7ec-9cfb9b5cc16a",
+                        "selectedService": "score"
+                    },
+                    "height": 149,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.servicecaller",
+                    "uuid": "4e57ac4d-1ce4-4452-b367-e22d1f1c8b77",
+                    "width": 246,
+                    "x": 2188,
+                    "y": 2178
+                },
+                {
+                    "data": {
+                        "arguments": [
+                            {
+                                "uuid": "4568"
+                            },
+                            {
+                                "position_x": "440"
+                            },
+                            {
+                                "position_y": "440"
+                            }
+                        ],
+                        "selectedAgentUuid": "34585ee1-becc-4cbf-a7ec-9cfb9b5cc16a",
+                        "selectedService": "player_position"
+                    },
+                    "height": 188,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.servicecaller",
+                    "uuid": "dfd27e39-83ff-4e74-a1f9-da961ce3863c",
+                    "width": 246,
+                    "x": 2509,
+                    "y": 2180
+                },
+                {
+                    "data": {
+                        "arguments": [
+                            {
+                                "uuid": "0"
+                            },
+                            {
+                                "uuid_kill": "0"
+                            }
+                        ],
+                        "selectedAgentUuid": "34585ee1-becc-4cbf-a7ec-9cfb9b5cc16a",
+                        "selectedService": "player_kill"
+                    },
+                    "height": 188,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.servicecaller",
+                    "uuid": "6f7b125c-7570-45e2-8bb0-824cf8701ab8",
+                    "width": 246,
+                    "x": 2802,
+                    "y": 2188
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "2a2e61e5-5e70-40ae-adcf-3fafd6818705",
+                    "width": 180,
+                    "x": 2212,
+                    "y": 480
+                },
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Map/main.py Map Wi-Fi 5670",
+                                "hostname": "LAPTOP-1U3EERO1",
+                                "ip": "192.168.27.135",
+                                "isAttachedToCircle": false,
+                                "uuid": "93a0ad35-97a4-4eca-b023-474c659d7e45"
+                            }
+                        ]
+                    },
+                    "class": "ee26188c-da42-46b8-bf1a-e2ce30745783",
+                    "comment": "",
+                    "height": 100,
+                    "name": "Map",
+                    "simulationTime": 5000,
+                    "uuid": "de1cc38b-16ef-4f35-b869-3a7057f5b539",
+                    "width": 250,
+                    "x": 928.9430019100487,
+                    "y": 569.5643535725246
+                },
+                {
+                    "data": {
+                        "entries": [
+                        ],
+                        "value_type": "IMPULSION"
+                    },
+                    "height": 44,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.writer",
+                    "uuid": "aa78ab51-bdbb-43fa-b287-afcb3bd8849d",
+                    "width": 256,
+                    "x": 504.558989075874,
+                    "y": 606.0915555750546
+                }
+            ],
+            "links": {
+                "mappings": [
+                    {
+                        "from": "Ennemies",
+                        "fromInput": "in",
+                        "to": "Starter",
+                        "toOutput": "out"
+                    },
+                    {
+                        "from": "Scorer",
+                        "fromInput": "score",
+                        "to": "Ennemies",
+                        "toOutput": "score"
+                    },
+                    {
+                        "from": "Scorer",
+                        "fromInput": "start",
+                        "to": "Starter",
+                        "toOutput": "out"
+                    },
+                    {
+                        "from": "Whiteboard",
+                        "fromInput": "title",
+                        "to": "Scorer",
+                        "toOutput": "out"
+                    },
+                    {
+                        "from": "Whiteboard",
+                        "fromInput": "backgroundColor",
+                        "to": "Starter",
+                        "toOutput": "color_background"
+                    },
+                    {
+                        "from": "Ennemies",
+                        "fromInput": "kill",
+                        "to": "Engine",
+                        "toOutput": "kill"
+                    },
+                    {
+                        "from": "Sound_manager",
+                        "fromInput": "monster_death",
+                        "to": "Ennemies",
+                        "toOutput": "score"
+                    },
+                    {
+                        "from": "Engine_Map",
+                        "fromInput": "list_ennemies",
+                        "to": "Ennemies",
+                        "toOutput": "list_ennemies"
+                    },
+                    {
+                        "from": "Engine",
+                        "fromInput": "Ennemies",
+                        "to": "Ennemies",
+                        "toOutput": "list_ennemies"
+                    },
+                    {
+                        "from": "Engine",
+                        "fromInput": "other_player",
+                        "to": "Player_enn",
+                        "toOutput": "list_players"
+                    },
+                    {
+                        "from": "Scorer",
+                        "fromInput": "score",
+                        "to": "Player_enn",
+                        "toOutput": "score"
+                    },
+                    {
+                        "from": "Sound_manager",
+                        "fromInput": "monster_death",
+                        "to": "Player_enn",
+                        "toOutput": "score"
+                    },
+                    {
+                        "from": "Player_enn",
+                        "fromInput": "kill",
+                        "to": "Engine",
+                        "toOutput": "kill_player"
+                    },
+                    {
+                        "from": "Engine_Map",
+                        "fromInput": "list_other_player",
+                        "to": "Player_enn",
+                        "toOutput": "list_players"
+                    },
+                    {
+                        "from": "Client_Server",
+                        "fromInput": "kill_ennemies",
+                        "to": "Engine",
+                        "toOutput": "kill"
+                    },
+                    {
+                        "from": "Whiteboard",
+                        "fromInput": "chatMessage",
+                        "to": "Scorer",
+                        "toOutput": "score_chat"
+                    },
+                    {
+                        "from": "Client_Server",
+                        "fromInput": "kill_player",
+                        "to": "Player_enn",
+                        "toOutput": "kill"
+                    },
+                    {
+                        "from": "Scorer",
+                        "fromInput": "score_multi",
+                        "to": "Client_Server",
+                        "toOutput": "score_multi"
+                    },
+                    {
+                        "from": "Client_Server",
+                        "fromInput": "score",
+                        "to": "Scorer",
+                        "toOutput": "score"
+                    },
+                    {
+                        "from": "Player_enn",
+                        "fromInput": "list_player_server",
+                        "to": "Client_Server",
+                        "toOutput": "multi_player"
+                    },
+                    {
+                        "from": "Player_enn",
+                        "fromInput": "multi",
+                        "to": "Client_Server",
+                        "toOutput": "multi"
+                    },
+                    {
+                        "from": "Ennemies",
+                        "fromInput": "multi",
+                        "to": "Client_Server",
+                        "toOutput": "multi"
+                    },
+                    {
+                        "from": "Ennemies",
+                        "fromInput": "multi_ennemy",
+                        "to": "Client_Server",
+                        "toOutput": "multi_ennemy"
+                    },
+                    {
+                        "from": "Engine",
+                        "fromInput": "map",
+                        "to": "Map",
+                        "toOutput": "map"
+                    },
+                    {
+                        "from": "Ennemies",
+                        "fromInput": "map",
+                        "to": "Map",
+                        "toOutput": "map"
+                    },
+                    {
+                        "from": "Engine_Map",
+                        "fromInput": "map",
+                        "to": "Map",
+                        "toOutput": "map"
+                    }
+                ],
+                "others": [
+                    {
+                        "destination": "790bac6c-d322-4a0c-8682-779d472b1aa2",
+                        "destinationIO": {
+                            "name": "player_x",
+                            "type": "INPUT"
+                        },
+                        "source": "d0cd9b4f-dba6-41da-9096-dab16d59d04e",
+                        "sourceIO": {
+                            "name": "value",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "790bac6c-d322-4a0c-8682-779d472b1aa2",
+                        "destinationIO": {
+                            "name": "player_y",
+                            "type": "INPUT"
+                        },
+                        "source": "05212126-7148-48d7-89a0-d3bd109b5d49",
+                        "sourceIO": {
+                            "name": "value",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "d0978519-7a32-4d73-b90f-425c872f2e86",
+                        "destinationIO": {
+                            "name": "player_x",
+                            "type": "INPUT"
+                        },
+                        "source": "d0cd9b4f-dba6-41da-9096-dab16d59d04e",
+                        "sourceIO": {
+                            "name": "value",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "d0978519-7a32-4d73-b90f-425c872f2e86",
+                        "destinationIO": {
+                            "name": "player_y",
+                            "type": "INPUT"
+                        },
+                        "source": "05212126-7148-48d7-89a0-d3bd109b5d49",
+                        "sourceIO": {
+                            "name": "value",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "2a2e61e5-5e70-40ae-adcf-3fafd6818705",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "d0978519-7a32-4d73-b90f-425c872f2e86",
+                        "sourceIO": {
+                            "name": "degat",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "69ef9c91-f128-4ff8-abc8-71b0cc9e98cc",
+                        "destinationIO": {
+                            "name": "player_x",
+                            "type": "INPUT"
+                        },
+                        "source": "d0cd9b4f-dba6-41da-9096-dab16d59d04e",
+                        "sourceIO": {
+                            "name": "value",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "69ef9c91-f128-4ff8-abc8-71b0cc9e98cc",
+                        "destinationIO": {
+                            "name": "player_y",
+                            "type": "INPUT"
+                        },
+                        "source": "05212126-7148-48d7-89a0-d3bd109b5d49",
+                        "sourceIO": {
+                            "name": "value",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "713ae859-3fb0-4be9-9ab7-f138f03bd21e",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "69ef9c91-f128-4ff8-abc8-71b0cc9e98cc",
+                        "sourceIO": {
+                            "name": "kill",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "de1cc38b-16ef-4f35-b869-3a7057f5b539",
+                        "destinationIO": {
+                            "name": "start",
+                            "type": "INPUT"
+                        },
+                        "source": "aa78ab51-bdbb-43fa-b287-afcb3bd8849d",
+                        "sourceIO": {
+                            "name": "value",
+                            "type": "OUTPUT"
+                        }
+                    }
+                ]
+            },
+            "name": "Main view"
+        }
+    ]
+}

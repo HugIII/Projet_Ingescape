@@ -6,3 +6,4 @@ engine => changer les entrees sorties et adapter le code
 engine => artefact visuel ennemie
 link le son au event adéquat 
 enlever le in de ennemies et de player_ennemie
+fermer l'appli
