@@ -94,6 +94,10 @@ if __name__ == "__main__":
     Ennemies.output_create("list_ennemies", igs.STRING_T, None)
     Ennemies.output_create("score", igs.IMPULSION_T, None)
 
+    Map = igs.Agent("Map_"+str(uuid),False)
+    Map.input_create("start",igs.IMPULSION_T,None)
+    Map.output_create("map",igs.STRING_T, None)
+
     Engine.activate()
     Engine_map.activate()
     Player_enn.activate()
@@ -101,18 +105,19 @@ if __name__ == "__main__":
     Starter.activate()
     Ennemies.activate()
     Scorer.activate()
+    Map.activate()
 
     time.sleep(5)
 
     Engine.mapping_add("Ennemies","Ennemies_"+str(uuid),"list_ennemies")
     Engine.mapping_add("other_player","Player_enn_"+str(uuid),"list_players")
     # player blood Engine
-    # map Engine
+    Engine.mapping_add("map","Map_"+str(uuid),"map")
     # player_x Engine
     # player_y Engine
     # player_x Engine_Map
     # player_y Engine_Map
-    # map Engine_Map
+    Engine_map.mapping_add("map","Map_"+str(uuid),"map")
     Engine_map.mapping_add("list_ennemies","Ennemies_"+str(uuid),"list_ennemies")
     Engine_map.mapping_add("list_other_player","Player_enn_"+str(uuid),"list_players")
     Player_enn.mapping_add("kill","Engine_"+str(uuid),"kill_player")
@@ -132,6 +137,7 @@ if __name__ == "__main__":
     Ennemies.mapping_add("multi","Client_Server_"+str(uuid),"multi")
     Ennemies.mapping_add("multi_ennemy","Client_Server_"+str(uuid),"multi_ennemy")
     #Whiteboard
+    Map.mapping_add("start","Starter_"+str(uuid),"out")
 
     time.sleep(4)
 
@@ -142,6 +148,7 @@ if __name__ == "__main__":
     Starter.deactivate()
     Ennemies.deactivate()
     Scorer.deactivate()
+    Map.deactivate()
 
     time.sleep(4)
     
@@ -153,6 +160,7 @@ if __name__ == "__main__":
     os.system("start /B python ./sandbox/Engine_Map/main.py Engine_Map_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
     os.system("start /B python ./sandbox/Player_enn/main.py Player_enn_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
     os.system("start /B python ./sandbox/Client_Server/main.py Client_Server_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
+    os.system("start /B python ./sandbox/Map/main.py Map_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
     os.system("start /B ./sandbox/whiteboard/Whiteboard.exe --device Wi-Fi --port 5670")
 
     igs.stop()
