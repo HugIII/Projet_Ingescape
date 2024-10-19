@@ -61,7 +61,6 @@ if __name__ == "__main__":
     Engine_map.input_create("list_other_player", igs.STRING_T, None)
 
     Player_enn = igs.Agent("Player_enn_"+str(uuid),False)
-    Player_enn.input_create("in", igs.IMPULSION_T, None)
     Player_enn.input_create("kill", igs.INTEGER_T, None)
     Player_enn.input_create("list_player_server", igs.STRING_T, None)
     Player_enn.input_create("multi", igs.BOOL_T, None)

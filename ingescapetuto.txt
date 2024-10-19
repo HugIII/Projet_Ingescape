@@ -78,8 +78,9 @@ in => impulsion S
    => impulsion E
    => impulsion Q
    => impulsion D
-   => impulsion kill (clique g)
-   => string map (P)
+   => impulsion kill 
+   => string map 
+   => double degat
 out => int posX
     => int posY
     => double angle
@@ -88,3 +89,4 @@ quand on string la map la met à jour, tu as déjà un string map par défaut co
 les impulsions mettent à jour l'angle, la position tu peux voir dans engine pour les calculs 
 il faut gérer les collisions, fait dans engine (normalement tu peux t'inspirer)
 lorsque la pos ou l'angle change il faut indiquer sur les ports posX posY et angle
+accumule les dégat et quand on atteint un certain seuil genre 100 même comportement que kill

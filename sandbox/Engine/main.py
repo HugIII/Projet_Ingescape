@@ -12,10 +12,10 @@ import sys
 import ingescape as igs
 import math
 import time
-import time
 import re
 import copy
 import threading
+import moviepy.editor
 
 string_map = [["X","X","X","X","X","X","X","X","X","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
@@ -32,7 +32,7 @@ string_map = [["X","X","X","X","X","X","X","X","X","X"],
 dic_color = {}
 
 WINDOW_HEIGHT = 780.0
-WINDOW_WIDTH = 1200.0
+WINDOW_WIDTH = 1280.0
 WINDOW_HEIGHT_INT = int(WINDOW_HEIGHT)
 WINDOW_WIDTH_INT = int(WINDOW_WIDTH)
 WINDOW_HEIGHT_DEMI = WINDOW_HEIGHT/2
@@ -131,7 +131,6 @@ def draw_ennemie_render_2D():
 
 def draw_sky_floor_3D():
     send_service_image_whiteboard(image_sky,0,0,WINDOW_HEIGHT_INT-200,WINDOW_WIDTH_INT)
-    #send_service_rectangle_whiteboard(0.0,0.0,WINDOW_WIDTH,WINDOW_HEIGHT_DEMI,"blue","grey",0.0)
     send_service_rectangle_whiteboard(0.0,WINDOW_HEIGHT_DEMI,WINDOW_WIDTH,WINDOW_HEIGHT_DEMI,"#655e5c","grey",0.0)
 
 
@@ -226,14 +225,15 @@ def draw_3D_world():
         player_enn_draw_dict[pla[2]] = (player_enn_draw_origin_dict[pla[2]],pla[1],pla[0])
 
     for enn in ennemy_draw_dict.values():
-        send_service_image_whiteboard(image_monstre[(enn[3]+enn[4])%len(image_monstre)],enn[0] * wall_width,(WINDOW_HEIGHT-enn[1])//2,int((enn[2]-enn[0])*wall_width),int(enn[1]))
+        index = (enn[3]+enn[4])%len(image_monstre)
+        send_service_image_whiteboard(image_monstre[index],enn[0] * wall_width,(WINDOW_HEIGHT-enn[1])//2,int((enn[2]-enn[0])*wall_width),int(enn[1]))
 
     for pla in player_enn_draw_dict.values():
         send_service_image_whiteboard(image_player,pla[0] * wall_width,(WINDOW_HEIGHT-pla[1])//2,int((pla[2]-pla[0])*wall_width),int(pla[1]))
 
     send_service_ellipse_whiteboard(WINDOW_WIDTH_DEMI-2,WINDOW_HEIGHT_DEMI-2,5.0,5.0,"red","black",1.0)
 
-    send_service_image_whiteboard(image_weapon,WINDOW_WIDTH_INT-100,WINDOW_HEIGHT_INT-100,100,100)
+    send_service_image_whiteboard(image_weapon,WINDOW_WIDTH-500,0,WINDOW_HEIGHT,500)
 
     if player_blood > 0:
         player_blood -= 1
@@ -400,6 +400,10 @@ if __name__=="__main__":
 
     running = True
     clock = pygame.time.Clock()
+
+    #video = moviepy.editor.VideoFileClip("./cinematics/intro.mp4")
+    #video.preview()
+
     while running:
         pygame.event.pump()
         key_pressed_test()
@@ -409,5 +413,12 @@ if __name__=="__main__":
         update()
         clock.tick(144)
 
+    print("test")
+
     igs.stop()
 
+    print("test")
+
+    pygame.quit()
+
+    exit()

@@ -54,7 +54,6 @@ if __name__ == "__main__":
     igs.log_set_file(True, None)
     igs.set_command_line(sys.executable + " " + " ".join(sys.argv))
 
-    igs.input_create("in", igs.IMPULSION_T, None)
     igs.input_create("kill", igs.INTEGER_T, None)
     igs.input_create("list_player_server", igs.STRING_T, None)
     igs.input_create("multi", igs.BOOL_T, None)
@@ -63,7 +62,6 @@ if __name__ == "__main__":
     igs.output_create("score", igs.IMPULSION_T, None)
     igs.output_create("kill", igs.STRING_T, None)
 
-    igs.observe_input("in", input_callback, None)
     igs.observe_input("kill", input_callback, None)
     igs.observe_input("list_player_server", input_callback, None)
     igs.observe_input("multi", input_callback, None)

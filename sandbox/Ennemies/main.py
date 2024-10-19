@@ -96,10 +96,11 @@ if __name__ == "__main__":
     igs.log_set_file(True, None)
     igs.set_command_line(sys.executable + " " + " ".join(sys.argv))
 
-    igs.input_create("in", igs.IMPULSION_T, None)
     igs.input_create("kill", igs.INTEGER_T, None)
-    igs.observe_input("in", input_callback, None)
     igs.observe_input("kill", input_callback, None)
+
+    igs.input_create("in", igs.IMPULSION_T, None)
+    igs.observe_input("in", input_callback, None)
 
     igs.output_create("list_ennemies", igs.STRING_T, None)
     igs.output_create("score", igs.IMPULSION_T, None)

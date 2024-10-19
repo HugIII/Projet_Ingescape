@@ -1,9 +1,15 @@
 à faire:
 objet => event
 objet => player
-objet => map
-engine => changer les entrees sorties et adapter le code
-engine => artefact visuel ennemie
+mapper => event
+mapper => player
 link le son au event adéquat 
-enlever le in de ennemies et de player_ennemie
-fermer l'appli
+rajouter des images
+
+enlever le prout
+réparer le chat
+les ennemies apparaissent les un sur les autres des fois assez rare 
+changer le cursor quand on appui sur k
+rajouter des armes
+rajouter des vagues 
+
