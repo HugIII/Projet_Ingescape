@@ -72,6 +72,7 @@ player_link = "./image/other_player.png"
 weapon_link = "./image/weapon.png"
 blood_link = "./image/blood.png"
 sky_link = "./image/sky.png"
+cursor_link = "./image/cursor.png"
 
 image_monstre = []
 for i in monstre_link:
@@ -81,8 +82,13 @@ image_weapon = pygame.image.load(weapon_link)
 image_blood = pygame.image.load(blood_link)
 image_player = pygame.image.load(player_link)
 image_sky = pygame.image.load(sky_link)
+image_cursor = pygame.image.load(cursor_link)
 
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+
+wave = 1
+wave_bool = False
+cursor_cooldown = 0
 
 #inputs
 def send_service_rectangle_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
@@ -96,6 +102,13 @@ def send_service_image_whiteboard(image,x,y,height,width):
         return
     image = pygame.transform.scale(image, (width, height))
     screen.blit(image, (x,y))
+
+def send_service_text(x,y,text):
+    text_color = (255, 0, 0)
+    font = pygame.font.Font(None, 38)
+    text = font.render(text, True, text_color)
+    text_rect = text.get_rect(center=(x, y))
+    screen.blit(text, text_rect)
 
 def draw_map_render_2D():
     for i in range(len(string_map)):
@@ -132,7 +145,6 @@ def draw_ennemie_render_2D():
 def draw_sky_floor_3D():
     send_service_image_whiteboard(image_sky,0,0,WINDOW_HEIGHT_INT-200,WINDOW_WIDTH_INT)
     send_service_rectangle_whiteboard(0.0,WINDOW_HEIGHT_DEMI,WINDOW_WIDTH,WINDOW_HEIGHT_DEMI,"#655e5c","grey",0.0)
-
 
 def cast_rays_3D():
     global wall_draw_list
@@ -191,7 +203,7 @@ def cast_rays_3D():
 
                 for index,i in enumerate(player_enn):
                     player_enn_position = i
-                    if touch_player == False and player_enn_position[0] - 2 < target_x < player_enn_position[0] + 2 and player_enn_position[1] - 2 < target_y < player_enn_position[1] + 2:
+                    if touch_player == False and player_enn_position[0] - 10 < target_x < player_enn_position[0] + 10 and player_enn_position[1] - 10 < target_y < player_enn_position[1] + 10:
                         corrected_depth = depth/5 * math.cos(ray_angle-angle)
                         wall_height = WINDOW_HEIGHT / (corrected_depth + 0.0001)
                         wall_height = 600 if wall_height > 600 else wall_height
@@ -207,6 +219,7 @@ def cast_rays_3D():
 
 def draw_3D_world():
     global player_blood
+    global cursor_cooldown
     for wall in wall_draw_list:
         send_service_rectangle_whiteboard(wall[0] * wall_width, (WINDOW_HEIGHT-wall[1])//2,wall_width,wall[1],dic_color[int(wall[1])],"black",1.0)
 
@@ -231,13 +244,20 @@ def draw_3D_world():
     for pla in player_enn_draw_dict.values():
         send_service_image_whiteboard(image_player,pla[0] * wall_width,(WINDOW_HEIGHT-pla[1])//2,int((pla[2]-pla[0])*wall_width),int(pla[1]))
 
-    send_service_ellipse_whiteboard(WINDOW_WIDTH_DEMI-2,WINDOW_HEIGHT_DEMI-2,5.0,5.0,"red","black",1.0)
+    if cursor_cooldown != 0:
+        cursor_cooldown -= 1
+        send_service_image_whiteboard(image_cursor,WINDOW_WIDTH_DEMI-15,WINDOW_HEIGHT_DEMI-15,30.0,30.0)
+    else:
+        send_service_ellipse_whiteboard(WINDOW_WIDTH_DEMI-2,WINDOW_HEIGHT_DEMI-2,5.0,5.0,"red","black",1.0)
 
     send_service_image_whiteboard(image_weapon,WINDOW_WIDTH-500,0,WINDOW_HEIGHT,500)
 
     if player_blood > 0:
         player_blood -= 1
         send_service_image_whiteboard(image_blood,0,0,WINDOW_HEIGHT_INT,WINDOW_WIDTH_INT)
+
+    if wave_bool == True:
+        send_service_text(50,50,"wave: "+str(wave))
     
 
 def update():
@@ -268,6 +288,8 @@ def input_callback(iop_type, name, value_type, value, my_data):
     global player_x
     global player_y
     global lock_ennemi_kill
+    global wave
+    global wave_bool
     if name=="Ennemies":
         if value == "[]":
             ennemies = []
@@ -304,7 +326,9 @@ def input_callback(iop_type, name, value_type, value, my_data):
         player_x = value
     elif name=="player_y":
         player_y = value
-
+    elif name=="wave":
+        wave_bool = True
+        wave = value
     # add code here if needed
 
 def key_pressed_test():
@@ -315,6 +339,8 @@ def key_pressed_test():
     global player_click
     global player_blood
     global string_map
+    global cursor_cooldown
+
     keys = pygame.key.get_pressed()  # Récupère l'état des touches
 
     # Mouvements
@@ -346,6 +372,7 @@ def key_pressed_test():
     # Logique du clic du joueur
     if keys[pygame.K_k]:
         player_click = True
+        cursor_cooldown = 10
 
 if __name__=="__main__":
     if len(sys.argv) < 4:
@@ -379,6 +406,9 @@ if __name__=="__main__":
 
     igs.input_create("player_y",igs.INTEGER_T, None)
     igs.observe_input("player_y",input_callback,None)
+
+    igs.input_create("wave",igs.INTEGER_T,None)
+    igs.observe_input("wave",input_callback,None)
 
     igs.output_create("kill", igs.INTEGER_T, None)
     igs.output_create("kill_player", igs.INTEGER_T, None)

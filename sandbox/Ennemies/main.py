@@ -27,19 +27,23 @@ ennemies_list = []
 multi_ennemies = []
 multi = False
 
+wave = 0
+into_spawn = False
+
 #inputs
 def input_callback(iop_type, name, value_type, value, my_data):
     global ennemies_list
     global string_map
     global multi
     global multi_ennemies
+    global wave
+    global into_spawn
 
     if name == "multi":
         multi = value
         if value == True:
             igs.output_set_string("list_ennemies",str(multi_ennemies))
     elif name == "multi_ennemy":
-        print("test")
         multi_ennemies = []
         for i in value.split("("):
             if i != "[" and i != "":
@@ -66,20 +70,27 @@ def input_callback(iop_type, name, value_type, value, my_data):
         return
 
     if name == "kill":
-        igs.output_set_impulsion("score")
         ennemies_list.pop(value)
 
-    while(len(ennemies_list) < 8):
-        coord_not_wall = False
-        while(coord_not_wall == False):
-            random_x = random.randint(0,499)
-            random_y = random.randint(0,499)
-            if string_map[int(random_x/50)][int(random_y/50)] != "X":
-                coord_not_wall = True
-                ennemies_list.append((random_x,random_y))
+    if len(ennemies_list) == 0 and into_spawn == False:
+        into_spawn = True
+        wave += 1
+        igs.output_set_int("wave",wave)
+        spawn_ennemies()
+        into_spawn = False
+    
     igs.output_set_string("list_ennemies",str(ennemies_list))
-    pass
-    # add code here if needed
+
+def spawn_ennemies():
+    global ennemies_list
+    coeff = int(3 + wave * 1.5)
+
+    while(len(ennemies_list)<coeff):
+        random_x = random.randint(0,499)
+        random_y = random.randint(0,499)
+        if string_map[int(random_x/50)][int(random_y/50)] != "X":
+            coord_not_wall = True
+            ennemies_list.append((random_x,random_y))
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
@@ -104,6 +115,7 @@ if __name__ == "__main__":
 
     igs.output_create("list_ennemies", igs.STRING_T, None)
     igs.output_create("score", igs.IMPULSION_T, None)
+    igs.output_create("wave", igs.INTEGER_T, None)
 
     igs.input_create("map",igs.STRING_T, None)
     igs.observe_input("map",input_callback,None)

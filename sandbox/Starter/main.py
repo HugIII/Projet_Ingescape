@@ -32,7 +32,13 @@ if __name__=="__main__":
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
 
     time.sleep(3)
-    igs.output_set_impulsion("out") 
+    igs.output_set_impulsion("out")
+    time.sleep(1)
+    igs.output_set_impulsion("out")
+    time.sleep(1)
+    igs.output_set_impulsion("out")
+    time.sleep(1) 
+    igs.output_set_impulsion("out")
     igs.output_set_string("color_background","grey") 
 
     input()

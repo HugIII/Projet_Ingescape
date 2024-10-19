@@ -26,7 +26,6 @@ def life_fun():
 
 def service_callback(sender_agent_name, sender_agent_uuid, service_name, arguments, token, my_data):
     if service_name == "player_position":
-        score[arguments[0]] = 0
         index_dict[arguments[0]] = (arguments[1],arguments[2])
         temp_list = []
         for i in index_dict.keys():
@@ -47,14 +46,15 @@ def service_callback(sender_agent_name, sender_agent_uuid, service_name, argumen
             igs.service_call("Client_Server_"+str(i), "kill_service", (), "") # à changer aussi
     elif service_name == "score":
         if arguments[0] in score.keys():
-            score[arguments[0]] += 50
+            score[int(arguments[0])] += 50
         else:
-            score[arguments[0]] = 50
+            score[int(arguments[0])] = 50
         s = "["
         for i in score.keys():
             s+="("+str(i)+","+str(score[i])+")"
         s += "]"
         arguments_list = (s)
+        print(s)
         for i in index_dict.keys():
             igs.service_call("Client_Server_"+str(i),"change_score",arguments_list,"") # à changer !!!!!!!!!!!!!!
     elif service_name == "chat":

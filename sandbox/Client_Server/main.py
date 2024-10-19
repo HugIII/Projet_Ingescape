@@ -33,7 +33,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
         arguments_list = (uuid,player_x,player_y)
         igs.service_call("Server", "player_position", arguments_list, "")
     elif name == "score":
-        arguments_list = (uuid)
+        arguments_list = (int(uuid))
         igs.service_call("Server", "score", arguments_list, "")
     elif name == "kill_ennemies":
         arguments_list = (uuid,value)
@@ -113,7 +113,6 @@ if __name__ == "__main__":
         arguments_list = (int(sys.argv[4]),player_x,player_y)
         igs.service_call("Server","player_position",arguments_list,"") 
         igs.output_set_bool("multi",True)
-        print("prout")
         time.sleep(1)
 
     input()

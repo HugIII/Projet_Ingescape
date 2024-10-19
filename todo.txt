@@ -6,10 +6,8 @@ mapper => player
 link le son au event adéquat 
 rajouter des images
 
-enlever le prout
-réparer le chat
-les ennemies apparaissent les un sur les autres des fois assez rare 
-changer le cursor quand on appui sur k
+bug Engine_map (je trouve pas)
+bug map qui se charge pas des fois (potentiellement réglé à surveiller)
 rajouter des armes
-rajouter des vagues 
+rajouter des screamers car rigolo
 

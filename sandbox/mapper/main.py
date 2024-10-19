@@ -49,6 +49,7 @@ if __name__ == "__main__":
     Engine.input_create("map", igs.STRING_T, None)
     Engine.input_create("player_x", igs.INTEGER_T, None)
     Engine.input_create("player_y", igs.INTEGER_T, None)
+    Engine.input_create("wave",igs.INTEGER_T,None)
     Engine.output_create("kill", igs.INTEGER_T, None)
     Engine.output_create("kill_player", igs.INTEGER_T, None)
     Engine.output_create("degat", igs.DOUBLE_T, None)
@@ -92,6 +93,7 @@ if __name__ == "__main__":
     Ennemies.input_create("multi_ennemy", igs.STRING_T, None)
     Ennemies.output_create("list_ennemies", igs.STRING_T, None)
     Ennemies.output_create("score", igs.IMPULSION_T, None)
+    Ennemies.output_create("wave", igs.INTEGER_T, None)
 
     Map = igs.Agent("Map_"+str(uuid),False)
     Map.input_create("start",igs.IMPULSION_T,None)
@@ -116,6 +118,7 @@ if __name__ == "__main__":
     # player_y Engine
     # player_x Engine_Map
     # player_y Engine_Map
+    Engine.mapping_add("wave","Ennemies_"+str(uuid),"wave")
     Engine_map.mapping_add("map","Map_"+str(uuid),"map")
     Engine_map.mapping_add("list_ennemies","Ennemies_"+str(uuid),"list_ennemies")
     Engine_map.mapping_add("list_other_player","Player_enn_"+str(uuid),"list_players")
