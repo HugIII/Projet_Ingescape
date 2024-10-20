@@ -45,15 +45,16 @@ player_y = 430
 angle = 45
 
 fov = math.pi / 3
+number_rays = 142
 tile_size = 50
-number_rays = 85
 middle_rays = number_rays / 2
-angle_step = fov / number_rays
+angle_step = float(fov / number_rays)
 
 wall_width = WINDOW_WIDTH//number_rays
 
 debug_perspective = False
-player_click = False
+player_click_left = False
+player_click_right = False
 lock_ennemi_kill = True
 
 ennemies = []
@@ -65,30 +66,34 @@ player_enn_draw_list = []
 ennemy_dict = {}
 player_enn_dict = {}
 
-player_blood = 0
-
 monstre_link = ["./image/monstre1.png","./image/monstre2.png","./image/monstre3.png"]
 player_link = "./image/other_player.png"
 weapon_link = "./image/weapon.png"
-blood_link = "./image/blood.png"
 sky_link = "./image/sky.png"
 cursor_link = "./image/cursor.png"
+scratch_link = ["./image/scratch1.png","./image/scratch2.png","./image/scratch3.png"]
 
 image_monstre = []
 for i in monstre_link:
     image_monstre.append(pygame.image.load(i))
 
 image_weapon = pygame.image.load(weapon_link)
-image_blood = pygame.image.load(blood_link)
 image_player = pygame.image.load(player_link)
 image_sky = pygame.image.load(sky_link)
 image_cursor = pygame.image.load(cursor_link)
+
+image_scratch = []
+for i in scratch_link:
+    image_scratch.append(pygame.image.load(i))
 
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
 wave = 1
 wave_bool = False
 cursor_cooldown = 0
+
+arrow_left = 0
+vie = 23
 
 #inputs
 def send_service_rectangle_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
@@ -153,7 +158,8 @@ def cast_rays_3D():
     global string_map
     global ennemies
     global player_enn
-    global player_click
+    global player_click_left
+    global player_click_right
     global lock_ennemi_kill
     start_angle = angle - fov / 2
     wall_height_memory = []
@@ -161,6 +167,27 @@ def cast_rays_3D():
     ennemy_draw_list = []
     player_enn_draw_list = []
     degat = 0
+
+    string_map_temp = []
+    for i in range(len(string_map)):
+        string_map_temp.append([])
+        for j in range(len(string_map[i])):
+            if string_map[i][j] == ".":
+                string_map_temp[i].append([])
+            else:
+                string_map_temp[i].append(string_map[i][j])
+
+    for index,i in enumerate(ennemies):
+        grid_x = int(i[0]/tile_size)
+        grid_y = int(i[1]/tile_size)
+        if not isinstance(string_map_temp[grid_x][grid_y],str):
+            string_map_temp[grid_x][grid_y].append(str(index))
+
+    for index,i in enumerate(player_enn):
+        grid_x = int(i[0]/tile_size)
+        grid_y = int(i[1]/tile_size)
+        if not isinstance(string_map_temp[grid_x][grid_y],str):
+            string_map_temp[grid_x][grid_y].append("P"+str(index))
 
     for ray in range(number_rays+1):
         touch_enn = False
@@ -186,39 +213,50 @@ def cast_rays_3D():
                 if depth > 300:
                     continue
 
-                for index,i in enumerate(ennemies):
-                    ennemies_position = i
-                    if touch_enn == False and ennemies_position[0] - 2 < target_x < ennemies_position[0] + 2 and ennemies_position[1] - 2 < target_y < ennemies_position[1] + 2:
-                        corrected_depth = depth/5 * math.cos(ray_angle-angle)
-                        wall_height = WINDOW_HEIGHT / (corrected_depth + 0.0001)
-                        wall_height = 600 if wall_height > 600 else wall_height
-                        ennemy_draw_list.append((ray,wall_height,index,ennemies_position[0],ennemies_position[1]))
-                        touch_enn = True
-                        degat += 0.1
+                if isinstance(string_map_temp[grid_x][grid_y],list):
+                    list_case = string_map_temp[grid_x][grid_y]
+                    for i in list_case:
+                        if i[0] == "P":
+                            continue
+                        try:
+                            ennemies_position = ennemies[int(i)]
+                        except:
+                            continue
+                        if touch_enn == False and ennemies_position[0] - 2 < target_x < ennemies_position[0] + 2 and ennemies_position[1] - 2 < target_y < ennemies_position[1] + 2:
+                            corrected_depth = depth/5 * math.cos(ray_angle-angle)
+                            wall_height = WINDOW_HEIGHT / (corrected_depth + 0.0001)
+                            wall_height = 600 if wall_height > 600 else wall_height
+                            ennemy_draw_list.append((ray,wall_height,i,ennemies_position[0],ennemies_position[1]))
+                            touch_enn = True
+                            degat += 0.5 * depth #mettre logarithmique
 
-                        if middle_rays - 1 <= ray <= middle_rays +1 and player_click == True and lock_ennemi_kill == True:
-                            if i[0] - 2 < target_x < i[0] + 2 and i[1] - 2 < target_y < i[1] + 2:
-                                lock_ennemi_kill = False
-                                igs.output_set_int("kill",index)
+                            if middle_rays - 3 <= ray <= middle_rays + 3 and (player_click_left == True or (player_click_right == True and depth < 75)) and lock_ennemi_kill == True:
+                                if ennemies_position[0] - 2 < target_x < ennemies_position[0] + 2 and ennemies_position[1] - 2 < target_y < ennemies_position[1] + 2:
+                                    lock_ennemi_kill = False
+                                    igs.output_set_int("kill",int(i))
 
-                for index,i in enumerate(player_enn):
-                    player_enn_position = i
-                    if touch_player == False and player_enn_position[0] - 10 < target_x < player_enn_position[0] + 10 and player_enn_position[1] - 10 < target_y < player_enn_position[1] + 10:
-                        corrected_depth = depth/5 * math.cos(ray_angle-angle)
-                        wall_height = WINDOW_HEIGHT / (corrected_depth + 0.0001)
-                        wall_height = 600 if wall_height > 600 else wall_height
-                        player_enn_draw_list.append((ray,wall_height,index))
-                        touch_player = True
+                if isinstance(string_map_temp[grid_x][grid_y],list):
+                    list_case = string_map_temp[grid_x][grid_y]
+                    for i in list_case:
+                        if i[0] != "P":
+                            continue
+                        player_enn_position = player_enn[int(i[1:])]
+                        if touch_player == False and player_enn_position[0] - 2 < target_x < player_enn_position[0] + 2 and player_enn_position[1] - 2 < target_y < player_enn_position[1] + 2:
+                            corrected_depth = depth/5 * math.cos(ray_angle-angle)
+                            wall_height = WINDOW_HEIGHT / (corrected_depth + 0.0001)
+                            wall_height = 600 if wall_height > 600 else wall_height
+                            player_enn_draw_list.append((ray,wall_height,i))
+                            touch_player = True
 
-                        if middle_rays - 1 <= ray <= middle_rays +1 and player_click == True:
-                            if i[0] - 2 < target_x < i[0] + 2 and i[1] - 2 < target_y < i[1] + 2:
-                                igs.output_set_int("kill_player",index)
+                            if middle_rays - 3 <= ray <= middle_rays + 3 and (player_click_left == True or (player_click_right == True and depth < 75)):
+                                if player_enn_position[0] - 2 < target_x < player_enn_position[0] + 2 and player_enn_position[1] - 2 < target_y < player_enn_position[1] + 2:
+                                    igs.output_set_int("kill_player",int(i[1:]))
 
     igs.output_set_double("degat",degat)
-    player_click = False
+    player_click_left = False
+    player_click_right = False
 
 def draw_3D_world():
-    global player_blood
     global cursor_cooldown
     for wall in wall_draw_list:
         send_service_rectangle_whiteboard(wall[0] * wall_width, (WINDOW_HEIGHT-wall[1])//2,wall_width,wall[1],dic_color[int(wall[1])],"black",1.0)
@@ -252,13 +290,17 @@ def draw_3D_world():
 
     send_service_image_whiteboard(image_weapon,WINDOW_WIDTH-500,0,WINDOW_HEIGHT,500)
 
-    if player_blood > 0:
-        player_blood -= 1
-        send_service_image_whiteboard(image_blood,0,0,WINDOW_HEIGHT_INT,WINDOW_WIDTH_INT)
-
+    send_service_text(50,50,"  life: "+str(vie))
+    send_service_text(50,75,"  arrow: "+str(arrow_left))
     if wave_bool == True:
-        send_service_text(50,50,"wave: "+str(wave))
+        send_service_text(50,100,"  wave: "+str(wave))
     
+    if vie < 75:
+        send_service_image_whiteboard(image_scratch[0],800,0,300,300)
+        if vie < 60:
+            send_service_image_whiteboard(image_scratch[1],200,400,300,300)
+            if vie < 30:
+                send_service_image_whiteboard(image_scratch[2],0,0,WINDOW_HEIGHT_INT,WINDOW_WIDTH)
 
 def update():
     global debug_perspective
@@ -280,16 +322,18 @@ def input_callback(iop_type, name, value_type, value, my_data):
     global player_y
     global debug_perspective
     global angle
-    global player_click
+    global player_click_left
+    global player_click_right
     global ennemies
     global player_enn
-    global player_blood
     global string_map
     global player_x
     global player_y
     global lock_ennemi_kill
     global wave
     global wave_bool
+    global arrow_left
+
     if name=="Ennemies":
         if value == "[]":
             ennemies = []
@@ -309,8 +353,6 @@ def input_callback(iop_type, name, value_type, value, my_data):
             if i != "[" and i != "":
                 t = i.strip()[:-2].split(",")
                 player_enn.append((int(t[0]),int(t[1])))
-    elif name=="player_blood":
-        player_blood = 5
     elif name=="map":
         temp_list = []
         temp_sub_list = []
@@ -329,6 +371,14 @@ def input_callback(iop_type, name, value_type, value, my_data):
     elif name=="wave":
         wave_bool = True
         wave = value
+    elif name=="arbalete_shot":
+        player_click_left = True
+        cursor_cooldown = 15
+    elif name=="sword_hit":
+        player_click_right = True
+        cursor_cooldown = 15
+    elif name=="arrow_left":
+        arrow_left = value
     # add code here if needed
 
 def key_pressed_test():
@@ -336,8 +386,6 @@ def key_pressed_test():
     global player_y
     global debug_perspective
     global angle
-    global player_click
-    global player_blood
     global string_map
     global cursor_cooldown
 
@@ -368,11 +416,6 @@ def key_pressed_test():
         angle -= 0.1
         if angle < 0:
             angle += 2 * math.pi
-
-    # Logique du clic du joueur
-    if keys[pygame.K_k]:
-        player_click = True
-        cursor_cooldown = 10
 
 if __name__=="__main__":
     if len(sys.argv) < 4:
@@ -410,6 +453,18 @@ if __name__=="__main__":
     igs.input_create("wave",igs.INTEGER_T,None)
     igs.observe_input("wave",input_callback,None)
 
+    igs.input_create("arbalete_shot",igs.IMPULSION_T,None)
+    igs.observe_input("arbalete_shot",input_callback,None)
+
+    igs.input_create("sword_hit",igs.IMPULSION_T,None)
+    igs.observe_input("sword_hit",input_callback,None)
+
+    igs.input_create("arrow_left",igs.INTEGER_T,None)
+    igs.observe_input("arrow_left",input_callback,None)
+
+    igs.input_create("vie",igs.INTEGER_T,None)
+    igs.observe_input("vie",input_callback,None)
+
     igs.output_create("kill", igs.INTEGER_T, None)
     igs.output_create("kill_player", igs.INTEGER_T, None)
     igs.output_create("degat", igs.DOUBLE_T, None)
@@ -431,19 +486,23 @@ if __name__=="__main__":
     running = True
     clock = pygame.time.Clock()
 
-    #video = moviepy.editor.VideoFileClip("./cinematics/intro.mp4")
+    video = moviepy.editor.VideoFileClip("./cinematics/intro.mp4")
     #video.preview()
 
     while running:
         pygame.event.pump()
         key_pressed_test()
+        if wave > 15:
+            running = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
         update()
         clock.tick(144)
 
-    print("test")
+    if wave > 15:
+        video = moviepy.editor.VideoFileClip("./cinematics/Outro.mp4")
+        video.preview()
 
     igs.stop()
 

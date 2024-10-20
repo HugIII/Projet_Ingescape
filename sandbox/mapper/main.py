@@ -50,9 +50,21 @@ if __name__ == "__main__":
     Engine.input_create("player_x", igs.INTEGER_T, None)
     Engine.input_create("player_y", igs.INTEGER_T, None)
     Engine.input_create("wave",igs.INTEGER_T,None)
+    Engine.input_create("arbalete_shot",igs.IMPULSION_T,None)
+    Engine.input_create("sword_hit",igs.IMPULSION_T,None)
+    Engine.input_create("arrow_left",igs.INTEGER_T,None)
+    Engine.input_create("vie",igs.INTEGER_T,None)
     Engine.output_create("kill", igs.INTEGER_T, None)
     Engine.output_create("kill_player", igs.INTEGER_T, None)
     Engine.output_create("degat", igs.DOUBLE_T, None)
+
+    Weapons = igs.Agent("Weapons_"+str(uuid),False)
+    Weapons.input_create("kill",igs.INTEGER_T,None)
+    Weapons.input_create("click_left",igs.IMPULSION_T,None)
+    Weapons.input_create("click_right",igs.IMPULSION_T,None)
+    Weapons.output_create("arbalete_shot",igs.IMPULSION_T,None)
+    Weapons.output_create("sword_shot",igs.IMPULSION_T,None)
+    Weapons.output_create("arrow_left",igs.INTEGER_T,None)
 
     Engine_map = igs.Agent("Engine_Map_"+str(uuid),False)
     Engine_map.input_create("player_x", igs.INTEGER_T, None)
@@ -100,6 +112,7 @@ if __name__ == "__main__":
     Map.output_create("map",igs.STRING_T, None)
 
     Engine.activate()
+    Weapons.activate()
     Engine_map.activate()
     Player_enn.activate()
     Client_Server.activate()
@@ -116,6 +129,9 @@ if __name__ == "__main__":
     Engine.mapping_add("map","Map_"+str(uuid),"map")
     # player_x Engine
     # player_y Engine
+    Engine.mapping_add("sword_hit","Weapons_"+str(uuid),"sword_shot")
+    Engine.mapping_add("arbalete_shot","Weapons_"+str(uuid),"arbalete_shot")
+    Engine.mapping_add("arrow_left","Weapons_"+str(uuid),"arrow_left")
     # player_x Engine_Map
     # player_y Engine_Map
     Engine.mapping_add("wave","Ennemies_"+str(uuid),"wave")
@@ -140,8 +156,12 @@ if __name__ == "__main__":
     Ennemies.mapping_add("multi_ennemy","Client_Server_"+str(uuid),"multi_ennemy")
     #Whiteboard
     Map.mapping_add("start","Starter_"+str(uuid),"out")
+    Weapons.mapping_add("kill","Engine_"+str(uuid),"kill")
+    Weapons.mapping_add("kill","Engine_"+str(uuid),"kill_player")
+    # Weapons click_left
+    # Weapons click_right
 
-    time.sleep(4)
+    time.sleep(5)
 
     Engine.deactivate()
     Engine_map.deactivate()
@@ -151,6 +171,7 @@ if __name__ == "__main__":
     Ennemies.deactivate()
     Scorer.deactivate()
     Map.deactivate()
+    Weapons.deactivate()
 
     time.sleep(4)
     
@@ -163,7 +184,10 @@ if __name__ == "__main__":
     os.system("start /B python ./sandbox/Player_enn/main.py Player_enn_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
     os.system("start /B python ./sandbox/Client_Server/main.py Client_Server_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
     os.system("start /B python ./sandbox/Map/main.py Map_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
+    os.system("start /B python ./sandbox/Weapons/main.py Weapons_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
+    
     os.system("start /B ./sandbox/whiteboard/Whiteboard.exe --device Wi-Fi --port 5670")
+
 
     igs.stop()
 

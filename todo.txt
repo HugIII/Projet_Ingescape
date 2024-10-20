@@ -1,13 +1,18 @@
 à faire:
+Clara:
 objet => event
 objet => player
+
+Clara ou Hugo
+map procedurale =>
+on choisit 2-4 point au hasard sur la carte et on les rattaches au mur le plus proche
+
+Dans Engine calculer les dégâts de façon logarithmiques => ligne 230
+
+Hugo:
+bug Engine_map (je trouve pas)
+rajouter des screamers car rigolo
 mapper => event
 mapper => player
 link le son au event adéquat 
 rajouter des images
-
-bug Engine_map (je trouve pas)
-bug map qui se charge pas des fois (potentiellement réglé à surveiller)
-rajouter des armes
-rajouter des screamers car rigolo
-
