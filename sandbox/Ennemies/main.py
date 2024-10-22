@@ -10,6 +10,8 @@
 import sys
 import ingescape as igs
 import random
+import threading
+import time
 
 string_map = [["X","X","X","X","X","X","X","X","X","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
@@ -23,12 +25,36 @@ string_map = [["X","X","X","X","X","X","X","X","X","X"],
               ["X","X","X","X","X","X","X","X","X","X"]]
 
 ennemies_list = []
+ennemies_list_move = []
 
 multi_ennemies = []
 multi = False
 
 wave = 0
 into_spawn = False
+
+player_x = 350
+player_y = 350
+
+def move_ennemies():
+    while(1):
+        for i in range(len(ennemies_list_move)):
+            x = ennemies_list_move[i][0]
+            y = ennemies_list_move[i][1]
+            if x > player_x + 5:
+                x -= 1
+            elif x < player_x + 5:
+                x += 1
+
+            if y > player_y + 5:
+                y -= 1
+            elif y < player_y + 5:
+                y += 1
+
+            ennemies_list_move[i] = (x,y)
+
+        igs.output_set_string("Ennemies_move",str(ennemies_list_move))    
+        time.sleep(0.2)
 
 #inputs
 def input_callback(iop_type, name, value_type, value, my_data):
@@ -38,11 +64,17 @@ def input_callback(iop_type, name, value_type, value, my_data):
     global multi_ennemies
     global wave
     global into_spawn
+    global player_x
+    global player_y
 
     if name == "multi":
         multi = value
         if value == True:
             igs.output_set_string("list_ennemies",str(multi_ennemies))
+    elif name == "player_x":
+        player_x = value
+    elif name == "player_y":
+        player_y = value
     elif name == "multi_ennemy":
         multi_ennemies = []
         for i in value.split("("):
@@ -71,6 +103,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
 
     if name == "kill":
         ennemies_list.pop(value)
+        ennemies_list_move.pop(value)
 
     if len(ennemies_list) == 0 and into_spawn == False:
         into_spawn = True
@@ -91,6 +124,7 @@ def spawn_ennemies():
         if string_map[int(random_x/50)][int(random_y/50)] != "X":
             coord_not_wall = True
             ennemies_list.append((random_x,random_y))
+            ennemies_list_move.append((random_x,random_y))
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
@@ -116,6 +150,7 @@ if __name__ == "__main__":
     igs.output_create("list_ennemies", igs.STRING_T, None)
     igs.output_create("score", igs.IMPULSION_T, None)
     igs.output_create("wave", igs.INTEGER_T, None)
+    igs.output_create("Ennemies_move",igs.STRING_T,None)
 
     igs.input_create("map",igs.STRING_T, None)
     igs.observe_input("map",input_callback,None)
@@ -126,7 +161,16 @@ if __name__ == "__main__":
     igs.input_create("multi_ennemy",igs.STRING_T, None)
     igs.observe_input("multi_ennemy", input_callback, None)
 
+    igs.input_create("player_x",igs.INTEGER_T,None)
+    igs.observe_input("player_x",input_callback,None)
+
+    igs.input_create("player_y",igs.INTEGER_T,None)
+    igs.observe_input("player_y",input_callback,None)
+
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
+
+    t = threading.Thread(target=move_ennemies)
+    t.start()
 
     input()
 

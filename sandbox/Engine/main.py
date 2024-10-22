@@ -58,6 +58,7 @@ player_click_right = False
 lock_ennemi_kill = True
 
 ennemies = []
+ennemies_move = []
 player_enn = []
 
 wall_draw_list = []
@@ -93,7 +94,7 @@ wave_bool = False
 cursor_cooldown = 0
 
 arrow_left = 0
-vie = 23
+vie = 100
 
 #inputs
 def send_service_rectangle_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
@@ -143,6 +144,8 @@ def draw_player_render_2D():
 def draw_ennemie_render_2D():
     for i in ennemies:
         send_service_ellipse_whiteboard(i[0]-10.0,i[1]-10.0,20.0,20.0,"purple","black",1.0)
+    for i in ennemies_move:
+        send_service_ellipse_whiteboard(i[0]-10.0,i[1]-10.0,20.0,20.0,"blue","black",1.0)
     for i in player_enn:
         send_service_ellipse_whiteboard(i[0]-10.0,i[1]-10.0,20.0,20.0,"yellow","black",1.0)
 
@@ -161,6 +164,8 @@ def cast_rays_3D():
     global player_click_left
     global player_click_right
     global lock_ennemi_kill
+    global ennemies_move
+
     start_angle = angle - fov / 2
     wall_height_memory = []
     wall_draw_list = []
@@ -177,11 +182,18 @@ def cast_rays_3D():
             else:
                 string_map_temp[i].append(string_map[i][j])
 
-    for index,i in enumerate(ennemies):
-        grid_x = int(i[0]/tile_size)
-        grid_y = int(i[1]/tile_size)
-        if not isinstance(string_map_temp[grid_x][grid_y],str):
-            string_map_temp[grid_x][grid_y].append(str(index))
+    if len(ennemies_move) == 0:
+        for index,i in enumerate(ennemies):
+            grid_x = int(i[0]/tile_size)
+            grid_y = int(i[1]/tile_size)
+            if not isinstance(string_map_temp[grid_x][grid_y],str):
+                string_map_temp[grid_x][grid_y].append(str(index))
+    else:
+        for index,i in enumerate(ennemies_move):
+            grid_x = int(i[0]/tile_size)
+            grid_y = int(i[1]/tile_size)
+            if not isinstance(string_map_temp[grid_x][grid_y],str):
+                string_map_temp[grid_x][grid_y].append(str(index))
 
     for index,i in enumerate(player_enn):
         grid_x = int(i[0]/tile_size)
@@ -189,7 +201,7 @@ def cast_rays_3D():
         if not isinstance(string_map_temp[grid_x][grid_y],str):
             string_map_temp[grid_x][grid_y].append("P"+str(index))
 
-    for ray in range(number_rays+1):
+    for ray in range(-50,number_rays+51):
         touch_enn = False
         touch_player = False
         ray_angle = start_angle + ray * angle_step
@@ -219,7 +231,10 @@ def cast_rays_3D():
                         if i[0] == "P":
                             continue
                         try:
-                            ennemies_position = ennemies[int(i)]
+                            if(len(ennemies_move)==0):
+                                ennemies_position = ennemies[int(i)]
+                            else:
+                                ennemies_position = ennemies_move[int(i)]
                         except:
                             continue
                         if touch_enn == False and ennemies_position[0] - 2 < target_x < ennemies_position[0] + 2 and ennemies_position[1] - 2 < target_y < ennemies_position[1] + 2:
@@ -266,7 +281,7 @@ def draw_3D_world():
     for enn in ennemy_draw_list:
         if enn[2] not in ennemy_draw_origin_dict.keys():
             ennemy_draw_origin_dict[enn[2]] = enn[0] 
-        ennemy_draw_dict[enn[2]] = (ennemy_draw_origin_dict[enn[2]],enn[1],enn[0],enn[3],enn[4])
+        ennemy_draw_dict[enn[2]] = (ennemy_draw_origin_dict[enn[2]],enn[1],enn[0],enn[3],enn[4],enn[2])
 
     player_enn_draw_dict = {}
     player_enn_draw_origin_dict = {}
@@ -276,9 +291,11 @@ def draw_3D_world():
         player_enn_draw_dict[pla[2]] = (player_enn_draw_origin_dict[pla[2]],pla[1],pla[0])
 
     for enn in ennemy_draw_dict.values():
-        index = (enn[3]+enn[4])%len(image_monstre)
-        send_service_image_whiteboard(image_monstre[index],enn[0] * wall_width,(WINDOW_HEIGHT-enn[1])//2,int((enn[2]-enn[0])*wall_width),int(enn[1]))
-
+        try:
+            index = (ennemies[int(enn[5])][0]+ennemies[int(enn[5])][1])%len(image_monstre)
+            send_service_image_whiteboard(image_monstre[index],enn[0] * wall_width,(WINDOW_HEIGHT-enn[1])//2,int((enn[2]-enn[0])*wall_width),int(enn[1]))
+        except:
+            pass
     for pla in player_enn_draw_dict.values():
         send_service_image_whiteboard(image_player,pla[0] * wall_width,(WINDOW_HEIGHT-pla[1])//2,int((pla[2]-pla[0])*wall_width),int(pla[1]))
 
@@ -333,6 +350,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
     global wave
     global wave_bool
     global arrow_left
+    global ennemies_move
 
     if name=="Ennemies":
         if value == "[]":
@@ -379,6 +397,16 @@ def input_callback(iop_type, name, value_type, value, my_data):
         cursor_cooldown = 15
     elif name=="arrow_left":
         arrow_left = value
+    elif name=="Ennemies_move":
+        if value == "[]":
+            ennemies_move = []
+            return
+        ennemies_move = []
+        for i in value.split("("):
+            if i != "[" and i != "":
+                t = i.strip()[:-2].split(",")
+                ennemies_move.append((int(t[0]),int(t[1])))
+        lock_ennemi_kill = True
     # add code here if needed
 
 def key_pressed_test():
@@ -464,6 +492,9 @@ if __name__=="__main__":
 
     igs.input_create("vie",igs.INTEGER_T,None)
     igs.observe_input("vie",input_callback,None)
+
+    igs.input_create("Ennemies_move",igs.STRING_T,None)
+    igs.observe_input("Ennemies_move",input_callback,None)
 
     igs.output_create("kill", igs.INTEGER_T, None)
     igs.output_create("kill_player", igs.INTEGER_T, None)
