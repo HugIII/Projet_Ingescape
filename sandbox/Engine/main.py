@@ -73,6 +73,7 @@ weapon_link = "./image/weapon.png"
 sky_link = "./image/sky.png"
 cursor_link = "./image/cursor.png"
 scratch_link = ["./image/scratch1.png","./image/scratch2.png","./image/scratch3.png"]
+screamer_link = "./image/screamer.png"
 
 image_monstre = []
 for i in monstre_link:
@@ -87,11 +88,15 @@ image_scratch = []
 for i in scratch_link:
     image_scratch.append(pygame.image.load(i))
 
+image_screamer = pygame.image.load(screamer_link)
+
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
 wave = 1
 wave_bool = False
+
 cursor_cooldown = 0
+screamer_cooldown = 0
 
 arrow_left = 0
 vie = 100
@@ -273,6 +278,8 @@ def cast_rays_3D():
 
 def draw_3D_world():
     global cursor_cooldown
+    global screamer_cooldown
+    
     for wall in wall_draw_list:
         send_service_rectangle_whiteboard(wall[0] * wall_width, (WINDOW_HEIGHT-wall[1])//2,wall_width,wall[1],dic_color[int(wall[1])],"black",1.0)
 
@@ -296,6 +303,7 @@ def draw_3D_world():
             send_service_image_whiteboard(image_monstre[index],enn[0] * wall_width,(WINDOW_HEIGHT-enn[1])//2,int((enn[2]-enn[0])*wall_width),int(enn[1]))
         except:
             pass
+
     for pla in player_enn_draw_dict.values():
         send_service_image_whiteboard(image_player,pla[0] * wall_width,(WINDOW_HEIGHT-pla[1])//2,int((pla[2]-pla[0])*wall_width),int(pla[1]))
 
@@ -312,6 +320,10 @@ def draw_3D_world():
     if wave_bool == True:
         send_service_text(50,100,"  wave: "+str(wave))
     
+    if screamer_cooldown > 0:
+        send_service_image_whiteboard(image_screamer,0,0,WINDOW_HEIGHT_INT,WINDOW_WIDTH_INT)
+        screamer_cooldown -= 1
+
     if vie < 75:
         send_service_image_whiteboard(image_scratch[0],800,0,300,300)
         if vie < 60:
@@ -351,6 +363,8 @@ def input_callback(iop_type, name, value_type, value, my_data):
     global wave_bool
     global arrow_left
     global ennemies_move
+    global angle
+    global screamer_cooldown
 
     if name=="Ennemies":
         if value == "[]":
@@ -397,6 +411,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
         cursor_cooldown = 15
     elif name=="arrow_left":
         arrow_left = value
+        cursor_cooldown = 30
     elif name=="Ennemies_move":
         if value == "[]":
             ennemies_move = []
@@ -407,6 +422,10 @@ def input_callback(iop_type, name, value_type, value, my_data):
                 t = i.strip()[:-2].split(",")
                 ennemies_move.append((int(t[0]),int(t[1])))
         lock_ennemi_kill = True
+    elif name == "screamer":
+        screamer_cooldown += 20
+    elif name == "angle":
+        angle = value
     # add code here if needed
 
 def key_pressed_test():
@@ -495,6 +514,12 @@ if __name__=="__main__":
 
     igs.input_create("Ennemies_move",igs.STRING_T,None)
     igs.observe_input("Ennemies_move",input_callback,None)
+
+    igs.input_create("screamer",igs.IMPULSION_T,None)
+    igs.observe_input("screamer",input_callback,None)
+
+    igs.input_create("angle",igs.DOUBLE_T,None)
+    igs.observe_input("angle",input_callback,None)
 
     igs.output_create("kill", igs.INTEGER_T, None)
     igs.output_create("kill_player", igs.INTEGER_T, None)

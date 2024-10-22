@@ -43,12 +43,16 @@ ennemies_index = []
 index = 0
 
 def start():
-    time.sleep(1)
-    clear()
-    draw_map_render_2D()
-    draw_player_render_2D()
-    draw_ennemie_render_2D()
-    draw_other_player_render_2D()
+    while True:
+        time.sleep(0.1)
+        clear()
+        draw_map_render_2D()
+        time.sleep(0.1)
+        draw_player_render_2D()
+        time.sleep(0.1)
+        draw_ennemie_render_2D()
+        time.sleep(0.1)
+        draw_other_player_render_2D()
 
 #inputs
 def send_service_rectangle_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
@@ -67,50 +71,21 @@ def remove_id(index):
     igs.service_call("Whiteboard","remove",arguments_list,"")
 
 def draw_map_render_2D():
-    global index
-    global wall_index
-    for i in wall_index:
-        remove_id(i) 
-    wall_index = []
     for i in range(len(string_map)):
         for j in range(len(string_map[i])):
             if string_map[i][j] == "X":
-                wall_index.append(index)
-                index += 1
                 send_service_rectangle_whiteboard(50.0*i,50.0*j,50.0,50.0,"black","grey",1.0)
 
 def draw_player_render_2D():
-    global index
-    global player_index
-    for i in player_index:
-        remove_id(i) 
-    player_index = []
     send_service_ellipse_whiteboard(player_x-10.0,player_y-10.0,20.0,20.0,"red","black",1.0)
-    player_index.append(index)
-    index += 1
 
 def draw_ennemie_render_2D():
-    global index
-    global ennemies_index
-    for i in ennemies_index:
-        remove_id(i) 
-    ennemies_index = []
     for i in ennemies:
         send_service_ellipse_whiteboard(i[0]-10.0,i[1]-10.0,20.0,20.0,"purple","black",1.0)
-        ennemies_index.append(index)
-        index += 1
 
-def draw_other_player_render_2D():
-    global index
-    global other_player_index
-    other_player_index = []
-    for i in other_player_index:
-            remove_id(i)
-    other_player_index = []    
+def draw_other_player_render_2D():   
     for i in other_player:
         send_service_ellipse_whiteboard(i[0]-10.0,i[1]-10.0,20.0,20.0,"yellow","black",1.0)
-        other_player_index.append(index)
-        index += 1
 
 def input_callback(iop_type, name, value_type, value, my_data):
     global player_x
@@ -118,12 +93,11 @@ def input_callback(iop_type, name, value_type, value, my_data):
     global string_map
     global ennemies
     global other_player
+
     if name=="player_x":
         player_x = value
-        draw_player_render_2D()
     elif name == "player_y":
         player_y = value
-        draw_player_render_2D()
     elif name == "map":
         temp_list = []
         temp_sub_list = []
@@ -135,7 +109,6 @@ def input_callback(iop_type, name, value_type, value, my_data):
                 temp_sub_list.append(value[i])
         temp_list.append(temp_sub_list)
         string_map = temp_list
-        draw_map_render_2D()
     elif name == "list_ennemies":
         if value == "[]":
             ennemies = []
@@ -145,7 +118,6 @@ def input_callback(iop_type, name, value_type, value, my_data):
             if i != "[" and i != "":
                 t = i.strip()[:-2].split(",")
                 ennemies.append((int(t[0]),int(t[1])))
-        draw_ennemie_render_2D()
     elif name=="list_other_player":
         if value == "[]":
             other_player = []
@@ -155,8 +127,15 @@ def input_callback(iop_type, name, value_type, value, my_data):
             if i != "[" and i != "":
                 t = i.strip()[:-2].split(",")
                 other_player.append((int(t[0]),int(t[1])))
-        draw_other_player_render_2D()
-    # add code here if needed
+    elif name=="list_ennemies_move":
+        if value == "[]":
+            ennemies = []
+            return
+        ennemies = []
+        for i in value.split("("):
+            if i != "[" and i != "":
+                t = i.strip()[:-2].split(",")
+                ennemies.append((int(t[0]),int(t[1])))
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
@@ -178,12 +157,14 @@ if __name__ == "__main__":
     igs.input_create("map", igs.STRING_T, None)
     igs.input_create("list_ennemies", igs.STRING_T, None)
     igs.input_create("list_other_player", igs.STRING_T, None)
+    igs.input_create("list_ennemies_move",igs.STRING_T,None)
 
     igs.observe_input("player_x", input_callback, None)
     igs.observe_input("player_y", input_callback, None)
     igs.observe_input("map", input_callback, None)
     igs.observe_input("list_ennemies", input_callback, None)
     igs.observe_input("list_other_player", input_callback, None)
+    igs.observe_input("list_ennemies_move",input_callback,None)
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
 

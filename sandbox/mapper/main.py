@@ -41,6 +41,7 @@ if __name__ == "__main__":
     Scorer.output_create("out", igs.STRING_T, None)
     Scorer.output_create("score", igs.INTEGER_T, None)
     Scorer.output_create("score_chat", igs.STRING_T, None)
+    Scorer.output_create("print_score_multi",igs.IMPULSION_T,None)
 
     Engine = igs.Agent("Engine_"+str(uuid),False)
     Engine.input_create("Ennemies", igs.STRING_T, None)
@@ -54,6 +55,7 @@ if __name__ == "__main__":
     Engine.input_create("sword_hit",igs.IMPULSION_T,None)
     Engine.input_create("arrow_left",igs.INTEGER_T,None)
     Engine.input_create("vie",igs.INTEGER_T,None)
+    Engine.input_create("screamer",igs.IMPULSION_T,None)
     Engine.output_create("kill", igs.INTEGER_T, None)
     Engine.output_create("kill_player", igs.INTEGER_T, None)
     Engine.output_create("degat", igs.DOUBLE_T, None)
@@ -72,6 +74,8 @@ if __name__ == "__main__":
     Engine_map.input_create("map", igs.STRING_T, None)
     Engine_map.input_create("list_ennemies", igs.STRING_T, None)
     Engine_map.input_create("list_other_player", igs.STRING_T, None)
+    Engine_map.input_create("list_ennemies_move",igs.STRING_T,None)
+    Engine_map.output_create("score_reprint",igs.IMPULSION_T,None)
 
     Player_enn = igs.Agent("Player_enn_"+str(uuid),False)
     Player_enn.input_create("kill", igs.INTEGER_T, None)
@@ -106,6 +110,10 @@ if __name__ == "__main__":
     Ennemies.output_create("list_ennemies", igs.STRING_T, None)
     Ennemies.output_create("score", igs.IMPULSION_T, None)
     Ennemies.output_create("wave", igs.INTEGER_T, None)
+    Ennemies.output_create("Ennemies_move",igs.STRING_T,None)
+
+    Screamer = igs.Agent("Screamer_"+str(uuid),False)
+    Screamer.output_create("screamer",igs.IMPULSION_T,None)
 
     Map = igs.Agent("Map_"+str(uuid),False)
     Map.input_create("start",igs.IMPULSION_T,None)
@@ -119,6 +127,7 @@ if __name__ == "__main__":
     Starter.activate()
     Ennemies.activate()
     Scorer.activate()
+    Screamer.activate()
     Map.activate()
 
     time.sleep(5)
@@ -135,9 +144,11 @@ if __name__ == "__main__":
     # player_x Engine_Map
     # player_y Engine_Map
     Engine.mapping_add("wave","Ennemies_"+str(uuid),"wave")
+    Engine.mapping_add("screamer","Screamer_"+str(uuid),"screamer")
     Engine_map.mapping_add("map","Map_"+str(uuid),"map")
     Engine_map.mapping_add("list_ennemies","Ennemies_"+str(uuid),"list_ennemies")
     Engine_map.mapping_add("list_other_player","Player_enn_"+str(uuid),"list_players")
+    Engine_map.mapping_add("list_ennemies_move","Ennemies_"+str(uuid),"Ennemies_move")
     Player_enn.mapping_add("kill","Engine_"+str(uuid),"kill_player")
     Player_enn.mapping_add("list_player_server","Client_Server_"+str(uuid),"multi_player")
     Player_enn.mapping_add("multi","Client_Server_"+str(uuid),"multi")
@@ -150,6 +161,7 @@ if __name__ == "__main__":
     Scorer.mapping_add("score","Ennemies_"+str(uuid),"score")
     Scorer.mapping_add("score","Player_enn_"+str(uuid),"score")
     Scorer.mapping_add("score_multi","Client_Server_"+str(uuid),"score_multi")
+    Scorer.mapping_add("print_score_multi","Engine_map_"+str(uuid),"score_reprint")
     Ennemies.mapping_add("kill","Engine_"+str(uuid),"kill")
     # map Ennemies
     Ennemies.mapping_add("multi","Client_Server_"+str(uuid),"multi")
@@ -171,22 +183,23 @@ if __name__ == "__main__":
     Ennemies.deactivate()
     Scorer.deactivate()
     Map.deactivate()
+    Screamer.deactivate()
     Weapons.deactivate()
 
     time.sleep(4)
-    
 
-    os.system("start /B python ./sandbox/Ennemies/main.py Ennemies_"+str(uuid)+" "+sys.argv[2]+" "+int(sys.argv[3])+" "+str(uuid))
-    os.system("start /B python ./sandbox/Starter/main.py Starter_"+str(uuid)+" "+sys.argv[2]+" "+int(sys.argv[3])+" "+str(uuid))
-    os.system("start /B python ./sandbox/Scorer/main.py Scorer_"+str(uuid)+" "+sys.argv[2]+" "+int(sys.argv[3])+" "+str(uuid))
-    os.system("start /B python ./sandbox/Engine/main.py Engine_"+str(uuid)+" "+sys.argv[2]+" "+int(sys.argv[3])+" "+str(uuid))
-    os.system("start /B python ./sandbox/Engine_Map/main.py Engine_Map_"+str(uuid)+" "+sys.argv[2]+" "+int(sys.argv[3])+" "+str(uuid))
-    os.system("start /B python ./sandbox/Player_enn/main.py Player_enn_"+str(uuid)+" "+sys.argv[2]+" "+int(sys.argv[3])+" "+str(uuid))
-    os.system("start /B python ./sandbox/Client_Server/main.py Client_Server_"+str(uuid)+" "+sys.argv[2]+" "+int(sys.argv[3])+" "+str(uuid))
-    os.system("start /B python ./sandbox/Map/main.py Map_"+str(uuid)+" "+sys.argv[2]+" "+int(sys.argv[3])+" "+str(uuid))
-    os.system("start /B python ./sandbox/Weapons/main.py Weapons_"+str(uuid)+" "+sys.argv[2]+" "+int(sys.argv[3])+" "+str(uuid))
-    
-    os.system("start /B ./sandbox/whiteboard/Whiteboard.exe --device "+sys.argv[2]+" --port "+int(sys.argv[3]))
+    os.system("start /B python ./sandbox/Ennemies/main.py Ennemies_"+str(uuid)+" "+sys.argv[1]+" "+sys.argv[2]+" "+str(uuid))
+    os.system("start /B python ./sandbox/Starter/main.py Starter_"+str(uuid)+" "+sys.argv[1]+" "+sys.argv[2]+" "+str(uuid))
+    os.system("start /B python ./sandbox/Scorer/main.py Scorer_"+str(uuid)+" "+sys.argv[1]+" "+sys.argv[2]+" "+str(uuid))
+    os.system("start /B python ./sandbox/Engine/main.py Engine_"+str(uuid)+" "+sys.argv[1]+" "+sys.argv[2]+" "+str(uuid))
+    os.system("start /B python ./sandbox/Engine_Map/main.py Engine_Map_"+str(uuid)+" "+sys.argv[1]+" "+sys.argv[2]+" "+str(uuid))
+    os.system("start /B python ./sandbox/Player_enn/main.py Player_enn_"+str(uuid)+" "+sys.argv[1]+" "+sys.argv[2]+" "+str(uuid))
+    os.system("start /B python ./sandbox/Client_Server/main.py Client_Server_"+str(uuid)+" "+sys.argv[1]+" "+sys.argv[2]+" "+str(uuid))
+    os.system("start /B python ./sandbox/Map/main.py Map_"+str(uuid)+" "+sys.argv[1]+" "+sys.argv[2]+" "+str(uuid))
+    os.system("start /B python ./sandbox/Weapons/main.py Weapons_"+str(uuid)+" "+sys.argv[1]+" "+sys.argv[2]+" "+str(uuid))
+    os.system("start /B python ./sandbox/Screamer/main.py Screamer_"+str(uuid)+" "+sys.argv[1]+" "+sys.argv[2]+" "+str(uuid))
+
+    os.system("start /B ./sandbox/whiteboard/Whiteboard.exe --device "+sys.argv[1]+" --port "+sys.argv[2])
 
 
     igs.stop()
