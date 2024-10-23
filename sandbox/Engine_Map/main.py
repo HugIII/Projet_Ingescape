@@ -38,6 +38,7 @@ player_x = 430
 player_y = 430
 
 ennemies = []
+ennemies_move = []
 other_player = []
 
 wall_index = []
@@ -113,8 +114,12 @@ def draw_player_render_2D():
     send_service_ellipse_whiteboard(player_x-10.0,player_y-10.0,20.0,20.0,"red","black",1.0)
 
 def draw_ennemie_render_2D():
-    for i in ennemies:
-        send_service_ellipse_whiteboard(i[0]-10.0,i[1]-10.0,20.0,20.0,"purple","black",1.0)
+    if len(ennemies_move) == 0:
+        for i in ennemies:
+            send_service_ellipse_whiteboard(i[0]-10.0,i[1]-10.0,20.0,20.0,"purple","black",1.0)
+    else:
+        for i in ennemies_move:
+            send_service_ellipse_whiteboard(i[0]-10.0,i[1]-10.0,20.0,20.0,"purple","black",1.0)
 
 def draw_other_player_render_2D():   
     for i in other_player:
@@ -125,6 +130,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
     global player_y
     global string_map
     global ennemies
+    global ennemies_move
     global other_player
 
     if name=="player_x":
@@ -162,13 +168,13 @@ def input_callback(iop_type, name, value_type, value, my_data):
                 other_player.append((int(t[0]),int(t[1])))
     elif name=="list_ennemies_move":
         if value == "[]":
-            ennemies = []
+            ennemies_move = []
             return
-        ennemies = []
+        ennemies_move = []
         for i in value.split("("):
             if i != "[" and i != "":
                 t = i.strip()[:-2].split(",")
-                ennemies.append((int(t[0]),int(t[1])))
+                ennemies_move.append((int(t[0]),int(t[1])))
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:

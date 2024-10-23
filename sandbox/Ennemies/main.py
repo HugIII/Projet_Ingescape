@@ -37,21 +37,34 @@ player_x = 350
 player_y = 350
 
 def move_ennemies():
+    global ennemies_list_move
+
     while(1):
         for i in range(len(ennemies_list_move)):
             x = ennemies_list_move[i][0]
             y = ennemies_list_move[i][1]
-            if x > player_x + 5:
-                x -= 1
-            elif x < player_x - 5:
-                x += 1
+            x_temp = ennemies_list_move[i][0]
+            y_temp = ennemies_list_move[i][1]
+            if x > player_x + 20:
+                x_temp -= 1
+            elif x < player_x - 20:
+                x_temp += 1
 
-            if y > player_y + 5:
-                y -= 1
-            elif y < player_y - 5:
-                y += 1
+            if y > player_y + 20:
+                y_temp -= 1
+            elif y < player_y - 20:
+                y_temp += 1
 
-            ennemies_list_move[i] = (x,y)
+            if string_map[int(x/50)][int(y/50)] == "X":
+                random_x = random.randint(0,499)
+                random_y = random.randint(0,499)
+                ennemies_list_move[i] = (random_x,random_y)
+            elif string_map[int(x_temp / 50)][int(y_temp / 50)] != "X":
+                ennemies_list_move[i] = (x_temp,y_temp)
+            elif string_map[int(x_temp / 50)][int(y / 50)] != "X":
+                ennemies_list_move[i] = (x_temp,y)
+            elif string_map[int(x / 50)][int(y_temp / 50)] != "X":
+                ennemies_list_move[i] = (x,y_temp)
 
         igs.output_set_string("Ennemies_move",str(ennemies_list_move))    
         time.sleep(0.2)

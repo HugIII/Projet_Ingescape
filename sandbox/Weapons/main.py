@@ -16,8 +16,8 @@ arrow_left = 0
 
 left_time = 0
 right_time = 0
-left_cooldown = 0.5
-right_cooldown = 2
+left_cooldown = 2
+right_cooldown = 0.5
 
 #inputs
 def input_callback(io_type, name, value_type, value, my_data):
@@ -28,16 +28,16 @@ def input_callback(io_type, name, value_type, value, my_data):
     global arrow_left
 
     if name == "kill":
-        arrow_left = random.randint(0,2)
+        arrow_left += random.randint(0,2)
         igs.output_set_int("arrow_left",arrow_left)
-    elif name == "click_left":
-        timestamp = time.time()
-        if timestamp - left_time > left_cooldown:
-            left_time = timestamp
-            igs.output_set_impulsion("sword_shoot")  
     elif name == "click_right":
         timestamp = time.time()
-        if arrow_left > 0 and timestamp - right_time > right_cooldown:
+        if timestamp - right_time > right_cooldown:
+            right_time = timestamp
+            igs.output_set_impulsion("sword_shoot")  
+    elif name == "click_left":
+        timestamp = time.time()
+        if arrow_left > 0 and timestamp - left_time > left_cooldown:
             arrow_left -= 1
             right_time = timestamp
             igs.output_set_impulsion("arbalete_shoot") 

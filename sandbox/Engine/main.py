@@ -101,6 +101,8 @@ screamer_cooldown = 0
 arrow_left = 0
 vie = 100
 
+kill_index = -1
+
 #inputs
 def send_service_rectangle_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
     pygame.draw.rect(screen,color,(x,y,longeur,largeur))
@@ -170,6 +172,7 @@ def cast_rays_3D():
     global player_click_right
     global lock_ennemi_kill
     global ennemies_move
+    global kill_index
 
     start_angle = angle - fov / 2
     wall_height_memory = []
@@ -195,6 +198,8 @@ def cast_rays_3D():
                 string_map_temp[grid_x][grid_y].append(str(index))
     else:
         for index,i in enumerate(ennemies_move):
+            if index == kill_index:
+                continue
             grid_x = int(i[0]/tile_size)
             grid_y = int(i[1]/tile_size)
             if not isinstance(string_map_temp[grid_x][grid_y],str):
@@ -233,6 +238,7 @@ def cast_rays_3D():
                 if isinstance(string_map_temp[grid_x][grid_y],list):
                     list_case = string_map_temp[grid_x][grid_y]
                     for i in list_case:
+                        touch_enn = False
                         if i[0] == "P":
                             continue
                         try:
@@ -241,7 +247,7 @@ def cast_rays_3D():
                             else:
                                 ennemies_position = ennemies_move[int(i)]
                         except:
-                            continue
+                            pass
                         if touch_enn == False and ennemies_position[0] - 2 < target_x < ennemies_position[0] + 2 and ennemies_position[1] - 2 < target_y < ennemies_position[1] + 2:
                             corrected_depth = depth/5 * math.cos(ray_angle-angle)
                             wall_height = WINDOW_HEIGHT / (corrected_depth + 0.0001)
@@ -253,6 +259,7 @@ def cast_rays_3D():
                             if middle_rays - 3 <= ray <= middle_rays + 3 and (player_click_left == True or (player_click_right == True and depth < 75)) and lock_ennemi_kill == True:
                                 if ennemies_position[0] - 2 < target_x < ennemies_position[0] + 2 and ennemies_position[1] - 2 < target_y < ennemies_position[1] + 2:
                                     lock_ennemi_kill = False
+                                    kill_index = i
                                     igs.output_set_int("kill",int(i))
 
                 if isinstance(string_map_temp[grid_x][grid_y],list):
@@ -365,6 +372,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
     global ennemies_move
     global angle
     global screamer_cooldown
+    global kill_index
 
     if name=="Ennemies":
         if value == "[]":
@@ -376,6 +384,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
                 t = i.strip()[:-2].split(",")
                 ennemies.append((int(t[0]),int(t[1])))
         lock_ennemi_kill = True
+        kill_index = -1
     if name=="other_player":
         if value == "[]":
             player_enn = []
