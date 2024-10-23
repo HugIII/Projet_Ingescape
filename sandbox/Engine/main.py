@@ -281,8 +281,6 @@ def draw_3D_world():
     global screamer_cooldown
     
     for wall in wall_draw_list:
-        print(dic_color[int(wall[1])])
-        print(int(wall[1]))
         send_service_rectangle_whiteboard(wall[0] * wall_width, (WINDOW_HEIGHT-wall[1])//2,wall_width,wall[1],dic_color[int(wall[1])],"black",1.0)
 
     ennemy_draw_dict = {}
@@ -440,31 +438,9 @@ def key_pressed_test():
 
     keys = pygame.key.get_pressed()  # Récupère l'état des touches
 
-    # Mouvements
-    if keys[pygame.K_z]:  # Avancer
-        player_x += 1 * math.cos(angle)
-        player_y += 1 * math.sin(angle)
-    if keys[pygame.K_s]:  # Reculer
-        player_x -= 1 * math.cos(angle)
-        player_y -= 1 * math.sin(angle)
-    if keys[pygame.K_q]:  # Gauche
-        player_x += 1 * math.cos(angle - math.pi / 2)
-        player_y += 1 * math.sin(angle - math.pi / 2)
-    if keys[pygame.K_d]:  # Droite
-        player_x += 1 * math.cos(angle + math.pi / 2)
-        player_y += 1 * math.sin(angle + math.pi / 2)
-
     # Changer de perspective de débogage
     if keys[pygame.K_p]:
         debug_perspective = not debug_perspective
-
-    # Rotation
-    if keys[pygame.K_e]:  # Tourner à droite
-        angle = (angle + 0.1) % (2 * math.pi)  # en radians
-    if keys[pygame.K_a]:  # Tourner à gauche
-        angle -= 0.1
-        if angle < 0:
-            angle += 2 * math.pi
 
 if __name__=="__main__":
     if len(sys.argv) < 4:
@@ -493,10 +469,10 @@ if __name__=="__main__":
     igs.input_create("map",igs.STRING_T, None)
     igs.observe_input("map",input_callback,None)
 
-    igs.input_create("player_x",igs.INTEGER_T, None)
+    igs.input_create("player_x",igs.DOUBLE_T, None)
     igs.observe_input("player_x",input_callback,None)
 
-    igs.input_create("player_y",igs.INTEGER_T, None)
+    igs.input_create("player_y",igs.DOUBLE_T, None)
     igs.observe_input("player_y",input_callback,None)
 
     igs.input_create("wave",igs.INTEGER_T,None)

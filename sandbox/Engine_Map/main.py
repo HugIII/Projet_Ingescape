@@ -12,6 +12,11 @@ import ingescape as igs
 
 import threading
 import time
+from PIL import Image, ImageDraw
+import http.server
+import socketserver
+
+PORT = 8000
 
 string_map = [["X","X","X","X","X","X","X","X","X","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
@@ -42,29 +47,57 @@ ennemies_index = []
 
 index = 0
 
+image = Image.new('RGB', (1500,1500),'white')
+draw = ImageDraw.Draw(image)
+
+class CustomHandler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        if self.path == "/download":
+            image_path = "./image/map.png"
+            self.send_response(200)
+            self.send_header('Content-type', 'application/octet-stream')
+            self.send_header('Content-Disposition', f'attachment; filename="{image_path}"')
+            self.end_headers()
+            with open(image_path, 'rb') as file:
+                self.wfile.write(file.read())
+
+def start_image_server():
+    with socketserver.TCPServer(("",PORT),CustomHandler) as httpd:
+        httpd.serve_forever()
+
 def start():
+    global image
+    global draw
+    global index
+
     while True:
-        time.sleep(0.1)
-        clear()
+        time.sleep(1)
+        image = Image.new('RGB', (1500,1500),'white')
+        draw = ImageDraw.Draw(image)
         draw_map_render_2D()
-        time.sleep(0.1)
         draw_player_render_2D()
-        time.sleep(0.1)
         draw_ennemie_render_2D()
-        time.sleep(0.1)
         draw_other_player_render_2D()
+        image.save("./image/map.png")
+        arguments_list = ("http://localhost:8000/download",50.0,50.0)
+        igs.service_call("Whiteboard","addImageFromUrl",arguments_list,"")
 
 #inputs
 def send_service_rectangle_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
-    arguments_list = ("rectangle",x,y,longeur,largeur,color,couleur_contour,contour)
-    igs.service_call("Whiteboard", "addShape", arguments_list, "")
+    global draw
+    draw.rectangle([(int(x),int(y)),(int(x+longeur),int(y+largeur))],fill=color,outline=couleur_contour,width=int(contour))
 
 def send_service_ellipse_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
-    arguments_list = ("ellipse",x,y,longeur,largeur,color,couleur_contour,contour)
-    igs.service_call("Whiteboard", "addShape", arguments_list, "")
+    global draw
+    draw.ellipse([(int(x-longeur/2),int(y-largeur/2)),(int(x+longeur/2),int(y+largeur/2))],fill=color,outline=couleur_contour,width=int(contour))
 
 def clear():
+    global image
+    global draw
     igs.service_call("Whiteboard","clear",(),"")
+    image = Image.new('RGB', (1500,1500),'white')
+    draw = ImageDraw.Draw(image)
+
 
 def remove_id(index):
     arguments_list = (index)
@@ -166,10 +199,15 @@ if __name__ == "__main__":
     igs.observe_input("list_other_player", input_callback, None)
     igs.observe_input("list_ennemies_move",input_callback,None)
 
+    igs.output_create("score_reprint",igs.IMPULSION_T, None)
+
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
 
     thread = threading.Thread(target=start)
     thread.start()
+
+    thread_server = threading.Thread(target=start_image_server)
+    thread_server.start()
 
     input()
 

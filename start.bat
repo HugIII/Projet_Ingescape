@@ -4,6 +4,7 @@ start /B python ./sandbox/Map/main.py Map Wi-Fi 5670
 start /B python ./sandbox/Ennemies/main.py Ennemies Wi-Fi 5670
 start /B python ./sandbox/Weapons/main.py Weapons Wi-Fi 5670
 start /B python ./sandbox/Screamer/main.py Screamer Wi-Fi 5670
+start /B python ./sandbox/Engine_Map/main.py Engine_Map Wi-Fi 5670
 start /B python ./sandbox/Starter/main.py Starter Wi-Fi 5670
 start /B python ./sandbox/EventKeyBoard/main.py EventKeyBoard Wi-Fi 5670
 start /B python ./sandbox/Player/main.py Player Wi-Fi 5670

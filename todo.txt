@@ -1,6 +1,7 @@
 à faire:
 Clara:
 objet => event reussir a quitter
+voir si on peut smooth les déplacement
 objet => player
 
 Clara ou Hugo
@@ -10,9 +11,10 @@ on choisit 2-4 point au hasard sur la carte et on les rattaches au mur le plus p
 Dans Engine calculer les dégâts de façon logarithmiques => ligne 230
 
 Hugo:
-mis à jour mais nul => map sur une image est chargé l'image
-bug quand on a deux ennemies il s'affiche mal
+merge les deux projet ingescape Hugo et Clara
+réparer + augmenter la distance à laquelle les ennemies s'arrête 
 mapper => event
+bug quand on a deux ennemies il s'affiche mal
 mapper => player
 link le son au event adéquat 
 rajouter des images

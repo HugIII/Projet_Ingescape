@@ -74,8 +74,8 @@ if __name__ == "__main__":
     igs.log_set_file(True, None)
     igs.set_command_line(sys.executable + " " + " ".join(sys.argv))
 
-    igs.input_create("player_x", igs.INTEGER_T, None)
-    igs.input_create("player_y", igs.INTEGER_T, None)
+    igs.input_create("player_x", igs.DOUBLE_T, None)
+    igs.input_create("player_y", igs.DOUBLE_T, None)
     igs.input_create("score", igs.INTEGER_T, None)
     igs.input_create("kill_ennemies", igs.INTEGER_T, None)
     igs.input_create("kill_player", igs.STRING_T, None)

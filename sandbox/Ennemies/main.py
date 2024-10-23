@@ -43,12 +43,12 @@ def move_ennemies():
             y = ennemies_list_move[i][1]
             if x > player_x + 5:
                 x -= 1
-            elif x < player_x + 5:
+            elif x < player_x - 5:
                 x += 1
 
             if y > player_y + 5:
                 y -= 1
-            elif y < player_y + 5:
+            elif y < player_y - 5:
                 y += 1
 
             ennemies_list_move[i] = (x,y)
@@ -161,10 +161,10 @@ if __name__ == "__main__":
     igs.input_create("multi_ennemy",igs.STRING_T, None)
     igs.observe_input("multi_ennemy", input_callback, None)
 
-    igs.input_create("player_x",igs.INTEGER_T,None)
+    igs.input_create("player_x",igs.DOUBLE_T,None)
     igs.observe_input("player_x",input_callback,None)
 
-    igs.input_create("player_y",igs.INTEGER_T,None)
+    igs.input_create("player_y",igs.DOUBLE_T,None)
     igs.observe_input("player_y",input_callback,None)
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
