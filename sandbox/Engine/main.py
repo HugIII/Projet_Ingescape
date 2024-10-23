@@ -281,6 +281,8 @@ def draw_3D_world():
     global screamer_cooldown
     
     for wall in wall_draw_list:
+        print(dic_color[int(wall[1])])
+        print(int(wall[1]))
         send_service_rectangle_whiteboard(wall[0] * wall_width, (WINDOW_HEIGHT-wall[1])//2,wall_width,wall[1],dic_color[int(wall[1])],"black",1.0)
 
     ennemy_draw_dict = {}

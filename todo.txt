@@ -1,6 +1,6 @@
 à faire:
 Clara:
-objet => event
+objet => event reussir a quitter
 objet => player
 
 Clara ou Hugo

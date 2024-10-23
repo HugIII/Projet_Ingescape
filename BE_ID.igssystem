@@ -685,6 +685,10 @@
                         {
                             "name": "list_other_player",
                             "type": "STRING"
+                        },
+                        {
+                            "name": "list_ennemies_move",
+                            "type": "STRING"
                         }
                     ],
                     "outputs": [
@@ -1018,6 +1022,112 @@
                 "plugin": "ingescape_class",
                 "uuid": "6e9e58f3-ae01-417d-872b-43603c459754",
                 "version": ""
+            },
+            {
+                "className": "EventKeyBoard",
+                "color": 0,
+                "definition": {
+                    "outputs": [
+                        {
+                            "name": "A",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "E",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "Z",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "Q",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "S",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "D",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "M",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "N",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "click_left",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "click_right",
+                            "type": "IMPULSION"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "a3a04263-ccc2-4fd1-9d9c-8ee51c919208",
+                "version": ""
+            },
+            {
+                "className": "Player",
+                "color": 0,
+                "definition": {
+                    "inputs": [
+                        {
+                            "name": "A",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "E",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "Z",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "Q",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "S",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "D",
+                            "type": "IMPULSION"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "player_x",
+                            "type": "DOUBLE"
+                        },
+                        {
+                            "name": "player_y",
+                            "type": "DOUBLE"
+                        },
+                        {
+                            "name": "angle",
+                            "type": "DOUBLE"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "202a3be5-54bb-4493-ab14-d3f031d8c9c9",
+                "version": ""
             }
         ]
     },
@@ -1040,13 +1150,6 @@
                     "agent": {
                         "instances": [
                             {
-                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Starter/main.py Starter Wi-Fi 5670",
-                                "hostname": "LAPTOP-1U3EERO1",
-                                "ip": "192.168.27.135",
-                                "isAttachedToCircle": false,
-                                "uuid": "c2913a76-d2a1-418c-b2b7-46fb2a165e02"
-                            },
-                            {
                                 "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Starter/main.py Starter Wi-Fi 5670",
                                 "hostname": "PcHugo",
                                 "ip": "10.188.183.219",
@@ -1061,6 +1164,13 @@
                                 "isAttachedToCircle": false,
                                 "mac": "F8:9E:94:19:AD:75",
                                 "uuid": "21fb4061-d771-4f88-9ecc-0b62b717149f"
+                            },
+                            {
+                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Starter/main.py Starter Wi-Fi 5670",
+                                "hostname": "LAPTOP-1U3EERO1",
+                                "ip": "192.168.27.135",
+                                "isAttachedToCircle": false,
+                                "uuid": "c2913a76-d2a1-418c-b2b7-46fb2a165e02"
                             }
                         ]
                     },
@@ -1112,36 +1222,6 @@
                     "width": 252,
                     "x": 2821,
                     "y": 1053
-                },
-                {
-                    "data": {
-                        "entries": [
-                            "220"
-                        ],
-                        "value_type": "INTEGER"
-                    },
-                    "height": 79,
-                    "name": "",
-                    "tool": "com.ingescape.circle.tool.writer",
-                    "uuid": "d0cd9b4f-dba6-41da-9096-dab16d59d04e",
-                    "width": 256,
-                    "x": 575,
-                    "y": 926
-                },
-                {
-                    "data": {
-                        "entries": [
-                            ""
-                        ],
-                        "value_type": "INTEGER"
-                    },
-                    "height": 79,
-                    "name": "",
-                    "tool": "com.ingescape.circle.tool.writer",
-                    "uuid": "05212126-7148-48d7-89a0-d3bd109b5d49",
-                    "width": 256,
-                    "x": 555,
-                    "y": 1051
                 },
                 {
                     "data": {
@@ -1333,20 +1413,6 @@
                     "y": 480
                 },
                 {
-                    "data": {
-                        "entries": [
-                        ],
-                        "value_type": "IMPULSION"
-                    },
-                    "height": 44,
-                    "name": "",
-                    "tool": "com.ingescape.circle.tool.writer",
-                    "uuid": "692e1a99-dac9-4829-8e7e-cf65a6c9cd21",
-                    "width": 256,
-                    "x": 752.5515036759989,
-                    "y": 828.1398827573063
-                },
-                {
                     "agent": {
                         "instances": [
                             {
@@ -1416,20 +1482,6 @@
                     "y": 1474.8443418013858
                 },
                 {
-                    "data": {
-                        "entries": [
-                        ],
-                        "value_type": "IMPULSION"
-                    },
-                    "height": 44,
-                    "name": "",
-                    "tool": "com.ingescape.circle.tool.writer",
-                    "uuid": "0e953a81-17f4-4ecf-9dfc-d2efaea47a47",
-                    "width": 256,
-                    "x": 820.9337053693434,
-                    "y": 784.0664830884998
-                },
-                {
                     "agent": {
                         "instances": [
                             {
@@ -1456,57 +1508,19 @@
                     "agent": {
                         "instances": [
                             {
-                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Engine/main.py Engine Wi-Fi 5670",
-                                "hostname": "LAPTOP-1U3EERO1",
-                                "ip": "192.168.27.135",
-                                "isAttachedToCircle": false,
-                                "uuid": "71edad31-10d0-4d9f-b99c-a5c2afe2d779"
-                            },
-                            {
-                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe main.py Engine Wi-Fi 5670",
-                                "hostname": "PcHugo",
-                                "ip": "10.188.183.219",
-                                "isAttachedToCircle": false,
-                                "mac": "F8:9E:94:19:AD:75",
-                                "uuid": "04455ed2-1df0-4d42-94a6-9b9e8cf139f8"
-                            },
-                            {
-                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Engine/main.py Engine Wi-Fi 5670",
-                                "hostname": "PcHugo",
-                                "ip": "10.188.183.219",
-                                "isAttachedToCircle": false,
-                                "mac": "F8:9E:94:19:AD:75",
-                                "uuid": "e881c213-6450-49ee-9a95-207aca02e6fe"
-                            }
-                        ]
-                    },
-                    "class": "2924bb1c-4778-5b08-ac4c-194a0f51a3d5",
-                    "comment": "",
-                    "height": 378,
-                    "name": "Engine",
-                    "simulationTime": 5000,
-                    "uuid": "d0978519-7a32-4d73-b90f-425c872f2e86",
-                    "width": 252,
-                    "x": 1758.0423798690904,
-                    "y": 890.9329178316605
-                },
-                {
-                    "agent": {
-                        "instances": [
-                            {
-                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Map/main.py Map Wi-Fi 5670",
-                                "hostname": "LAPTOP-1U3EERO1",
-                                "ip": "192.168.27.135",
-                                "isAttachedToCircle": false,
-                                "uuid": "93a0ad35-97a4-4eca-b023-474c659d7e45"
-                            },
-                            {
                                 "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Map/main.py Map Wi-Fi 5670",
                                 "hostname": "PcHugo",
                                 "ip": "10.188.183.219",
                                 "isAttachedToCircle": false,
                                 "mac": "F8:9E:94:19:AD:75",
                                 "uuid": "fd27ab65-8bcc-4783-b05e-f6812347ac64"
+                            },
+                            {
+                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Map/main.py Map Wi-Fi 5670",
+                                "hostname": "LAPTOP-1U3EERO1",
+                                "ip": "192.168.27.135",
+                                "isAttachedToCircle": false,
+                                "uuid": "93a0ad35-97a4-4eca-b023-474c659d7e45"
                             }
                         ]
                     },
@@ -1524,51 +1538,6 @@
                     "agent": {
                         "instances": [
                             {
-                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Engine_Map/main.py Engine_Map Wi-Fi 5670",
-                                "hostname": "LAPTOP-1U3EERO1",
-                                "ip": "192.168.27.135",
-                                "isAttachedToCircle": false,
-                                "uuid": "99e78a43-f1f8-43ac-a42f-4f0e5f3287ed"
-                            },
-                            {
-                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Engine_Map/main.py Engine_Map Wi-Fi 5670",
-                                "hostname": "PcHugo",
-                                "ip": "10.188.183.219",
-                                "isAttachedToCircle": false,
-                                "mac": "F8:9E:94:19:AD:75",
-                                "uuid": "73aa1705-54f2-4438-bfb5-7d478e6ff280"
-                            },
-                            {
-                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Engine_Map/main.py Engine_Map Wi-Fi 5670",
-                                "hostname": "PcHugo",
-                                "ip": "10.188.183.219",
-                                "isAttachedToCircle": false,
-                                "mac": "F8:9E:94:19:AD:75",
-                                "uuid": "cbfedb28-8f54-4c37-b233-637e9e65bbdc"
-                            }
-                        ]
-                    },
-                    "class": "7982e962-9357-55f9-aa46-f02597d0ca61",
-                    "comment": "",
-                    "height": 202,
-                    "name": "Engine_Map",
-                    "simulationTime": 5000,
-                    "uuid": "790bac6c-d322-4a0c-8682-779d472b1aa2",
-                    "width": 252,
-                    "x": 2337.7430617449004,
-                    "y": 1095.6288669648554
-                },
-                {
-                    "agent": {
-                        "instances": [
-                            {
-                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Scorer/main.py Scorer Wi-Fi 5670",
-                                "hostname": "LAPTOP-1U3EERO1",
-                                "ip": "192.168.27.135",
-                                "isAttachedToCircle": false,
-                                "uuid": "d6424333-5cf2-42e3-80ba-53c4bcba5962"
-                            },
-                            {
                                 "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Scorer/main.py Scorer Wi-Fi 5670",
                                 "hostname": "PcHugo",
                                 "ip": "10.188.183.219",
@@ -1583,6 +1552,13 @@
                                 "isAttachedToCircle": false,
                                 "mac": "F8:9E:94:19:AD:75",
                                 "uuid": "ad9f2d49-39ed-4fa1-924a-faef6b063eb9"
+                            },
+                            {
+                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Scorer/main.py Scorer Wi-Fi 5670",
+                                "hostname": "LAPTOP-1U3EERO1",
+                                "ip": "192.168.27.135",
+                                "isAttachedToCircle": false,
+                                "uuid": "d6424333-5cf2-42e3-80ba-53c4bcba5962"
                             }
                         ]
                     },
@@ -1615,12 +1591,104 @@
                     "agent": {
                         "instances": [
                             {
-                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Ennemies/main.py Ennemies Wi-Fi 5670",
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Engine_Map/main.py Engine_Map Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "10.188.183.219",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "73aa1705-54f2-4438-bfb5-7d478e6ff280"
+                            },
+                            {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Engine_Map/main.py Engine_Map Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "10.188.183.219",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "cbfedb28-8f54-4c37-b233-637e9e65bbdc"
+                            },
+                            {
+                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Engine_Map/main.py Engine_Map Wi-Fi 5670",
                                 "hostname": "LAPTOP-1U3EERO1",
                                 "ip": "192.168.27.135",
                                 "isAttachedToCircle": false,
-                                "uuid": "04f1ce53-0d15-4c27-bb67-5e6f0344ba21"
+                                "uuid": "99e78a43-f1f8-43ac-a42f-4f0e5f3287ed"
+                            }
+                        ]
+                    },
+                    "class": "7982e962-9357-55f9-aa46-f02597d0ca61",
+                    "comment": "",
+                    "height": 202,
+                    "name": "Engine_Map",
+                    "simulationTime": 5000,
+                    "uuid": "790bac6c-d322-4a0c-8682-779d472b1aa2",
+                    "width": 252,
+                    "x": 2337.7430617449004,
+                    "y": 1095.6288669648554
+                },
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe .\\sandbox\\Player\\main.py Player Wi-Fi 5670",
+                                "hostname": "LAPTOP-1U3EERO1",
+                                "ip": "172.17.151.240",
+                                "isAttachedToCircle": false,
+                                "mac": "5C:61:99:44:CA:23",
+                                "uuid": "11744a28-f357-44fd-9da0-ac409c1b5eca"
+                            }
+                        ]
+                    },
+                    "class": "202a3be5-54bb-4493-ab14-d3f031d8c9c9",
+                    "comment": "",
+                    "height": 202,
+                    "name": "Player",
+                    "simulationTime": 5000,
+                    "uuid": "125e04e1-8258-48f7-adae-91f7fa676b2b",
+                    "width": 250,
+                    "x": 982.7601829770001,
+                    "y": 1577.4282270987942
+                },
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe main.py Engine Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "10.188.183.219",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "04455ed2-1df0-4d42-94a6-9b9e8cf139f8"
                             },
+                            {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Engine/main.py Engine Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "10.188.183.219",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "e881c213-6450-49ee-9a95-207aca02e6fe"
+                            },
+                            {
+                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Engine/main.py Engine Wi-Fi 5670",
+                                "hostname": "LAPTOP-1U3EERO1",
+                                "ip": "192.168.27.135",
+                                "isAttachedToCircle": false,
+                                "uuid": "71edad31-10d0-4d9f-b99c-a5c2afe2d779"
+                            }
+                        ]
+                    },
+                    "class": "2924bb1c-4778-5b08-ac4c-194a0f51a3d5",
+                    "comment": "",
+                    "height": 378,
+                    "name": "Engine",
+                    "simulationTime": 5000,
+                    "uuid": "d0978519-7a32-4d73-b90f-425c872f2e86",
+                    "width": 252,
+                    "x": 1758.0423798690904,
+                    "y": 890.9329178316605
+                },
+                {
+                    "agent": {
+                        "instances": [
                             {
                                 "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Ennemies/main.py Ennemies Wi-Fi 5670",
                                 "hostname": "PcHugo",
@@ -1636,6 +1704,13 @@
                                 "isAttachedToCircle": false,
                                 "mac": "F8:9E:94:19:AD:75",
                                 "uuid": "497a955a-dfbc-4250-8412-6c3437da0965"
+                            },
+                            {
+                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Ennemies/main.py Ennemies Wi-Fi 5670",
+                                "hostname": "LAPTOP-1U3EERO1",
+                                "ip": "192.168.27.135",
+                                "isAttachedToCircle": false,
+                                "uuid": "04f1ce53-0d15-4c27-bb67-5e6f0344ba21"
                             }
                         ]
                     },
@@ -1646,8 +1721,31 @@
                     "simulationTime": 5000,
                     "uuid": "0cf94243-a8b9-4132-8ed6-677e07604de0",
                     "width": 252,
-                    "x": 1754.7178010828122,
-                    "y": 1282.9883239505607
+                    "x": 1595.2516114082891,
+                    "y": 1282.9883239505605
+                },
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe .\\sandbox\\EventKeyBoard\\main.py EventKeyBoard Wi-Fi 5670",
+                                "hostname": "LAPTOP-1U3EERO1",
+                                "ip": "172.17.151.240",
+                                "isAttachedToCircle": false,
+                                "mac": "5C:61:99:44:CA:23",
+                                "uuid": "a52e9ecd-55c0-4b53-8a4e-c9670906d901"
+                            }
+                        ]
+                    },
+                    "class": "a3a04263-ccc2-4fd1-9d9c-8ee51c919208",
+                    "comment": "",
+                    "height": 290,
+                    "name": "EventKeyBoard",
+                    "simulationTime": 5000,
+                    "uuid": "e6fe4ccb-b23e-4273-b0d1-34dbed7f91ab",
+                    "width": 250,
+                    "x": 549.085598008854,
+                    "y": 1548.48899927734
                 }
             ],
             "links": {
@@ -1873,57 +1971,111 @@
                         "fromInput": "list_ennemies_move",
                         "to": "Ennemies",
                         "toOutput": "Ennemies_move"
+                    },
+                    {
+                        "from": "Client_Server",
+                        "fromInput": "player_x",
+                        "to": "Player",
+                        "toOutput": "player_x"
+                    },
+                    {
+                        "from": "Engine",
+                        "fromInput": "player_x",
+                        "to": "Player",
+                        "toOutput": "player_x"
+                    },
+                    {
+                        "from": "Engine_Map",
+                        "fromInput": "player_x",
+                        "to": "Player",
+                        "toOutput": "player_x"
+                    },
+                    {
+                        "from": "Client_Server",
+                        "fromInput": "player_y",
+                        "to": "Player",
+                        "toOutput": "player_y"
+                    },
+                    {
+                        "from": "Engine",
+                        "fromInput": "player_y",
+                        "to": "Player",
+                        "toOutput": "player_y"
+                    },
+                    {
+                        "from": "Engine_Map",
+                        "fromInput": "player_y",
+                        "to": "Player",
+                        "toOutput": "player_y"
+                    },
+                    {
+                        "from": "Engine",
+                        "fromInput": "angle",
+                        "to": "Player",
+                        "toOutput": "angle"
+                    },
+                    {
+                        "from": "Ennemies",
+                        "fromInput": "player_x",
+                        "to": "Player",
+                        "toOutput": "player_x"
+                    },
+                    {
+                        "from": "Ennemies",
+                        "fromInput": "player_y",
+                        "to": "Player",
+                        "toOutput": "player_y"
+                    },
+                    {
+                        "from": "Player",
+                        "fromInput": "A",
+                        "to": "EventKeyBoard",
+                        "toOutput": "A"
+                    },
+                    {
+                        "from": "Player",
+                        "fromInput": "E",
+                        "to": "EventKeyBoard",
+                        "toOutput": "E"
+                    },
+                    {
+                        "from": "Player",
+                        "fromInput": "Z",
+                        "to": "EventKeyBoard",
+                        "toOutput": "Z"
+                    },
+                    {
+                        "from": "Player",
+                        "fromInput": "Q",
+                        "to": "EventKeyBoard",
+                        "toOutput": "Q"
+                    },
+                    {
+                        "from": "Player",
+                        "fromInput": "S",
+                        "to": "EventKeyBoard",
+                        "toOutput": "S"
+                    },
+                    {
+                        "from": "Player",
+                        "fromInput": "D",
+                        "to": "EventKeyBoard",
+                        "toOutput": "D"
+                    },
+                    {
+                        "from": "Weapons",
+                        "fromInput": "click_left",
+                        "to": "EventKeyBoard",
+                        "toOutput": "click_left"
+                    },
+                    {
+                        "from": "Weapons",
+                        "fromInput": "click_right",
+                        "to": "EventKeyBoard",
+                        "toOutput": "click_right"
                     }
                 ],
                 "others": [
-                    {
-                        "destination": "790bac6c-d322-4a0c-8682-779d472b1aa2",
-                        "destinationIO": {
-                            "name": "player_x",
-                            "type": "INPUT"
-                        },
-                        "source": "d0cd9b4f-dba6-41da-9096-dab16d59d04e",
-                        "sourceIO": {
-                            "name": "value",
-                            "type": "OUTPUT"
-                        }
-                    },
-                    {
-                        "destination": "790bac6c-d322-4a0c-8682-779d472b1aa2",
-                        "destinationIO": {
-                            "name": "player_y",
-                            "type": "INPUT"
-                        },
-                        "source": "05212126-7148-48d7-89a0-d3bd109b5d49",
-                        "sourceIO": {
-                            "name": "value",
-                            "type": "OUTPUT"
-                        }
-                    },
-                    {
-                        "destination": "d0978519-7a32-4d73-b90f-425c872f2e86",
-                        "destinationIO": {
-                            "name": "player_x",
-                            "type": "INPUT"
-                        },
-                        "source": "d0cd9b4f-dba6-41da-9096-dab16d59d04e",
-                        "sourceIO": {
-                            "name": "value",
-                            "type": "OUTPUT"
-                        }
-                    },
-                    {
-                        "destination": "d0978519-7a32-4d73-b90f-425c872f2e86",
-                        "destinationIO": {
-                            "name": "player_y",
-                            "type": "INPUT"
-                        },
-                        "source": "05212126-7148-48d7-89a0-d3bd109b5d49",
-                        "sourceIO": {
-                            "name": "value",
-                            "type": "OUTPUT"
-                        }
-                    },
                     {
                         "destination": "2a2e61e5-5e70-40ae-adcf-3fafd6818705",
                         "destinationIO": {
@@ -1937,30 +2089,6 @@
                         }
                     },
                     {
-                        "destination": "69ef9c91-f128-4ff8-abc8-71b0cc9e98cc",
-                        "destinationIO": {
-                            "name": "player_x",
-                            "type": "INPUT"
-                        },
-                        "source": "d0cd9b4f-dba6-41da-9096-dab16d59d04e",
-                        "sourceIO": {
-                            "name": "value",
-                            "type": "OUTPUT"
-                        }
-                    },
-                    {
-                        "destination": "69ef9c91-f128-4ff8-abc8-71b0cc9e98cc",
-                        "destinationIO": {
-                            "name": "player_y",
-                            "type": "INPUT"
-                        },
-                        "source": "05212126-7148-48d7-89a0-d3bd109b5d49",
-                        "sourceIO": {
-                            "name": "value",
-                            "type": "OUTPUT"
-                        }
-                    },
-                    {
                         "destination": "713ae859-3fb0-4be9-9ab7-f138f03bd21e",
                         "destinationIO": {
                             "name": "wildcard",
@@ -1969,30 +2097,6 @@
                         "source": "69ef9c91-f128-4ff8-abc8-71b0cc9e98cc",
                         "sourceIO": {
                             "name": "kill",
-                            "type": "OUTPUT"
-                        }
-                    },
-                    {
-                        "destination": "eb560d5e-b0a3-4507-83bb-9f31b84f0ae6",
-                        "destinationIO": {
-                            "name": "click_left",
-                            "type": "INPUT"
-                        },
-                        "source": "0e953a81-17f4-4ecf-9dfc-d2efaea47a47",
-                        "sourceIO": {
-                            "name": "value",
-                            "type": "OUTPUT"
-                        }
-                    },
-                    {
-                        "destination": "eb560d5e-b0a3-4507-83bb-9f31b84f0ae6",
-                        "destinationIO": {
-                            "name": "click_right",
-                            "type": "INPUT"
-                        },
-                        "source": "692e1a99-dac9-4829-8e7e-cf65a6c9cd21",
-                        "sourceIO": {
-                            "name": "value",
                             "type": "OUTPUT"
                         }
                     },
