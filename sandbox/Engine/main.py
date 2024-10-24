@@ -252,7 +252,7 @@ def cast_rays_3D():
                             corrected_depth = depth/5 * math.cos(ray_angle-angle)
                             wall_height = WINDOW_HEIGHT / (corrected_depth + 0.0001)
                             wall_height = 600 if wall_height > 600 else wall_height
-                            ennemy_draw_list.append((ray,wall_height,i,ennemies_position[0],ennemies_position[1]))
+                            ennemy_draw_list.append((ray,wall_height,i,ennemies_position[0],ennemies_position[1],depth))
                             touch_enn = True
                             try:
                                 degat += 0.001 / depth #mettre logarithmique
@@ -275,7 +275,7 @@ def cast_rays_3D():
                             corrected_depth = depth/5 * math.cos(ray_angle-angle)
                             wall_height = WINDOW_HEIGHT / (corrected_depth + 0.0001)
                             wall_height = 600 if wall_height > 600 else wall_height
-                            player_enn_draw_list.append((ray,wall_height,i))
+                            player_enn_draw_list.append((ray,wall_height,i,depth))
                             touch_player = True
 
                             if middle_rays - 3 <= ray <= middle_rays + 3 and (player_click_left == True or (player_click_right == True and depth < 75)):
@@ -295,26 +295,32 @@ def draw_3D_world():
 
     ennemy_draw_dict = {}
     ennemy_draw_origin_dict = {}
+    ennemy_depth_dict = {}
     for enn in ennemy_draw_list:
         if enn[2] not in ennemy_draw_origin_dict.keys():
             ennemy_draw_origin_dict[enn[2]] = enn[0] 
+            ennemy_depth_dict[enn[5]] = enn[2]
         ennemy_draw_dict[enn[2]] = (ennemy_draw_origin_dict[enn[2]],enn[1],enn[0],enn[3],enn[4],enn[2])
 
     player_enn_draw_dict = {}
     player_enn_draw_origin_dict = {}
+    player_depth_dict = {}
     for pla in player_enn_draw_list:
         if pla[2] not in player_enn_draw_origin_dict.keys():
             player_enn_draw_origin_dict[pla[2]] = pla[0] 
+            player_depth_dict[enn[5]] = pla[2]
         player_enn_draw_dict[pla[2]] = (player_enn_draw_origin_dict[pla[2]],pla[1],pla[0])
 
-    for enn in ennemy_draw_dict.values():
+    for i in reversed(ennemy_depth_dict.keys()):
+        enn = ennemy_draw_dict[ennemy_depth_dict[i]]
         try:
             index = (ennemies[int(enn[5])][0]+ennemies[int(enn[5])][1])%len(image_monstre)
             send_service_image_whiteboard(image_monstre[index],enn[0] * wall_width,(WINDOW_HEIGHT-enn[1])//2,int((enn[2]-enn[0])*wall_width),int(enn[1]))
         except:
             pass
 
-    for pla in player_enn_draw_dict.values():
+    for i in reversed(player_depth_dict.keys()):
+        pla = player_draw_dict[player_depth_dict[i]]
         send_service_image_whiteboard(image_player,pla[0] * wall_width,(WINDOW_HEIGHT-pla[1])//2,int((pla[2]-pla[0])*wall_width),int(pla[1]))
 
     if cursor_cooldown != 0:
@@ -536,7 +542,7 @@ if __name__=="__main__":
     clock = pygame.time.Clock()
 
     video = moviepy.editor.VideoFileClip("./cinematics/intro.mp4")
-    video.preview()
+    #video.preview()
 
     while running:
         pygame.event.pump()
