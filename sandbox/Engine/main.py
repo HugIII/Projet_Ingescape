@@ -254,7 +254,10 @@ def cast_rays_3D():
                             wall_height = 600 if wall_height > 600 else wall_height
                             ennemy_draw_list.append((ray,wall_height,i,ennemies_position[0],ennemies_position[1]))
                             touch_enn = True
-                            degat += 0.5 * depth #mettre logarithmique
+                            try:
+                                degat += 0.001 / depth #mettre logarithmique
+                            except:
+                                pass
 
                             if middle_rays - 3 <= ray <= middle_rays + 3 and (player_click_left == True or (player_click_right == True and depth < 75)) and lock_ennemi_kill == True:
                                 if ennemies_position[0] - 2 < target_x < ennemies_position[0] + 2 and ennemies_position[1] - 2 < target_y < ennemies_position[1] + 2:
@@ -373,6 +376,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
     global angle
     global screamer_cooldown
     global kill_index
+    global vie
 
     if name=="Ennemies":
         if value == "[]":
@@ -435,6 +439,8 @@ def input_callback(iop_type, name, value_type, value, my_data):
         screamer_cooldown += 20
     elif name == "angle":
         angle = value
+    elif name == "vie" :
+        vie = value
     # add code here if needed
 
 def key_pressed_test():
@@ -530,7 +536,7 @@ if __name__=="__main__":
     clock = pygame.time.Clock()
 
     video = moviepy.editor.VideoFileClip("./cinematics/intro.mp4")
-    #video.preview()
+    video.preview()
 
     while running:
         pygame.event.pump()
@@ -543,7 +549,7 @@ if __name__=="__main__":
         update()
         clock.tick(144)
 
-    if wave > 15:
+    if wave > 5:
         video = moviepy.editor.VideoFileClip("./cinematics/Outro.mp4")
         video.preview()
 

@@ -109,7 +109,6 @@ def input_callback(iop_type, name, value_type, value, my_data):
                 temp_sub_list.append(value[i])
         temp_list.append(temp_sub_list)
         string_map = temp_list
-        player_doesnt_move = True
 
     if multi == True:
         return
