@@ -78,12 +78,13 @@ in => impulsion S
    => impulsion E
    => impulsion Q
    => impulsion D
-   => impulsion kill 
+   => impulsion kill (lorsque joueur est kill, respawn pos random dans map pas dans le mur)
    => string map 
-   => double degat
+   => double degat (vie - degat > 0 -> kill)
 out => int posX
     => int posY
     => double angle
+    => int vie (pour engine)
 
 quand on string la map la met à jour, tu as déjà un string map par défaut comme dans engine
 les impulsions mettent à jour l'angle, la position tu peux voir dans engine pour les calculs 
