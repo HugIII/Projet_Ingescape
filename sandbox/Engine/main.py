@@ -262,7 +262,7 @@ def cast_rays_3D():
 
                             if middle_rays - 5 <= ray <= middle_rays + 5 and (player_click_left == True or (player_click_right == True and depth < 25)) and lock_ennemi_kill == True:
                                 print(depth)
-                                if ennemies_position[0] - 5 < target_x < ennemies_position[0] + 5 and ennemies_position[1] - 5 < target_y < ennemies_position[1] + 5:
+                                if ennemies_position[0] - 10 < target_x < ennemies_position[0] + 10 and ennemies_position[1] - 10 < target_y < ennemies_position[1] + 10:
                                     lock_ennemi_kill = False
                                     kill_index = i
                                     cursor_cooldown = 15
