@@ -45,25 +45,31 @@ def move_ennemies():
             y = ennemies_list_move[i][1]
             x_temp = ennemies_list_move[i][0]
             y_temp = ennemies_list_move[i][1]
+            x_temp_mur = ennemies_list_move[i][0]
+            y_temp_mur = ennemies_list_move[i][1]
             if x > player_x + 20:
                 x_temp -= 1
+                x_temp_mur -= 5
             elif x < player_x - 20:
                 x_temp += 1
+                x_temp_mur += 5
 
             if y > player_y + 20:
                 y_temp -= 1
+                y_temp_mur -= 5
             elif y < player_y - 20:
                 y_temp += 1
+                y_temp_mur += 5
 
             if string_map[int(x/50)][int(y/50)] == "X":
                 random_x = random.randint(0,499)
                 random_y = random.randint(0,499)
                 ennemies_list_move[i] = (random_x,random_y)
-            elif string_map[int(x_temp / 50)][int(y_temp / 50)] != "X":
+            elif string_map[int(x_temp_mur / 50)][int(y_temp_mur / 50)] != "X":
                 ennemies_list_move[i] = (x_temp,y_temp)
-            elif string_map[int(x_temp / 50)][int(y / 50)] != "X":
+            elif string_map[int(x_temp_mur / 50)][int(y / 50)] != "X":
                 ennemies_list_move[i] = (x_temp,y)
-            elif string_map[int(x / 50)][int(y_temp / 50)] != "X":
+            elif string_map[int(x / 50)][int(y_temp_mur / 50)] != "X":
                 ennemies_list_move[i] = (x,y_temp)
 
         igs.output_set_string("Ennemies_move",str(ennemies_list_move))    
