@@ -124,6 +124,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
         spawn_ennemies()
         into_spawn = False
     
+    igs.output_set_string("Ennemies_move",str(ennemies_list_move))
     igs.output_set_string("list_ennemies",str(ennemies_list))
 
 def spawn_ennemies():

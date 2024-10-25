@@ -173,6 +173,7 @@ def cast_rays_3D():
     global lock_ennemi_kill
     global ennemies_move
     global kill_index
+    global cursor_cooldown
 
     start_angle = angle - fov / 2
     wall_height_memory = []
@@ -263,6 +264,7 @@ def cast_rays_3D():
                                 if ennemies_position[0] - 2 < target_x < ennemies_position[0] + 2 and ennemies_position[1] - 2 < target_y < ennemies_position[1] + 2:
                                     lock_ennemi_kill = False
                                     kill_index = i
+                                    cursor_cooldown = 15
                                     igs.output_set_int("kill",int(i))
 
                 if isinstance(string_map_temp[grid_x][grid_y],list):
@@ -323,7 +325,7 @@ def draw_3D_world():
         pla = player_draw_dict[player_depth_dict[i]]
         send_service_image_whiteboard(image_player,pla[0] * wall_width,(WINDOW_HEIGHT-pla[1])//2,int((pla[2]-pla[0])*wall_width),int(pla[1]))
 
-    if cursor_cooldown != 0:
+    if cursor_cooldown > 0:
         cursor_cooldown -= 1
         send_service_image_whiteboard(image_cursor,WINDOW_WIDTH_DEMI-15,WINDOW_HEIGHT_DEMI-15,30.0,30.0)
     else:
@@ -424,13 +426,10 @@ def input_callback(iop_type, name, value_type, value, my_data):
         wave = value
     elif name=="arbalete_shot":
         player_click_left = True
-        cursor_cooldown = 15
     elif name=="sword_hit":
         player_click_right = True
-        cursor_cooldown = 15
     elif name=="arrow_left":
         arrow_left = value
-        cursor_cooldown = 30
     elif name=="Ennemies_move":
         if value == "[]":
             ennemies_move = []
