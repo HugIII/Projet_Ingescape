@@ -260,8 +260,9 @@ def cast_rays_3D():
                             except:
                                 pass
 
-                            if middle_rays - 3 <= ray <= middle_rays + 3 and (player_click_left == True or (player_click_right == True and depth < 75)) and lock_ennemi_kill == True:
-                                if ennemies_position[0] - 2 < target_x < ennemies_position[0] + 2 and ennemies_position[1] - 2 < target_y < ennemies_position[1] + 2:
+                            if middle_rays - 5 <= ray <= middle_rays + 5 and (player_click_left == True or (player_click_right == True and depth < 25)) and lock_ennemi_kill == True:
+                                print(depth)
+                                if ennemies_position[0] - 5 < target_x < ennemies_position[0] + 5 and ennemies_position[1] - 5 < target_y < ennemies_position[1] + 5:
                                     lock_ennemi_kill = False
                                     kill_index = i
                                     cursor_cooldown = 15
@@ -280,7 +281,7 @@ def cast_rays_3D():
                             player_enn_draw_list.append((ray,wall_height,i,depth))
                             touch_player = True
 
-                            if middle_rays - 3 <= ray <= middle_rays + 3 and (player_click_left == True or (player_click_right == True and depth < 75)):
+                            if middle_rays - 3 <= ray <= middle_rays + 3 and (player_click_left == True or (player_click_right == True and depth < 25)):
                                 if player_enn_position[0] - 2 < target_x < player_enn_position[0] + 2 and player_enn_position[1] - 2 < target_y < player_enn_position[1] + 2:
                                     igs.output_set_int("kill_player",int(i[1:]))
 

@@ -49,17 +49,17 @@ def move_ennemies():
             y_temp_mur = ennemies_list_move[i][1]
             if x > player_x + 20:
                 x_temp -= 1
-                x_temp_mur -= 5
+                x_temp_mur -= 10
             elif x < player_x - 20:
                 x_temp += 1
-                x_temp_mur += 5
+                x_temp_mur += 10
 
             if y > player_y + 20:
                 y_temp -= 1
-                y_temp_mur -= 5
+                y_temp_mur -= 10
             elif y < player_y - 20:
                 y_temp += 1
-                y_temp_mur += 5
+                y_temp_mur += 10
 
             if string_map[int(x/50)][int(y/50)] == "X":
                 random_x = random.randint(0,499)
