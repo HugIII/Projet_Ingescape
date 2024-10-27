@@ -44,18 +44,19 @@ def input_callback(io_type, name, value_type, value, my_data):
     if name=="Z":  # Avancer
         player_x += 1 * math.cos(angle)
         player_y += 1 * math.sin(angle)
-    elif name=="S":  # Reculer
+    if name=="S":  # Reculer
         player_x -= 1 * math.cos(angle)
         player_y -= 1 * math.sin(angle)
-    elif name=="Q":  # Gauche
+    if name=="Q":  # Gauche
         player_x += 1 * math.cos(angle - math.pi / 2)
         player_y += 1 * math.sin(angle - math.pi / 2)
-    elif name=="D":  # Droite
+    if name=="D":  # Droite
         player_x += 1 * math.cos(angle + math.pi / 2)
         player_y += 1 * math.sin(angle + math.pi / 2)
 
+
     # Rotation
-    elif name=="E":  # Tourner à droite
+    if name=="E":  # Tourner à droite
         angle = (angle + 0.1) % (2 * math.pi)  # en radians
     elif name=="A":  # Tourner à gauche
         angle -= 0.1

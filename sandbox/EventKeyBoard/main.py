@@ -9,58 +9,44 @@
 
 import sys
 import ingescape as igs
-'''import pygame
-
-#inputs
-def input_callback():
-    while True:
-        keys = pygame.key.get_pressed()
-
-        # Mouvements
-        if keys[pygame.K_z]:  # Avancer
-            print("avancer !")
-            igs.output_set_impulsion("Z")
-        if keys[pygame.K_s]:  # Reculer
-            igs.output_set_impulsion("S")
-        if keys[pygame.K_q]:  # Gauche
-            igs.output_set_impulsion("Q")
-        if keys[pygame.K_d]:  # Droite
-            igs.output_set_impulsion("D")
-
-        # Rotation
-        if keys[pygame.K_e]:  # Tourner à droite
-            igs.output_set_impulsion("E")
-        if keys[pygame.K_a]:  # Tourner à gauche
-            igs.output_set_impulsion("A")
-'''
-
 from pynput import keyboard, mouse
 
-# Fonction appelée à chaque pression de touche
+pressed_keys = []
+
 def on_press(key):
+    global pressed_keys
     try:
-        if key.char=='a':
-            igs.output_set_impulsion("A")
-        if key.char=='e':
-            igs.output_set_impulsion("E")
-        if key.char=='z':
-            igs.output_set_impulsion("Z")
-        if key.char=='q':
-            igs.output_set_impulsion("Q")
-        if key.char=='s':
-            igs.output_set_impulsion("S")
-        if key.char=='d':
-            igs.output_set_impulsion("D")
-        if key.char=='m':
-            igs.output_set_impulsion("M")
-        if key.char=='n':
-            igs.output_set_impulsion("N")
+        if key.char not in pressed_keys:
+            pressed_keys.append(key.char)
+        for k in pressed_keys:
+            if k=='a':
+                igs.output_set_impulsion("A")
+            if k=='e':
+                igs.output_set_impulsion("E")
+            if k=='z':
+                igs.output_set_impulsion("Z")
+            if k=='q':
+                igs.output_set_impulsion("Q")
+            if k=='s':
+                igs.output_set_impulsion("S")
+            if k=='d':
+                igs.output_set_impulsion("D")
+            if k=='m':
+                igs.output_set_impulsion("M")
+            if k=='n':
+                igs.output_set_impulsion("N")
     except AttributeError:
         print(f'Touche spéciale appuyée: {key}')
 
-# Fonction appelée à chaque relâchement de touche
 def on_release(key):
-    if key == keyboard.Key.esc:  # Arrêter le programme quand "Echap" est pressée
+    global pressed_keys
+    try:
+        if key.char in pressed_keys:
+            pressed_keys.remove(key.char)
+        print("Touches appuyées :", pressed_keys)
+    except AttributeError:
+        pass
+    if key == keyboard.Key.esc:
         return False
 
 # Fonction appelée lors d'un clic de souris

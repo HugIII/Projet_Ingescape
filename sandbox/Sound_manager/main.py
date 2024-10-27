@@ -3,13 +3,12 @@
 
 #
 #  main.py
-#  Sound_manager version 1.0
+#  Sound_manager
 #  Created by Ingenuity i/o on 2024/10/02
 #
 
 import sys
 import ingescape as igs
-
 import pygame
 
 music_play = True
@@ -21,41 +20,39 @@ monster_death_link = "./sounds/monster_death.mp3"
 shoot_link = "./sounds/shoot.mp3"
 degat_link = "./sounds/degat.mp3"
 
-#inputs
+# Inputs
 def input_callback(iop_type, name, value_type, value, my_data):
     global music_play
     global sound_on
 
     if name == "sound_on":
-        sound_on = not sound_on
-        if music_play == True:
-            pygame.mixer.music.unpause()
-
-    if sound_on == False:
-        pygame.mixer.music.pause()
-        return
-
-    if name == "music":   
-        if music_play == True:
+        if music_play:
             pygame.mixer.music.pause()
             music_play = False
         else:
             pygame.mixer.music.unpause()
             music_play = True
-    if name=="death":
+
+    elif name == "music":
+        if sound_on:
+            sound_on = False
+            pygame.mixer.music.pause()
+        else:
+            sound_on = True
+            pygame.mixer.music.unpause()
+
+    elif name == "death" and sound_on:
         death = pygame.mixer.Sound(death_link)
         death.play()
-    elif name=="monster_death":
+    elif name == "monster_death" and sound_on:
         death_monster = pygame.mixer.Sound(monster_death_link)
         death_monster.play()
-    elif name=="shoot":
+    elif name == "shoot" and sound_on:
         shoot = pygame.mixer.Sound(shoot_link)
         shoot.play()
-    elif name=="degat_recu":
+    elif name == "degat_recu" and sound_on:
         degat = pygame.mixer.Sound(degat_link)
         degat.play()
-
-    # add code here if needed
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
@@ -67,7 +64,6 @@ if __name__ == "__main__":
         exit(0)
 
     igs.agent_set_name(sys.argv[1])
-    igs.definition_set_version("1.0")
     igs.log_set_console(True)
     igs.log_set_file(True, None)
     igs.set_command_line(sys.executable + " " + " ".join(sys.argv))
@@ -91,8 +87,8 @@ if __name__ == "__main__":
     pygame.mixer.init()
 
     pygame.mixer.music.load(music_link)
-
-    pygame.mixer.music.play()
+    
+    pygame.mixer.music.play(-1)
 
     input()
 

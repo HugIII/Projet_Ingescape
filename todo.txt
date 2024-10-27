@@ -1,8 +1,7 @@
 à faire:
 Clara:
 objet => event reussir a quitter
-voir si on peut smooth les déplacement
-et appuyer sur deux touches
+voir si on peut smooth les déplacements
 objet => player
 
 Clara ou Hugo
