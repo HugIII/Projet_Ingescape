@@ -39,7 +39,7 @@ player_y = 350
 def move_ennemies():
     global ennemies_list_move
 
-    while(1):
+    while multi==False:
         for i in range(len(ennemies_list_move)):
             x = ennemies_list_move[i][0]
             y = ennemies_list_move[i][1]
@@ -75,6 +75,8 @@ def move_ennemies():
         igs.output_set_string("Ennemies_move",str(ennemies_list_move))    
         time.sleep(0.2)
 
+    igs.output_set_string("Ennemies_move","[]")
+
 #inputs
 def input_callback(iop_type, name, value_type, value, my_data):
     global ennemies_list
@@ -100,7 +102,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
             if i != "[" and i != "":
                 t = i.strip()[:-2].split(",")
                 multi_ennemies.append((int(t[0]),int(t[1])))
-                igs.output_set_string("list_ennemies",str(multi_ennemies))
+        igs.output_set_string("list_ennemies",str(multi_ennemies))
 
     if name == "kill":
         igs.output_set_impulsion("score")

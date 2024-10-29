@@ -25,21 +25,26 @@ def input_callback(iop_type, name, value_type, value, my_data):
     global player_y
     global uuid 
     if name == "player_x":
-        player_x = value
+        player_x = float(value)
+        if uuid == -1:
+            return
         arguments_list = (uuid,player_x,player_y)
         igs.service_call("Server", "player_position", arguments_list, "")
     elif name == "player_y":
-        player_y = value
+        if uuid == -1:
+            return
+        player_y = float(value)
         arguments_list = (uuid,player_x,player_y)
         igs.service_call("Server", "player_position", arguments_list, "")
     elif name == "score":
         arguments_list = (int(uuid))
         igs.service_call("Server", "score", arguments_list, "")
     elif name == "kill_ennemies":
-        arguments_list = (uuid,value)
+        arguments_list = (uuid,int(value))
         igs.service_call("Server", "ennemies_kill", arguments_list, "")
     elif name == "kill_player":
-        arguments_list = (uuid,value)
+        print(value)
+        arguments_list = (uuid,int(value))
         igs.service_call("Server", "player_kill", arguments_list, "")
     # add code here if needed
 
@@ -47,7 +52,16 @@ def service_callback(sender_agent_name, sender_agent_uuid, service_name, argumen
     global not_starting
     not_starting = False
     if service_name == "change_liste_player":
-        igs.output_set_string("multi_player",arguments[0])
+        try:
+            player_enn = []
+            for i in arguments[0].split("("):
+                if i != "[" and i != "":
+                    t = i.strip()[:-2].split(",")
+                    if float(t[0]) != float(uuid):
+                        player_enn.append((int(t[0]),float(t[1]),float(t[2])))
+            igs.output_set_string("multi_player",str(player_enn))
+        except:
+            pass
     elif service_name == "change_liste_ennemies":
         igs.output_set_bool("multi",True)
         igs.output_set_string("multi_ennemy",arguments[0])
@@ -101,13 +115,13 @@ if __name__ == "__main__":
     igs.service_init("chat", service_callback, None)
     igs.service_arg_add("chat", "uuid", igs.STRING_T)
     igs.service_arg_add("chat", "message", igs.STRING_T)
-    #igs.service_init("kill_service", service_callback, None)
+    igs.service_init("kill_service", service_callback, None)
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
 
     time.sleep(10)
 
-    uuid = sys.argv[4]
+    uuid = int(sys.argv[4])
 
     while not_starting:
         arguments_list = (int(sys.argv[4]),player_x,player_y)

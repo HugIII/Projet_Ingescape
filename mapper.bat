@@ -1,0 +1,1 @@
+python ./sandbox/mapper/main.py mapper Wi-Fi 5670

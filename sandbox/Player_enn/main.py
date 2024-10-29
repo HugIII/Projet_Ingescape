@@ -30,8 +30,11 @@ def input_callback(iop_type, name, value_type, value, my_data):
         for i in value.split("("):
             if i != "[" and i != "":
                 t = i.strip()[:-2].split(",")
-                player_enn_uuid.append((int(t[0])))
-                player_enn.append((int(t[1]),int(t[2])))
+                try:
+                    player_enn_uuid.append((int(t[0])))
+                except:
+                    return
+                player_enn.append((float(t[1]),float(t[2])))
         igs.output_set_string("list_players",str(player_enn))
     elif name=="kill":
         igs.output_set_impulsion("score")

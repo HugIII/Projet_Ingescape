@@ -56,6 +56,7 @@ debug_perspective = False
 player_click_left = False
 player_click_right = False
 lock_ennemi_kill = True
+lock_player_kill = True
 
 ennemies = []
 ennemies_move = []
@@ -171,6 +172,7 @@ def cast_rays_3D():
     global player_click_left
     global player_click_right
     global lock_ennemi_kill
+    global lock_player_kill
     global ennemies_move
     global kill_index
     global cursor_cooldown
@@ -213,7 +215,6 @@ def cast_rays_3D():
             string_map_temp[grid_x][grid_y].append("P"+str(index))
 
     for ray in range(-50,number_rays+51):
-        touch_enn = False
         touch_player = False
         ray_angle = start_angle + ray * angle_step
         ray_angle_cos = math.cos(ray_angle)
@@ -226,12 +227,15 @@ def cast_rays_3D():
             grid_y = int(target_y / tile_size)
 
             if 0 <= grid_x < len(string_map[0]) and 0 <= grid_y < len(string_map):
-                if string_map[grid_x][grid_y] == "X":
-                    corrected_depth = depth/10 * math.cos(ray_angle-angle)
-                    wall_height = WINDOW_HEIGHT / (corrected_depth + 0.0001)  
-                    wall_height = 600 if wall_height > 600 else wall_height            
-                    wall_draw_list.append((ray,wall_height))
-                    break
+                try:
+                    if string_map[grid_x][grid_y] == "X":
+                        corrected_depth = depth/10 * math.cos(ray_angle-angle)
+                        wall_height = WINDOW_HEIGHT / (corrected_depth + 0.0001)  
+                        wall_height = 600 if wall_height > 600 else wall_height            
+                        wall_draw_list.append((ray,wall_height))
+                        break
+                except:
+                    print(grid_x,grid_y)
 
                 if depth > 300:
                     continue
@@ -248,7 +252,7 @@ def cast_rays_3D():
                             else:
                                 ennemies_position = ennemies_move[int(i)]
                         except:
-                            pass
+                            continue
                         if touch_enn == False and ennemies_position[0] - 2 < target_x < ennemies_position[0] + 2 and ennemies_position[1] - 2 < target_y < ennemies_position[1] + 2:
                             corrected_depth = depth/5 * math.cos(ray_angle-angle)
                             wall_height = WINDOW_HEIGHT / (corrected_depth + 0.0001)
@@ -261,7 +265,6 @@ def cast_rays_3D():
                                 pass
 
                             if middle_rays - 5 <= ray <= middle_rays + 5 and (player_click_left == True or (player_click_right == True and depth < 25)) and lock_ennemi_kill == True:
-                                print(depth)
                                 if ennemies_position[0] - 10 < target_x < ennemies_position[0] + 10 and ennemies_position[1] - 10 < target_y < ennemies_position[1] + 10:
                                     lock_ennemi_kill = False
                                     kill_index = i
@@ -281,8 +284,9 @@ def cast_rays_3D():
                             player_enn_draw_list.append((ray,wall_height,i,depth))
                             touch_player = True
 
-                            if middle_rays - 3 <= ray <= middle_rays + 3 and (player_click_left == True or (player_click_right == True and depth < 25)):
-                                if player_enn_position[0] - 2 < target_x < player_enn_position[0] + 2 and player_enn_position[1] - 2 < target_y < player_enn_position[1] + 2:
+                            if middle_rays - 5 <= ray <= middle_rays + 5 and (player_click_left == True or (player_click_right == True and depth < 25)) and lock_player_kill == True:
+                                if player_enn_position[0] - 10 < target_x < player_enn_position[0] + 10 and player_enn_position[1] - 10 < target_y < player_enn_position[1] + 10:
+                                    lock_player_kill = False
                                     igs.output_set_int("kill_player",int(i[1:]))
 
     igs.output_set_double("degat",degat)
@@ -311,7 +315,7 @@ def draw_3D_world():
     for pla in player_enn_draw_list:
         if pla[2] not in player_enn_draw_origin_dict.keys():
             player_enn_draw_origin_dict[pla[2]] = pla[0] 
-            player_depth_dict[enn[5]] = pla[2]
+            player_depth_dict[pla[3]] = pla[2]
         player_enn_draw_dict[pla[2]] = (player_enn_draw_origin_dict[pla[2]],pla[1],pla[0])
 
     for i in reversed(ennemy_depth_dict.keys()):
@@ -323,7 +327,7 @@ def draw_3D_world():
             pass
 
     for i in reversed(player_depth_dict.keys()):
-        pla = player_draw_dict[player_depth_dict[i]]
+        pla = player_enn_draw_dict[player_depth_dict[i]]
         send_service_image_whiteboard(image_player,pla[0] * wall_width,(WINDOW_HEIGHT-pla[1])//2,int((pla[2]-pla[0])*wall_width),int(pla[1]))
 
     if cursor_cooldown > 0:
@@ -378,6 +382,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
     global player_x
     global player_y
     global lock_ennemi_kill
+    global lock_player_kill
     global wave
     global wave_bool
     global arrow_left
@@ -406,7 +411,8 @@ def input_callback(iop_type, name, value_type, value, my_data):
         for i in value.split("("):
             if i != "[" and i != "":
                 t = i.strip()[:-2].split(",")
-                player_enn.append((int(t[0]),int(t[1])))
+                player_enn.append((float(t[0]),float(t[1])))
+        lock_player_kill = True
     elif name=="map":
         temp_list = []
         temp_sub_list = []
@@ -547,7 +553,7 @@ if __name__=="__main__":
     while running:
         pygame.event.pump()
         key_pressed_test()
-        if wave > 15:
+        if wave > 5:
             running = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

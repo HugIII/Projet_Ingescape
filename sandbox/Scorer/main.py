@@ -24,6 +24,8 @@ def input_callback(iop_type, name, value_type, value, my_data):
         igs.output_set_int("score",score)
     elif name == "score_multi":
         s = "Tableau des score:\n" 
+        if value == "[]":
+            return
         for i in value.split("("):
             if i != "[" and i != "":
                 t = i.strip()[:-2].split(",")

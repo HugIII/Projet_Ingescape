@@ -165,7 +165,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
         for i in value.split("("):
             if i != "[" and i != "":
                 t = i.strip()[:-2].split(",")
-                other_player.append((int(t[0]),int(t[1])))
+                other_player.append((float(t[0]),float(t[1])))
     elif name=="list_ennemies_move":
         if value == "[]":
             ennemies_move = []

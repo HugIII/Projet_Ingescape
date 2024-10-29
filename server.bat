@@ -1,0 +1,1 @@
+python ./sandbox/Server/main.py Server Wi-Fi 5670
