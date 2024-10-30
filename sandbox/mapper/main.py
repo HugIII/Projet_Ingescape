@@ -228,7 +228,7 @@ if __name__ == "__main__":
 
     time.sleep(4)
 
-    os.system("start /B python ./sandbox/Ennemies/main.py Ennemies_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
+    os.system("start /B python ./sandbox/Ennemies/main.py Ennemies_"+str(uuid)+" Wi-Fi 5670 False")
     os.system("start /B python ./sandbox/Starter/main.py Starter_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
     os.system("start /B python ./sandbox/Scorer/main.py Scorer_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
     os.system("start /B python ./sandbox/Engine/main.py Engine_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))

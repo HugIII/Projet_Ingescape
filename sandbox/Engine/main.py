@@ -68,7 +68,7 @@ player_enn_draw_list = []
 ennemy_dict = {}
 player_enn_dict = {}
 
-monstre_link = ["./image/monstre1.png","./image/monstre2.png","./image/monstre3.png"]
+monstre_link = ["./image/monstre1.png","./image/monstre2.png","./image/monstre3.png","./image/monstre4.png","./image/monstre5.png","./image/monstre6.png","./image/monstre7.png","./image/monstre8.png"]
 player_link = "./image/other_player.png"
 weapon_link = "./image/weapon.png"
 sky_link = "./image/sky.png"
@@ -264,8 +264,8 @@ def cast_rays_3D():
                             except:
                                 pass
 
-                            if middle_rays - 5 <= ray <= middle_rays + 5 and (player_click_left == True or (player_click_right == True and depth < 25)) and lock_ennemi_kill == True:
-                                if ennemies_position[0] - 10 < target_x < ennemies_position[0] + 10 and ennemies_position[1] - 10 < target_y < ennemies_position[1] + 10:
+                            if middle_rays - 20 <= ray <= middle_rays + 20 and (player_click_left == True or (player_click_right == True and depth < 25)) and lock_ennemi_kill == True:
+                                if ennemies_position[0] -10 < target_x < ennemies_position[0] + 10 and ennemies_position[1] - 10 < target_y < ennemies_position[1] +10:
                                     lock_ennemi_kill = False
                                     kill_index = i
                                     cursor_cooldown = 15
@@ -529,6 +529,7 @@ if __name__=="__main__":
     igs.output_create("kill", igs.INTEGER_T, None)
     igs.output_create("kill_player", igs.INTEGER_T, None)
     igs.output_create("degat", igs.DOUBLE_T, None)
+    igs.output_create("music_trigger", igs.IMPULSION_T, None)
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
     
@@ -547,8 +548,11 @@ if __name__=="__main__":
     running = True
     clock = pygame.time.Clock()
 
-    video = moviepy.editor.VideoFileClip("./cinematics/intro.mp4")
-    #video.preview()
+    if sys.argv[4] == "True":
+        video = moviepy.editor.VideoFileClip("./cinematics/intro.mp4")
+        video.preview()
+
+    igs.output_set_impulsion("music_trigger")
 
     while running:
         pygame.event.pump()
@@ -560,6 +564,8 @@ if __name__=="__main__":
                 running = False
         update()
         clock.tick(144)
+
+    igs.music_set_impulsion("music_trigger")
 
     if wave > 5:
         video = moviepy.editor.VideoFileClip("./cinematics/Outro.mp4")

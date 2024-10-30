@@ -12,6 +12,7 @@ import ingescape as igs
 import pygame
 
 music_play = True
+music_trigger = False
 sound_on = True
 
 music_link = "./sounds/music.mp3"
@@ -24,6 +25,7 @@ degat_link = "./sounds/degat.mp3"
 def input_callback(iop_type, name, value_type, value, my_data):
     global music_play
     global sound_on
+    global music_trigger
 
     if name == "sound_on":
         if music_play:
@@ -53,6 +55,12 @@ def input_callback(iop_type, name, value_type, value, my_data):
     elif name == "degat_recu" and sound_on:
         degat = pygame.mixer.Sound(degat_link)
         degat.play()
+    elif name == "music_trigger":
+        music_trigger = not music_trigger
+        if music_trigger == False:
+            pygame.mixer.music.pause()
+        elif music_trigger == True:
+            pygame.mixer.music.play(-1)
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
@@ -74,6 +82,7 @@ if __name__ == "__main__":
     igs.input_create("shoot", igs.IMPULSION_T, None)
     igs.input_create("degat_recu", igs.IMPULSION_T, None)
     igs.input_create("sound_on", igs.IMPULSION_T, None)
+    igs.input_create("music_trigger", igs.IMPULSION_T, None)
 
     igs.observe_input("music", input_callback, None)
     igs.observe_input("death", input_callback, None)
@@ -81,14 +90,13 @@ if __name__ == "__main__":
     igs.observe_input("shoot", input_callback, None)
     igs.observe_input("degat_recu", input_callback, None)
     igs.observe_input("sound_on", input_callback, None)
+    igs.observe_input("music_trigger", input_callback, None)
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
 
     pygame.mixer.init()
 
     pygame.mixer.music.load(music_link)
-    
-    pygame.mixer.music.play(-1)
 
     input()
 

@@ -36,7 +36,7 @@ if __name__ == "__main__":
         r = random.randint(0,1000)
         if r < 2:
             igs.output_set_impulsion("screamer")
-        time.sleep(0.2)
+        time.sleep(1)
 
     input()
 
