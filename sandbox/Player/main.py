@@ -79,7 +79,7 @@ def input_callback(io_type, name, value_type, value, my_data):
         vie -= value
         igs.output_set_double("vie",vie)
         if vie < 1:
-            print(vie)
+            igs.output_set_impulsion("death")
             mur = 1
             while mur!=0 :
                 random_x = random.randint(0,499)
@@ -140,6 +140,7 @@ if __name__ == "__main__":
     igs.output_create("player_y", igs.DOUBLE_T, None)
     igs.output_create("angle", igs.DOUBLE_T, None)
     igs.output_create("vie", igs.DOUBLE_T, None)
+    igs.output_create("death", igs.IMPULSION_T, None)
 
     igs.observe_input("A", input_callback, None)
     igs.observe_input("E", input_callback, None)
