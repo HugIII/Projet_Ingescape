@@ -12,8 +12,7 @@ import ingescape as igs
 import math
 import random
 
-player_x = 430
-player_y = 430
+
 angle = 45
 
 vie = 100
@@ -29,6 +28,10 @@ string_map = [["X","X","X","X","X","X","X","X","X","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
               ["X","X","X","X","X","X","X","X","X","X"]]
 
+
+player_x = random.randint(0,499)
+player_y = random.randint(0,499)
+
 #inputs
 def input_callback(io_type, name, value_type, value, my_data):
     global player_x
@@ -36,6 +39,10 @@ def input_callback(io_type, name, value_type, value, my_data):
     global angle
     global string_map
     global vie
+
+    while string_map[int(player_x/50)][int(player_y/50)] == "X":
+        player_x = random.randint(0,499)
+        player_y = random.randint(0,499)
 
     tmp_x = player_x
     tmp_y = player_y

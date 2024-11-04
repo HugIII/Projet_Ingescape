@@ -261,10 +261,15 @@ def cast_rays_3D():
                             wall_height = 600 if wall_height > 600 else wall_height
                             ennemy_draw_list.append((ray,wall_height,i,ennemies_position[0],ennemies_position[1],depth))
                             touch_enn = True
-                            try:
-                                degat += 0.001 / depth #mettre logarithmique
-                            except:
-                                pass
+
+                            if depth >= 120:
+                                d = 0.001
+                            elif depth >= 50:
+                                d = 0.005
+                            else:
+                                d = 0.01
+
+                            degat += d / depth
 
                             if middle_rays - 20 <= ray <= middle_rays + 20 and (player_click_left == True or (player_click_right == True and depth < 25)) and lock_ennemi_kill == True:
                                 if ennemies_position[0] -10 < target_x < ennemies_position[0] + 10 and ennemies_position[1] - 10 < target_y < ennemies_position[1] +10:
@@ -291,7 +296,8 @@ def cast_rays_3D():
                                     lock_player_kill = False
                                     igs.output_set_int("kill_player",int(i[1:]))
 
-    igs.output_set_double("degat",degat)
+    if degat != 0:
+        igs.output_set_double("degat",degat)
     player_click_left = False
     player_click_right = False
 

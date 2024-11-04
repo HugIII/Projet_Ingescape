@@ -21,11 +21,14 @@ monster_death_link = "./sounds/monster_death.mp3"
 shoot_link = "./sounds/shoot.mp3"
 degat_link = "./sounds/degat.mp3"
 
+vie = 100
+
 # Inputs
 def input_callback(iop_type, name, value_type, value, my_data):
     global music_play
     global sound_on
     global music_trigger
+    global vie
 
     if name == "sound_on":
         if music_play:
@@ -52,9 +55,10 @@ def input_callback(iop_type, name, value_type, value, my_data):
     elif name == "shoot" and sound_on:
         shoot = pygame.mixer.Sound(shoot_link)
         shoot.play()
-    elif name == "degat_recu" and sound_on:
+    elif name == "degat_recu" and sound_on and vie != value:
         degat = pygame.mixer.Sound(degat_link)
         degat.play()
+        vie = value
     elif name == "music_trigger":
         music_trigger = not music_trigger
         if music_trigger == False:

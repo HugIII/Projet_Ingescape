@@ -1,4 +1,4 @@
-start /B python ./sandbox/Engine/main.py Engine Wi-Fi 5670 True
+start /B python ./sandbox/Engine/main.py Engine Wi-Fi 5670 False
 start /B python ./sandbox/Engine_Map/main.py Engine_Map Wi-Fi 5670
 start /B python ./sandbox/Scorer/main.py Scorer Wi-Fi 5670
 start /B python ./sandbox/Map/main.py Map Wi-Fi 5670
