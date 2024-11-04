@@ -39,7 +39,7 @@ def input_callback(io_type, name, value_type, value, my_data):
         timestamp = time.time()
         if arrow_left > 0 and timestamp - left_time > left_cooldown:
             arrow_left -= 1
-            right_time = timestamp
+            left_time = timestamp
             igs.output_set_impulsion("arbalete_shoot") 
             igs.output_set_int("arrow_left",arrow_left)
 

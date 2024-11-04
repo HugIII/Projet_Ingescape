@@ -1,0 +1,138 @@
+{
+    "extensions": {
+        "eventsTimeline": {
+            "events": [
+            ],
+            "patterns": [
+            ],
+            "timelines": [
+                {
+                    "eventInstances": [
+                    ],
+                    "name": "Timeline_1",
+                    "order": 0,
+                    "patternInstances": [
+                    ]
+                }
+            ]
+        },
+        "recordAndReplay": {
+            "filters": {
+            }
+        }
+    },
+    "library": {
+        "classes": [
+            {
+                "className": "Starter",
+                "color": 0,
+                "definition": {
+                    "outputs": [
+                        {
+                            "name": "out",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "color_background",
+                            "type": "STRING"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "3cf18fa4-00cf-465c-b766-5ebaa4636da0",
+                "version": "1.0"
+            }
+        ]
+    },
+    "systemViews": [
+        {
+            "children": [
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe .\\sandbox\\Starter\\main.py Starter Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.88",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "0f5129b3-e83d-42d7-9949-bb14ff726170"
+                            }
+                        ]
+                    },
+                    "class": "3cf18fa4-00cf-465c-b766-5ebaa4636da0",
+                    "comment": "",
+                    "height": 114,
+                    "name": "Starter",
+                    "simulationTime": 5000,
+                    "uuid": "800d821f-4024-4b7c-a331-ea3c968524c4",
+                    "width": 250,
+                    "x": 947.4901826006504,
+                    "y": 662.3787965113162
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "a804f20f-f8ef-481c-9db2-af407994f8b6",
+                    "width": 180,
+                    "x": 1346.9419006900969,
+                    "y": 714.2895093192332
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "d6a054d9-d3da-4454-8a64-61f001e8cf77",
+                    "width": 180,
+                    "x": 1343.341900690097,
+                    "y": 781.4895093192331
+                }
+            ],
+            "links": {
+                "others": [
+                    {
+                        "destination": "a804f20f-f8ef-481c-9db2-af407994f8b6",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "800d821f-4024-4b7c-a331-ea3c968524c4",
+                        "sourceIO": {
+                            "name": "out",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "d6a054d9-d3da-4454-8a64-61f001e8cf77",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "800d821f-4024-4b7c-a331-ea3c968524c4",
+                        "sourceIO": {
+                            "name": "color_background",
+                            "type": "OUTPUT"
+                        }
+                    }
+                ]
+            },
+            "name": "Main view"
+        }
+    ]
+}

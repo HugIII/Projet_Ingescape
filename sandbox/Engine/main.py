@@ -68,9 +68,10 @@ player_enn_draw_list = []
 ennemy_dict = {}
 player_enn_dict = {}
 
-monstre_link = ["./image/monstre1.png","./image/monstre2.png","./image/monstre3.png","./image/monstre4.png","./image/monstre5.png","./image/monstre6.png","./image/monstre7.png","./image/monstre8.png"]
+monstre_link = ["./image/monstre1.png","./image/monstre2.png","./image/monstre3.png","./image/monstre4.png","./image/monstre5.png","./image/monstre6.png","./image/monstre7.png","./image/monstre8.png","./image/monstre9.png"]
 player_link = "./image/other_player.png"
 weapon_link = "./image/weapon.png"
+weapon_link2 = "./image/weapon2.png"
 sky_link = "./image/sky.png"
 cursor_link = "./image/cursor.png"
 scratch_link = ["./image/scratch1.png","./image/scratch2.png","./image/scratch3.png"]
@@ -81,6 +82,7 @@ for i in monstre_link:
     image_monstre.append(pygame.image.load(i))
 
 image_weapon = pygame.image.load(weapon_link)
+image_weapon2 = pygame.image.load(weapon_link2)
 image_player = pygame.image.load(player_link)
 image_sky = pygame.image.load(sky_link)
 image_cursor = pygame.image.load(cursor_link)
@@ -337,6 +339,7 @@ def draw_3D_world():
         send_service_ellipse_whiteboard(WINDOW_WIDTH_DEMI-2,WINDOW_HEIGHT_DEMI-2,5.0,5.0,"red","black",1.0)
 
     send_service_image_whiteboard(image_weapon,WINDOW_WIDTH-500,0,WINDOW_HEIGHT,500)
+    send_service_image_whiteboard(image_weapon2,0,WINDOW_HEIGHT-300,300,400)
 
     send_service_text(50,50,"  life: "+str(vie))
     send_service_text(50,75,"  arrow: "+str(arrow_left))
@@ -565,7 +568,7 @@ if __name__=="__main__":
         update()
         clock.tick(144)
 
-    igs.music_set_impulsion("music_trigger")
+    igs.output_set_impulsion("music_trigger")
 
     if wave > 5:
         video = moviepy.editor.VideoFileClip("./cinematics/Outro.mp4")
