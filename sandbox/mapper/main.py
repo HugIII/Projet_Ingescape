@@ -28,6 +28,7 @@ if __name__ == "__main__":
     igs.log_set_file(True, None)
     igs.set_command_line(sys.executable + " " + " ".join(sys.argv))
 
+    dev = sys.argv[2]
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
 
     uuid = random.randint(1,9999)
@@ -67,14 +68,6 @@ if __name__ == "__main__":
     Weapons.output_create("arbalete_shoot",igs.IMPULSION_T,None)
     Weapons.output_create("sword_shoot",igs.IMPULSION_T,None)
     Weapons.output_create("arrow_left",igs.INTEGER_T,None)
-
-    Engine_map = igs.Agent("Engine_Map_"+str(uuid),False)
-    Engine_map.input_create("player_x", igs.DOUBLE_T, None)
-    Engine_map.input_create("player_y", igs.DOUBLE_T, None)
-    Engine_map.input_create("map", igs.STRING_T, None)
-    Engine_map.input_create("list_ennemies", igs.STRING_T, None)
-    Engine_map.input_create("list_other_player", igs.STRING_T, None)
-    Engine_map.input_create("list_ennemies_move",igs.STRING_T,None)
 
     EventKeyBoard = igs.Agent("EventKeyBoard_"+str(uuid),False)
     EventKeyBoard.output_create("A",igs.IMPULSION_T,None)
@@ -147,7 +140,6 @@ if __name__ == "__main__":
 
     Engine.activate()
     Weapons.activate()
-    Engine_map.activate()
     Player_enn.activate()
     Client_Server.activate()
     Starter.activate()
@@ -173,12 +165,6 @@ if __name__ == "__main__":
     Engine.mapping_add("screamer","Screamer_"+str(uuid),"screamer")
     Engine.mapping_add("vie","Player_"+str(uuid),"vie")
     Engine.mapping_add("Ennemies_move","Ennemies_"+str(uuid),"Ennemies_move")
-    Engine_map.mapping_add("player_x","Player_"+str(uuid),"player_x")
-    Engine_map.mapping_add("player_y","Player_"+str(uuid),"player_y")
-    Engine_map.mapping_add("map","Map_"+str(uuid),"map")
-    Engine_map.mapping_add("list_ennemies","Ennemies_"+str(uuid),"list_ennemies")
-    Engine_map.mapping_add("list_other_player","Player_enn_"+str(uuid),"list_players")
-    Engine_map.mapping_add("list_ennemies_move","Ennemies_"+str(uuid),"Ennemies_move")
     Player_enn.mapping_add("kill","Engine_"+str(uuid),"kill_player")
     Player_enn.mapping_add("list_player_server","Client_Server_"+str(uuid),"multi_player")
     Player_enn.mapping_add("multi","Client_Server_"+str(uuid),"multi")
@@ -195,7 +181,6 @@ if __name__ == "__main__":
     Ennemies.mapping_add("map","Map_"+str(uuid),"map")
     Ennemies.mapping_add("multi","Client_Server_"+str(uuid),"multi")
     Ennemies.mapping_add("multi_ennemy","Client_Server_"+str(uuid),"multi_ennemy")
-    #Whiteboard
     Map.mapping_add("start","Starter_"+str(uuid),"out")
     Weapons.mapping_add("kill","Engine_"+str(uuid),"kill")
     Weapons.mapping_add("kill","Engine_"+str(uuid),"kill_player")
@@ -228,21 +213,22 @@ if __name__ == "__main__":
 
     time.sleep(4)
 
-    os.system("start /B python ./sandbox/Ennemies/main.py Ennemies_"+str(uuid)+" Wi-Fi 5670 False")
-    os.system("start /B python ./sandbox/Starter/main.py Starter_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
-    os.system("start /B python ./sandbox/Scorer/main.py Scorer_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
-    os.system("start /B python ./sandbox/Engine/main.py Engine_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
-    os.system("start /B python ./sandbox/Engine_Map/main.py Engine_Map_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
-    os.system("start /B python ./sandbox/Player_enn/main.py Player_enn_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
-    os.system("start /B python ./sandbox/Client_Server/main.py Client_Server_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
-    os.system("start /B python ./sandbox/Map/main.py Map_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
-    os.system("start /B python ./sandbox/Weapons/main.py Weapons_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
-    os.system("start /B python ./sandbox/Screamer/main.py Screamer_"+str(uuid)+" Wi-Fi 5670 "+str(uuid))
-    os.system("start /B python ./sandbox/Player/main.py Player_"+str(uuid)+" Wi-Fi 5670")
-    os.system("start /B python ./sandbox/EventKeyBoard/main.py EventKeyBoard_"+str(uuid)+" Wi-Fi 5670")
+    device = dev + " " + str(sys.argv[3])
 
-    #os.system("start /B ./sandbox/whiteboard/Whiteboard.exe --device "+sys.argv[1]+" --port "+sys.argv[2])
+    os.system("start /B python ./sandbox/Ennemies/main.py Ennemies_"+str(uuid)+" "+device+" False")
+    os.system("start /B python ./sandbox/Starter/main.py Starter_"+str(uuid)+" "+device+" "+str(uuid))
+    os.system("start /B python ./sandbox/Scorer/main.py Scorer_"+str(uuid)+" "+device+" "+str(uuid))
+    os.system("start /B python ./sandbox/Engine/main.py Engine_"+str(uuid)+" "+device+" "+str(uuid))
+    os.system("start /B python ./sandbox/Engine_Map/main.py Engine_Map_"+str(uuid)+" "+device+" "+str(uuid))
+    os.system("start /B python ./sandbox/Player_enn/main.py Player_enn_"+str(uuid)+" "+device+" "+str(uuid))
+    os.system("start /B python ./sandbox/Client_Server/main.py Client_Server_"+str(uuid)+" "+device+" "+str(uuid))
+    os.system("start /B python ./sandbox/Map/main.py Map_"+str(uuid)+" "+device+" "+str(uuid))
+    os.system("start /B python ./sandbox/Weapons/main.py Weapons_"+str(uuid)+" "+device+" "+str(uuid))
+    os.system("start /B python ./sandbox/Screamer/main.py Screamer_"+str(uuid)+" "+device+" "+str(uuid))
+    os.system("start /B python ./sandbox/Player/main.py Player_"+str(uuid)+"  "+device)
+    os.system("start /B python ./sandbox/EventKeyBoard/main.py EventKeyBoard_"+str(uuid)+"  "+device)
 
+    os.system("start /B ./sandbox/whiteboard/Whiteboard.exe --device "+dev+" --port "+str(sys.argv[3]))
 
     igs.stop()
 
