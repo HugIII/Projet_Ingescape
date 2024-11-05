@@ -8,10 +8,7 @@ Clara ou Hugo
 map procedurale =>
 on choisit 2-4 point au hasard sur la carte et on les rattaches au mur le plus proche
 
-Dans Engine calculer les dégâts de façon logarithmiques => ligne 230
-
 Hugo:
 mapper => event
 mapper => player
-link le son au event adéquat 
 rajouter des images

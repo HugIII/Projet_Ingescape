@@ -344,8 +344,8 @@ def draw_3D_world():
     else:
         send_service_ellipse_whiteboard(WINDOW_WIDTH_DEMI-2,WINDOW_HEIGHT_DEMI-2,5.0,5.0,"red","black",1.0)
 
-    send_service_image_whiteboard(image_weapon,WINDOW_WIDTH-500,0,WINDOW_HEIGHT,500)
-    send_service_image_whiteboard(image_weapon2,0,WINDOW_HEIGHT-300,300,400)
+    send_service_image_whiteboard(image_weapon,WINDOW_WIDTH-400,WINDOW_HEIGHT-400,400,400)
+    send_service_image_whiteboard(image_weapon2,0,WINDOW_HEIGHT-300,300,300)
 
     send_service_text(50,50,"  life: "+str(vie))
     send_service_text(50,75,"  arrow: "+str(arrow_left))
@@ -556,6 +556,7 @@ if __name__=="__main__":
 
     running = True
     clock = pygame.time.Clock()
+    time.sleep(3)
 
     if sys.argv[4] == "True":
         video = moviepy.editor.VideoFileClip("./cinematics/intro.mp4")

@@ -21,6 +21,7 @@ string_map = [["X","X","X","X","X","X","X","X","X","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
               ["X","X","X","X","X","X","X","X","X","X"]]
 
+
 #inputs
 def input_callback(io_type, name, value_type, value, my_data):
     if (name == "start"):
@@ -29,7 +30,6 @@ def input_callback(io_type, name, value_type, value, my_data):
             for l in m:
                 s += l
             s += "R"
-        print(s)
         igs.output_set_string("map", s)
 
 if __name__ == "__main__":
