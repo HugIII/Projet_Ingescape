@@ -6,6 +6,7 @@ voir
 -Map procédurale 
 
 à faire:
+-Adapter Whiteboard pour le multi (en cours Clara)
 -Documentation
 -Script de test
 
