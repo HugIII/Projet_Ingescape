@@ -133,11 +133,7 @@ if __name__ == "__main__":
 
     Screamer = igs.Agent("Screamer_"+str(uuid),False)
     Screamer.output_create("screamer",igs.IMPULSION_T,None)
-
-    Map = igs.Agent("Map_"+str(uuid),False)
-    Map.input_create("start",igs.IMPULSION_T,None)
-    Map.output_create("map",igs.STRING_T, None)
-
+    
     Engine.activate()
     Weapons.activate()
     Player_enn.activate()
@@ -146,7 +142,6 @@ if __name__ == "__main__":
     Ennemies.activate()
     Scorer.activate()
     Screamer.activate()
-    Map.activate()
     EventKeyBoard.activate()
     Player.activate()
 
@@ -154,7 +149,6 @@ if __name__ == "__main__":
 
     Engine.mapping_add("Ennemies","Ennemies_"+str(uuid),"list_ennemies")
     Engine.mapping_add("other_player","Player_enn_"+str(uuid),"list_players")
-    Engine.mapping_add("map","Map_"+str(uuid),"map")
     Engine.mapping_add("player_x","Player_"+str(uuid),"player_x")
     Engine.mapping_add("player_y","Player_"+str(uuid),"player_y")
     Engine.mapping_add("angle","Player_"+str(uuid),"angle")
@@ -178,10 +172,8 @@ if __name__ == "__main__":
     Scorer.mapping_add("score","Player_enn_"+str(uuid),"score")
     Scorer.mapping_add("score_multi","Client_Server_"+str(uuid),"score_multi")
     Ennemies.mapping_add("kill","Engine_"+str(uuid),"kill")
-    Ennemies.mapping_add("map","Map_"+str(uuid),"map")
     Ennemies.mapping_add("multi","Client_Server_"+str(uuid),"multi")
     Ennemies.mapping_add("multi_ennemy","Client_Server_"+str(uuid),"multi_ennemy")
-    Map.mapping_add("start","Starter_"+str(uuid),"out")
     Weapons.mapping_add("kill","Engine_"+str(uuid),"kill")
     Weapons.mapping_add("kill","Engine_"+str(uuid),"kill_player")
     Weapons.mapping_add("click_left","EventKeyBoard_"+str(uuid),"click_left")
@@ -192,20 +184,17 @@ if __name__ == "__main__":
     Player.mapping_add("Q","EventKeyBoard_"+str(uuid),"Q")
     Player.mapping_add("D","EventKeyBoard_"+str(uuid),"D")
     Player.mapping_add("S","EventKeyBoard_"+str(uuid),"S")
-    Player.mapping_add("map","Map_"+str(uuid),"map")
     Player.mapping_add("degat","Engine_"+str(uuid),"degat")
     Player.mapping_add("kill","Client_Server_"+str(uuid),"kill")
 
     time.sleep(5)
 
     Engine.deactivate()
-    Engine_map.deactivate()
     Player_enn.deactivate()
     Client_Server.deactivate()
     Starter.deactivate()
     Ennemies.deactivate()
     Scorer.deactivate()
-    Map.deactivate()
     Screamer.deactivate()
     Weapons.deactivate()
     EventKeyBoard.deactivate()
@@ -222,7 +211,6 @@ if __name__ == "__main__":
     os.system("start /B python ./sandbox/Engine_Map/main.py Engine_Map_"+str(uuid)+" "+device+" "+str(uuid))
     os.system("start /B python ./sandbox/Player_enn/main.py Player_enn_"+str(uuid)+" "+device+" "+str(uuid))
     os.system("start /B python ./sandbox/Client_Server/main.py Client_Server_"+str(uuid)+" "+device+" "+str(uuid))
-    os.system("start /B python ./sandbox/Map/main.py Map_"+str(uuid)+" "+device+" "+str(uuid))
     os.system("start /B python ./sandbox/Weapons/main.py Weapons_"+str(uuid)+" "+device+" "+str(uuid))
     os.system("start /B python ./sandbox/Screamer/main.py Screamer_"+str(uuid)+" "+device+" "+str(uuid))
     os.system("start /B python ./sandbox/Player/main.py Player_"+str(uuid)+"  "+device)

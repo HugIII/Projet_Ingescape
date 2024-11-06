@@ -9,17 +9,10 @@
 
 import sys
 import ingescape as igs
+import random
+import numpy
 
-string_map = [["X","X","X","X","X","X","X","X","X","X"],
-              ["X",".",".",".",".",".",".",".",".","X"],
-              ["X",".",".",".",".",".",".",".",".","X"],
-              ["X",".",".",".",".",".",".",".",".","X"],
-              ["X",".",".",".",".",".",".",".",".","X"],
-              ["X",".",".","X","X","X",".",".",".","X"],
-              ["X",".",".",".",".",".",".",".",".","X"],
-              ["X",".",".",".",".",".",".",".",".","X"],
-              ["X",".",".",".",".",".",".",".",".","X"],
-              ["X","X","X","X","X","X","X","X","X","X"]]
+string_map = []
 
 
 #inputs
@@ -55,6 +48,74 @@ if __name__ == "__main__":
     igs.observe_input("start", input_callback, None)
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
+
+    map_size = 10
+    room_number = 10
+    room_size = 5
+
+    room_centers = []
+    index_to_visit = set()
+
+    for i in range(map_size):
+        l = []
+        for j in range(map_size):
+            l.append("X")
+        string_map.append(l)
+
+    for i in range(random.randint(2,room_number)):
+        room_ok = False
+        while not room_ok:
+            room_size = random.randint(2,room_size)
+            room_x = random.randint(1,map_size-room_size-1)
+            room_y = random.randint(1,map_size-room_size-1)
+            room_ok = True
+            for p in range(room_size):
+                for j in range(room_size):
+                    if string_map[room_x+p][room_y+j] == ".":
+                        room_ok = False
+
+        room_centers.append((int(room_x+room_size/2),int(room_y+room_size/2),room_size))
+        index_to_visit.add(i)
+
+        for k in range(room_size):
+            for j in range(room_size):
+                string_map[room_x+k][room_y+j] = "."
+
+    index = -1
+    while len(index_to_visit) != 0 and index < len(room_centers):
+        index += 1
+        if index in index_to_visit:
+            index_candidate = -1
+            dist_candidate = 1000000000000
+            for j in index_to_visit:
+                if index != j:
+                    dist = (abs(room_centers[index][0]-room_centers[j][0])+abs(room_centers[index][1]-room_centers[j][1]))/room_centers[j][2]
+                    if dist < dist_candidate:
+                        index_candidate = j
+                        dist_candidate = dist
+            t_x = room_centers[index][0]
+            t_y = room_centers[index][1]
+            goal_x = room_centers[index_candidate][0]
+            goal_y = room_centers[index_candidate][1]
+            while t_x != goal_x or t_y != goal_y:
+                if t_y < goal_y:
+                    t_y += 1
+                elif t_y > goal_y:
+                    t_y -= 1
+                elif t_x < goal_x:
+                    t_x += 1
+                elif t_x > goal_x:
+                    t_x -= 1
+                string_map[t_x][t_y] = "."
+            index_to_visit.remove(index)
+
+    s = ""
+    for m in string_map:
+        for l in m:
+            s += l
+        s += "R"
+    print(s)
+    igs.output_set_string("map", s)
 
     input()
 

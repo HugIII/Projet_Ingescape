@@ -1,14 +1,13 @@
-à faire:
-Clara:
-objet => event reussir a quitter
-voir si on peut smooth les déplacements
-objet => player
+bug:
+lancement du jeu laps de temps avant le spawn aléatoire
+voir 
 
-Clara ou Hugo
-map procedurale =>
-on choisit 2-4 point au hasard sur la carte et on les rattaches au mur le plus proche
+à tester plus amplement:
+-Map procédurale 
+
+à faire:
+-Documentation
+-Script de test
 
 Hugo:
-mapper => event
-mapper => player
-rajouter des images
+rajouter des objets
