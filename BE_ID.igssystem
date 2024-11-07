@@ -646,7 +646,7 @@
                         },
                         {
                             "name": "degat_recu",
-                            "type": "IMPULSION"
+                            "type": "INTEGER"
                         },
                         {
                             "name": "sound_on",
@@ -1136,7 +1136,7 @@
                         },
                         {
                             "name": "vie",
-                            "type": "DOUBLE"
+                            "type": "INTEGER"
                         },
                         {
                             "name": "death",
@@ -1190,6 +1190,13 @@
                     "agent": {
                         "instances": [
                             {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Starter/main.py Starter Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.27.101",
+                                "isAttachedToCircle": false,
+                                "uuid": "bb6ba9d1-40ec-4121-9626-827ca8336275"
+                            },
+                            {
                                 "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Starter/main.py Starter Wi-Fi 5670",
                                 "hostname": "LAPTOP-1U3EERO1",
                                 "ip": "192.168.27.135",
@@ -1204,13 +1211,6 @@
                                 "isAttachedToCircle": false,
                                 "mac": "5C:61:99:44:CA:23",
                                 "uuid": "c2913a76-d2a1-418c-b2b7-46fb2a165e02"
-                            },
-                            {
-                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Starter/main.py Starter Wi-Fi 5670",
-                                "hostname": "PcHugo",
-                                "ip": "192.168.27.101",
-                                "isAttachedToCircle": false,
-                                "uuid": "bb6ba9d1-40ec-4121-9626-827ca8336275"
                             },
                             {
                                 "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Starter/main.py Starter Wi-Fi 5670",
@@ -1252,19 +1252,19 @@
                     "agent": {
                         "instances": [
                             {
+                                "commandLine": "D:\\Projet_Ingescape\\sandbox\\whiteboard\\Whiteboard.exe --device Wi-Fi --port 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.27.101",
+                                "isAttachedToCircle": false,
+                                "uuid": "6bc0f603-4321-4864-baba-d9d88676f669"
+                            },
+                            {
                                 "commandLine": "\"D:\\Mes Documents\\UPSSITECH\\Projet_Ingescape\\sandbox\\whiteboard\\Whiteboard.exe\" --device Wi-Fi --port 5670",
                                 "hostname": "LAPTOP-1U3EERO1",
                                 "ip": "192.168.27.135",
                                 "isAttachedToCircle": false,
                                 "mac": "5C:61:99:44:CA:23",
                                 "uuid": "4c531bfc-312c-4b4d-9088-cd73fb3f26f5"
-                            },
-                            {
-                                "commandLine": "D:\\Projet_Ingescape\\sandbox\\whiteboard\\Whiteboard.exe --device Wi-Fi --port 5670",
-                                "hostname": "PcHugo",
-                                "ip": "192.168.27.101",
-                                "isAttachedToCircle": false,
-                                "uuid": "6bc0f603-4321-4864-baba-d9d88676f669"
                             },
                             {
                                 "commandLine": "D:\\Projet_Ingescape\\sandbox\\whiteboard\\Whiteboard.exe --device Wi-Fi --port 5670",
@@ -1465,19 +1465,19 @@
                     "agent": {
                         "instances": [
                             {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Weapons/main.py Weapons Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.27.101",
+                                "isAttachedToCircle": false,
+                                "uuid": "f1c0346e-e5f4-4e04-88be-c59123490c9c"
+                            },
+                            {
                                 "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Weapons/main.py Weapons Wi-Fi 5670",
                                 "hostname": "LAPTOP-1U3EERO1",
                                 "ip": "192.168.27.135",
                                 "isAttachedToCircle": false,
                                 "mac": "5C:61:99:44:CA:23",
                                 "uuid": "e22bea8c-76c7-478f-a412-e9b8eb716273"
-                            },
-                            {
-                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Weapons/main.py Weapons Wi-Fi 5670",
-                                "hostname": "PcHugo",
-                                "ip": "192.168.27.101",
-                                "isAttachedToCircle": false,
-                                "uuid": "f1c0346e-e5f4-4e04-88be-c59123490c9c"
                             },
                             {
                                 "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Weapons/main.py Weapons Wi-Fi 5670",
@@ -1511,19 +1511,19 @@
                     "agent": {
                         "instances": [
                             {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Screamer/main.py Screamer Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.27.101",
+                                "isAttachedToCircle": false,
+                                "uuid": "f307cdb4-068b-4e63-b8ee-2505fa3aaa91"
+                            },
+                            {
                                 "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Screamer/main.py Screamer Wi-Fi 5670",
                                 "hostname": "LAPTOP-1U3EERO1",
                                 "ip": "192.168.27.135",
                                 "isAttachedToCircle": false,
                                 "mac": "5C:61:99:44:CA:23",
                                 "uuid": "ec7b8c6d-dc1a-4138-9b96-1d1a898b23e5"
-                            },
-                            {
-                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Screamer/main.py Screamer Wi-Fi 5670",
-                                "hostname": "PcHugo",
-                                "ip": "192.168.27.101",
-                                "isAttachedToCircle": false,
-                                "uuid": "f307cdb4-068b-4e63-b8ee-2505fa3aaa91"
                             },
                             {
                                 "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Screamer/main.py Screamer Wi-Fi 5670",
@@ -1557,6 +1557,13 @@
                     "agent": {
                         "instances": [
                             {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Map/main.py Map Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.27.101",
+                                "isAttachedToCircle": false,
+                                "uuid": "dff528df-99a2-4358-bc2a-234f66746724"
+                            },
+                            {
                                 "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Map/main.py Map Wi-Fi 5670",
                                 "hostname": "LAPTOP-1U3EERO1",
                                 "ip": "192.168.27.135",
@@ -1571,13 +1578,6 @@
                                 "isAttachedToCircle": false,
                                 "mac": "5C:61:99:44:CA:23",
                                 "uuid": "93a0ad35-97a4-4eca-b023-474c659d7e45"
-                            },
-                            {
-                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Map/main.py Map Wi-Fi 5670",
-                                "hostname": "PcHugo",
-                                "ip": "192.168.27.101",
-                                "isAttachedToCircle": false,
-                                "uuid": "dff528df-99a2-4358-bc2a-234f66746724"
                             },
                             {
                                 "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Map/main.py Map Wi-Fi 5670",
@@ -1611,6 +1611,13 @@
                     "agent": {
                         "instances": [
                             {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Scorer/main.py Scorer Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.27.101",
+                                "isAttachedToCircle": false,
+                                "uuid": "a64e6551-90e6-433a-9817-27e7409af993"
+                            },
+                            {
                                 "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Scorer/main.py Scorer Wi-Fi 5670",
                                 "hostname": "LAPTOP-1U3EERO1",
                                 "ip": "192.168.27.135",
@@ -1625,13 +1632,6 @@
                                 "isAttachedToCircle": false,
                                 "mac": "5C:61:99:44:CA:23",
                                 "uuid": "d6424333-5cf2-42e3-80ba-53c4bcba5962"
-                            },
-                            {
-                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Scorer/main.py Scorer Wi-Fi 5670",
-                                "hostname": "PcHugo",
-                                "ip": "192.168.27.101",
-                                "isAttachedToCircle": false,
-                                "uuid": "a64e6551-90e6-433a-9817-27e7409af993"
                             },
                             {
                                 "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Scorer/main.py Scorer Wi-Fi 5670",
@@ -1688,6 +1688,13 @@
                     "agent": {
                         "instances": [
                             {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Engine/main.py Engine Wi-Fi 5670 True",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.27.101",
+                                "isAttachedToCircle": false,
+                                "uuid": "74fd0945-bc3e-4e16-884c-9b7ca1b8d736"
+                            },
+                            {
                                 "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Engine/main.py Engine Wi-Fi 5670",
                                 "hostname": "LAPTOP-1U3EERO1",
                                 "ip": "192.168.27.135",
@@ -1718,13 +1725,6 @@
                                 "isAttachedToCircle": false,
                                 "mac": "5C:61:99:44:CA:23",
                                 "uuid": "3cbda1fe-41ab-4cfc-989f-cbf0425ce951"
-                            },
-                            {
-                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Engine/main.py Engine Wi-Fi 5670 True",
-                                "hostname": "PcHugo",
-                                "ip": "192.168.27.101",
-                                "isAttachedToCircle": false,
-                                "uuid": "74fd0945-bc3e-4e16-884c-9b7ca1b8d736"
                             },
                             {
                                 "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Engine/main.py Engine Wi-Fi 5670",
@@ -1766,6 +1766,13 @@
                     "agent": {
                         "instances": [
                             {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/EventKeyBoard/main.py EventKeyBoard Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.27.101",
+                                "isAttachedToCircle": false,
+                                "uuid": "4f132908-aae5-45b9-a7cc-74083c989948"
+                            },
+                            {
                                 "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe .\\sandbox\\EventKeyBoard\\main.py EventKeyBoard Wi-Fi 5670",
                                 "hostname": "LAPTOP-1U3EERO1",
                                 "ip": "192.168.27.135",
@@ -1780,13 +1787,6 @@
                                 "isAttachedToCircle": false,
                                 "mac": "5C:61:99:44:CA:23",
                                 "uuid": "6c94a0a9-dd13-48fb-9245-9dca6ad06924"
-                            },
-                            {
-                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/EventKeyBoard/main.py EventKeyBoard Wi-Fi 5670",
-                                "hostname": "PcHugo",
-                                "ip": "192.168.27.101",
-                                "isAttachedToCircle": false,
-                                "uuid": "4f132908-aae5-45b9-a7cc-74083c989948"
                             },
                             {
                                 "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/EventKeyBoard/main.py EventKeyBoard Wi-Fi 5670",
@@ -1843,6 +1843,13 @@
                     "agent": {
                         "instances": [
                             {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Ennemies/main.py Ennemies Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.27.101",
+                                "isAttachedToCircle": false,
+                                "uuid": "630a8c61-d34a-4de7-85dd-1b92ec90b6f9"
+                            },
+                            {
                                 "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Ennemies/main.py Ennemies Wi-Fi 5670",
                                 "hostname": "LAPTOP-1U3EERO1",
                                 "ip": "192.168.27.135",
@@ -1857,13 +1864,6 @@
                                 "isAttachedToCircle": false,
                                 "mac": "5C:61:99:44:CA:23",
                                 "uuid": "04f1ce53-0d15-4c27-bb67-5e6f0344ba21"
-                            },
-                            {
-                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Ennemies/main.py Ennemies Wi-Fi 5670",
-                                "hostname": "PcHugo",
-                                "ip": "192.168.27.101",
-                                "isAttachedToCircle": false,
-                                "uuid": "630a8c61-d34a-4de7-85dd-1b92ec90b6f9"
                             },
                             {
                                 "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Ennemies/main.py Ennemies Wi-Fi 5670",
@@ -1905,19 +1905,19 @@
                     "agent": {
                         "instances": [
                             {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Engine_Map/main.py Engine_Map Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.27.101",
+                                "isAttachedToCircle": false,
+                                "uuid": "08058fb9-3fd3-48ff-aced-912b1ee15790"
+                            },
+                            {
                                 "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe ./sandbox/Engine_Map/main.py Engine_Map Wi-Fi 5670",
                                 "hostname": "LAPTOP-1U3EERO1",
                                 "ip": "192.168.27.135",
                                 "isAttachedToCircle": false,
                                 "mac": "5C:61:99:44:CA:23",
                                 "uuid": "99e78a43-f1f8-43ac-a42f-4f0e5f3287ed"
-                            },
-                            {
-                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Engine_Map/main.py Engine_Map Wi-Fi 5670",
-                                "hostname": "PcHugo",
-                                "ip": "192.168.27.101",
-                                "isAttachedToCircle": false,
-                                "uuid": "08058fb9-3fd3-48ff-aced-912b1ee15790"
                             },
                             {
                                 "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Engine_Map/main.py Engine_Map Wi-Fi 5670",
@@ -1982,6 +1982,13 @@
                     "agent": {
                         "instances": [
                             {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Sound_Manager/main.py Sound_manager Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.27.101",
+                                "isAttachedToCircle": false,
+                                "uuid": "f79de4ad-3d47-4caf-9341-3bfed88fb37d"
+                            },
+                            {
                                 "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe .\\sandbox\\Sound_manager\\main.py Sound_manager Wi-Fi 5670",
                                 "hostname": "LAPTOP-1U3EERO1",
                                 "ip": "192.168.27.135",
@@ -1996,13 +2003,6 @@
                                 "isAttachedToCircle": false,
                                 "mac": "5C:61:99:44:CA:23",
                                 "uuid": "f86fc697-f5a0-4007-82da-a4635fe8c815"
-                            },
-                            {
-                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Sound_Manager/main.py Sound_manager Wi-Fi 5670",
-                                "hostname": "PcHugo",
-                                "ip": "192.168.27.101",
-                                "isAttachedToCircle": false,
-                                "uuid": "f79de4ad-3d47-4caf-9341-3bfed88fb37d"
                             },
                             {
                                 "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Programs\\Python\\Python311\\python.exe ./sandbox/Sound_manager/main.py Sound_manager Wi-Fi 5670",
@@ -2028,6 +2028,13 @@
                     "agent": {
                         "instances": [
                             {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Player/main.py Player Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.27.101",
+                                "isAttachedToCircle": false,
+                                "uuid": "d5a651ad-fc79-4d4a-afa0-12841923f25f"
+                            },
+                            {
                                 "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe .\\sandbox\\Player\\main.py Player Wi-Fi 5670",
                                 "hostname": "LAPTOP-1U3EERO1",
                                 "ip": "192.168.27.135",
@@ -2042,13 +2049,6 @@
                                 "isAttachedToCircle": false,
                                 "mac": "5C:61:99:44:CA:23",
                                 "uuid": "83f1d4b8-cc93-43e1-aa89-ea08fba94fd8"
-                            },
-                            {
-                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Player/main.py Player Wi-Fi 5670",
-                                "hostname": "PcHugo",
-                                "ip": "192.168.27.101",
-                                "isAttachedToCircle": false,
-                                "uuid": "d5a651ad-fc79-4d4a-afa0-12841923f25f"
                             },
                             {
                                 "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe ./sandbox/Player/main.py Player Wi-Fi 5670",

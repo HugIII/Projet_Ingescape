@@ -146,7 +146,7 @@ if __name__ == "__main__":
     igs.output_create("player_x", igs.DOUBLE_T, None)
     igs.output_create("player_y", igs.DOUBLE_T, None)
     igs.output_create("angle", igs.DOUBLE_T, None)
-    igs.output_create("vie", igs.DOUBLE_T, None)
+    igs.output_create("vie", igs.INTEGER_T, None)
     igs.output_create("death", igs.IMPULSION_T, None)
 
     igs.observe_input("A", input_callback, None)

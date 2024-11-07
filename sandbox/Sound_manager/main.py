@@ -93,7 +93,7 @@ if __name__ == "__main__":
     igs.input_create("monster_death", igs.IMPULSION_T, None)
     igs.input_create("crossbow", igs.IMPULSION_T, None)
     igs.input_create("sword", igs.IMPULSION_T, None)
-    igs.input_create("degat_recu", igs.IMPULSION_T, None)
+    igs.input_create("degat_recu", igs.INTEGER_T, None)
     igs.input_create("sound_on", igs.IMPULSION_T, None)
     igs.input_create("music_trigger", igs.IMPULSION_T, None)
 
