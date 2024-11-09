@@ -1,0 +1,8 @@
+pygame
+pynput
+moviepy
+ingescape
+numpy
+PIL
+http.server
+socketserver
