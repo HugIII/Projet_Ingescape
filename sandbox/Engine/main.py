@@ -12,8 +12,6 @@ import sys
 import ingescape as igs
 import math
 import time
-import re
-import copy
 import threading
 import moviepy.editor
 

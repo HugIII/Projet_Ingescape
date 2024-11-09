@@ -60,6 +60,7 @@ if __name__ == "__main__":
     Engine.output_create("kill", igs.INTEGER_T, None)
     Engine.output_create("kill_player", igs.INTEGER_T, None)
     Engine.output_create("degat", igs.DOUBLE_T, None)
+    Engine.output_create("music_trigger", igs.IMPULSION_T, None)
 
     Weapons = igs.Agent("Weapons_"+str(uuid),False)
     Weapons.input_create("kill",igs.INTEGER_T,None)
@@ -133,6 +134,16 @@ if __name__ == "__main__":
 
     Screamer = igs.Agent("Screamer_"+str(uuid),False)
     Screamer.output_create("screamer",igs.IMPULSION_T,None)
+
+    Sound_Manager = igs.Agent("Sound_Manager_"+str(uuid),False)
+    Sound_Manager.input_create("music",igs.IMPULSION_T,None)
+    Sound_Manager.input_create("death",igs.IMPULSION_T,None)
+    Sound_Manager.input_create("monster_death",igs.IMPULSION_T,None)
+    Sound_Manager.input_create("crossbow",igs.IMPULSION_T,None)
+    Sound_Manager.input_create("degat_recu",igs.INTEGER_T,None)
+    Sound_Manager.input_create("sound_on",igs.IMPULSION_T,None)
+    Sound_Manager.input_create("music_trigger",igs.IMPULSION_T,None)
+    Sound_Manager.input_create("sword",igs.IMPULSION_T,None)
     
     Engine.activate()
     Weapons.activate()
@@ -144,6 +155,7 @@ if __name__ == "__main__":
     Screamer.activate()
     EventKeyBoard.activate()
     Player.activate()
+    Sound_Manager.activate()
 
     time.sleep(5)
 
@@ -186,6 +198,15 @@ if __name__ == "__main__":
     Player.mapping_add("S","EventKeyBoard_"+str(uuid),"S")
     Player.mapping_add("degat","Engine_"+str(uuid),"degat")
     Player.mapping_add("kill","Client_Server_"+str(uuid),"kill")
+    Sound_Manager.mapping_add("music","EventKeyBoard_"+str(uuid),"M")
+    Sound_Manager.mapping_add("death","Player_"+str(uuid),"death")
+    Sound_Manager.mapping_add("monster_death","Ennemies_"+str(uuid),"score")
+    Sound_Manager.mapping_add("monster_death","Player_enn_"+str(uuid),"score")
+    Sound_Manager.mapping_add("crossbow","Weapons_"+str(uuid),"arbalete_shoot")
+    Sound_Manager.mapping_add("degat_recu","Player_"+str(uuid),"vie")
+    Sound_Manager.mapping_add("sound_on","EventKeyBoard_"+str(uuid),"N")
+    Sound_Manager.mapping_add("music_trigger","Engine_"+str(uuid),"music_trigger")
+    Sound_Manager.mapping_add("sword","Weapons_"+str(uuid),"sword_shoot")
 
     time.sleep(5)
 
@@ -199,6 +220,7 @@ if __name__ == "__main__":
     Weapons.deactivate()
     EventKeyBoard.deactivate()
     Player.deactivate()
+    Sound_Manager.deactivate()
 
     time.sleep(4)
 
@@ -215,6 +237,7 @@ if __name__ == "__main__":
     os.system("start /B python ./sandbox/Screamer/main.py Screamer_"+str(uuid)+" "+device+" "+str(uuid))
     os.system("start /B python ./sandbox/Player/main.py Player_"+str(uuid)+"  "+device)
     os.system("start /B python ./sandbox/EventKeyBoard/main.py EventKeyBoard_"+str(uuid)+"  "+device)
+    os.system("start /B python ./sandbox/Sound_Manager/main.py Sound_Manager_"+str(uuid)+" "+device)
 
     os.system("start /B ./sandbox/whiteboard/Whiteboard.exe --device "+dev+" --port "+str(sys.argv[3]))
 

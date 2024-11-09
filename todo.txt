@@ -1,6 +1,6 @@
 bug:
 lancement du jeu laps de temps avant le spawn aléatoire
-voir 
+des fois la map se charge pas
 
 à tester plus amplement:
 -Map procédurale 
