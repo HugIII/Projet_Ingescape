@@ -230,7 +230,7 @@ if __name__ == "__main__":
     os.system("start /B python ./sandbox/Starter/main.py Starter_"+str(uuid)+" "+device+" "+str(uuid))
     os.system("start /B python ./sandbox/Scorer/main.py Scorer_"+str(uuid)+" "+device+" "+str(uuid))
     os.system("start /B python ./sandbox/Engine/main.py Engine_"+str(uuid)+" "+device+" "+str(uuid))
-    os.system("start /B python ./sandbox/Engine_Map/main.py Engine_Map_"+str(uuid)+" "+device+" "+str(uuid))
+    #os.system("start /B python ./sandbox/Engine_Map/main.py Engine_Map_"+str(uuid)+" "+device+" "+str(uuid))
     os.system("start /B python ./sandbox/Player_enn/main.py Player_enn_"+str(uuid)+" "+device+" "+str(uuid))
     os.system("start /B python ./sandbox/Client_Server/main.py Client_Server_"+str(uuid)+" "+device+" "+str(uuid))
     os.system("start /B python ./sandbox/Weapons/main.py Weapons_"+str(uuid)+" "+device+" "+str(uuid))

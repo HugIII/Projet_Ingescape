@@ -12,6 +12,22 @@ import ingescape as igs
 import random
 import time
 import threading
+from PIL import Image, ImageDraw
+import http.server
+import socketserver
+
+PORT = 8000
+
+string_map = [["X","X","X","X","X","X","X","X","X","X"],
+              ["X",".",".",".",".",".",".",".",".","X"],
+              ["X",".",".",".",".",".",".",".",".","X"],
+              ["X",".",".",".",".",".",".",".",".","X"],
+              ["X",".",".",".",".",".",".",".",".","X"],
+              ["X",".",".",".",".",".",".",".",".","X"],
+              ["X",".",".",".",".",".",".",".",".","X"],
+              ["X",".",".",".",".",".",".",".",".","X"],
+              ["X",".",".",".",".",".",".",".",".","X"],
+              ["X","X","X","X","X","X","X","X","X","X"]]
 
 list_ennemies = []
 index_dict = {}
@@ -58,6 +74,78 @@ def service_callback(sender_agent_name, sender_agent_uuid, service_name, argumen
             igs.service_call("Client_Server_"+str(i),"chat",arguments_list,"") 
     # add code here if needed
 
+class CustomHandler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        if self.path == "/download":
+            image_path = "./image/map.png"
+            self.send_response(200)
+            self.send_header('Content-type', 'application/octet-stream')
+            self.send_header('Content-Disposition', f'attachment; filename="{image_path}"')
+            self.end_headers()
+            with open(image_path, 'rb') as file:
+                self.wfile.write(file.read())
+
+def start_image_server():
+    with socketserver.TCPServer(("",PORT),CustomHandler) as httpd:
+        httpd.serve_forever()
+
+def start():
+    global image
+    global draw
+    global index
+
+    while True:
+        time.sleep(1)
+        image = Image.new('RGB', (1500,1500),'white')
+        draw = ImageDraw.Draw(image)
+        draw_map_render_2D()
+        draw_ennemie_render_2D()
+        draw_other_player_render_2D()
+        image.save("./image/map.png")
+        arguments_list = ("http://localhost:8000/download",50.0,50.0)
+        igs.service_call("Whiteboard","addImageFromUrl",arguments_list,"")
+
+#inputs
+def send_service_rectangle_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
+    global draw
+    draw.rectangle([(int(x),int(y)),(int(x+longeur),int(y+largeur))],fill=color,outline=couleur_contour,width=int(contour))
+
+def send_service_ellipse_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
+    global draw
+    draw.ellipse([(int(x-longeur/2),int(y-largeur/2)),(int(x+longeur/2),int(y+largeur/2))],fill=color,outline=couleur_contour,width=int(contour))
+
+def clear():
+    global image
+    global draw
+    igs.service_call("Whiteboard","clear",(),"")
+    image = Image.new('RGB', (1500,1500),'white')
+    draw = ImageDraw.Draw(image)
+
+
+def remove_id(index):
+    arguments_list = (index)
+    igs.service_call("Whiteboard","remove",arguments_list,"")
+
+def draw_map_render_2D():
+    for i in range(len(string_map)):
+        for j in range(len(string_map[i])):
+            if string_map[i][j] == "X":
+                send_service_rectangle_whiteboard(50.0*i,50.0*j,50.0,50.0,"black","grey",1.0)
+
+def draw_ennemie_render_2D():
+    ennemies_move = []
+    if len(ennemies_move) == 0:
+        for i in list_ennemies:
+            send_service_ellipse_whiteboard(i[0]-10.0,i[1]-10.0,20.0,20.0,"purple","black",1.0)
+    else:
+        for i in ennemies_move:
+            send_service_ellipse_whiteboard(i[0]-10.0,i[1]-10.0,20.0,20.0,"purple","black",1.0)
+
+def draw_other_player_render_2D():
+    for key,value in index_dict.items():
+        send_service_ellipse_whiteboard(index_dict[key][0]-10.0,index_dict[key][1]-10.0,20.0,20.0,"yellow","black",1.0)
+
+
 if __name__ == "__main__":
     if len(sys.argv) < 4:
         print("usage: python3 main.py agent_name network_device port")
@@ -97,7 +185,12 @@ if __name__ == "__main__":
     thread = threading.Thread(target=life_fun) 
     thread.start()
 
+    thread2 = threading.Thread(target=start)
+    thread2.start()
+
+    thread_server = threading.Thread(target=start_image_server)
+    thread_server.start()
+
     input()
 
     igs.stop()
-
