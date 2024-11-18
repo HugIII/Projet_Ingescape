@@ -5,3 +5,4 @@ des fois la map se charge pas
 à faire:
 -Adapter Whiteboard pour le multi (en cours Clara)
 -Script de test
+-Commenter le code
