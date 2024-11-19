@@ -12,6 +12,6 @@ if "%~1"=="" (
 	set "cinematique=%3"
 )
 
-python ./sandbox/mapper/main.py mapper Wi-Fi 5670
+python ./sandbox/mapper/main.py mapper %device% %port%
 
 endlocal

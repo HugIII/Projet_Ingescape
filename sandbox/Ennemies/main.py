@@ -12,6 +12,7 @@ import ingescape as igs
 import random
 import threading
 import time
+import math
 
 string_map = [["X","X","X","X","X","X","X","X","X","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
@@ -47,6 +48,7 @@ def move_ennemies():
             y_temp = ennemies_list_move[i][1]
             x_temp_mur = ennemies_list_move[i][0]
             y_temp_mur = ennemies_list_move[i][1]
+
             if x > player_x + 20:
                 x_temp -= 1
                 x_temp_mur -= 10
@@ -65,6 +67,8 @@ def move_ennemies():
                 random_x = random.randint(0,499)
                 random_y = random.randint(0,499)
                 ennemies_list_move[i] = (random_x,random_y)
+            elif math.dist([player_x,player_y],[x,y]) > 150:
+                pass
             elif string_map[int(x_temp_mur / 50)][int(y_temp_mur / 50)] != "X":
                 ennemies_list_move[i] = (x_temp,y_temp)
             elif string_map[int(x_temp_mur / 50)][int(y / 50)] != "X":

@@ -104,6 +104,8 @@ vie = 100
 
 kill_index = -1
 
+cinematics_end = False
+
 #inputs
 def send_service_rectangle_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
     pygame.draw.rect(screen,color,(x,y,longeur,largeur))
@@ -176,6 +178,7 @@ def cast_rays_3D():
     global ennemies_move
     global kill_index
     global cursor_cooldown
+    global cinematics_end
 
     start_angle = angle - fov / 2
     wall_height_memory = []
@@ -267,7 +270,8 @@ def cast_rays_3D():
                             else:
                                 d = 0.01
 
-                            degat += d / depth
+                            if cinematics_end:
+                                degat += d / depth
 
                             if middle_rays - 20 <= ray <= middle_rays + 20 and (player_click_left == True or (player_click_right == True and depth < 25)) and lock_ennemi_kill == True:
                                 if ennemies_position[0] -10 < target_x < ennemies_position[0] + 10 and ennemies_position[1] - 10 < target_y < ennemies_position[1] +10:
@@ -561,6 +565,7 @@ if __name__=="__main__":
         video.preview()
 
     igs.output_set_impulsion("music_trigger")
+    cinematics_end = True
 
     while running:
         pygame.event.pump()
