@@ -611,8 +611,6 @@ if __name__=="__main__":
 
     igs.stop()
 
-    print("test")
-
     pygame.quit()
 
     exit()
