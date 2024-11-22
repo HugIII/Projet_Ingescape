@@ -74,6 +74,7 @@ sky_link = "./image/sky.png"
 cursor_link = "./image/cursor.png"
 scratch_link = ["./image/scratch1.png","./image/scratch2.png","./image/scratch3.png"]
 screamer_link = "./image/screamer.png"
+arrow_link = "./image/arrow.png"
 
 image_monstre = []
 for i in monstre_link:
@@ -90,6 +91,7 @@ for i in scratch_link:
     image_scratch.append(pygame.image.load(i))
 
 image_screamer = pygame.image.load(screamer_link)
+image_arrow = pygame.image.load(arrow_link)
 
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
@@ -125,6 +127,22 @@ def send_service_text(x,y,text):
     text = font.render(text, True, text_color)
     text_rect = text.get_rect(center=(x, y))
     screen.blit(text, text_rect)
+
+def draw_arow():
+    ennemies_proche = min(ennemies_move,key=lambda i: math.dist(i,(player_x,player_y)))
+    angle_arrow = calculate_angle(player_x,player_y,ennemies_proche[0],ennemies_proche[1])
+    rotated_arrow = pygame.transform.rotate(image_arrow,angle_arrow)
+    send_service_image_whiteboard(rotated_arrow,WINDOW_WIDTH_DEMI-50,WINDOW_HEIGHT-200,100,100)
+
+def calculate_angle(ax,ay,bx,by):
+    global angle
+    delta_x = ax-bx
+    delta_y = ay-by
+
+    theta_ennemie = math.atan2(delta_y, delta_x)
+    delta_ennemie = angle - theta_ennemie
+    return math.degrees(delta_ennemie)-90 
+
 
 def draw_map_render_2D():
     for i in range(len(string_map)):
@@ -376,6 +394,7 @@ def update():
         draw_sky_floor_3D()
         cast_rays_3D()
         draw_3D_world()
+        draw_arow()
     pygame.display.update()
 
 

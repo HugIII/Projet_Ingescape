@@ -191,8 +191,8 @@ if __name__ == "__main__":
     igs.log_set_file(True, None)
     igs.set_command_line(sys.executable + " " + " ".join(sys.argv))
 
-    igs.input_create("player_x", igs.INTEGER_T, None)
-    igs.input_create("player_y", igs.INTEGER_T, None)
+    igs.input_create("player_x", igs.DOUBLE_T, None)
+    igs.input_create("player_y", igs.DOUBLE_T, None)
     igs.input_create("map", igs.STRING_T, None)
     igs.input_create("list_ennemies", igs.STRING_T, None)
     igs.input_create("list_other_player", igs.STRING_T, None)
@@ -204,8 +204,6 @@ if __name__ == "__main__":
     igs.observe_input("list_ennemies", input_callback, None)
     igs.observe_input("list_other_player", input_callback, None)
     igs.observe_input("list_ennemies_move",input_callback,None)
-
-    igs.output_create("score_reprint",igs.IMPULSION_T, None)
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
 

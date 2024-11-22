@@ -67,8 +67,6 @@ def move_ennemies():
                 random_x = random.randint(0,499)
                 random_y = random.randint(0,499)
                 ennemies_list_move[i] = (random_x,random_y)
-            elif math.dist([player_x,player_y],[x,y]) > 150:
-                pass
             elif string_map[int(x_temp_mur / 50)][int(y_temp_mur / 50)] != "X":
                 ennemies_list_move[i] = (x_temp,y_temp)
             elif string_map[int(x_temp_mur / 50)][int(y / 50)] != "X":
