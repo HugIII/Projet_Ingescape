@@ -129,7 +129,13 @@ def send_service_text(x,y,text):
     screen.blit(text, text_rect)
 
 def draw_arow():
-    ennemies_proche = min(ennemies_move,key=lambda i: math.dist(i,(player_x,player_y)))
+    try:
+        ennemies_proche = min(ennemies_move,key=lambda i: math.dist(i,(player_x,player_y)))
+    except:
+        try:
+            ennemies_proche = min(ennemies,key=lambda i: math.dist(i,(player_x,player_y)))
+        except:
+            return
     angle_arrow = calculate_angle(player_x,player_y,ennemies_proche[0],ennemies_proche[1])
     rotated_arrow = pygame.transform.rotate(image_arrow,angle_arrow)
     send_service_image_whiteboard(rotated_arrow,WINDOW_WIDTH_DEMI-50,WINDOW_HEIGHT-200,100,100)

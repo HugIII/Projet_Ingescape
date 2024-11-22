@@ -1,0 +1,6 @@
+"Test"{
+    Ennemies.in = 0
+    assert Ennemies.list_ennemies == "[(50, 361), (363, 95), (161, 325), (196, 242)]"
+}
+
+//D:\Ingescape_Circle_v4\igs.exe --device Wi-Fi --port 5670 --script .\test\Ennemies\EnnemiesTester.igsscript  --license C:\Users\hugo\OneDrive\Documents\Ingescape\licenses --verbose

@@ -1,0 +1,831 @@
+{
+    "extensions": {
+        "eventsTimeline": {
+            "events": [
+            ],
+            "patterns": [
+            ],
+            "timelines": [
+                {
+                    "eventInstances": [
+                    ],
+                    "name": "Timeline_1",
+                    "order": 0,
+                    "patternInstances": [
+                    ]
+                }
+            ]
+        },
+        "recordAndReplay": {
+            "filters": {
+            }
+        }
+    },
+    "library": {
+        "classes": [
+            {
+                "className": "Whiteboard",
+                "color": 0,
+                "definition": {
+                    "inputs": [
+                        {
+                            "name": "title",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "backgroundColor",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "labelsVisible",
+                            "type": "BOOL"
+                        },
+                        {
+                            "name": "chatMessage",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "clear",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "ui_command",
+                            "type": "STRING"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "lastChatMessage",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "lastAction",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "ui_error",
+                            "type": "STRING"
+                        }
+                    ],
+                    "services": [
+                        {
+                            "arguments": [
+                                {
+                                    "name": "message",
+                                    "type": "STRING"
+                                }
+                            ],
+                            "name": "chat"
+                        },
+                        {
+                            "name": "snapshot",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "base64Png",
+                                            "type": "DATA"
+                                        }
+                                    ],
+                                    "name": "snapshotResult"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "clear"
+                        },
+                        {
+                            "name": "showLabels"
+                        },
+                        {
+                            "name": "hideLabels"
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "type",
+                                    "type": "STRING"
+                                },
+                                {
+                                    "name": "x",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "y",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "width",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "height",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "fill",
+                                    "type": "STRING"
+                                },
+                                {
+                                    "name": "stroke",
+                                    "type": "STRING"
+                                },
+                                {
+                                    "name": "strokeWidth",
+                                    "type": "DOUBLE"
+                                }
+                            ],
+                            "name": "addShape",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "elementId",
+                                            "type": "INTEGER"
+                                        }
+                                    ],
+                                    "name": "elementCreated"
+                                }
+                            ]
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "text",
+                                    "type": "STRING"
+                                },
+                                {
+                                    "name": "x",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "y",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "color",
+                                    "type": "STRING"
+                                }
+                            ],
+                            "name": "addText",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "elementId",
+                                            "type": "INTEGER"
+                                        }
+                                    ],
+                                    "name": "elementCreated"
+                                }
+                            ]
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "base64",
+                                    "type": "DATA"
+                                },
+                                {
+                                    "name": "x",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "y",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "width",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "height",
+                                    "type": "DOUBLE"
+                                }
+                            ],
+                            "name": "addImage",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "elementId",
+                                            "type": "INTEGER"
+                                        }
+                                    ],
+                                    "name": "elementCreated"
+                                }
+                            ]
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "url",
+                                    "type": "STRING"
+                                },
+                                {
+                                    "name": "x",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "y",
+                                    "type": "DOUBLE"
+                                }
+                            ],
+                            "name": "addImageFromUrl",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "elementId",
+                                            "type": "INTEGER"
+                                        }
+                                    ],
+                                    "name": "elementCreated"
+                                }
+                            ]
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "elementId",
+                                    "type": "INTEGER"
+                                }
+                            ],
+                            "name": "remove",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "succeeded",
+                                            "type": "BOOL"
+                                        }
+                                    ],
+                                    "name": "actionResult"
+                                }
+                            ]
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "elementId",
+                                    "type": "INTEGER"
+                                },
+                                {
+                                    "name": "dx",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "dy",
+                                    "type": "DOUBLE"
+                                }
+                            ],
+                            "name": "translate",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "succeeded",
+                                            "type": "BOOL"
+                                        }
+                                    ],
+                                    "name": "actionResult"
+                                }
+                            ]
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "elementId",
+                                    "type": "INTEGER"
+                                },
+                                {
+                                    "name": "x",
+                                    "type": "DOUBLE"
+                                },
+                                {
+                                    "name": "y",
+                                    "type": "DOUBLE"
+                                }
+                            ],
+                            "name": "moveTo",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "succeeded",
+                                            "type": "BOOL"
+                                        }
+                                    ],
+                                    "name": "actionResult"
+                                }
+                            ]
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "elementId",
+                                    "type": "INTEGER"
+                                },
+                                {
+                                    "name": "property",
+                                    "type": "STRING"
+                                },
+                                {
+                                    "name": "value",
+                                    "type": "STRING"
+                                }
+                            ],
+                            "name": "setStringProperty",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "succeeded",
+                                            "type": "BOOL"
+                                        }
+                                    ],
+                                    "name": "actionResult"
+                                }
+                            ]
+                        },
+                        {
+                            "arguments": [
+                                {
+                                    "name": "elementId",
+                                    "type": "INTEGER"
+                                },
+                                {
+                                    "name": "property",
+                                    "type": "STRING"
+                                },
+                                {
+                                    "name": "value",
+                                    "type": "DOUBLE"
+                                }
+                            ],
+                            "name": "setDoubleProperty",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "succeeded",
+                                            "type": "BOOL"
+                                        }
+                                    ],
+                                    "name": "actionResult"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "getElementIds",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "jsonArray",
+                                            "type": "STRING"
+                                        }
+                                    ],
+                                    "name": "elementIds"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "getElements",
+                            "replies": [
+                                {
+                                    "arguments": [
+                                        {
+                                            "name": "jsonArray",
+                                            "type": "STRING"
+                                        }
+                                    ],
+                                    "name": "elements"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "5b60baad-2453-4c49-972c-d10d98af1359",
+                "version": ""
+            },
+            {
+                "className": "Ennemies",
+                "color": 0,
+                "definition": {
+                    "inputs": [
+                        {
+                            "name": "kill",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "in",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "map",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "multi",
+                            "type": "BOOL"
+                        },
+                        {
+                            "name": "multi_ennemy",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "player_x",
+                            "type": "DOUBLE"
+                        },
+                        {
+                            "name": "player_y",
+                            "type": "DOUBLE"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "list_ennemies",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "score",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "wave",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "Ennemies_move",
+                            "type": "STRING"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "0c1ed2f7-40fa-4679-b870-6f7035d1fb1c",
+                "version": "1.0"
+            }
+        ]
+    },
+    "systemViews": [
+        {
+            "children": [
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "D:/Ingescape_Circle_v4/igs.exe --device Wi-Fi --port 5670 --script .\\test\\Whiteboard\\WhiteboardTester.igsscript --license C:\\Users\\hugo\\OneDrive\\Documents\\Ingescape\\licenses --name Igs",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "915e3837-4aeb-4d3d-bed4-a36d5fe2a8ac"
+                            },
+                            {
+                                "commandLine": "D:\\Ingescape_Circle_v4\\igs.exe --device Wi-Fi --port 5670 --script .\\test\\Ennemies\\EnnemiesTester.igsscript --license C:\\Users\\hugo\\OneDrive\\Documents\\Ingescape\\licenses --verbose",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "1f50da1e-7f02-4fac-8446-f7af00e0a5bd"
+                            }
+                        ]
+                    },
+                    "class": "27D9171748894A4C90D3573FD8289CF1",
+                    "comment": "",
+                    "height": 100,
+                    "name": "Igs",
+                    "simulationTime": 5000,
+                    "uuid": "d9bdaa92-7464-4073-aee3-4e0477cee123",
+                    "width": 250,
+                    "x": 1230.9166469060592,
+                    "y": 459.4188614354372
+                },
+                {
+                    "data": {
+                        "entries": [
+                            ""
+                        ],
+                        "value_type": "INTEGER"
+                    },
+                    "height": 79,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.writer",
+                    "uuid": "374c9453-3af1-41fd-b72b-57a765e46d23",
+                    "width": 256,
+                    "x": 797.5911311298557,
+                    "y": 825.7114170144525
+                },
+                {
+                    "data": {
+                        "entries": [
+                            ""
+                        ],
+                        "value_type": "INTEGER"
+                    },
+                    "height": 79,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.writer",
+                    "uuid": "c6c07e92-51bc-45c9-abdb-dd9d6e79de72",
+                    "width": 256,
+                    "x": 802.2345244581602,
+                    "y": 936.0948320250127
+                },
+                {
+                    "data": {
+                        "entries": [
+                            ""
+                        ],
+                        "value_type": "INTEGER"
+                    },
+                    "height": 79,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.writer",
+                    "uuid": "5cfc7459-437e-48bc-8ffc-51ac52c09149",
+                    "width": 256,
+                    "x": 802.4036272747136,
+                    "y": 506.3758293900305
+                },
+                {
+                    "data": {
+                    },
+                    "height": 79,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.writer",
+                    "uuid": "296e8826-a156-4383-a9d0-8743b9c16700",
+                    "width": 256,
+                    "x": 457.48918072482434,
+                    "y": 777.3807948980116
+                },
+                {
+                    "data": {
+                    },
+                    "height": 79,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.writer",
+                    "uuid": "34023752-3843-41cb-be0e-e086663ea369",
+                    "width": 256,
+                    "x": 425.80604975638516,
+                    "y": 673.038945978833
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "df19f1e7-05a0-40df-9d96-f3756e405e61",
+                    "width": 180,
+                    "x": 1586.5349227113268,
+                    "y": 665.4430866942637
+                },
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe .\\sandbox\\Ennemies\\main.py Ennemies Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "10f539a9-c290-4143-9448-6d0872ec5a35"
+                            }
+                        ]
+                    },
+                    "class": "0c1ed2f7-40fa-4679-b870-6f7035d1fb1c",
+                    "comment": "",
+                    "height": 224,
+                    "name": "Ennemies",
+                    "simulationTime": 5000,
+                    "uuid": "e5811667-ffa3-4caa-bfc6-b0da1ec001f4",
+                    "width": 250,
+                    "x": 1220.3715479011598,
+                    "y": 599.2367093762473
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "dffd4fe1-317a-483a-a631-c015cf40a3da",
+                    "width": 180,
+                    "x": 1584.1018535462044,
+                    "y": 721.4036774920743
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "a9a3867a-ce8a-4660-9875-ee6cf04bf1fb",
+                    "width": 180,
+                    "x": 1584.1018535462044,
+                    "y": 781.4193835650887
+                },
+                {
+                    "data": {
+                        "entries": [
+                            ""
+                        ],
+                        "value_type": "INTEGER"
+                    },
+                    "height": 79,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.writer",
+                    "uuid": "90a62599-4d9a-4407-a458-c74e114c1243",
+                    "width": 256,
+                    "x": 731.8334920949678,
+                    "y": 619.2698732327962
+                },
+                {
+                    "data": {
+                        "entries": [
+                        ],
+                        "value_type": "IMPULSION"
+                    },
+                    "height": 44,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.writer",
+                    "uuid": "af685492-4f66-4eb2-b959-3540ad08261c",
+                    "width": 256,
+                    "x": 478.3012797986587,
+                    "y": 540.2248190708988
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "a457eeb8-ba8d-4389-a9b7-461ee9b9c6bd",
+                    "width": 355.82980080787706,
+                    "x": 1602.7553838121414,
+                    "y": 604.6163575662085
+                }
+            ],
+            "links": {
+                "others": [
+                    {
+                        "destination": "e5811667-ffa3-4caa-bfc6-b0da1ec001f4",
+                        "destinationIO": {
+                            "name": "kill",
+                            "type": "INPUT"
+                        },
+                        "source": "5cfc7459-437e-48bc-8ffc-51ac52c09149",
+                        "sourceIO": {
+                            "name": "value",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "e5811667-ffa3-4caa-bfc6-b0da1ec001f4",
+                        "destinationIO": {
+                            "name": "map",
+                            "type": "INPUT"
+                        },
+                        "source": "34023752-3843-41cb-be0e-e086663ea369",
+                        "sourceIO": {
+                            "name": "value",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "e5811667-ffa3-4caa-bfc6-b0da1ec001f4",
+                        "destinationIO": {
+                            "name": "multi",
+                            "type": "INPUT"
+                        },
+                        "source": "90a62599-4d9a-4407-a458-c74e114c1243",
+                        "sourceIO": {
+                            "name": "value",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "e5811667-ffa3-4caa-bfc6-b0da1ec001f4",
+                        "destinationIO": {
+                            "name": "player_x",
+                            "type": "INPUT"
+                        },
+                        "source": "374c9453-3af1-41fd-b72b-57a765e46d23",
+                        "sourceIO": {
+                            "name": "value",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "e5811667-ffa3-4caa-bfc6-b0da1ec001f4",
+                        "destinationIO": {
+                            "name": "player_y",
+                            "type": "INPUT"
+                        },
+                        "source": "c6c07e92-51bc-45c9-abdb-dd9d6e79de72",
+                        "sourceIO": {
+                            "name": "value",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "e5811667-ffa3-4caa-bfc6-b0da1ec001f4",
+                        "destinationIO": {
+                            "name": "multi_ennemy",
+                            "type": "INPUT"
+                        },
+                        "source": "296e8826-a156-4383-a9d0-8743b9c16700",
+                        "sourceIO": {
+                            "name": "value",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "a457eeb8-ba8d-4389-a9b7-461ee9b9c6bd",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "e5811667-ffa3-4caa-bfc6-b0da1ec001f4",
+                        "sourceIO": {
+                            "name": "list_ennemies",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "df19f1e7-05a0-40df-9d96-f3756e405e61",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "e5811667-ffa3-4caa-bfc6-b0da1ec001f4",
+                        "sourceIO": {
+                            "name": "score",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "dffd4fe1-317a-483a-a631-c015cf40a3da",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "e5811667-ffa3-4caa-bfc6-b0da1ec001f4",
+                        "sourceIO": {
+                            "name": "wave",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "a9a3867a-ce8a-4660-9875-ee6cf04bf1fb",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "e5811667-ffa3-4caa-bfc6-b0da1ec001f4",
+                        "sourceIO": {
+                            "name": "Ennemies_move",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "e5811667-ffa3-4caa-bfc6-b0da1ec001f4",
+                        "destinationIO": {
+                            "name": "in",
+                            "type": "INPUT"
+                        },
+                        "source": "af685492-4f66-4eb2-b959-3540ad08261c",
+                        "sourceIO": {
+                            "name": "value",
+                            "type": "OUTPUT"
+                        }
+                    }
+                ]
+            },
+            "name": "Main view"
+        }
+    ]
+}

@@ -90,6 +90,7 @@
                                 "hostname": "PcHugo",
                                 "ip": "192.168.1.59",
                                 "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
                                 "uuid": "a4e8fb3a-6a94-4e29-af40-f55e74f8d9cd"
                             }
                         ]
@@ -103,8 +104,282 @@
                     "width": 250,
                     "x": 1296.6649770537604,
                     "y": 696.139412005555
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "fc5129be-4e9b-426e-8039-8a1914dd8d78",
+                    "width": 180,
+                    "x": 1691.1035316866282,
+                    "y": 627.1354412350789
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "9ca3cb79-f234-4d40-b817-b619b28428fd",
+                    "width": 180,
+                    "x": 1684.1920476123557,
+                    "y": 715.2568631820535
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "1f8f3cdc-a0f3-4b27-9294-c65ff8c92df6",
+                    "width": 180,
+                    "x": 1884.6250857662585,
+                    "y": 765.3651227205293
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "371d27b4-3771-4d17-bad3-e86703e69137",
+                    "width": 180,
+                    "x": 2124.7991573472286,
+                    "y": 810.2897692033006
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "e40d5a6e-65df-43e0-84e3-a69f6b9ef80d",
+                    "width": 180,
+                    "x": 1898.4480539148037,
+                    "y": 841.3914475375269
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "ae61f0f6-2dba-41a3-8aa4-e55f9690525c",
+                    "width": 180,
+                    "x": 2126.527028365797,
+                    "y": 889.7718360574345
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "727cd19c-6eeb-4e78-80a3-c49b6961d522",
+                    "width": 180,
+                    "x": 1905.3595379890762,
+                    "y": 927.7849984659333
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "c26853b0-3c22-45e3-8bb4-f1b2735697f0",
+                    "width": 180,
+                    "x": 1908.8152800262123,
+                    "y": 979.6211290229772
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "3e04f3de-f50c-4c05-b43d-d679699e4e12",
+                    "width": 180,
+                    "x": 1912.2710220633487,
+                    "y": 1055.647453839975
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "2c14b7be-4800-431d-9baf-7da9b081c06c",
+                    "width": 180,
+                    "x": 1907.0874090076443,
+                    "y": 1152.4082308797902
                 }
             ],
+            "links": {
+                "others": [
+                    {
+                        "destination": "fc5129be-4e9b-426e-8039-8a1914dd8d78",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "2deda022-4a44-4a3a-98e1-0ff97e351159",
+                        "sourceIO": {
+                            "name": "A",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "9ca3cb79-f234-4d40-b817-b619b28428fd",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "2deda022-4a44-4a3a-98e1-0ff97e351159",
+                        "sourceIO": {
+                            "name": "E",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "1f8f3cdc-a0f3-4b27-9294-c65ff8c92df6",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "2deda022-4a44-4a3a-98e1-0ff97e351159",
+                        "sourceIO": {
+                            "name": "Z",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "371d27b4-3771-4d17-bad3-e86703e69137",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "2deda022-4a44-4a3a-98e1-0ff97e351159",
+                        "sourceIO": {
+                            "name": "Q",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "e40d5a6e-65df-43e0-84e3-a69f6b9ef80d",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "2deda022-4a44-4a3a-98e1-0ff97e351159",
+                        "sourceIO": {
+                            "name": "S",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "ae61f0f6-2dba-41a3-8aa4-e55f9690525c",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "2deda022-4a44-4a3a-98e1-0ff97e351159",
+                        "sourceIO": {
+                            "name": "D",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "727cd19c-6eeb-4e78-80a3-c49b6961d522",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "2deda022-4a44-4a3a-98e1-0ff97e351159",
+                        "sourceIO": {
+                            "name": "M",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "c26853b0-3c22-45e3-8bb4-f1b2735697f0",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "2deda022-4a44-4a3a-98e1-0ff97e351159",
+                        "sourceIO": {
+                            "name": "N",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "3e04f3de-f50c-4c05-b43d-d679699e4e12",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "2deda022-4a44-4a3a-98e1-0ff97e351159",
+                        "sourceIO": {
+                            "name": "click_left",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "2c14b7be-4800-431d-9baf-7da9b081c06c",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "2deda022-4a44-4a3a-98e1-0ff97e351159",
+                        "sourceIO": {
+                            "name": "click_right",
+                            "type": "OUTPUT"
+                        }
+                    }
+                ]
+            },
             "name": "Main view"
         }
     ]

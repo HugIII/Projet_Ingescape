@@ -55,7 +55,6 @@ if __name__ == "__main__":
     igs.input_create("start", igs.IMPULSION_T, None)
     igs.input_create("score", igs.IMPULSION_T, None)
     igs.input_create("score_multi", igs.STRING_T, None)
-    igs.input_create("print_score_multi",igs.IMPULSION_T, None
 
     igs.output_create("out", igs.STRING_T, None)
     igs.output_create("score", igs.INTEGER_T, None)
