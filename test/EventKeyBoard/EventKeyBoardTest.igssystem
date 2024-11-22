@@ -1,0 +1,111 @@
+{
+    "extensions": {
+        "eventsTimeline": {
+            "events": [
+            ],
+            "patterns": [
+            ],
+            "timelines": [
+                {
+                    "eventInstances": [
+                    ],
+                    "name": "Timeline_1",
+                    "order": 0,
+                    "patternInstances": [
+                    ]
+                }
+            ]
+        },
+        "recordAndReplay": {
+            "filters": {
+            }
+        }
+    },
+    "library": {
+        "classes": [
+            {
+                "className": "EventKeyBoard",
+                "color": 0,
+                "definition": {
+                    "outputs": [
+                        {
+                            "name": "A",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "E",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "Z",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "Q",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "S",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "D",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "M",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "N",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "click_left",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "click_right",
+                            "type": "IMPULSION"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "06e4e0b1-f342-4e67-8873-7fe06a61a85e",
+                "version": ""
+            }
+        ]
+    },
+    "systemViews": [
+        {
+            "children": [
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe .\\sandbox\\EventKeyBoard\\main.py EventKeyBoard Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "uuid": "a4e8fb3a-6a94-4e29-af40-f55e74f8d9cd"
+                            }
+                        ]
+                    },
+                    "class": "06e4e0b1-f342-4e67-8873-7fe06a61a85e",
+                    "comment": "",
+                    "height": 290,
+                    "name": "EventKeyBoard",
+                    "simulationTime": 5000,
+                    "uuid": "2deda022-4a44-4a3a-98e1-0ff97e351159",
+                    "width": 250,
+                    "x": 1296.6649770537604,
+                    "y": 696.139412005555
+                }
+            ],
+            "name": "Main view"
+        }
+    ]
+}

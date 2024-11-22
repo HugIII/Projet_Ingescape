@@ -1,8 +1,28 @@
-bug:
-lancement du jeu laps de temps avant le spawn aléatoire
-des fois la map se charge pas
-
 à faire:
 -Adapter Whiteboard pour le multi (en cours Clara)
--Script de test
+-Script de test:
+	à faire:
+		-Client_Server
+		-Engine
+		-Engine_Map
+		-Ennemies
+		-EventKeyBoard
+		-Map
+		-Player
+		-Player_enn
+		-Scorer
+		-Screamer
+		-Server
+		-Sound_manager
+		-Weapons (en attend de réponse mail)
+
+	à ne pas faire:
+		-Timer
+		-Starter
+		-mapper
+	
+	fait:
+		-Whitboard
+
+	
 -Commenter le code

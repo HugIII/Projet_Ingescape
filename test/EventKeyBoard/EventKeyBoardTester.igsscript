@@ -1,0 +1,6 @@
+"TestInput"{
+	keyboard press A
+	assert EventKeyBoard.A == 1
+}
+
+//D:\Ingescape_Circle_v4\igs.exe --device Wi-Fi --port 5670 --script .\test\EventKeyBoard\EventKeyBoardTester.igsscript  --license C:\Users\hugo\OneDrive\Documents\Ingescape\licenses

@@ -1,0 +1,357 @@
+{
+    "extensions": {
+        "eventsTimeline": {
+            "events": [
+            ],
+            "patterns": [
+            ],
+            "timelines": [
+                {
+                    "eventInstances": [
+                    ],
+                    "name": "Timeline_1",
+                    "order": 0,
+                    "patternInstances": [
+                    ]
+                }
+            ]
+        },
+        "recordAndReplay": {
+            "filters": {
+            }
+        }
+    },
+    "library": {
+        "classes": [
+            {
+                "className": "EventKeyBoard",
+                "color": 0,
+                "definition": {
+                    "outputs": [
+                        {
+                            "name": "A",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "E",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "Z",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "Q",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "S",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "D",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "M",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "N",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "click_left",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "click_right",
+                            "type": "IMPULSION"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "1f91c2c2-511e-4d08-a883-5957025c3cc1",
+                "version": ""
+            },
+            {
+                "className": "Weapons",
+                "color": 0,
+                "definition": {
+                    "inputs": [
+                        {
+                            "name": "kill",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "click_left",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "click_right",
+                            "type": "INTEGER"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "arbalete_shoot",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "sword_shoot",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "arrow_left",
+                            "type": "INTEGER"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "fbd5e1f9-44d5-4f1c-b4be-0ba71ab93ab4",
+                "version": ""
+            }
+        ]
+    },
+    "systemViews": [
+        {
+            "children": [
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe .\\sandbox\\Weapons\\main.py Weapons Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "0e976fce-1a6e-4320-8feb-969b91f2a27c"
+                            }
+                        ]
+                    },
+                    "class": "fbd5e1f9-44d5-4f1c-b4be-0ba71ab93ab4",
+                    "comment": "",
+                    "height": 136,
+                    "name": "Weapons",
+                    "simulationTime": 5000,
+                    "uuid": "8267f7da-cbd5-4ade-be1b-fb3446d1d1c0",
+                    "width": 250,
+                    "x": 1234.5602478903304,
+                    "y": 708.5931577921581
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "6639a205-66a4-4af0-826e-b71accd1d1fa",
+                    "width": 180,
+                    "x": 1705.8917437187117,
+                    "y": 897.9631697930615
+                },
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "D:/Ingescape_Circle_v4/igs.exe --device Wi-Fi --port 5670 --script .\\test\\Weapons\\WeaponsTester.igsscript --license C:\\Users\\hugo\\OneDrive\\Documents\\Ingescape\\licenses --name Igs",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "94637b94-1dd7-422a-b0ef-702526fc115e"
+                            },
+                            {
+                                "commandLine": "D:\\Ingescape_Circle_v4\\igs.exe --device Wi-Fi --port 5670 --script .\\test\\Whiteboard\\WhiteboardTester.igsscript --license C:\\Users\\hugo\\OneDrive\\Documents\\Ingescape\\licenses --verbose",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "34641ff1-53bd-40d1-9a6a-f968e32b921d"
+                            },
+                            {
+                                "commandLine": "D:\\Ingescape_Circle_v4\\igs.exe --device Wi-Fi --port 5670 --script .\\test\\Weapons\\WeaponsTester.igsscript --license C:\\Users\\hugo\\OneDrive\\Documents\\Ingescape\\licenses --verbose",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "b49f9b11-fa1f-4fb7-a4bf-676c1aa4595e"
+                            }
+                        ]
+                    },
+                    "class": "27D9171748894A4C90D3573FD8289CF1",
+                    "comment": "",
+                    "height": 100,
+                    "name": "Igs",
+                    "simulationTime": 5000,
+                    "uuid": "2aa5416b-101e-4c33-9a1d-1284acec0aef",
+                    "width": 250,
+                    "x": 1228.021776907466,
+                    "y": 531.0233829215066
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "905acd40-1b45-44cb-8ae8-7c56ea65cf7f",
+                    "width": 180,
+                    "x": 1714.0965612290784,
+                    "y": 800.2032182178085
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "56e768fc-4afb-403a-983c-fd030942e6f4",
+                    "width": 180,
+                    "x": 1714.219572692983,
+                    "y": 699.7844943755659
+                },
+                {
+                    "data": {
+                        "entries": [
+                            "1"
+                        ],
+                        "value_type": "INTEGER"
+                    },
+                    "height": 79,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.writer",
+                    "uuid": "0afaaa91-9f9b-4ae0-8e22-4998b1832a32",
+                    "width": 256,
+                    "x": 845.7441735393277,
+                    "y": 612.7873767170568
+                },
+                {
+                    "data": {
+                        "entries": [
+                            "1"
+                        ],
+                        "value_type": "INTEGER"
+                    },
+                    "height": 79,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.writer",
+                    "uuid": "05e769ec-8270-4661-81fa-fd283b4e2f75",
+                    "width": 256,
+                    "x": 855.7809071783599,
+                    "y": 862.2562820471562
+                },
+                {
+                    "data": {
+                        "entries": [
+                            "1"
+                        ],
+                        "value_type": "INTEGER"
+                    },
+                    "height": 79,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.writer",
+                    "uuid": "ca91d366-92fe-498e-a540-8707cabacc26",
+                    "width": 256,
+                    "x": 854.0809071783599,
+                    "y": 730.5562820471562
+                }
+            ],
+            "links": {
+                "others": [
+                    {
+                        "destination": "6639a205-66a4-4af0-826e-b71accd1d1fa",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "8267f7da-cbd5-4ade-be1b-fb3446d1d1c0",
+                        "sourceIO": {
+                            "name": "arrow_left",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "905acd40-1b45-44cb-8ae8-7c56ea65cf7f",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "8267f7da-cbd5-4ade-be1b-fb3446d1d1c0",
+                        "sourceIO": {
+                            "name": "sword_shoot",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "56e768fc-4afb-403a-983c-fd030942e6f4",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "8267f7da-cbd5-4ade-be1b-fb3446d1d1c0",
+                        "sourceIO": {
+                            "name": "arbalete_shoot",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "8267f7da-cbd5-4ade-be1b-fb3446d1d1c0",
+                        "destinationIO": {
+                            "name": "kill",
+                            "type": "INPUT"
+                        },
+                        "source": "0afaaa91-9f9b-4ae0-8e22-4998b1832a32",
+                        "sourceIO": {
+                            "name": "value",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "8267f7da-cbd5-4ade-be1b-fb3446d1d1c0",
+                        "destinationIO": {
+                            "name": "click_left",
+                            "type": "INPUT"
+                        },
+                        "source": "ca91d366-92fe-498e-a540-8707cabacc26",
+                        "sourceIO": {
+                            "name": "value",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "8267f7da-cbd5-4ade-be1b-fb3446d1d1c0",
+                        "destinationIO": {
+                            "name": "click_right",
+                            "type": "INPUT"
+                        },
+                        "source": "05e769ec-8270-4661-81fa-fd283b4e2f75",
+                        "sourceIO": {
+                            "name": "value",
+                            "type": "OUTPUT"
+                        }
+                    }
+                ]
+            },
+            "name": "Main view"
+        }
+    ]
+}
