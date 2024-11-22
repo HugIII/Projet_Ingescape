@@ -44,7 +44,7 @@ def life_fun():
             igs.service_call("Client_Server_"+str(i),"change_liste_ennemies",arguments_list,"")
             igs.service_call("Client_Server_"+str(i), "change_liste_player", (str(temp_list)), "") 
         arguments_list = (str(temp_list))
-        time.sleep(0.05)
+        time.sleep(0.2)
 
 def service_callback(sender_agent_name, sender_agent_uuid, service_name, arguments, token, my_data):
     if service_name == "player_position":
