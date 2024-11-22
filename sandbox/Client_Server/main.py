@@ -4,13 +4,17 @@
 #
 #  main.py
 #  Client_Server version 1.0
-#  Created by Ingenuity i/o on 2024/10/04
+#  Created by BLAYES Hugo, BAFFOGNE Clara i/o on 2024/10/04
+#  Description:
+#   Ce programme permet de faire le lien entre le serveur et le client side de notre systeme
 #
 
 import sys
 import ingescape as igs
 import random
 import time
+
+#variables#####################################################################################################
 
 player_x = 0
 player_y = 0
@@ -19,11 +23,16 @@ not_starting = True
 
 uuid = -1
 
-#inputs
+#input callback#############################################################################################
 def input_callback(iop_type, name, value_type, value, my_data):
     global player_x
     global player_y
     global uuid 
+
+    #lorsque la position de notre joueur change, on envoie l'information au serveur
+    #de même lorsque le score change,
+    #lorsque le joueur tue un ennemie
+    #lorsque le joueur tue un autre joueur
     if name == "player_x":
         player_x = float(value)
         if uuid == -1:
@@ -46,11 +55,14 @@ def input_callback(iop_type, name, value_type, value, my_data):
         print(value)
         arguments_list = (uuid,int(value))
         igs.service_call("Server", "player_kill", arguments_list, "")
-    # add code here if needed
 
+#service callback ##################################################################################
 def service_callback(sender_agent_name, sender_agent_uuid, service_name, arguments, token, my_data):
     global not_starting
     not_starting = False
+
+    #lorsqu'on reçoit des informations du server, cet agent permet de les mettres en forme et de les transmettre aux autres elements de notre
+    #systeme
     if service_name == "change_liste_player":
         try:
             player_enn = []
@@ -71,6 +83,7 @@ def service_callback(sender_agent_name, sender_agent_uuid, service_name, argumen
         igs.output_set_impulsion("kill")
     # add code here if needed
 
+#code principal #############################################################################
 if __name__ == "__main__":
     if len(sys.argv) < 4:
         print("usage: python3 main.py agent_name network_device port")

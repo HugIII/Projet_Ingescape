@@ -3,8 +3,12 @@
 
 #
 #  main.py
-#  Engine_Map version 1.0
-#  Created by Ingenuity i/o on 2024/10/03
+#  Engine version 1.0
+#  Created by BLAYES Hugo, BAFFOGNE Clara on 2024/09/28
+#  Description:
+#   Ce programme permet d'afficher la map sur le whiteboard en solo
+#   Comme nous voulons afficher environ 50 objets nous avons préféré passer par un server web pour des raisons de performances du whiteboard
+#   qui heberge une image de la map, de ce fait le whiteboard ne se met a jour qu'une fois par iteration
 #
 
 import sys
@@ -16,6 +20,7 @@ from PIL import Image, ImageDraw
 import http.server
 import socketserver
 
+#constante #########################################################
 PORT = 8000
 
 string_map = [["X","X","X","X","X","X","X","X","X","X"],
@@ -34,6 +39,7 @@ WINDOW_WIDTH = 800.0
 WINDOW_HEIGHT_DEMI = WINDOW_HEIGHT/2
 WINDOW_WIDTH_DEMI = WINDOW_WIDTH/2
 
+#Variable ############################################################################
 player_x = 430
 player_y = 430
 
@@ -51,7 +57,10 @@ index = 0
 image = Image.new('RGB', (1500,1500),'white')
 draw = ImageDraw.Draw(image)
 
+#classe #####################################################################
+#classe permetant de gerer l'hebergement du server image
 class CustomHandler(http.server.SimpleHTTPRequestHandler):
+    #lorsqu'on recherche sur l'url /download on recupere une image
     def do_GET(self):
         if self.path == "/download":
             image_path = "./image/map.png"
@@ -62,10 +71,15 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
             with open(image_path, 'rb') as file:
                 self.wfile.write(file.read())
 
+#fonction ##################################################################
+#lancement du server image
 def start_image_server():
     with socketserver.TCPServer(("",PORT),CustomHandler) as httpd:
         httpd.serve_forever()
 
+#cette fonction permet de creer l'image avec les informations a sa disposition
+#le taux de rafraichissement est de 1 seconde car pour des raisons de gamedesign nous avons decider de pas baisser ce temps
+#mais il peut etre baisser sans probleme de performance
 def start():
     global image
     global draw
@@ -80,10 +94,10 @@ def start():
         draw_ennemie_render_2D()
         draw_other_player_render_2D()
         image.save("./image/map.png")
+        #envoi du service au whiteboard avec l'url qui permet de recuperer l'image
         arguments_list = ("http://localhost:8000/download",50.0,50.0)
         igs.service_call("Whiteboard","addImageFromUrl",arguments_list,"")
 
-#inputs
 def send_service_rectangle_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
     global draw
     draw.rectangle([(int(x),int(y)),(int(x+longeur),int(y+largeur))],fill=color,outline=couleur_contour,width=int(contour))
@@ -98,11 +112,6 @@ def clear():
     igs.service_call("Whiteboard","clear",(),"")
     image = Image.new('RGB', (1500,1500),'white')
     draw = ImageDraw.Draw(image)
-
-
-def remove_id(index):
-    arguments_list = (index)
-    igs.service_call("Whiteboard","remove",arguments_list,"")
 
 def draw_map_render_2D():
     for i in range(len(string_map)):
@@ -125,6 +134,7 @@ def draw_other_player_render_2D():
     for i in other_player:
         send_service_ellipse_whiteboard(i[0]-10.0,i[1]-10.0,20.0,20.0,"yellow","black",1.0)
 
+#input callback ###############################################################
 def input_callback(iop_type, name, value_type, value, my_data):
     global player_x
     global player_y
@@ -176,6 +186,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
                 t = i.strip()[:-2].split(",")
                 ennemies_move.append((int(t[0]),int(t[1])))
 
+# main #####################################################################
 if __name__ == "__main__":
     if len(sys.argv) < 4:
         print("usage: python3 main.py agent_name network_device port")
@@ -207,6 +218,10 @@ if __name__ == "__main__":
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
 
+    #dans ce code nous avons 3 threads:
+    #le premier permet de s'occuper des inputs ingescape 
+    #le second permet de s'occuper du server web image 
+    #et le troisieme permet de creer une fonction periodique permettant de creer l'image
     thread = threading.Thread(target=start)
     thread.start()
 

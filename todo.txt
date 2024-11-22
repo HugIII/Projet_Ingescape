@@ -2,26 +2,42 @@
 -Script de test:
 	à faire:
 		-Client_Server
-		-Engine
-		-Engine_Map
 		-Map
 		-Player 
-		-Scorer (en cours Hugo)
-		-Server
-		-Sound_manager
 
 	à ne pas faire:
-		-Timer
-		-Starter
-		-mapper
-		-Screamer
+		-Timer (obsolete)
+		-Starter (obsolete)
+		-mapper (bordel)
+		-Screamer (trop aleatoire)
+		-Sound_manager (pas de sortie)
+		-Scorer (pas de sortie interessante)
+		-Server (pas de sortie)
+		-Engine_Map (pas de sortie)
+		-Engine (trop complexe)
 	
 	fait:
-		-Whitboard
+		-Whiteboard
 		-Ennemies
 		-Player_enn
-		-EventKeyBoard (en attente réponse mail)
-		-Weapons (en attente réponse mail)
+		-EventKeyBoard 
+		-Weapons 
 
 	
--Commenter le code
+-Commenter le code:
+	à faire:
+		-EventKeyBoard
+		-Map
+		-Player
+		-Player_enn
+		-Scorer
+		-Screamer
+		-Server
+		-Sound_manager
+		-Weapons
+	fait:
+		-Client_server
+		-Engine
+		-Engine_Map
+		-Ennemies
+		-mapper

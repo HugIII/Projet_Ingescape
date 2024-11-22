@@ -4,7 +4,10 @@
 #
 #  main.py
 #  Engine version 1.0
-#  Created by Ingenuity i/o on 2024/09/28
+#  Created by BLAYES Hugo, BAFFOGNE Clara on 2024/09/28
+#  Description:
+#   Ce programme est le bloc principal de notre jeu video,
+#   il s'occupe de la partie graphique de notre projet en plus de centraliser la plupart de nos informations
 #
 
 import pygame
@@ -15,6 +18,9 @@ import time
 import threading
 import moviepy.editor
 
+#variables########################################################################
+
+#Map de secours
 string_map = [["X","X","X","X","X","X","X","X","X","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
@@ -26,9 +32,11 @@ string_map = [["X","X","X","X","X","X","X","X","X","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
               ["X","X","X","X","X","X","X","X","X","X"]]
 
-
+#dictionnaire comporant toutes les couleurs permettant de calculer à l'avance la couleurs des murs en fonction de la distance
+#à laquelle nous nous situons du mur
 dic_color = {}
 
+#constante apparente à notre fenêtre
 WINDOW_HEIGHT = 780.0
 WINDOW_WIDTH = 1280.0
 WINDOW_HEIGHT_INT = int(WINDOW_HEIGHT)
@@ -37,25 +45,29 @@ WINDOW_HEIGHT_DEMI = WINDOW_HEIGHT/2
 WINDOW_WIDTH_DEMI = WINDOW_WIDTH/2
 MAX_DEPTH = 800
 
+#valeur par default de notre player
 player_x = 430
 player_y = 430
-
 angle = 45
 
+#variable d'affichage de la fenetre
 fov = math.pi / 3
 number_rays = 142
 tile_size = 50
 middle_rays = number_rays / 2
 angle_step = float(fov / number_rays)
-
 wall_width = WINDOW_WIDTH//number_rays
 
+#booleen
 debug_perspective = False
 player_click_left = False
 player_click_right = False
 lock_ennemi_kill = True
 lock_player_kill = True
+wave_bool = False
+cinematics_end = False
 
+#variables liste
 ennemies = []
 ennemies_move = []
 player_enn = []
@@ -66,6 +78,7 @@ player_enn_draw_list = []
 ennemy_dict = {}
 player_enn_dict = {}
 
+#toutes les images du projet
 monstre_link = ["./image/monstre1.png","./image/monstre2.png","./image/monstre3.png","./image/monstre4.png","./image/monstre5.png","./image/monstre6.png","./image/monstre7.png","./image/monstre8.png","./image/monstre9.png"]
 player_link = "./image/other_player.png"
 weapon_link = "./image/weapon.png"
@@ -76,6 +89,15 @@ scratch_link = ["./image/scratch1.png","./image/scratch2.png","./image/scratch3.
 screamer_link = "./image/screamer.png"
 arrow_link = "./image/arrow.png"
 
+#variables int
+wave = 1
+cursor_cooldown = 0
+screamer_cooldown = 0
+arrow_left = 0
+vie = 100
+kill_index = -1
+
+#prechargement des images
 image_monstre = []
 for i in monstre_link:
     image_monstre.append(pygame.image.load(i))
@@ -93,35 +115,28 @@ for i in scratch_link:
 image_screamer = pygame.image.load(screamer_link)
 image_arrow = pygame.image.load(arrow_link)
 
+#creation du screen
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
-wave = 1
-wave_bool = False
+#fonctions###################################################################################
 
-cursor_cooldown = 0
-screamer_cooldown = 0
-
-arrow_left = 0
-vie = 100
-
-kill_index = -1
-
-cinematics_end = False
-
-#inputs
 def send_service_rectangle_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
+    #dessine un rectangle sur notre fenetre pygame
     pygame.draw.rect(screen,color,(x,y,longeur,largeur))
 
 def send_service_ellipse_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
+    #dessine une ellipse sur notre fenetre pygame
     pygame.draw.ellipse(screen,color,(x,y,longeur,largeur))
 
 def send_service_image_whiteboard(image,x,y,height,width):
+    #dessine une image sur notre fenetre pygame
     if width <= 0 or height <= 0:
         return
     image = pygame.transform.scale(image, (width, height))
     screen.blit(image, (x,y))
 
 def send_service_text(x,y,text):
+    #dessine un texte sur notre fenetre pygame
     text_color = (255, 0, 0)
     font = pygame.font.Font(None, 38)
     text = font.render(text, True, text_color)
@@ -129,6 +144,7 @@ def send_service_text(x,y,text):
     screen.blit(text, text_rect)
 
 def draw_arow():
+    #dessine une fleche pointant vers l'ennemie le plus proche de la carte
     try:
         ennemies_proche = min(ennemies_move,key=lambda i: math.dist(i,(player_x,player_y)))
     except:
@@ -141,6 +157,7 @@ def draw_arow():
     send_service_image_whiteboard(rotated_arrow,WINDOW_WIDTH_DEMI-50,WINDOW_HEIGHT-200,100,100)
 
 def calculate_angle(ax,ay,bx,by):
+    #calcule l'angle de difference entre deux point et l'angle de notre personnage
     global angle
     delta_x = ax-bx
     delta_y = ay-by
@@ -151,12 +168,14 @@ def calculate_angle(ax,ay,bx,by):
 
 
 def draw_map_render_2D():
+    #permet de dessiner les differents mur de la carte de notre rendu 2D
     for i in range(len(string_map)):
         for j in range(len(string_map[i])):
             if string_map[i][j] == "X":
                 send_service_rectangle_whiteboard(50.0*i,50.0*j,50.0,50.0,"black","grey",1.0)
 
 def cast_rays_2D():
+    #permet d'afficher les resultats du raycasting sur notre rendu 2D
     ray_angle = angle - fov/2
     for i in range(int(fov/angle_step)):
         for depth in range(MAX_DEPTH):
@@ -173,9 +192,11 @@ def cast_rays_2D():
         ray_angle += angle_step
 
 def draw_player_render_2D():
+    #dessine notre personnage sur le rendu 2D
     send_service_ellipse_whiteboard(player_x-10.0,player_y-10.0,20.0,20.0,"red","black",1.0)
 
 def draw_ennemie_render_2D():
+    #dessine les differents adversaires sur notre rendu 2D
     for i in ennemies:
         send_service_ellipse_whiteboard(i[0]-10.0,i[1]-10.0,20.0,20.0,"purple","black",1.0)
     for i in ennemies_move:
@@ -185,10 +206,12 @@ def draw_ennemie_render_2D():
 
 
 def draw_sky_floor_3D():
+    #dessine le ciel et le sol de notre rendu 3D
     send_service_image_whiteboard(image_sky,0,0,WINDOW_HEIGHT_INT-200,WINDOW_WIDTH_INT)
     send_service_rectangle_whiteboard(0.0,WINDOW_HEIGHT_DEMI,WINDOW_WIDTH,WINDOW_HEIGHT_DEMI,"#655e5c","grey",0.0)
 
 def cast_rays_3D():
+    #calcul du raycasting de notre rendu 3D
     global wall_draw_list
     global ennemy_draw_list
     global player_enn_draw_list
@@ -211,6 +234,7 @@ def cast_rays_3D():
     player_enn_draw_list = []
     degat = 0
 
+    #copie de notre map en une map temporaire
     string_map_temp = []
     for i in range(len(string_map)):
         string_map_temp.append([])
@@ -220,6 +244,7 @@ def cast_rays_3D():
             else:
                 string_map_temp[i].append(string_map[i][j])
 
+    #ajout de chaque ennemie dans la case dans laquelle il se trouve sur la map temporaire
     if len(ennemies_move) == 0:
         for index,i in enumerate(ennemies):
             grid_x = int(i[0]/tile_size)
@@ -235,17 +260,21 @@ def cast_rays_3D():
             if not isinstance(string_map_temp[grid_x][grid_y],str):
                 string_map_temp[grid_x][grid_y].append(str(index))
 
+    #ajout de chaque autre joueur dans la case dans laquelle il se trouve sur le map temporaire
     for index,i in enumerate(player_enn):
         grid_x = int(i[0]/tile_size)
         grid_y = int(i[1]/tile_size)
         if not isinstance(string_map_temp[grid_x][grid_y],str):
             string_map_temp[grid_x][grid_y].append("P"+str(index))
 
+    #calcul pour chaque ray
+    #on commence les calculs à -50 et on depasse de 51 rays pour que les objets qui ne sont pas entierement dans notre champs de vision soit afficher correctement
     for ray in range(-50,number_rays+51):
         touch_player = False
         ray_angle = start_angle + ray * angle_step
         ray_angle_cos = math.cos(ray_angle)
         ray_angle_sin = math.sin(ray_angle)
+        #pour chaque point jusqu'a notre max depth on calcule si le point touche un mur ou un ennemie
         for depth in range(0,MAX_DEPTH):
             target_x = player_x + depth * ray_angle_cos
             target_y = player_y + depth * ray_angle_sin
@@ -253,7 +282,9 @@ def cast_rays_3D():
             grid_x = int(target_x / tile_size)
             grid_y = int(target_y / tile_size)
 
+            #si le point sort de la carte pas besoin de le prendre en compte
             if 0 <= grid_x < len(string_map[0]) and 0 <= grid_y < len(string_map):
+                #lorsque le point atteint le mur, nous le mettons dans la liste des objets a dessiner 
                 try:
                     if string_map[grid_x][grid_y] == "X":
                         corrected_depth = depth/10 * math.cos(ray_angle-angle)
@@ -264,11 +295,14 @@ def cast_rays_3D():
                 except:
                     print(grid_x,grid_y)
 
+                #pour des raisons de performance on affiche pas les ennemies à une distance superieure a 300
                 if depth > 300:
                     continue
 
+                #cette condition permet de voir si dans la map temporaire la case du depth est vide
                 if isinstance(string_map_temp[grid_x][grid_y],list):
                     list_case = string_map_temp[grid_x][grid_y]
+                    #si nous avons des ennemies dans la liste sans prendre en compte 
                     for i in list_case:
                         touch_enn = False
                         if i[0] == "P":
@@ -281,12 +315,14 @@ def cast_rays_3D():
                         except:
                             continue
                         if touch_enn == False and ennemies_position[0] - 2 < target_x < ennemies_position[0] + 2 and ennemies_position[1] - 2 < target_y < ennemies_position[1] + 2:
+                            #calcul de la depth en fonction de la distance de l'adversaire
                             corrected_depth = depth/5 * math.cos(ray_angle-angle)
                             wall_height = WINDOW_HEIGHT / (corrected_depth + 0.0001)
                             wall_height = 600 if wall_height > 600 else wall_height
                             ennemy_draw_list.append((ray,wall_height,i,ennemies_position[0],ennemies_position[1],depth))
                             touch_enn = True
 
+                            #cette partie permet de retirer de la vie au personnage en fonction du nombre d'adversaire a l'ecran et de leur distance
                             if depth >= 120:
                                 d = 0.001
                             elif depth >= 50:
@@ -294,9 +330,11 @@ def cast_rays_3D():
                             else:
                                 d = 0.01
 
+                            #evite au personnage prendre des degats si nous sommes dans la cinematique
                             if cinematics_end:
                                 degat += d / depth
 
+                            #si l'adversaire est dans les rayons du milieu et que le player a attaque alors nous tuons l'adversaire
                             if middle_rays - 20 <= ray <= middle_rays + 20 and (player_click_left == True or (player_click_right == True and depth < 25)) and lock_ennemi_kill == True:
                                 if ennemies_position[0] -10 < target_x < ennemies_position[0] + 10 and ennemies_position[1] - 10 < target_y < ennemies_position[1] +10:
                                     lock_ennemi_kill = False
@@ -304,6 +342,7 @@ def cast_rays_3D():
                                     cursor_cooldown = 15
                                     igs.output_set_int("kill",int(i))
 
+                #meme boucle que au dessus mais pour le mode multi
                 if isinstance(string_map_temp[grid_x][grid_y],list):
                     list_case = string_map_temp[grid_x][grid_y]
                     for i in list_case:
@@ -322,18 +361,22 @@ def cast_rays_3D():
                                     lock_player_kill = False
                                     igs.output_set_int("kill_player",int(i[1:]))
 
+    #on partage les degats recu au systeme
     if degat != 0:
         igs.output_set_double("degat",degat)
     player_click_left = False
     player_click_right = False
 
 def draw_3D_world():
+    #cette fonction permet de determiner la taille des differents objets a dessiner
     global cursor_cooldown
     global screamer_cooldown
-    
+
+    #dessin des murs
     for wall in wall_draw_list:
         send_service_rectangle_whiteboard(wall[0] * wall_width, (WINDOW_HEIGHT-wall[1])//2,wall_width,wall[1],dic_color[int(wall[1])],"black",1.0)
 
+    #dessin des ennemies
     ennemy_draw_dict = {}
     ennemy_draw_origin_dict = {}
     ennemy_depth_dict = {}
@@ -343,6 +386,7 @@ def draw_3D_world():
             ennemy_depth_dict[enn[5]] = enn[2]
         ennemy_draw_dict[enn[2]] = (ennemy_draw_origin_dict[enn[2]],enn[1],enn[0],enn[3],enn[4],enn[2])
 
+    #dessin des autres joueurs
     player_enn_draw_dict = {}
     player_enn_draw_origin_dict = {}
     player_depth_dict = {}
@@ -364,24 +408,29 @@ def draw_3D_world():
         pla = player_enn_draw_dict[player_depth_dict[i]]
         send_service_image_whiteboard(image_player,pla[0] * wall_width,(WINDOW_HEIGHT-pla[1])//2,int((pla[2]-pla[0])*wall_width),int(pla[1]))
 
+    #dessin du curseur
     if cursor_cooldown > 0:
         cursor_cooldown -= 1
         send_service_image_whiteboard(image_cursor,WINDOW_WIDTH_DEMI-15,WINDOW_HEIGHT_DEMI-15,30.0,30.0)
     else:
         send_service_ellipse_whiteboard(WINDOW_WIDTH_DEMI-2,WINDOW_HEIGHT_DEMI-2,5.0,5.0,"red","black",1.0)
 
+    #dessin des armes
     send_service_image_whiteboard(image_weapon,WINDOW_WIDTH-400,WINDOW_HEIGHT-400,400,400)
     send_service_image_whiteboard(image_weapon2,0,WINDOW_HEIGHT-300,300,300)
 
+    #dessin texte vie et arrow 
     send_service_text(50,50,"  life: "+str(vie))
     send_service_text(50,75,"  arrow: "+str(arrow_left))
     if wave_bool == True:
         send_service_text(50,100,"  wave: "+str(wave))
     
+    #dessin screamer
     if screamer_cooldown > 0:
         send_service_image_whiteboard(image_screamer,0,0,WINDOW_HEIGHT_INT,WINDOW_WIDTH_INT)
         screamer_cooldown -= 1
 
+    #dessin griffures 
     if vie < 75:
         send_service_image_whiteboard(image_scratch[0],800,0,300,300)
         if vie < 60:
@@ -390,6 +439,7 @@ def draw_3D_world():
                 send_service_image_whiteboard(image_scratch[2],0,0,WINDOW_HEIGHT_INT,WINDOW_WIDTH)
 
 def update():
+    #cette fonction permet de mettre a jour la fenetre pygame
     global debug_perspective
     if debug_perspective == True:
         draw_map_render_2D()
@@ -406,6 +456,7 @@ def update():
 
 
 def input_callback(iop_type, name, value_type, value, my_data):
+    #cette fonction prend en compte les differents inputs de ingescape
     global player_x
     global player_y
     global debug_perspective
@@ -492,19 +543,15 @@ def input_callback(iop_type, name, value_type, value, my_data):
     # add code here if needed
 
 def key_pressed_test():
-    global player_x
-    global player_y
+    #cette fonction permet de dessiner le map debug
     global debug_perspective
-    global angle
-    global string_map
-    global cursor_cooldown
 
-    keys = pygame.key.get_pressed()  # Récupère l'état des touches
+    keys = pygame.key.get_pressed()  
 
-    # Changer de perspective de débogage
     if keys[pygame.K_p]:
         debug_perspective = not debug_perspective
 
+#code principal
 if __name__=="__main__":
     if len(sys.argv) < 4:
         print("usage: python3 main.py agent_name network_device port")
@@ -569,12 +616,17 @@ if __name__=="__main__":
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
     
+    #init pygame
     pygame.init()
     pygame.display.set_caption("DPPM")
 
+    #init thread
+    #on considere pygame plus important que les entrees en ingescape
+    #donc on delegue la fonction ingescape dans un thread avec une priorite moindre 
     thread = threading.Thread(target=input)
     thread.start()
 
+    #calcul du dictionnaire de couleur
     for i in range(int(WINDOW_HEIGHT)+1):
         if len(str(hex(int(i*255/600))[2:])) != 2: 
             dic_color[i] = "#"+("0"+str(hex(int(i*255/600))[2:]))*3
@@ -585,6 +637,7 @@ if __name__=="__main__":
     clock = pygame.time.Clock()
     time.sleep(3)
 
+    #lancement de la cinematique
     if sys.argv[4] == "True":
         video = moviepy.editor.VideoFileClip("./cinematics/intro.mp4")
         video.preview()
@@ -605,6 +658,7 @@ if __name__=="__main__":
 
     igs.output_set_impulsion("music_trigger")
 
+    #fin de la cinematique
     if wave > 5:
         video = moviepy.editor.VideoFileClip("./cinematics/Outro.mp4")
         video.preview()

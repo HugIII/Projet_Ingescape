@@ -3,16 +3,20 @@
 
 #
 #  main.py
-#  mapper version 1.0
-#  Created by Ingenuity i/o on 2024/10/09
+#  Client_Server version 1.0
+#  Created by BLAYES Hugo, BAFFOGNE Clara i/o on 2024/10/04
+#  Description:
+#   Ce programme s'occupe de la creation des agents pour le mode multi, il permet aussi les links entre les differents agents
+#   et le lancement de ces derniers
 #
-
+    
 import sys
 import ingescape as igs
 import os
 import random
 import time
 
+#code principal #######################################################################
 if __name__ == "__main__":
     if len(sys.argv) < 4:
         print("usage: python3 main.py agent_name network_device port")
@@ -31,10 +35,12 @@ if __name__ == "__main__":
     dev = sys.argv[2]
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
 
+    #calcul uuid
     uuid = random.randint(1,9999)
 
     igs.agent_set_name("mapper_"+str(uuid))
 
+    #creation des agents
     Engine = igs.Agent("Engine_"+str(uuid),False)
     Engine.input_create("Ennemies", igs.STRING_T, None)
     Engine.input_create("other_player", igs.STRING_T, None)
@@ -137,6 +143,7 @@ if __name__ == "__main__":
     Sound_Manager.input_create("music_trigger",igs.IMPULSION_T,None)
     Sound_Manager.input_create("sword",igs.IMPULSION_T,None)
     
+    #activate des agents pour le link
     Engine.activate()
     Weapons.activate()
     Player_enn.activate()
@@ -211,6 +218,7 @@ if __name__ == "__main__":
 
     device = dev + " " + str(sys.argv[3])
 
+    #lancement final des agents
     os.system("start /B python ./sandbox/Ennemies/main.py Ennemies_"+str(uuid)+" "+device+" False")
     os.system("start /B python ./sandbox/Engine/main.py Engine_"+str(uuid)+" "+device+" "+str(uuid))
     os.system("start /B python ./sandbox/Player_enn/main.py Player_enn_"+str(uuid)+" "+device+" "+str(uuid))

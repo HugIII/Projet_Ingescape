@@ -3,8 +3,12 @@
 
 #
 #  main.py
-#  Ennemies version 1.0
-#  Created by Ingenuity i/o on 2024/09/30
+#  Client_Server version 1.0
+#  Created by BLAYES Hugo, BAFFOGNE Clara i/o on 2024/10/04
+#  Description:
+#   Ce programme s'occupe de la gestion des ennemies dans notre jeu video
+#   en solo, cela comprend leurs mouvements, leurs apparitions, le format vague, les collisions des ennemies avec les murs
+#   en multi, cet agent fait le tampon entre l'engine et le client server
 #
 
 import sys
@@ -14,6 +18,7 @@ import threading
 import time
 import math
 
+#variables########################################################
 string_map = [["X","X","X","X","X","X","X","X","X","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
@@ -37,10 +42,14 @@ into_spawn = False
 player_x = 350
 player_y = 350
 
+#fonction #######################################################
 def move_ennemies():
+    #cette fonction gere le deplacement des ennemies sur la carte
     global ennemies_list_move
 
+    #si la variable multi est fause, l'agent se met en mode fonctionnement solo
     while multi==False:
+        #pour chaque ennemies
         for i in range(len(ennemies_list_move)):
             x = ennemies_list_move[i][0]
             y = ennemies_list_move[i][1]
@@ -49,6 +58,7 @@ def move_ennemies():
             x_temp_mur = ennemies_list_move[i][0]
             y_temp_mur = ennemies_list_move[i][1]
 
+            #on calcule le potentiel deplacement de l'ennemie
             if x > player_x + 20:
                 x_temp -= 1
                 x_temp_mur -= 10
@@ -63,23 +73,29 @@ def move_ennemies():
                 y_temp += 1
                 y_temp_mur += 10
 
+            #si l'ennemie est dans le mur on le teleporte au hasard sur la carte
             if string_map[int(x/50)][int(y/50)] == "X":
                 random_x = random.randint(0,499)
                 random_y = random.randint(0,499)
                 ennemies_list_move[i] = (random_x,random_y)
+            #si le deplacement en x et y est pas dans le mur alors l'ennemie bouge
             elif string_map[int(x_temp_mur / 50)][int(y_temp_mur / 50)] != "X":
                 ennemies_list_move[i] = (x_temp,y_temp)
+            #idem avec seulement x
             elif string_map[int(x_temp_mur / 50)][int(y / 50)] != "X":
                 ennemies_list_move[i] = (x_temp,y)
+            #idem seulement avec y
             elif string_map[int(x / 50)][int(y_temp_mur / 50)] != "X":
                 ennemies_list_move[i] = (x,y_temp)
 
+        #on recalcule toutes les 0.2 secondes le positionnement de l'ennemie
         igs.output_set_string("Ennemies_move",str(ennemies_list_move))    
         time.sleep(0.2)
 
+    #si on est en mode multi on laisse vide la liste ennemies move
     igs.output_set_string("Ennemies_move","[]")
 
-#inputs
+#input callback ##########################################################
 def input_callback(iop_type, name, value_type, value, my_data):
     global ennemies_list
     global string_map
@@ -90,14 +106,17 @@ def input_callback(iop_type, name, value_type, value, my_data):
     global player_x
     global player_y
 
+    #permet de definir que nous sommes en mode multi
     if name == "multi":
         multi = value
         if value == True:
             igs.output_set_string("list_ennemies",str(multi_ennemies))
+    #maj positionnement player
     elif name == "player_x":
         player_x = value
     elif name == "player_y":
         player_y = value
+    #recupere et traite les positions servers des ennemies
     elif name == "multi_ennemy":
         multi_ennemies = []
         for i in value.split("("):
@@ -106,6 +125,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
                 multi_ennemies.append((int(t[0]),int(t[1])))
         igs.output_set_string("list_ennemies",str(multi_ennemies))
 
+    #si on a un kill on mode multi juste on augmente le score
     if name == "kill":
         igs.output_set_impulsion("score")
     elif name=="map":
@@ -120,13 +140,16 @@ def input_callback(iop_type, name, value_type, value, my_data):
         temp_list.append(temp_sub_list)
         string_map = temp_list
 
+    #si on est en multi on a finit le traitement
     if multi == True:
         return
 
+    #si on est en solo et qu'on a un kill, on enleve l'ennemies de la liste
     if name == "kill":
         ennemies_list.pop(value)
         ennemies_list_move.pop(value)
 
+    #lorsque la liste des ennemies est vide on cherche a les refaire spawns
     if len(ennemies_list) == 0 and into_spawn == False:
         into_spawn = True
         wave += 1
@@ -138,9 +161,13 @@ def input_callback(iop_type, name, value_type, value, my_data):
     igs.output_set_string("list_ennemies",str(ennemies_list))
 
 def spawn_ennemies():
+    #fonction qui permet de faire spawner les ennemies
     global ennemies_list
+
+    #on considere que plus le nombre de wave augmente plus le nombre d'ennemies est grand
     coeff = int(3 + wave * 1.5)
 
+    #on fait spawn les ennemies avec des positions aleatoire
     while(len(ennemies_list)<coeff):
         random_x = random.randint(0,499)
         random_y = random.randint(0,499)
@@ -149,6 +176,7 @@ def spawn_ennemies():
             ennemies_list.append((random_x,random_y))
             ennemies_list_move.append((random_x,random_y))
 
+#code principal ###########################################################
 if __name__ == "__main__":
     if len(sys.argv) < 4:
         print("usage: python3 main.py agent_name network_device port")
@@ -192,6 +220,9 @@ if __name__ == "__main__":
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
 
+    #nous avons deux threads:
+    #un periodique qui calcule le deplacement des ennemies
+    #un qui permet de gerer les entrees ingescape
     t = threading.Thread(target=move_ennemies)
     t.start()
 
