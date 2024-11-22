@@ -4,13 +4,11 @@
 		-Client_Server
 		-Engine
 		-Engine_Map
-		-EventKeyBoard (en attente réponse mail)
 		-Map
 		-Player 
 		-Scorer (en cours Hugo)
 		-Server
 		-Sound_manager
-		-Weapons (en attente réponse mail)
 
 	à ne pas faire:
 		-Timer
@@ -22,6 +20,8 @@
 		-Whitboard
 		-Ennemies
 		-Player_enn
+		-EventKeyBoard (en attente réponse mail)
+		-Weapons (en attente réponse mail)
 
 	
 -Commenter le code
