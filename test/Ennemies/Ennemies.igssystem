@@ -490,12 +490,20 @@
                                 "uuid": "915e3837-4aeb-4d3d-bed4-a36d5fe2a8ac"
                             },
                             {
-                                "commandLine": "D:\\Ingescape_Circle_v4\\igs.exe --device Wi-Fi --port 5670 --script .\\test\\Ennemies\\EnnemiesTester.igsscript --license C:\\Users\\hugo\\OneDrive\\Documents\\Ingescape\\licenses --verbose",
+                                "commandLine": "D:/Ingescape_Circle_v4/igs.exe --device Wi-Fi --port 5670 --script .\\test\\Ennemies\\EnnemiesTester.igsscript --license C:\\Users\\hugo\\OneDrive\\Documents\\Ingescape\\licenses --verbose --name Igs",
                                 "hostname": "PcHugo",
                                 "ip": "192.168.1.59",
                                 "isAttachedToCircle": false,
                                 "mac": "F8:9E:94:19:AD:75",
                                 "uuid": "1f50da1e-7f02-4fac-8446-f7af00e0a5bd"
+                            },
+                            {
+                                "commandLine": "D:\\Ingescape_Circle_v4\\igs.exe --device Wi-Fi --port 5670 --script .\\test\\Ennemies\\EnnemiesTester.igsscript --license C:\\Users\\hugo\\OneDrive\\Documents\\Ingescape\\licenses --verbose",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "e1a4d2ab-5087-4a39-ad89-c8da6558bc6b"
                             }
                         ]
                     },
@@ -631,21 +639,6 @@
                 },
                 {
                     "data": {
-                        "data_decoder": "BINARY",
-                        "msg_type": "",
-                        "proto_file_path": "",
-                        "string_decoder": "PLAIN_TEXT"
-                    },
-                    "height": 56,
-                    "name": "",
-                    "tool": "com.ingescape.circle.tool.observer",
-                    "uuid": "a9a3867a-ce8a-4660-9875-ee6cf04bf1fb",
-                    "width": 180,
-                    "x": 1584.1018535462044,
-                    "y": 781.4193835650887
-                },
-                {
-                    "data": {
                         "entries": [
                             ""
                         ],
@@ -687,6 +680,21 @@
                     "width": 355.82980080787706,
                     "x": 1602.7553838121414,
                     "y": 604.6163575662085
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "a9a3867a-ce8a-4660-9875-ee6cf04bf1fb",
+                    "width": 180,
+                    "x": 1588.8824512377869,
+                    "y": 788.1122203333042
                 }
             ],
             "links": {

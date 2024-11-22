@@ -1,5 +1,4 @@
 à faire:
--Adapter Whiteboard pour le multi (en cours Clara)
 -Script de test:
 	à faire:
 		-Client_Server
@@ -7,10 +6,8 @@
 		-Engine_Map
 		-EventKeyBoard (en attente réponse mail)
 		-Map
-		-Player
-		-Player_enn
-		-Scorer
-		-Screamer(en cours)
+		-Player 
+		-Scorer (en cours Hugo)
 		-Server
 		-Sound_manager
 		-Weapons (en attente réponse mail)
@@ -19,10 +16,12 @@
 		-Timer
 		-Starter
 		-mapper
+		-Screamer
 	
 	fait:
 		-Whitboard
 		-Ennemies
+		-Player_enn
 
 	
 -Commenter le code
