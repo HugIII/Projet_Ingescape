@@ -3,8 +3,9 @@
 	assert Weapons.arrow_left >= 0
 
 	Weapons.click_right = 0
-	assert Weapons.sword_shoot >= 0 //impulsion
+	assert Weapons.sword_shoot >= "" //impulsion
 
+	//passer une vague
 	Weapons.kill = 0
 	Weapons.kill = 0
 	Weapons.kill = 0
@@ -16,7 +17,7 @@
 	Weapons.kill = 0
 
 	Weapons.click_left = 0
-	assert Weapons.arbalete_shoot == 0 //impulsion
+	assert Weapons.arbalete_shoot == "" //impulsion
 }
 
 //D:\Ingescape_Circle_v4\igs.exe --device Wi-Fi --port 5670 --script .\test\Weapons\WeaponsTester.igsscript  --license C:\Users\hugo\OneDrive\Documents\Ingescape\licenses --verbose

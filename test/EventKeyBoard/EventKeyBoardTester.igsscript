@@ -1,27 +1,28 @@
 "TestInput"{
-	keyboard press A
-	assert EventKeyBoard.A == 1
+	keyboard press_release a
+	assert EventKeyBoard.A == ""
+	
+	keyboard press_release e
+	assert EventKeyBoard.E == ""
+	
+	keyboard press_release z
+	assert EventKeyBoard.Z == ""
+	
+	keyboard press_release q
+	assert EventKeyBoard.Q == ""
+	
+	keyboard press_release s
+	assert EventKeyBoard.S == ""
+	
+	keyboard press_release d
+	assert EventKeyBoard.D == ""
+	
+	keyboard press_release m
+	assert EventKeyBoard.M == ""
+	
+	keyboard press_release n
+	assert EventKeyBoard.N == ""
 
-	keyboard press E
-	assert EventKeyBoard.E == 1
-
-	keyboard press Z
-	assert EventKeyBoard.Z == 1
-
-	keyboard press Q
-	assert EventKeyBoard.Q == 1
-
-	keyboard press S
-	assert EventKeyBoard.S == 1
-
-	keyboard press D
-	assert EventKeyBoard.D == 1
-
-	keyboard press M
-	assert EventKeyBoard.M == 1
-
-	keyboard press N
-	assert EventKeyBoard.N == 1
 }
 
 //D:\Ingescape_Circle_v4\igs.exe --device Wi-Fi --port 5670 --script .\test\EventKeyBoard\EventKeyBoardTester.igsscript  --license C:\Users\hugo\OneDrive\Documents\Ingescape\licenses --verbose
