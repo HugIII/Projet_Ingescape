@@ -1,6 +1,17 @@
 "Test"{
     Ennemies.in = 0
-    assert Ennemies.list_ennemies == "[(50, 361), (363, 95), (161, 325), (196, 242)]"
+    assert user "list_ennemies return a list of 4?"
+
+    Ennemies.kill = 0
+    assert user "list_ennemies smaller ?"
+
+    assert user "Ennemies_move move ?"
+
+    Ennemies.kill = 0
+    Ennemies.kill = 0
+    Ennemies.kill = 0
+
+    assert Ennemies.wave == 2
 }
 
 //D:\Ingescape_Circle_v4\igs.exe --device Wi-Fi --port 5670 --script .\test\Ennemies\EnnemiesTester.igsscript  --license C:\Users\hugo\OneDrive\Documents\Ingescape\licenses --verbose

@@ -5,8 +5,7 @@
 		-Client_Server
 		-Engine
 		-Engine_Map
-		-Ennemies
-		-EventKeyBoard
+		-EventKeyBoard (en attente réponse mail)
 		-Map
 		-Player
 		-Player_enn
@@ -14,7 +13,7 @@
 		-Screamer
 		-Server
 		-Sound_manager
-		-Weapons (en attend de réponse mail)
+		-Weapons (en attente réponse mail)
 
 	à ne pas faire:
 		-Timer
@@ -23,6 +22,7 @@
 	
 	fait:
 		-Whitboard
+		-Ennemies
 
 	
 -Commenter le code
