@@ -7,10 +7,8 @@
 		-Engine_Map
 		-EventKeyBoard (en attente réponse mail)
 		-Map
-		-Player
-		-Player_enn
+		-Player 
 		-Scorer
-		-Screamer(en cours)
 		-Server
 		-Sound_manager
 		-Weapons (en attente réponse mail)
@@ -19,10 +17,12 @@
 		-Timer
 		-Starter
 		-mapper
+		-Screamer
 	
 	fait:
 		-Whitboard
 		-Ennemies
+		-Player_enn
 
 	
 -Commenter le code
