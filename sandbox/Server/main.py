@@ -39,18 +39,10 @@ def life_fun():
         for i in index_dict.keys():
             li = index_dict[i]
             temp_list.append((i,li[0],li[1]))
-        s = "["
-        for i in score.keys():
-            s+="("+str(i)+","+str(score[i])+"),"
-        if s != "[":
-            s = s[:-1]+"]"
-        else:
-            s = "[]"
         for i in index_dict.keys():
             arguments_list = (str(list_ennemies))
             igs.service_call("Client_Server_"+str(i),"change_liste_ennemies",arguments_list,"")
             igs.service_call("Client_Server_"+str(i), "change_liste_player", (str(temp_list)), "") 
-            igs.service_call("Client_Server_"+str(i),"change_score",(s),"")
         arguments_list = (str(temp_list))
         time.sleep(0.05)
 
@@ -68,10 +60,15 @@ def service_callback(sender_agent_name, sender_agent_uuid, service_name, argumen
             score[int(arguments[0])] += 50
         else:
             score[int(arguments[0])] = 50
+        s = "Tableau des scores :\n" 
+        for k,v in score.items():
+            s += "player_"+str(k)+" : "+str(v)+ "\n"
+        print(s)
+        igs.service_call("Whiteboard", "chat",(s), "")
     elif service_name == "chat":
         arguments_list = (str(arguments[0]),str(arguments[1]))
         for i in index_dict.keys():
-            igs.service_call("Client_Server_"+str(i),"chat",arguments_list,"") 
+            igs.service_call("Client_Server_"+str(i),"chat",arguments_list,"")
     # add code here if needed
 
 class CustomHandler(http.server.SimpleHTTPRequestHandler):
@@ -143,7 +140,7 @@ def draw_ennemie_render_2D():
 
 def draw_other_player_render_2D():
     for key,value in index_dict.items():
-        send_service_ellipse_whiteboard(index_dict[key][0]-10.0,index_dict[key][1]-10.0,20.0,20.0,"yellow","black",1.0)
+        send_service_ellipse_whiteboard(index_dict[key][0]-10.0,index_dict[key][1]-10.0,20.0,20.0,"red","black",1.0)
 
 
 if __name__ == "__main__":

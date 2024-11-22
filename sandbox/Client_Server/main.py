@@ -65,8 +65,6 @@ def service_callback(sender_agent_name, sender_agent_uuid, service_name, argumen
     elif service_name == "change_liste_ennemies":
         igs.output_set_bool("multi",True)
         igs.output_set_string("multi_ennemy",arguments[0])
-    elif service_name == "change_score":
-        igs.output_set_string("score_multi",arguments[0])
     elif service_name == "chat":
         igs.service_call("Whiteboard", "chat", (arguments[0]+":"+arguments[1]),"")
     elif service_name == "kill_service":
@@ -110,8 +108,6 @@ if __name__ == "__main__":
     igs.service_arg_add("change_liste_player", "liste_player", igs.STRING_T)
     igs.service_init("change_liste_ennemies", service_callback, None)
     igs.service_arg_add("change_liste_ennemies", "liste_ennemies", igs.STRING_T)
-    igs.service_init("change_score", service_callback, None)
-    igs.service_arg_add("change_score", "liste_score", igs.STRING_T)
     igs.service_init("chat", service_callback, None)
     igs.service_arg_add("chat", "uuid", igs.STRING_T)
     igs.service_arg_add("chat", "message", igs.STRING_T)
