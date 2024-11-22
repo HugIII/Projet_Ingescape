@@ -1,5 +1,4 @@
 à faire:
--Adapter Whiteboard pour le multi (en cours Clara)
 -Script de test:
 	à faire:
 		-Client_Server
@@ -8,7 +7,7 @@
 		-EventKeyBoard (en attente réponse mail)
 		-Map
 		-Player 
-		-Scorer
+		-Scorer (en cours Hugo)
 		-Server
 		-Sound_manager
 		-Weapons (en attente réponse mail)
