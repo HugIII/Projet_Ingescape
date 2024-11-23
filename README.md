@@ -55,3 +55,20 @@ Pour modifier les paramètres réseau, utilisez la commande suivante dans un ter
 ```bash
 .\start_multi.bat device port
  ```
+
+## Commandes
+
+### Commandes de Déplacement
+- **Avancer** : `Z`
+- **Reculer** : `S`
+- **Aller à Gauche** : `Q`
+- **Aller à Droite** : `D`
+- **Vision à Gauche** : `A`
+- **Vision à Droite** : `E`
+
+### Commandes pour la Musique
+- **Couper les bruitages et la musique** : `M`
+- **Couper uniquement la musique** : `N`
+
+### Commande de Debug
+- **Activer le mode debug** : `P`
