@@ -1,0 +1,280 @@
+{
+    "extensions": {
+        "eventsTimeline": {
+            "events": [
+            ],
+            "patterns": [
+            ],
+            "timelines": [
+                {
+                    "eventInstances": [
+                    ],
+                    "name": "Timeline_1",
+                    "order": 0,
+                    "patternInstances": [
+                    ]
+                }
+            ]
+        },
+        "recordAndReplay": {
+            "filters": {
+            }
+        }
+    },
+    "library": {
+        "classes": [
+            {
+                "className": "EventKeyBoard",
+                "color": 0,
+                "definition": {
+                    "outputs": [
+                        {
+                            "name": "A",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "E",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "Z",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "Q",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "S",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "D",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "M",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "N",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "click_left",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "click_right",
+                            "type": "IMPULSION"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "1f91c2c2-511e-4d08-a883-5957025c3cc1",
+                "version": ""
+            },
+            {
+                "className": "Weapons",
+                "color": 0,
+                "definition": {
+                    "inputs": [
+                        {
+                            "name": "kill",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "click_left",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "click_right",
+                            "type": "INTEGER"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "arbalete_shoot",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "sword_shoot",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "arrow_left",
+                            "type": "INTEGER"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "fbd5e1f9-44d5-4f1c-b4be-0ba71ab93ab4",
+                "version": ""
+            },
+            {
+                "className": "Map",
+                "color": 0,
+                "definition": {
+                    "inputs": [
+                        {
+                            "name": "start",
+                            "type": "IMPULSION"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "map",
+                            "type": "STRING"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "5dd6e755-cd41-44f9-9f1f-ff02df1fac7f",
+                "version": ""
+            }
+        ]
+    },
+    "systemViews": [
+        {
+            "children": [
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "D:/Ingescape_Circle_v4/igs.exe --device Wi-Fi --port 5670 --script .\\test\\Weapons\\WeaponsTester.igsscript --license C:\\Users\\hugo\\OneDrive\\Documents\\Ingescape\\licenses --name Igs",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "94637b94-1dd7-422a-b0ef-702526fc115e"
+                            },
+                            {
+                                "commandLine": "D:/Ingescape_Circle_v4/igs.exe --device Wi-Fi --port 5670 --script .\\test\\Whiteboard\\WhiteboardTester.igsscript --license C:\\Users\\hugo\\OneDrive\\Documents\\Ingescape\\licenses --verbose --name Igs",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "34641ff1-53bd-40d1-9a6a-f968e32b921d"
+                            },
+                            {
+                                "commandLine": "D:/Ingescape_Circle_v4/igs.exe --device Wi-Fi --port 5670 --script .\\test\\Weapons\\WeaponsTester.igsscript --license C:\\Users\\hugo\\OneDrive\\Documents\\Ingescape\\licenses --verbose --name Igs",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "b49f9b11-fa1f-4fb7-a4bf-676c1aa4595e"
+                            },
+                            {
+                                "commandLine": "D:\\Ingescape_Circle_v4\\igs.exe --device Wi-Fi --port 5670 --script .\\test\\Map\\MapTester.igsscript --license C:\\Users\\hugo\\OneDrive\\Documents\\Ingescape\\licenses --verbose",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "e513817d-df22-441b-a9e6-9289d31faba7"
+                            }
+                        ]
+                    },
+                    "class": "27D9171748894A4C90D3573FD8289CF1",
+                    "comment": "",
+                    "height": 100,
+                    "name": "Igs",
+                    "simulationTime": 5000,
+                    "uuid": "2aa5416b-101e-4c33-9a1d-1284acec0aef",
+                    "width": 250,
+                    "x": 1228.021776907466,
+                    "y": 531.0233829215066
+                },
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\hugo\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\python.exe .\\sandbox\\Map\\main.py Map Wi-Fi 5670",
+                                "hostname": "PcHugo",
+                                "ip": "192.168.1.59",
+                                "isAttachedToCircle": false,
+                                "mac": "F8:9E:94:19:AD:75",
+                                "uuid": "41c20692-3a06-4b2b-bd8b-17116b52619c"
+                            }
+                        ]
+                    },
+                    "class": "5dd6e755-cd41-44f9-9f1f-ff02df1fac7f",
+                    "comment": "",
+                    "height": 100,
+                    "name": "Map",
+                    "simulationTime": 5000,
+                    "uuid": "da1c8f72-1cf5-4d13-9da0-88ca24bd4d6a",
+                    "width": 250,
+                    "x": 1248.10445253648,
+                    "y": 704.1532415056837
+                },
+                {
+                    "data": {
+                        "entries": [
+                        ],
+                        "value_type": "IMPULSION"
+                    },
+                    "height": 44,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.writer",
+                    "uuid": "bba40dff-ffd4-4e15-b0cd-922858a382cc",
+                    "width": 256,
+                    "x": 846.0546294840215,
+                    "y": 696.4485311892413
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "25597707-a4d7-4c03-b2b5-bfc4edf18e1a",
+                    "width": 180,
+                    "x": 1653.877656353256,
+                    "y": 767.363129723612
+                }
+            ],
+            "links": {
+                "others": [
+                    {
+                        "destination": "da1c8f72-1cf5-4d13-9da0-88ca24bd4d6a",
+                        "destinationIO": {
+                            "name": "start",
+                            "type": "INPUT"
+                        },
+                        "source": "bba40dff-ffd4-4e15-b0cd-922858a382cc",
+                        "sourceIO": {
+                            "name": "value",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "25597707-a4d7-4c03-b2b5-bfc4edf18e1a",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "da1c8f72-1cf5-4d13-9da0-88ca24bd4d6a",
+                        "sourceIO": {
+                            "name": "map",
+                            "type": "OUTPUT"
+                        }
+                    }
+                ]
+            },
+            "name": "Main view"
+        }
+    ]
+}

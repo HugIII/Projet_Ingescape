@@ -1,0 +1,6 @@
+"Test"{
+	Map.start = 1
+	assert Map.map >= ""
+}
+
+//D:\Ingescape_Circle_v4\igs.exe --device Wi-Fi --port 5670 --script .\test\Map\MapTester.igsscript  --license C:\Users\hugo\OneDrive\Documents\Ingescape\licenses --verbose
