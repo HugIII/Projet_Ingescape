@@ -27,7 +27,8 @@ pip install -r requirements.txt
 
 ### Jeu Solo
 1. Ouvrez le projet dans **Ingescape Circle V4**.
-2. Connectez-vous au réseau Wi-Fi **5670**. Le cadran doit se colorer en orange.
+2. Connectez-vous au réseau Wi-Fi **5670**. Le logiciel Circle doit ressembler à ceci :
+![Alt text](image/img_readme.png)
 3. Lancez le fichier `start.bat`.
 
 #### Exécution avec paramètres spécifiques
@@ -35,6 +36,7 @@ Pour personnaliser les paramètres réseau ou désactiver la cinématique, utili
 ```bash
 .\start.bat device port cinematique
 ```
+- `device` : Wi-Fi
 - `cinematique` : True ou False pour lancer la cinématique vidéo au debut et à la fin de la partie.
 
 ### Jeu Multijoueur
