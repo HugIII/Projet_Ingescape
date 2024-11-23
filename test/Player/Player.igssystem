@@ -1,0 +1,300 @@
+{
+    "extensions": {
+        "eventsTimeline": {
+            "events": [
+            ],
+            "patterns": [
+            ],
+            "timelines": [
+                {
+                    "eventInstances": [
+                    ],
+                    "name": "Timeline_1",
+                    "order": 0,
+                    "patternInstances": [
+                    ]
+                }
+            ]
+        },
+        "recordAndReplay": {
+            "filters": {
+            }
+        }
+    },
+    "library": {
+        "classes": [
+            {
+                "className": "Player",
+                "color": 0,
+                "definition": {
+                    "inputs": [
+                        {
+                            "name": "A",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "E",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "Z",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "Q",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "S",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "D",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "map",
+                            "type": "STRING"
+                        },
+                        {
+                            "name": "degat",
+                            "type": "DOUBLE"
+                        },
+                        {
+                            "name": "kill",
+                            "type": "IMPULSION"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "name": "player_x",
+                            "type": "DOUBLE"
+                        },
+                        {
+                            "name": "player_y",
+                            "type": "DOUBLE"
+                        },
+                        {
+                            "name": "angle",
+                            "type": "DOUBLE"
+                        },
+                        {
+                            "name": "vie",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "death",
+                            "type": "IMPULSION"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "0924efbb-dbda-4802-807c-e11f48bf5eaa",
+                "version": ""
+            }
+        ]
+    },
+    "systemViews": [
+        {
+            "children": [
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe .\\sandbox\\Player\\main.py Player Wi-Fi 5670",
+                                "hostname": "LAPTOP-1U3EERO1",
+                                "ip": "192.168.0.14",
+                                "isAttachedToCircle": false,
+                                "mac": "5C:61:99:44:CA:23",
+                                "uuid": "11139ef0-e3db-4cbe-bac1-d3404299e2b2"
+                            }
+                        ]
+                    },
+                    "class": "0924efbb-dbda-4802-807c-e11f48bf5eaa",
+                    "comment": "",
+                    "height": 268,
+                    "name": "Player",
+                    "simulationTime": 5000,
+                    "uuid": "bf3cb23f-0785-492a-a78d-a4987f5000e5",
+                    "width": 250,
+                    "x": 1069.0095666521481,
+                    "y": 693.4708828032104
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "f33071ee-6f5e-4749-a2de-e1d32b7e74b0",
+                    "width": 180,
+                    "x": 1437.0173061387816,
+                    "y": 793.7995421983296
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "3f2e2bdb-6ef5-441b-a243-2e9fc9b71587",
+                    "width": 180,
+                    "x": 1438.374815030233,
+                    "y": 709.7474159670004
+                },
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "\"E:/Ingescape/Ingescape Circle v4/igs.exe\" --device Wi-Fi --port 5670 --script .\\test\\Player\\Player.igsscript --license \"E:\\Mes Documents\\UPSSITECH\\Projet_Ingescape\\licenses\" --verbose --name Igs",
+                                "hostname": "LAPTOP-1U3EERO1",
+                                "ip": "192.168.0.14",
+                                "isAttachedToCircle": false,
+                                "mac": "5C:61:99:44:CA:23",
+                                "uuid": "12e6d9e4-6e72-4ce8-a12f-2a3fb7d8d995"
+                            },
+                            {
+                                "commandLine": "\"E:/Ingescape/Ingescape Circle v4/igs.exe\" --device Wi-Fi --port 5670 --script .\\test\\Player\\Player.igsscript --license \"E:\\Mes Documents\\UPSSITECH\\Projet_Ingescape\\licenses\" --verbose --name Igs",
+                                "hostname": "LAPTOP-1U3EERO1",
+                                "ip": "192.168.0.14",
+                                "isAttachedToCircle": false,
+                                "mac": "5C:61:99:44:CA:23",
+                                "uuid": "26397ef2-ec1c-4886-a158-7b38a670f683"
+                            }
+                        ]
+                    },
+                    "class": "27D9171748894A4C90D3573FD8289CF1",
+                    "comment": "",
+                    "height": 100,
+                    "name": "Igs",
+                    "simulationTime": 5000,
+                    "uuid": "bb776f7e-a842-44d1-bb85-d50317c58967",
+                    "width": 250,
+                    "x": 1060.5043486517025,
+                    "y": 514.6551564357121
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "06c3a328-0c28-48b5-be84-fec79b07597f",
+                    "width": 180,
+                    "x": 1584.6725818402904,
+                    "y": 897.6731308716065
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "1fa6bdf1-eb47-4ccf-9851-f43c7cdbd089",
+                    "width": 180,
+                    "x": 1481.128872461661,
+                    "y": 975.8678831404368
+                },
+                {
+                    "data": {
+                        "data_decoder": "BINARY",
+                        "msg_type": "",
+                        "proto_file_path": "",
+                        "string_decoder": "PLAIN_TEXT"
+                    },
+                    "height": 56,
+                    "name": "",
+                    "tool": "com.ingescape.circle.tool.observer",
+                    "uuid": "6d7e313a-4504-4c24-8807-232309bd6ab7",
+                    "width": 180,
+                    "x": 1670.4695972851082,
+                    "y": 832.6945648370837
+                }
+            ],
+            "links": {
+                "others": [
+                    {
+                        "destination": "3f2e2bdb-6ef5-441b-a243-2e9fc9b71587",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "bf3cb23f-0785-492a-a78d-a4987f5000e5",
+                        "sourceIO": {
+                            "name": "player_x",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "f33071ee-6f5e-4749-a2de-e1d32b7e74b0",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "bf3cb23f-0785-492a-a78d-a4987f5000e5",
+                        "sourceIO": {
+                            "name": "player_y",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "06c3a328-0c28-48b5-be84-fec79b07597f",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "bf3cb23f-0785-492a-a78d-a4987f5000e5",
+                        "sourceIO": {
+                            "name": "vie",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "1fa6bdf1-eb47-4ccf-9851-f43c7cdbd089",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "bf3cb23f-0785-492a-a78d-a4987f5000e5",
+                        "sourceIO": {
+                            "name": "death",
+                            "type": "OUTPUT"
+                        }
+                    },
+                    {
+                        "destination": "6d7e313a-4504-4c24-8807-232309bd6ab7",
+                        "destinationIO": {
+                            "name": "wildcard",
+                            "type": "INPUT"
+                        },
+                        "source": "bf3cb23f-0785-492a-a78d-a4987f5000e5",
+                        "sourceIO": {
+                            "name": "angle",
+                            "type": "OUTPUT"
+                        }
+                    }
+                ]
+            },
+            "name": "Main view"
+        }
+    ]
+}

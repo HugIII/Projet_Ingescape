@@ -1,0 +1,19 @@
+"TestInput"{
+	//position (x,y) random entre (0,499)
+	Player.Z = 1
+	assert Player.player_x > 0
+	assert Player.player_y > 0
+
+	//test degat vie
+	Player.degat = 10
+	assert Player.vie <= 99 //valeur par defaut 100
+	
+	//test death
+	Player.degat = 100
+	assert Player.death == ""
+
+	//test angle
+	Player.A = 0
+	assert Player.angle < 45
+
+}

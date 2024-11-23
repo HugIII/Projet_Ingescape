@@ -1,0 +1,125 @@
+{
+    "extensions": {
+        "eventsTimeline": {
+            "events": [
+            ],
+            "patterns": [
+            ],
+            "timelines": [
+                {
+                    "eventInstances": [
+                    ],
+                    "name": "Timeline_1",
+                    "order": 0,
+                    "patternInstances": [
+                    ]
+                }
+            ]
+        },
+        "recordAndReplay": {
+            "filters": {
+            }
+        }
+    },
+    "library": {
+        "classes": [
+            {
+                "className": "Sound_manager",
+                "color": 0,
+                "definition": {
+                    "inputs": [
+                        {
+                            "name": "music",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "death",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "monster_death",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "crossbow",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "sword",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "degat_recu",
+                            "type": "INTEGER"
+                        },
+                        {
+                            "name": "sound_on",
+                            "type": "IMPULSION"
+                        },
+                        {
+                            "name": "music_trigger",
+                            "type": "IMPULSION"
+                        }
+                    ]
+                },
+                "description": "",
+                "icon": -1,
+                "package": "",
+                "plugin": "ingescape_class",
+                "uuid": "18877ac9-5d4f-4706-86e6-59bf4af3f19e",
+                "version": ""
+            }
+        ]
+    },
+    "systemViews": [
+        {
+            "children": [
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "C:\\Users\\CLARA\\AppData\\Local\\Programs\\Python\\Python312\\python.exe .\\sandbox\\Sound_manager\\main.py Sound_manager Wi-Fi 5670",
+                                "hostname": "LAPTOP-1U3EERO1",
+                                "ip": "192.168.0.14",
+                                "isAttachedToCircle": false,
+                                "uuid": "57e040bf-291c-4306-9978-d86485247efe"
+                            }
+                        ]
+                    },
+                    "class": "18877ac9-5d4f-4706-86e6-59bf4af3f19e",
+                    "comment": "",
+                    "height": 246,
+                    "name": "Sound_manager",
+                    "simulationTime": 5000,
+                    "uuid": "878793e5-ea3e-41b1-b3ad-d10825a37779",
+                    "width": 250,
+                    "x": 1029.4558488929313,
+                    "y": 768.8416770226219
+                },
+                {
+                    "agent": {
+                        "instances": [
+                            {
+                                "commandLine": "\"E:\\Ingescape\\Ingescape Circle v4\\igs.exe\" --device Wi-Fi --port 5670 --script .\\test\\Sound_manager\\Sound_manager.igsscript --license \"E:\\Mes Documents\\UPSSITECH\\Projet_Ingescape\\licenses\" --verbose",
+                                "hostname": "LAPTOP-1U3EERO1",
+                                "ip": "192.168.0.14",
+                                "isAttachedToCircle": false,
+                                "uuid": "9a10574d-8a7b-4cb8-8e32-11c6c7ed151c"
+                            }
+                        ]
+                    },
+                    "class": "27D9171748894A4C90D3573FD8289CF1",
+                    "comment": "",
+                    "height": 100,
+                    "name": "Igs",
+                    "simulationTime": 5000,
+                    "uuid": "944e1829-9e8d-44c7-b8ca-fa80fcb8044f",
+                    "width": 250,
+                    "x": 1032.8366311082439,
+                    "y": 611.9308560132739
+                }
+            ],
+            "name": "Main view"
+        }
+    ]
+}

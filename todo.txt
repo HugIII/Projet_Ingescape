@@ -3,14 +3,12 @@
 	à faire:
 		-Client_Server
 		-Map
-		-Player 
 
 	à ne pas faire:
 		-Timer (obsolete)
 		-Starter (obsolete)
 		-mapper (bordel)
 		-Screamer (trop aleatoire)
-		-Sound_manager (pas de sortie)
 		-Scorer (pas de sortie interessante)
 		-Server (pas de sortie)
 		-Engine_Map (pas de sortie)
@@ -21,7 +19,9 @@
 		-Ennemies
 		-Player_enn
 		-EventKeyBoard 
-		-Weapons 
+		-Weapons
+		-Player
+		-Sound_manager
 
 	
 -Commenter le code:

@@ -1,0 +1,17 @@
+"TestSound"{
+	Sound_manager.sound_on = 0
+
+    Sound_manager.music_trigger = 0
+    assert user "Has the music played?"
+    Sound_manager.music_trigger = 0
+    assert user "Has the music stopped?"
+
+    Sound_manager.degat_recu = 50
+    assert user "Did the sound of damage play?"
+
+    Sound_manager.crossbow = 0
+    assert user "Did you hear the crossbow sound?"
+
+    Sound_manager.sword = 0
+    assert user "Did you hear the sword sound?"
+}
