@@ -72,3 +72,11 @@ Pour modifier les paramètres réseau, utilisez la commande suivante dans un ter
 
 ### Commande de Debug
 - Activer le mode debug : `P`
+
+## Lien exemple gameplay
+
+### Solo
+https://youtu.be/SlaDNC0tvr0
+
+### Multi
+https://youtu.be/kgHKAu8CVC4

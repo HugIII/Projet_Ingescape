@@ -1,4 +1,0 @@
-questions
-
-Comment on lance les blocks à partir de l'application?
-Pour le whiteboard plus facile d'afficher une image ou de dessiner un rectangle ?
