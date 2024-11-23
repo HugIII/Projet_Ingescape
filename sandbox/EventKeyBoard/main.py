@@ -11,39 +11,51 @@ import sys
 import ingescape as igs
 from pynput import keyboard, mouse
 
+#liste des touches appuyées
 pressed_keys = []
 
 def on_press(key):
+    '''
+    Fonction appelée lorsque une touche est appuyée
+
+    Input : key : la touche appuyée
+    '''
     global pressed_keys
+
     try:
         if key.char not in pressed_keys:
             pressed_keys.append(key.char)
         for k in pressed_keys:
             if k=='a':
-                igs.output_set_impulsion("A")
+                igs.output_set_impulsion("A") #tourner à gauche
             if k=='e':
-                igs.output_set_impulsion("E")
+                igs.output_set_impulsion("E") #tourner à droite
             if k=='z':
-                igs.output_set_impulsion("Z")
+                igs.output_set_impulsion("Z") #avancer
             if k=='q':
-                igs.output_set_impulsion("Q")
+                igs.output_set_impulsion("Q") #aller à gauche
             if k=='s':
-                igs.output_set_impulsion("S")
+                igs.output_set_impulsion("S") #reculer
             if k=='d':
-                igs.output_set_impulsion("D")
+                igs.output_set_impulsion("D") #aller à droite
             if k=='m':
-                igs.output_set_impulsion("M")
+                igs.output_set_impulsion("M") #couper tous les sons
             if k=='n':
-                igs.output_set_impulsion("N")
-    except AttributeError:
+                igs.output_set_impulsion("N") #couper uniquement la musique
+    except AttributeError: #autre touche appuyée
         print(f'Touche spéciale appuyée: {key}')
 
 def on_release(key):
+    '''
+    Fonction appelée lorsque une touche est relachée
+
+    Input : key : la touche relachée
+    '''
     global pressed_keys
     try:
+        #on enleve la touche de la liste des touches appuyées
         if key.char in pressed_keys:
             pressed_keys.remove(key.char)
-        print("Touches appuyées :", pressed_keys)
     except AttributeError:
         pass
     if key == keyboard.Key.esc:
@@ -86,15 +98,15 @@ if __name__ == "__main__":
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
 
-    # Ecouteur de clavier
+    # listener clavier
     keyboard_listener = keyboard.Listener(on_press=on_press, on_release=on_release)
     keyboard_listener.start()
 
-    # Ecouteur de souris
+    # listener souris
     mouse_listener = mouse.Listener(on_click=on_click)
     mouse_listener.start()
 
-    # Attendre la fin des écouteurs
+    # Attendre fin listener
     keyboard_listener.join()
     mouse_listener.join()
 

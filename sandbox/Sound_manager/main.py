@@ -12,9 +12,10 @@ import ingescape as igs
 import pygame
 
 music_play = True
-music_trigger = False
+music_trigger = False #lancer la musique après la cinématique du début
 sound_on = True
 
+#Tous les sons du projet
 music_link = "./sounds/music.mp3"
 death_link = "./sounds/death.mp3"
 monster_death_link = "./sounds/monster_death.mp3"
@@ -23,9 +24,10 @@ crossbow_link = "./sounds/crossbow.mp3"
 sword_link = "./sounds/sword.mp3"
 degat_link = "./sounds/degat.mp3"
 
+#vie par défaut
 vie = 100
 
-# Inputs
+# Pour chaque cas, on joue le son qui correspond à la situation
 def input_callback(iop_type, name, value_type, value, my_data):
     global music_play
     global sound_on
@@ -66,7 +68,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
         degat = pygame.mixer.Sound(degat_link)
         degat.play()
         vie = value
-    elif name == "music_trigger":
+    elif name == "music_trigger": #cinématique finie, on lance la musique
         music_trigger = not music_trigger
         if music_trigger == False:
             pygame.mixer.music.pause()
@@ -110,6 +112,7 @@ if __name__ == "__main__":
 
     pygame.mixer.init()
 
+    #on charge la musique du jeu
     pygame.mixer.music.load(music_link)
 
     input()

@@ -31,7 +31,7 @@ if __name__ == "__main__":
     igs.output_create("screamer", igs.IMPULSION_T, None)
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
-
+    #apparition aleatoire du screamer
     while(1):
         r = random.randint(0,1000)
         if r < 2:

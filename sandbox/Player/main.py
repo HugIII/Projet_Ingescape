@@ -13,10 +13,11 @@ import math
 import random
 
 
-angle = 45
+angle = 45 #valeur par defaut
 
-vie = 100
+vie = 100 #vie par defaut
 
+#Map de secours, "X" represente les murs
 string_map = [["X","X","X","X","X","X","X","X","X","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
@@ -28,7 +29,7 @@ string_map = [["X","X","X","X","X","X","X","X","X","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
               ["X","X","X","X","X","X","X","X","X","X"]]
 
-
+#Position du player aleatoire
 player_x = random.randint(0,499)
 player_y = random.randint(0,499)
 
@@ -40,10 +41,12 @@ def input_callback(io_type, name, value_type, value, my_data):
     global string_map
     global vie
 
+    #tant que le player se trouve dans un mur, on retire une position aléatoire
     while string_map[int(player_x/50)][int(player_y/50)] == "X":
         player_x = random.randint(0,499)
         player_y = random.randint(0,499)
 
+    #sauvegarde de la pos du player avant mouvements
     tmp_x = player_x
     tmp_y = player_y
 
@@ -70,11 +73,12 @@ def input_callback(io_type, name, value_type, value, my_data):
         if angle < 0:
             angle += 2 * math.pi
 
+    #mise en forme de la map dans le string
     elif name=="map":
         temp_list = []
         temp_sub_list = []
         for i in range(len(value)):
-            if value[i] == "R":
+            if value[i] == "R": #retour à la ligne
                 temp_list.append(temp_sub_list)
                 temp_sub_list = []
             else:
@@ -82,13 +86,14 @@ def input_callback(io_type, name, value_type, value, my_data):
         temp_list.append(temp_sub_list)
         string_map = temp_list
 
+    #gestion degat et de la vie
     elif name=="degat":
         vie -= value
         igs.output_set_double("vie",vie)
-        if vie < 1:
+        if vie < 1: #mort
             igs.output_set_impulsion("death")
             mur = 1
-            while mur!=0 :
+            while mur!=0 : #respawn aleatoire sur la map
                 random_x = random.randint(0,499)
                 random_y = random.randint(0,499)
                 if string_map[int(random_x/50)][int(random_y/50)] != "X":
@@ -97,6 +102,7 @@ def input_callback(io_type, name, value_type, value, my_data):
                     mur = 0
             vie = 100
 
+    #le player se fait tuer par un autre player
     elif name=="kill":
         mur = 1;
         while mur :
@@ -106,8 +112,8 @@ def input_callback(io_type, name, value_type, value, my_data):
                 player_x = random_x
                 player_y = random_y
                 mur = 0
-            
-
+    
+    #cas si le deplacement du joueur est dans le mur
     if string_map[int(player_x/50)][int(player_y/50)] == "X":
         player_x = tmp_x
         player_y = tmp_y

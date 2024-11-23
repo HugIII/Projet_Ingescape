@@ -10,30 +10,16 @@
 import sys
 import ingescape as igs
 
-score = 0
-s = ""
+score = 0 #score par defaut
 
 #inputs
 def input_callback(iop_type, name, value_type, value, my_data):
     global score
-    global s
 
-    if name == "score":
+    if name == "score": #point marqué, on rajoute 50 
         score += 50
         igs.output_set_string("out","Score: "+str(score)) 
         igs.output_set_int("score",score)
-    elif name == "score_multi":
-        s = "Tableau des score:\n" 
-        if value == "[]":
-            return
-        for i in value.split("("):
-            if i != "[" and i != "":
-                t = i.strip()[:-2].split(",")
-                s += "player_"+t[0]+" : "+t[1] + "\n"
-        s = s[:-1]
-        igs.service_call("Whiteboard", "chat",s, "")
-    elif name == "print_score_multi":
-        igs.service_call("Whiteboard", "chat",s, "")
 
     # add code here if needed
 
@@ -54,7 +40,6 @@ if __name__ == "__main__":
 
     igs.input_create("start", igs.IMPULSION_T, None)
     igs.input_create("score", igs.IMPULSION_T, None)
-    igs.input_create("score_multi", igs.STRING_T, None)
 
     igs.output_create("out", igs.STRING_T, None)
     igs.output_create("score", igs.INTEGER_T, None)
@@ -62,7 +47,6 @@ if __name__ == "__main__":
 
     igs.observe_input("start", input_callback, None)
     igs.observe_input("score", input_callback, None)
-    igs.observe_input("score_multi", input_callback, None)
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
 

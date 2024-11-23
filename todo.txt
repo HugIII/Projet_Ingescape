@@ -26,18 +26,18 @@
 	
 -Commenter le code:
 	à faire:
-		-EventKeyBoard
 		-Map
-		-Player
 		-Player_enn
-		-Scorer
-		-Screamer
 		-Server
-		-Sound_manager
-		-Weapons
 	fait:
+		-EventKeyBoard
 		-Client_server
 		-Engine
 		-Engine_Map
 		-Ennemies
 		-mapper
+		-Sound_manager
+		-Weapons
+		-Player (à valider)
+		-Scorer
+		-Screamer (je suppose...)

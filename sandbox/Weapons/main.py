@@ -12,12 +12,12 @@ import ingescape as igs
 import random
 import time
 
-arrow_left = 0
+arrow_left = 0 #nombre de fleches par defaut
 
 left_time = 0
 right_time = 0
-left_cooldown = 2
-right_cooldown = 0.5
+left_cooldown = 2 #cooldown avant de pouvoir tirer le prochain coup à l'arbalette
+right_cooldown = 0.5 #cooldown avant de pouvoir donner un coup de hache
 
 #inputs
 def input_callback(io_type, name, value_type, value, my_data):
@@ -27,17 +27,17 @@ def input_callback(io_type, name, value_type, value, my_data):
     global right_cooldown
     global arrow_left
 
-    if name == "kill":
-        arrow_left += random.randint(0,2)
+    if name == "kill": #monstre tué
+        arrow_left += random.randint(0,2) #donne un nombre de fleche aleatoire entre 0 et 2
         igs.output_set_int("arrow_left",arrow_left)
-    elif name == "click_right":
+    elif name == "click_right": #coup de hache
         timestamp = time.time()
-        if timestamp - right_time > right_cooldown:
+        if timestamp - right_time > right_cooldown: #si cooldown passé
             right_time = timestamp
             igs.output_set_impulsion("sword_shoot")  
-    elif name == "click_left":
+    elif name == "click_left": #arbalette
         timestamp = time.time()
-        if arrow_left > 0 and timestamp - left_time > left_cooldown:
+        if arrow_left > 0 and timestamp - left_time > left_cooldown: #on a des fleches et si cooldown passé
             arrow_left -= 1
             left_time = timestamp
             igs.output_set_impulsion("arbalete_shoot") 
