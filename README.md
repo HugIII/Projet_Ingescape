@@ -59,16 +59,16 @@ Pour modifier les paramètres réseau, utilisez la commande suivante dans un ter
 ## Commandes
 
 ### Commandes de Déplacement
-- **Avancer** : `Z`
-- **Reculer** : `S`
-- **Aller à Gauche** : `Q`
-- **Aller à Droite** : `D`
-- **Vision à Gauche** : `A`
-- **Vision à Droite** : `E`
+- Avancer : `Z`
+- Reculer : `S`
+- Aller à Gauche : `Q`
+- Aller à Droite : `D`
+- Tourner à Gauche : `A`
+- Tourner à Droite : `E`
 
 ### Commandes pour la Musique
-- **Couper les bruitages et la musique** : `M`
-- **Couper uniquement la musique** : `N`
+- Couper les bruitages et la musique : `M`
+- Couper uniquement la musique : `N`
 
 ### Commande de Debug
-- **Activer le mode debug** : `P`
+- Activer le mode debug : `P`
