@@ -3,8 +3,9 @@
 
 #
 #  main.py
-#  Engine version 1.0
+#  Engine_map
 #  Created by BLAYES Hugo, BAFFOGNE Clara on 2024/09/28
+#  Created by Ingenuity i/o on 2024/09/28
 #  Description:
 #   Ce programme permet d'afficher la map sur le whiteboard en solo
 #   Comme nous voulons afficher environ 50 objets nous avons préféré passer par un server web pour des raisons de performances du whiteboard

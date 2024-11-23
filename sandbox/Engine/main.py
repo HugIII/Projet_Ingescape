@@ -3,8 +3,9 @@
 
 #
 #  main.py
-#  Engine version 1.0
+#  Engine
 #  Created by BLAYES Hugo, BAFFOGNE Clara on 2024/09/28
+#  Created by Ingenuity i/o on 2024/09/28
 #  Description:
 #   Ce programme est le bloc principal de notre jeu video,
 #   il s'occupe de la partie graphique de notre projet en plus de centraliser la plupart de nos informations

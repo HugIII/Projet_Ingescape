@@ -4,8 +4,10 @@
 #
 #  main.py
 #  Map
-#  Created by Ingenuity i/o on 2024/10/18
-#
+#  Created by BAFFOGNE Clara,BLAYES Hugo on 2024/10/22
+#  Created by Ingenuity i/o on 2024/10/22
+#  Description:
+#   Cet agent permet de generer une map en fonction d'une seed aleatoire
 
 import sys
 import ingescape as igs
@@ -15,9 +17,10 @@ import numpy
 string_map = []
 
 
-#inputs
+#inputs callback #####################################################
 def input_callback(io_type, name, value_type, value, my_data):
     if (name == "start"):
+        #met la map sous forme de string et l'envoie sur la sortie map
         s = ""
         for m in string_map:
             for l in m:
@@ -25,6 +28,7 @@ def input_callback(io_type, name, value_type, value, my_data):
             s += "R"
         igs.output_set_string("map", s)
 
+#code principal ######################################################
 if __name__ == "__main__":
     if len(sys.argv) < 4:
         print("usage: python3 main.py agent_name network_device port")
@@ -49,6 +53,7 @@ if __name__ == "__main__":
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
 
+    #generation de la map
     map_size = 10
     room_number = 10
     room_size = 5
@@ -56,24 +61,29 @@ if __name__ == "__main__":
     room_centers = []
     index_to_visit = set()
 
+    #on cree d'abord une map rempli de mur
     for i in range(map_size):
         l = []
         for j in range(map_size):
             l.append("X")
         string_map.append(l)
 
+    #on genere entre 2 et 10 salle
     for i in range(random.randint(2,room_number)):
         room_ok = False
+        #on genere la salle
         while not room_ok:
             room_size = random.randint(2,room_size)
             room_x = random.randint(1,map_size-room_size-1)
             room_y = random.randint(1,map_size-room_size-1)
             room_ok = True
+            #on verifie que la salle que nous creons ne soit pas deja sur une carte
             for p in range(room_size):
                 for j in range(room_size):
                     if string_map[room_x+p][room_y+j] == ".":
                         room_ok = False
 
+        #on ajoute le centre de la salle a cette liste
         room_centers.append((int(room_x+room_size/2),int(room_y+room_size/2),room_size))
         index_to_visit.add(i)
 
@@ -81,6 +91,7 @@ if __name__ == "__main__":
             for j in range(room_size):
                 string_map[room_x+k][room_y+j] = "."
 
+    #on relie chaque salle a la salle la plus pres
     index = -1
     while len(index_to_visit) != 0 and index < len(room_centers):
         index += 1

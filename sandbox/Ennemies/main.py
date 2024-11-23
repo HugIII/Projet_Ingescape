@@ -3,8 +3,9 @@
 
 #
 #  main.py
-#  Client_Server version 1.0
-#  Created by BLAYES Hugo, BAFFOGNE Clara i/o on 2024/10/04
+#  Ennemies
+#  Created by BLAYES Hugo, BAFFOGNE Clara on 2024/10/04
+#  Created by Ingenuity i/o on 2024/10/04
 #  Description:
 #   Ce programme s'occupe de la gestion des ennemies dans notre jeu video
 #   en solo, cela comprend leurs mouvements, leurs apparitions, le format vague, les collisions des ennemies avec les murs

@@ -3,9 +3,9 @@
 
 #
 #  main.py
-#  Scorer version 1.0
+#  Scorer 
 #  Created by BLAYES Hugo, BAFFOGNE Clara on 2024/09/28
-#  Created by Ingenuity i/o on 2024/10/01
+#  Created by Ingenuity i/o on 2024/09/28
 #  Description:
 #   Cet agent permet de rajouter du score lorsque le player tue un monstre
 

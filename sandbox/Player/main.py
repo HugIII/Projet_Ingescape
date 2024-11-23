@@ -5,7 +5,7 @@
 #  main.py
 #  Player
 #  Created by BLAYES Hugo, BAFFOGNE Clara on 2024/09/28
-#  Created by Ingenuity i/o on 2024/10/23
+#  Created by Ingenuity i/o on 2024/09/28
 #  Description:
 #   Cet agent gere toutes les actions liees au player :
 #   les deplacements, sa vie

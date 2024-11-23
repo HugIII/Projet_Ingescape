@@ -3,8 +3,9 @@
 
 #
 #  main.py
-#  Client_Server version 1.0
+#  Client_Server
 #  Created by BLAYES Hugo, BAFFOGNE Clara i/o on 2024/10/04
+#  Created by Ingenuity i/o on 2024/10/22
 #  Description:
 #   Ce programme permet de faire le lien entre le serveur et le client side de notre systeme
 #

@@ -4,7 +4,7 @@
 #
 #  main.py
 #  Screamer
-#  Created by BLAYES Hugo, BAFFOGNE Clara on 2024/09/28
+#  Created by BLAYES Hugo, BAFFOGNE Clara on 2024/10/22
 #  Created by Ingenuity i/o on 2024/10/22
 #  Description:
 #   Cet agent envoie une impulsion pour afficher le screamer à un moment aléatoire

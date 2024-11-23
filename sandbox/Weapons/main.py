@@ -8,7 +8,7 @@
 #  Created by Ingenuity i/o on 2024/10/20
 #  Description:
 #   Cet agent gere les armes a utiliser,
-#   il etablit des cooldown en fonction de l'arme et fournit un nombre aléatoire de fleches au player lors d'un kill
+#   il etablit les cooldowns en fonction de l'arme et fournit un nombre aléatoire de fleches au player lors d'un kill
 
 import sys
 import ingescape as igs

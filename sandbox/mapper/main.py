@@ -3,8 +3,9 @@
 
 #
 #  main.py
-#  Client_Server version 1.0
-#  Created by BLAYES Hugo, BAFFOGNE Clara i/o on 2024/10/04
+#  mapper
+#  Created by BLAYES Hugo, BAFFOGNE Clara on 2024/10/04
+#  Created by Ingenuity i/o on 2024/10/04
 #  Description:
 #   Ce programme s'occupe de la creation des agents pour le mode multi, il permet aussi les links entre les differents agents
 #   et le lancement de ces derniers

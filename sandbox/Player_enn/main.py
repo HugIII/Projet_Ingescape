@@ -3,21 +3,26 @@
 
 #
 #  main.py
-#  Player_enn version 1.0
-#  Created by Ingenuity i/o on 2024/10/04
-#
+#  Player_enn
+#  Created by BAFFOGNE Clara,BLAYES Hugo on 2024/10/22
+#  Created by Ingenuity i/o on 2024/10/22
+#  Description:
+#   Cet agent permet de faire le lien entre le client server et l'engine
+
 
 import sys
 import ingescape as igs
 
+#variables#################################################################
 player_enn = []
 player_enn_uuid = []
 multi = True
 
-#inputs
+#inputs callback ###########################################################
 def input_callback(iop_type, name, value_type, value, my_data):
     global player_enn
     global multi
+    # permet de passer switch entre solo et multi
     if name=="multi":
         if value == False:
             multi = False
@@ -25,6 +30,7 @@ def input_callback(iop_type, name, value_type, value, my_data):
             igs.output_set_string("list_players",str(player_enn))
         else:
             multi = True
+    # recuperation et mise en forme de la liste player server
     elif name=="list_player_server":
         player_enn = []
         for i in value.split("("):
@@ -36,12 +42,12 @@ def input_callback(iop_type, name, value_type, value, my_data):
                     return
                 player_enn.append((float(t[1]),float(t[2])))
         igs.output_set_string("list_players",str(player_enn))
+    # lorsqu'on tue un adversaire on envoie l'uuid du player mort au client server
     elif name=="kill":
         igs.output_set_impulsion("score")
         igs.output_set_string("kill",str(player_enn_uuid[value]))
 
-    # add code here if needed
-
+# code principal ######################################################
 if __name__ == "__main__":
     if len(sys.argv) < 4:
         print("usage: python3 main.py agent_name network_device port")

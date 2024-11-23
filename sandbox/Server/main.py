@@ -3,9 +3,13 @@
 
 #
 #  main.py
-#  Server version 1.0
-#  Created by Ingenuity i/o on 2024/10/04
-#
+#  Server
+#  Created by BAFFOGNE Clara,BLAYES Hugo on 2024/10/22
+#  Created by Ingenuity i/o on 2024/10/22
+#  Description:
+#   Server du mode multi
+#   En multi, le serveur s'occupe d'envoyer les informations au whiteboard
+#   De ce fait, cet agent heberge un server image afin que le whiteboard puisse recuperer la map
 
 import sys
 import ingescape as igs
@@ -16,8 +20,10 @@ from PIL import Image, ImageDraw
 import http.server
 import socketserver
 
+# constante ############################################
 PORT = 8000
 
+# variable ##############################################
 string_map = [["X","X","X","X","X","X","X","X","X","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
               ["X",".",".",".",".",".",".",".",".","X"],
@@ -33,7 +39,22 @@ list_ennemies = []
 index_dict = {}
 score = {}
 
+# Classe ################################################
+
+class CustomHandler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        if self.path == "/download":
+            image_path = "./image/map.png"
+            self.send_response(200)
+            self.send_header('Content-type', 'application/octet-stream')
+            self.send_header('Content-Disposition', f'attachment; filename="{image_path}"')
+            self.end_headers()
+            with open(image_path, 'rb') as file:
+                self.wfile.write(file.read())
+
+# fonction ##############################################
 def life_fun():
+    # on envoie la liste d'ennemie et la liste player de maniere periodique
     while True:
         temp_list = []
         for i in index_dict.keys():
@@ -46,7 +67,79 @@ def life_fun():
         arguments_list = (str(temp_list))
         time.sleep(0.2)
 
+def start_image_server():
+    #permet de lancer le server image
+    with socketserver.TCPServer(("",PORT),CustomHandler) as httpd:
+        httpd.serve_forever()
+
+def start():
+    #permet de dessiner l'image et de la sauvegarder
+    global image
+    global draw
+    global index
+
+    while True:
+        time.sleep(1)
+        image = Image.new('RGB', (1500,1500),'white')
+        draw = ImageDraw.Draw(image)
+        draw_map_render_2D()
+        draw_ennemie_render_2D()
+        draw_other_player_render_2D()
+        image.save("./image/map.png")
+        arguments_list = ("http://localhost:8000/download",50.0,50.0)
+        igs.service_call("Whiteboard","addImageFromUrl",arguments_list,"")
+
+def send_service_rectangle_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
+    #dessiner un rectangle sur l'image
+    global draw
+    draw.rectangle([(int(x),int(y)),(int(x+longeur),int(y+largeur))],fill=color,outline=couleur_contour,width=int(contour))
+
+def send_service_ellipse_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
+    #dessiner une ellipse sur l'image
+    global draw
+    draw.ellipse([(int(x-longeur/2),int(y-largeur/2)),(int(x+longeur/2),int(y+largeur/2))],fill=color,outline=couleur_contour,width=int(contour))
+
+def clear():
+    #clear le white board
+    global image
+    global draw
+    igs.service_call("Whiteboard","clear",(),"")
+    image = Image.new('RGB', (1500,1500),'white')
+    draw = ImageDraw.Draw(image)
+
+
+def remove_id(index):
+    #enlever un element du whiteboard
+    arguments_list = (index)
+    igs.service_call("Whiteboard","remove",arguments_list,"")
+
+def draw_map_render_2D():
+    #dessiner les murs sur l'image
+    for i in range(len(string_map)):
+        for j in range(len(string_map[i])):
+            if string_map[i][j] == "X":
+                send_service_rectangle_whiteboard(50.0*i,50.0*j,50.0,50.0,"black","grey",1.0)
+
+def draw_ennemie_render_2D():
+    #dessiner les ennemies sur la carte
+    ennemies_move = []
+    if len(ennemies_move) == 0:
+        for i in list_ennemies:
+            send_service_ellipse_whiteboard(i[0]-10.0,i[1]-10.0,20.0,20.0,"purple","black",1.0)
+    else:
+        for i in ennemies_move:
+            send_service_ellipse_whiteboard(i[0]-10.0,i[1]-10.0,20.0,20.0,"purple","black",1.0)
+
+def draw_other_player_render_2D():
+    #dessiner les autres players sur la carte
+    for key,value in index_dict.items():
+        send_service_ellipse_whiteboard(index_dict[key][0]-10.0,index_dict[key][1]-10.0,20.0,20.0,"red","black",1.0)
+
+
+# service callback #######################################
 def service_callback(sender_agent_name, sender_agent_uuid, service_name, arguments, token, my_data):
+    # cette fonction permet de mettre a jour les differentes variables
+    # sauf pour score, lorsque le score change on fait la mise a jour directement
     if service_name == "player_position":
         index_dict[arguments[0]] = (arguments[1],arguments[2])
     elif service_name == "ennemies_kill":
@@ -69,80 +162,8 @@ def service_callback(sender_agent_name, sender_agent_uuid, service_name, argumen
         arguments_list = (str(arguments[0]),str(arguments[1]))
         for i in index_dict.keys():
             igs.service_call("Client_Server_"+str(i),"chat",arguments_list,"")
-    # add code here if needed
 
-class CustomHandler(http.server.SimpleHTTPRequestHandler):
-    def do_GET(self):
-        if self.path == "/download":
-            image_path = "./image/map.png"
-            self.send_response(200)
-            self.send_header('Content-type', 'application/octet-stream')
-            self.send_header('Content-Disposition', f'attachment; filename="{image_path}"')
-            self.end_headers()
-            with open(image_path, 'rb') as file:
-                self.wfile.write(file.read())
-
-def start_image_server():
-    with socketserver.TCPServer(("",PORT),CustomHandler) as httpd:
-        httpd.serve_forever()
-
-def start():
-    global image
-    global draw
-    global index
-
-    while True:
-        time.sleep(1)
-        image = Image.new('RGB', (1500,1500),'white')
-        draw = ImageDraw.Draw(image)
-        draw_map_render_2D()
-        draw_ennemie_render_2D()
-        draw_other_player_render_2D()
-        image.save("./image/map.png")
-        arguments_list = ("http://localhost:8000/download",50.0,50.0)
-        igs.service_call("Whiteboard","addImageFromUrl",arguments_list,"")
-
-#inputs
-def send_service_rectangle_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
-    global draw
-    draw.rectangle([(int(x),int(y)),(int(x+longeur),int(y+largeur))],fill=color,outline=couleur_contour,width=int(contour))
-
-def send_service_ellipse_whiteboard(x,y,longeur,largeur,color,couleur_contour,contour):
-    global draw
-    draw.ellipse([(int(x-longeur/2),int(y-largeur/2)),(int(x+longeur/2),int(y+largeur/2))],fill=color,outline=couleur_contour,width=int(contour))
-
-def clear():
-    global image
-    global draw
-    igs.service_call("Whiteboard","clear",(),"")
-    image = Image.new('RGB', (1500,1500),'white')
-    draw = ImageDraw.Draw(image)
-
-
-def remove_id(index):
-    arguments_list = (index)
-    igs.service_call("Whiteboard","remove",arguments_list,"")
-
-def draw_map_render_2D():
-    for i in range(len(string_map)):
-        for j in range(len(string_map[i])):
-            if string_map[i][j] == "X":
-                send_service_rectangle_whiteboard(50.0*i,50.0*j,50.0,50.0,"black","grey",1.0)
-
-def draw_ennemie_render_2D():
-    ennemies_move = []
-    if len(ennemies_move) == 0:
-        for i in list_ennemies:
-            send_service_ellipse_whiteboard(i[0]-10.0,i[1]-10.0,20.0,20.0,"purple","black",1.0)
-    else:
-        for i in ennemies_move:
-            send_service_ellipse_whiteboard(i[0]-10.0,i[1]-10.0,20.0,20.0,"purple","black",1.0)
-
-def draw_other_player_render_2D():
-    for key,value in index_dict.items():
-        send_service_ellipse_whiteboard(index_dict[key][0]-10.0,index_dict[key][1]-10.0,20.0,20.0,"red","black",1.0)
-
-
+#code principal ####################################################
 if __name__ == "__main__":
     if len(sys.argv) < 4:
         print("usage: python3 main.py agent_name network_device port")
@@ -176,9 +197,11 @@ if __name__ == "__main__":
 
     igs.start_with_device(sys.argv[2], int(sys.argv[3]))
 
+    #on fait apparaitre 4 ennemies aleatoirement sur la carte
     for i in range(4):
         list_ennemies.append((random.randint(50,450),random.randint(50,450)))
 
+    #il y a trois thread: un pour ingescape, un pour le server image et un qui creer l'image
     thread = threading.Thread(target=life_fun) 
     thread.start()
 
