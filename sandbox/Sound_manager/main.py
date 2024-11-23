@@ -4,8 +4,11 @@
 #
 #  main.py
 #  Sound_manager
+#  Created by BLAYES Hugo, BAFFOGNE Clara on 2024/09/28
 #  Created by Ingenuity i/o on 2024/10/02
-#
+#  Description:
+#   Cet agent gère tous les sons de notre projet,
+#   il joue les sons en fonction des différentes situations
 
 import sys
 import ingescape as igs

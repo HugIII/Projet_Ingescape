@@ -4,8 +4,10 @@
 #
 #  main.py
 #  EventKeyBoard
+#  Created by BLAYES Hugo, BAFFOGNE Clara on 2024/09/28
 #  Created by Ingenuity i/o on 2024/10/22
-#
+#  Description:
+#   Cet agent permet de gerer les entrées clavier et souris
 
 import sys
 import ingescape as igs
