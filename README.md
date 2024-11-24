@@ -83,7 +83,7 @@ https://youtu.be/kgHKAu8CVC4
 
 ## Auteurs:
 
-### Développeur:
+### Développeurs:
 Baffogne Clara
 Blayes Hugo
 
