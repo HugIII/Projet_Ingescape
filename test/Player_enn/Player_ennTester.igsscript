@@ -7,5 +7,3 @@
 	Player_enn.kill = 0
 	assert Player_enn.kill == 1
 }
-
-// D:\Ingescape_Circle_v4\igs.exe --device Wi-Fi --port 5670 --script .\test\Player_enn\Player_ennTester.igsscript  --license C:\Users\hugo\OneDrive\Documents\Ingescape\licenses --verbose

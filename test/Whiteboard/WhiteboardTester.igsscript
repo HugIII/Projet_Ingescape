@@ -84,5 +84,3 @@
     Whiteboard.snapshot()
     assert snapshotResult from Whiteboard
 }
-
-//D:\Ingescape_Circle_v4\igs.exe --device Wi-Fi --port 5670 --script .\test\Whiteboard\WhiteboardTester.igsscript  --license C:\Users\hugo\OneDrive\Documents\Ingescape\licenses
