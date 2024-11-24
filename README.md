@@ -80,3 +80,12 @@ https://youtu.be/SlaDNC0tvr0
 
 ### Multi
 https://youtu.be/kgHKAu8CVC4
+
+## Auteurs:
+
+### Développeur:
+Baffogne Clara
+Blayes Hugo
+
+### Graphiste:
+Piquer Alexia
